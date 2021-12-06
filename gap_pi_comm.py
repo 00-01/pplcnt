@@ -143,3 +143,4 @@ if ser.in_waiting > 0:
 else:
 	print("SERIAL READ FAIL")
 # camera.stop_preview()
+
