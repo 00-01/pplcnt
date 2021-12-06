@@ -82,6 +82,7 @@ if ser.in_waiting > 0:
 		print("incorrect size received. skipping image!")
 		exit()
 	ser.flush()
+
 # reading detections
 	det = ser.read(DET_SIZE)
 	while len(det) < (DET_SIZE):
@@ -90,20 +91,23 @@ if ser.in_waiting > 0:
 	if len(det) != (DET_SIZE):
 		print("incorrect size received. skipping detections!")
 		exit()
-	ser.write(threshold.to_bytes(4, byteorder = 'little'))
+	ser.write(threshold.to_bytes(4, byteorder='little'))
+
 # save bin
-	det_str = det.decode()
-	im_int = struct.unpack('<' + 'H' * w * h, x)
+	im_int = struct.unpack('<'+'H'*w*h, x)
 	# im = Image.frombuffer('I;16',(w, h),x,'raw','L',0,1)
 	im_dir = "images/"
 	im_name = "IR_" + NODE_NAME + "_" + dt_string + ".bin"
-	with open(im_dir + im_name, "wb") as file:
+	with open(im_dir+im_name, "wb") as file:
 		for val in im_int:
 			file.write(val.to_bytes(2, byteorder='little', signed=False))
+
 # save txt
+	det_str = det.decode()
 	det_name = "CNT_" + NODE_NAME + "_" + dt_string + ".txt"
 	with open (im_dir+det_name,"w") as file:
 		file.write("%s" % det_str)
+
 # upload to ftp
 	if USE_FTP == True:
 		with FTP(FTP_ADDR, FTP_USER, FTP_PASS) as ftp:
