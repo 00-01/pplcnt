@@ -70,15 +70,15 @@ GPIO.output(gp, GPIO.LOW)
 print("capturing picamera image")
 os.system("/bin/bash grubFrame.sh "+ NODE_NAME + " " + dt_string)
 
-# begin serial read
+# rx serial
 print("serial read begin")
 if ser.in_waiting > 0:
 	print ("serial read waiting")
-	x = ser.read(w * h * size)
-	while len(x) < (w * h * size):
-		b = ser.read(w * h * size-len(x))
-		x = x+b
-	if len(x) != (w * h * size):
+	rx = ser.read(w * h * size)
+	while len(rx) < (w * h * size):
+		b = ser.read(w * h * size-len(rx))
+		rx = rx+b
+	if len(rx) != (w * h * size):
 		print("incorrect size received. skipping image!")
 		exit()
 	ser.flush()
@@ -91,16 +91,18 @@ if ser.in_waiting > 0:
 	if len(det) != (DET_SIZE):
 		print("incorrect size received. skipping detections!")
 		exit()
+
+# tx threshold
 	ser.write(threshold.to_bytes(4, byteorder='little'))
 
 # save bin
-	im_int = struct.unpack('<'+'H'*w*h, x)
-	# im = Image.frombuffer('I;16',(w, h),x,'raw','L',0,1)
+	im_int = struct.unpack('<' + 'h' *w*h, rx)
+	# im = Image.frombuffer('I;16',(w, h),rx,'raw','L',0,1)
 	im_dir = "images/"
 	im_name = "IR_" + NODE_NAME + "_" + dt_string + ".bin"
 	with open(im_dir+im_name, "wb") as file:
 		for val in im_int:
-			file.write(val.to_bytes(2, byteorder='little', signed=False))
+			file.write(val.to_bytes(2, byteorder='little', signed=True))
 
 # save txt
 	det_str = det.decode()
@@ -143,4 +145,3 @@ if ser.in_waiting > 0:
 else:
 	print("SERIAL READ FAIL")
 # camera.stop_preview()
-
