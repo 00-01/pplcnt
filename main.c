@@ -87,7 +87,7 @@ extern L1_CL_MEM AT_L1_POINTER lynred_L1_Memory;
 
 void open_flash_filesystem(struct pi_device *flash, struct pi_device *fs){
     struct pi_readfs_conf fsconf;
-    
+
     /* Init & open flash. */
     #if defined(QSPI)
     struct pi_spiflash_conf flash_conf;
@@ -105,9 +105,9 @@ void open_flash_filesystem(struct pi_device *flash, struct pi_device *fs){
     pi_readfs_conf_init(&fsconf);
 
     fsconf.fs.flash = flash;
-    
+
     pi_open_from_conf(fs, &fsconf);
-    
+
     if (pi_fs_mount(fs)){
         printf("Error FS mounting !\n");
         pmsis_exit(-2);
@@ -282,7 +282,7 @@ void CI_checks(bboxs_t *boundbxs){
                 printf("Error in CI Checks...\n");
                 pmsis_exit(-1);}}
     #endif
-    
+
     #ifdef INPUT_RAW_FILE
         bbox_t GT[2];
         bbox_t INF[2];
@@ -409,7 +409,7 @@ void sendResultsToBle(bboxs_t *boundbxs){
 //int detSize = 3+(MAX_OUT_BB*12);
 //char * raspDetString = (int *)malloc(detSize * sizeof(int *));
 char raspDetString[3+(MAX_OUT_BB*12)];
-void sendResultsToRaspberry(struct pi_device* uart, unsigned short img, bboxs_t *boundbxs){
+void sendResultsToRaspberry(struct pi_device* uart, int16_t img, bboxs_t *boundbxs){
     int stringLenght = 0;
     int AliveBBs = 0;
 
@@ -435,7 +435,7 @@ void sendResultsToRaspberry(struct pi_device* uart, unsigned short img, bboxs_t 
     //printf("\n");
     //printf("String Size: %d\n",stringLenght);
 
-    pi_uart_write(uart, img, 80*80*sizeof(unsigned short));
+    pi_uart_write(uart, img, 80*80*sizeof(int16_t));
     //printf("writing detections\n");
     pi_uart_write(uart, raspDetString, 3+(MAX_OUT_BB*12));
     //waiting back threshold
@@ -494,7 +494,6 @@ int read_raw_image(char* filename, int16_t* buffer,int w,int h){
 #ifdef SLEEP
     #define RTC_TIME 5
     void go_to_sleep(){
-
         rt_rtc_conf_t rtc_conf;
         rt_rtc_t *rtc;
 
@@ -521,7 +520,7 @@ int32_t fixed_shutterless(int16_t* img_input_fp16,int16_t* img_offset_fp16,int w
     int32_t out_max = 255;
     int32_t out_space = (out_max-out_min);
     uint8_t *img_input_fp8=img_input_fp16;
-   
+
     //Optmized shutterless running on cluster (cluster must be open ahead and have enough free memory)
     int error = shutterless_fixed_cl(&cluster_dev,img_input_fp16,img_offset_fp16,40,&min,&max);
     //Calling shutterless running on fabric controller
@@ -542,9 +541,9 @@ int32_t float_shutterless(int16_t* img_input_fp16,int16_t* img_offset_fp16,int w
     int32_t out_min = 0;
     int32_t out_max = 255;
     uint8_t *img_input_fp8=img_input_fp16;
-    
-    int error = shutterless_float(img_input_fp16,img_offset_fp16,40,&min,&max);    
-        
+
+    int error = shutterless_float(img_input_fp16,img_offset_fp16,40,&min,&max);
+
     for(int i=0;i<w*h;i++){
         img_input_fp16[i]= (int16_t)((out_max-out_min)* (pow(((float)img_input_fp16[i]-min)/(max-min),gamma) + out_min)) ;
         img_input_fp8[i]= img_input_fp16[i] << (q_output-8);
@@ -591,13 +590,13 @@ void peopleDetection(void){
     unsigned int W = 80, H = 80;
     unsigned int save_index=0;
     PRINTF("Entering main controller\n");
-    
+
     ImageInChar = (unsigned char *) pmsis_l2_malloc( W * H* sizeof(short int));
     if (ImageInChar == 0) {
         PRINTF("Failed to allocate Memory for Image (%d bytes)\n", W * H * sizeof(int16_t));
         return 1;
     }
-    ImageIn = (int16_t *)ImageInChar;
+    ImageIn = (int16_t *) ImageInChar;
 
     #ifdef INPUT_FILE
         //Reading Image from Bridge
