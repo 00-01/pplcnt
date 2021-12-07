@@ -399,7 +399,7 @@ void sendResultsToBle(bboxs_t *boundbxs){
     //printf("String Size: %d\n",stringLenght);
 
     dt = handleDetections(bleDetString,stringLenght);
-    if(dt<10)dt=10;
+    if(dt<10) dt=10;
     if(dt!=old_dt){
         old_dt=dt;
         thres = ((float)old_dt)/100;
@@ -442,8 +442,12 @@ void sendResultsToRaspberry(struct pi_device* uart, int16_t img, bboxs_t *boundb
     pi_uart_read(uart, &dt, 4);
     printf("dt: %d\n", dt);
 
-    //dt = handleDetections(raspDetString,stringLenght);
-    if(dt < 10)dt=10;
+    dt = handleDetections(raspDetString,stringLenght);
+    if(dt < 10) dt = 10;
+    if(dt != old_dt) {
+        old_dt = dt;
+        thres = ((float)old_dt)/100;
+    }
 //    if(dt != old_dt){
 //        old_dt = dt;
 //        thres = ((float)old_dt) / 100;
