@@ -81,7 +81,6 @@ extern L1_CL_MEM AT_L1_POINTER lynred_L1_Memory;
 
 void open_flash_filesystem(struct pi_device *flash, struct pi_device *fs){
     struct pi_readfs_conf fsconf;
-
     /* Init & open flash. */
     #if defined(QSPI)
     struct pi_spiflash_conf flash_conf;
@@ -95,7 +94,6 @@ void open_flash_filesystem(struct pi_device *flash, struct pi_device *fs){
         printf("Error flash open !\n");
         pmsis_exit(-1);
     }
-
     pi_readfs_conf_init(&fsconf);
 
     fsconf.fs.flash = flash;
@@ -125,7 +123,7 @@ void close_flash_filesystem(struct pi_device *flash, struct pi_device *fs){
     }
 #endif
 
-static int initNN() {
+static int initNN(){
     #ifndef INPUT_FILE
         PRINTF("Loading Offset Image from Flash...\n");
         pi_fs_file_t *file = NULL;
@@ -163,15 +161,16 @@ static int initNN() {
 
 int initL3Buffers(){
     /* Init & open ram. */
-#if defined(QSPI)
-    struct pi_device *ram= &QspiRam;
-    static struct pi_spiram_conf conf;
-    pi_spiram_conf_init(&conf);
-#else
-    struct pi_device *ram=&HyperRam;
-    static struct pi_hyperram_conf conf;
-    pi_hyperram_conf_init(&conf);
-#endif
+    #if defined(QSPI)
+        struct pi_device *ram= &QspiRam;
+        static struct pi_spiram_conf conf;
+        pi_spiram_conf_init(&conf);
+    #else
+        struct pi_device *ram=&HyperRam;
+        static struct pi_hyperram_conf conf;
+        pi_hyperram_conf_init(&conf);
+    #endif
+
     pi_open_from_conf(ram, &conf);
     if (pi_ram_open(ram)){
         printf("Error ram open !\n");
@@ -435,9 +434,6 @@ void sendResultsToRaspberry(struct pi_device* uart, int16_t img, bboxs_t *boundb
         old_dt = dt;
         thres = ((float)old_dt)/100;
     }
-//    if(dt != old_dt){
-//        old_dt = dt;
-//        thres = ((float)old_dt) / 100;
 //        anchor_layer_2 -> confidence_thr = FP2FIX(thres,15);
 //        anchor_layer_3 -> confidence_thr = FP2FIX(thres,15);
 //        anchor_layer_4 -> confidence_thr = FP2FIX(thres,15);
@@ -479,9 +475,7 @@ int read_raw_image(char* filename, int16_t* buffer,int w,int h){
 }
 
 /* This SLEEP only works in pulpos for now
- * TODO: need to be support in freeRTOS when new api available
- */
-
+ * TODO: need to be support in freeRTOS when new api available */
 #ifdef SLEEP
     #define RTC_TIME 5
     void go_to_sleep(){
