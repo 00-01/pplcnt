@@ -57,7 +57,6 @@
     }
 #endif
 
-
 #define FIX2FP(Val, Precision)    ((float) (Val) / (float) (1<<(Precision)))
 
 PI_L2 bbox_t *out_boxes;
@@ -66,13 +65,10 @@ typedef struct{
     int16_t num_bb;
 }bboxs_t;
 
-PI_L2 bboxs_t bbxs;
-
 L2_MEM short int output_1[40];
 L2_MEM signed char output_2[10];
 L2_MEM signed char output_3[10];
-
-
+PI_L2 bboxs_t bbxs;
 PI_L2 int16_t * img_offset;
 PI_L2 int16_t * ImageIn;
 PI_L2 unsigned char * ImageInChar;
@@ -81,9 +77,7 @@ PI_L2 unsigned char * ImageInChar;
 static struct pi_device cam;
 static struct pi_device cluster_dev;
 
-
 extern L1_CL_MEM AT_L1_POINTER lynred_L1_Memory;
-
 
 void open_flash_filesystem(struct pi_device *flash, struct pi_device *fs){
     struct pi_readfs_conf fsconf;
@@ -131,8 +125,7 @@ void close_flash_filesystem(struct pi_device *flash, struct pi_device *fs){
     }
 #endif
 
-static int initNN(){
-
+static int initNN() {
     #ifndef INPUT_FILE
         PRINTF("Loading Offset Image from Flash...\n");
         pi_fs_file_t *file = NULL;
@@ -166,11 +159,9 @@ static int initNN(){
     #endif
 
     return 0;
-
 }
 
 int initL3Buffers(){
-
     /* Init & open ram. */
 #if defined(QSPI)
     struct pi_device *ram= &QspiRam;
@@ -206,10 +197,8 @@ void printBboxes(bboxs_t *boundbxs){
     PRINTF("\n\n======================================================");
     PRINTF("\nDetected Bounding boxes                                 ");
     PRINTF("\n======================================================\n");
-
     PRINTF("BoudingBox:  score     cx     cy     w     h    class");
     PRINTF("\n------------------------------------------------------\n");
-
     for (int counter=0;counter< boundbxs->num_bb;counter++){
         if(boundbxs->bbs[counter].alive)
             PRINTF("bbox [%02d] : %.5f     %03d    %03d     %03d    %03d     %02d\n",
@@ -323,7 +312,6 @@ void CI_checks(bboxs_t *boundbxs){
     #endif
 }
 
-
 static void RunNN(){
     unsigned int ti,ti_nn,ti_ssd;
     for(int i=0;i<10;i++){
@@ -389,7 +377,6 @@ void sendResultsToBle(bboxs_t *boundbxs){
             strcat(bleDetString,tmpString);
         }
     }
-
     //stringLenght+=sprintf(tmpString,"Gap8 Power Consuption %f mW/FPS",((float)(1/(50000000.f/12000000)) * 16.800));
     stringLenght+=sprintf(tmpString,"A Project from GreenWaves and Lynred");
     strcat(bleDetString,tmpString);
