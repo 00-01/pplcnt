@@ -14,20 +14,16 @@
 #include "ImageDraw.h"
 #include "setup.h"
 
-#if defined(QSPI)
-    #define FLASH_NAME "QSPI"
-    #include "bsp/flash/spiflash.h"
-#else
+#ifdef HYPER
     #define FLASH_NAME "HYPER"
     #include "bsp/flash/hyperflash.h"
-#endif
-
-#if defined(QSPI)
-    struct pi_device QspiRam;
-    AT_QSPIFLASH_FS_EXT_ADDR_TYPE lynred_L3_Flash;
-#else
     struct pi_device HyperRam;
     AT_HYPERFLASH_FS_EXT_ADDR_TYPE lynred_L3_Flash;
+#else
+    #define FLASH_NAME "QSPI"
+    #include "bsp/flash/spiflash.h"
+    struct pi_device QspiRam;
+    AT_QSPIFLASH_FS_EXT_ADDR_TYPE lynred_L3_Flash;
 #endif
 
 #define MOUNT           1
