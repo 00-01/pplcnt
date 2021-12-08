@@ -15,12 +15,12 @@
 #include "setup.h"
 
 #ifdef HYPER
-#define FLASH_NAME "HYPER"
-#include "bsp/flash/hyperflash.h"
-struct pi_device HyperRam;
-AT_HYPERFLASH_FS_EXT_ADDR_TYPE lynred_L3_Flash;
+    #define FLASH_NAME "HYPER"
+    #include "bsp/flash/hyperflash.h"
+    struct pi_device HyperRam;
+    AT_HYPERFLASH_FS_EXT_ADDR_TYPE lynred_L3_Flash;
 #else
-#define FLASH_NAME "QSPI"
+    #define FLASH_NAME "QSPI"
     #include "bsp/flash/spiflash.h"
     struct pi_device QspiRam;
     AT_QSPIFLASH_FS_EXT_ADDR_TYPE lynred_L3_Flash;
@@ -108,7 +108,7 @@ void close_flash_filesystem(struct pi_device *flash, struct pi_device *fs){
 }
 
 #if !defined(INPUT_RAW_FILE) && !defined(INPUT_FILE)
-static int32_t open_camera_thermeye(struct pi_device *device){
+    static int32_t open_camera_thermeye(struct pi_device *device){
     struct pi_thermeye_conf cam_conf;
     pi_thermeye_conf_init(&cam_conf);
     pi_open_from_conf(device, &cam_conf);
@@ -157,14 +157,14 @@ static int initNN(){
 
 int initL3Buffers(){
     /* Init & open ram. */
-    #if defined(QSPI)
-    struct pi_device *ram= &QspiRam;
+    #ifdef QSPI
+        struct pi_device *ram= &QspiRam;
         static struct pi_spiram_conf conf;
         pi_spiram_conf_init(&conf);
     #else
-    struct pi_device *ram=&HyperRam;
-    static struct pi_hyperram_conf conf;
-    pi_hyperram_conf_init(&conf);
+        struct pi_device *ram=&HyperRam;
+        static struct pi_hyperram_conf conf;
+        pi_hyperram_conf_init(&conf);
     #endif
 
     pi_open_from_conf(ram, &conf);
@@ -338,8 +338,8 @@ static void RunNN(){
             bbxs.num_bb++;
         }
     }
-    #if !defined SILENT
-    printBboxes(&bbxs);
+    #ifndef SILENT
+        printBboxes(&bbxs);
     #endif
 
     PRINTF("Cycles NN : %10d\n",ti_nn);
@@ -473,7 +473,7 @@ int read_raw_image(char* filename, int16_t* buffer,int w,int h){
 /* This SLEEP only works in pulpos for now
  * TODO: need to be support in freeRTOS when new api available */
 #ifdef SLEEP
-#define RTC_TIME 5
+    #define RTC_TIME 5
     void go_to_sleep(){
         rt_rtc_conf_t rtc_conf;
         rt_rtc_t *rtc;
@@ -493,7 +493,6 @@ int read_raw_image(char* filename, int16_t* buffer,int w,int h){
             printf("Error....\n");
     }
 #endif
-
 
 int32_t fixed_shutterless(int16_t* img_input_fp16,int16_t* img_offset_fp16,int w, int h, uint8_t q_output){
     int16_t min,max;
@@ -567,7 +566,7 @@ void peopleDetection(void){
         pi_gpio_pin_configure(&gpio_led, gpio_out_led, cfg_flags);
         pi_gpio_pin_write(&gpio_led, gpio_out_led, 1); //set off
 
-        led(20,10,2);
+        led(5,20,5);
     #endif
 
     unsigned int Wi, Hi;
@@ -629,34 +628,34 @@ void peopleDetection(void){
         printf("Error deallocating L1 for cluster...\n");
         pmsis_exit(-1);
     }
-        #if !defined(INPUT_RAW_FILE) && !defined(INPUT_FILE)
-            PRINTF("Opening camera\n");
-            if (open_camera_thermeye(&cam)){
-                PRINTF("Thermal Eye camera open failed !\n");
-                pmsis_exit(-1);
-            }
-            #ifdef OFFSET_IMAGE_EVERY_BOOT
-                //This taking the offset each time we turn on the board
-                PRINTF("Shooting offset, cover sensor with a black body!\n");
-                pi_gpio_pin_write(NULL, GPIO_USER_LED, 0);
-                pi_time_wait_us(2 * 1000 * 1000);
-                pi_camera_control(&cam, PI_CAMERA_CMD_START, 0);
-                pi_camera_capture(&cam, img_offset, W*H * sizeof(uint16_t));
-                pi_camera_control(&cam, PI_CAMERA_CMD_STOP, 0);
-                pi_gpio_pin_write(NULL, GPIO_USER_LED, 1);
-                PRINTF("Offset image taken!\n");
-            #endif
+    #if !defined(INPUT_RAW_FILE) && !defined(INPUT_FILE)
+        PRINTF("Opening camera\n");
+        if (open_camera_thermeye(&cam)){
+            PRINTF("Thermal Eye camera open failed !\n");
+            pmsis_exit(-1);
+        }
+        #ifdef OFFSET_IMAGE_EVERY_BOOT
+            //This taking the offset each time we turn on the board
+            PRINTF("Shooting offset, cover sensor with a black body!\n");
+            pi_gpio_pin_write(NULL, GPIO_USER_LED, 0);
+            pi_time_wait_us(2 * 1000 * 1000);
+            pi_camera_control(&cam, PI_CAMERA_CMD_START, 0);
+            pi_camera_capture(&cam, img_offset, W*H * sizeof(uint16_t));
+            pi_camera_control(&cam, PI_CAMERA_CMD_STOP, 0);
+            pi_gpio_pin_write(NULL, GPIO_USER_LED, 1);
+            PRINTF("Offset image taken!\n");
         #endif
+    #endif
 
-        #ifdef USE_BLE
-            PRINTF("Init BLE\n");
-            int status;
-            status = initHandler();
-            if(status){
-                PRINTF("User manager init failed!\n");
-                pmsis_exit(-5);
-            }
-        #endif
+    #ifdef USE_BLE
+        PRINTF("Init BLE\n");
+        int status;
+        status = initHandler();
+        if(status){
+            PRINTF("User manager init failed!\n");
+            pmsis_exit(-5);
+        }
+    #endif
 
     PRINTF("Running NN\n");
     struct pi_cluster_task *task = pmsis_l2_malloc(sizeof(struct pi_cluster_task));
@@ -672,6 +671,8 @@ void peopleDetection(void){
 
     #if RASPBERRY
     //Creating GPIO TASK INPUT
+        led(3,20,10);
+
         struct pi_gpio_conf gpio_conf = {0};
         pi_gpio_conf_init(&gpio_conf);
         pi_open_from_conf(&gpio, &gpio_conf);
@@ -727,16 +728,16 @@ void peopleDetection(void){
         #endif
 
         #ifndef INPUT_FILE
-        PRINTF("Calling shutterless filtering\n");
-        //The shutterless floating point version was done just for reference...very slow on gap.
-        //if(float_shutterless(ImageIn, img_offset,W,H,8,1)){
-        int tm = pi_time_get_us();
-        if(fixed_shutterless(ImageIn, img_offset, W, H, 8)){
-            PRINTF("Error Calling prefiltering, exiting...\n");
-            pmsis_exit(-8);
-        }
-        tm = pi_time_get_us() - tm;
-        PRINTF("Shutterless %.02f ms\n", ((float)tm)/1000);
+            PRINTF("Calling shutterless filtering\n");
+            //The shutterless floating point version was done just for reference...very slow on gap.
+            //if(float_shutterless(ImageIn, img_offset,W,H,8,1)){
+            int tm = pi_time_get_us();
+            if(fixed_shutterless(ImageIn, img_offset, W, H, 8)){
+                PRINTF("Error Calling prefiltering, exiting...\n");
+                pmsis_exit(-8);
+            }
+            tm = pi_time_get_us() - tm;
+            PRINTF("Shutterless %.02f ms\n", ((float)tm)/1000);
         #endif
 
         PRINTF("Call cluster\n");
@@ -752,6 +753,9 @@ void peopleDetection(void){
         pmsis_l1_malloc_free(task->stacks, STACK_SIZE+SLAVE_STACK_SIZE*7);
 
         #if RASPBERRY
+
+            led(4,20,10);
+
             sendResultsToRaspberry(&uart, ImageIn, &bbxs);
             pi_gpio_pin_write(&gpio_led, gpio_out_led, 1); // off
         #endif
@@ -783,7 +787,7 @@ void peopleDetection(void){
     pi_cluster_close(&cluster_dev);
 
     #ifdef CI
-    CI_checks(&bbxs);
+        CI_checks(&bbxs);
     #endif
 
     PRINTF("Ended\n");
