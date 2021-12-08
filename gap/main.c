@@ -69,9 +69,9 @@ L2_MEM short int output_1[40];
 L2_MEM signed char output_2[10];
 L2_MEM signed char output_3[10];
 PI_L2 bboxs_t bbxs;
-PI_L2 int16_t * img_offset;
-PI_L2 int16_t * ImageIn;
-PI_L2 unsigned char * ImageInChar;
+PI_L2 int16_t *img_offset;
+PI_L2 int16_t *ImageIn;
+PI_L2 unsigned char *ImageInChar;
 
 #define BUFFER_SIZE 1024
 static struct pi_device cam;
@@ -538,9 +538,8 @@ int32_t float_shutterless(int16_t* img_input_fp16,int16_t* img_offset_fp16,int w
 
 #define USER_GPIO 18
 void peopleDetection(void){
-    char * ImageName = "../../../samples/im2.pgm";
-    char * RawImageName = "../../../raw_samples/dump_out_imgs/im_gap_20210125-14_15_04.bin";
-
+    char *ImageName = "../../../samples/im2.pgm";
+    char *RawImageName = "../../../raw_samples/dump_out_imgs/im_gap_20210125-14_15_04.bin";
     //To configure and use User LED
     //pi_pad_e pad = (GPIO_USER_LED >> PI_GPIO_NUM_SHIFT);
     //uint32_t pin = (GPIO_USER_LED & PI_GPIO_NUM_MASK);
@@ -561,7 +560,6 @@ void peopleDetection(void){
         pi_gpio_e gpio_out_led = PI_GPIO_A0_PAD_12_A3;
         pi_gpio_pin_configure(&gpio_led, gpio_out_led, cfg_flags);
         pi_gpio_pin_write(&gpio_led, gpio_out_led, 1); //set off
-
         //Blink few times at boot
         for(volatile int i=0;i<10;i++){
             pi_gpio_pin_write(&gpio_led, gpio_out_led, 0); //set off
@@ -606,7 +604,6 @@ void peopleDetection(void){
         PRINTF("Cluster open failed !\n");
         pmsis_exit(-7);
     }
-
     pi_freq_set(PI_FREQ_DOMAIN_FC,250000000);
     pi_freq_set(PI_FREQ_DOMAIN_CL,150000000);
 
@@ -630,7 +627,6 @@ void peopleDetection(void){
         printf("Error deallocating L1 for cluster...\n");
         pmsis_exit(-1);
     }
-
     #if !defined(INPUT_RAW_FILE) && !defined(INPUT_FILE)
         PRINTF("Opening camera\n");
         if (open_camera_thermeye(&cam)){
@@ -681,7 +677,8 @@ void peopleDetection(void){
         errors = pi_gpio_open(&gpio);
         if (errors){
             PRINTF("Error opening GPIO %d\n", errors);
-            pmsis_exit(errors);}
+            pmsis_exit(errors);
+        }
         pi_task_t cb_gpio = {0};
 
         pi_gpio_e gpio_in = PI_GPIO_A18_PAD_32_A13; //GPIO A18
@@ -704,7 +701,8 @@ void peopleDetection(void){
         pi_open_from_conf(&uart, &conf);
         if (pi_uart_open(&uart)){
             PRINTF("Uart open failed !\n");
-            pmsis_exit(-1);}
+            pmsis_exit(-1);
+        }
     #endif
 
     char iterate=1;
@@ -732,7 +730,8 @@ void peopleDetection(void){
             int tm = pi_time_get_us();
             if(fixed_shutterless(ImageIn, img_offset, W, H, 8)){
                 PRINTF("Error Calling prefiltering, exiting...\n");
-                pmsis_exit(-8); }
+                pmsis_exit(-8);
+            }
             tm = pi_time_get_us() - tm;
             PRINTF("Shutterless %.02f ms\n", ((float)tm)/1000);
         #endif
@@ -746,7 +745,6 @@ void peopleDetection(void){
             pmsis_exit(-1);
         }
         pi_cluster_send_task_to_cl(&cluster_dev, task);
-
         lynredCNN_Destruct(1);
         pmsis_l1_malloc_free(task->stacks, STACK_SIZE+SLAVE_STACK_SIZE*7);
 
@@ -764,7 +762,7 @@ void peopleDetection(void){
             save_index++;
         #endif
 
-        #if defined USE_BLE
+        #ifdef USE_BLE
             sendResultsToBle(&bbxs);
             #ifndef SAVE_TO_PC
                 pi_time_wait_us(2 * 1000 * 1000);
@@ -777,9 +775,7 @@ void peopleDetection(void){
             go_to_sleep();
         #endif
     }
-
     lynredCNN_Destruct(0);
-
     // Close the cluster
     pi_cluster_close(&cluster_dev);
 
