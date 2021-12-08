@@ -15,12 +15,12 @@
 #include "setup.h"
 
 #ifdef HYPER
-    #define FLASH_NAME "HYPER"
-    #include "bsp/flash/hyperflash.h"
-    struct pi_device HyperRam;
-    AT_HYPERFLASH_FS_EXT_ADDR_TYPE lynred_L3_Flash;
+#define FLASH_NAME "HYPER"
+#include "bsp/flash/hyperflash.h"
+struct pi_device HyperRam;
+AT_HYPERFLASH_FS_EXT_ADDR_TYPE lynred_L3_Flash;
 #else
-    #define FLASH_NAME "QSPI"
+#define FLASH_NAME "QSPI"
     #include "bsp/flash/spiflash.h"
     struct pi_device QspiRam;
     AT_QSPIFLASH_FS_EXT_ADDR_TYPE lynred_L3_Flash;
@@ -33,7 +33,7 @@
 
 
 #if RASPBERRY
-    struct pi_device gpio;
+struct pi_device gpio;
     struct pi_device gpio_led;
     volatile uint8_t trigger = 0;
     void __pi_cb_gpio(void *arg){
@@ -108,48 +108,48 @@ void close_flash_filesystem(struct pi_device *flash, struct pi_device *fs){
 }
 
 #if !defined(INPUT_RAW_FILE) && !defined(INPUT_FILE)
-    static int32_t open_camera_thermeye(struct pi_device *device){
-        struct pi_thermeye_conf cam_conf;
-        pi_thermeye_conf_init(&cam_conf);
-        pi_open_from_conf(device, &cam_conf);
-        if (pi_camera_open(device)){
-            return -1;
-        }
-        return 0;
+static int32_t open_camera_thermeye(struct pi_device *device){
+    struct pi_thermeye_conf cam_conf;
+    pi_thermeye_conf_init(&cam_conf);
+    pi_open_from_conf(device, &cam_conf);
+    if (pi_camera_open(device)){
+        return -1;
     }
+    return 0;
+}
 #endif
 
 static int initNN(){
     #ifndef INPUT_FILE
-        PRINTF("Loading Offset Image from Flash...\n");
-        pi_fs_file_t *file = NULL;
-        char *name = "Calibration.bin";
-        int32_t size = 0;
-        uint32_t size_total = 0;
+    PRINTF("Loading Offset Image from Flash...\n");
+    pi_fs_file_t *file = NULL;
+    char *name = "Calibration.bin";
+    int32_t size = 0;
+    uint32_t size_total = 0;
 
-        img_offset  = (unsigned short int *) pmsis_l2_malloc(80 * 80 * sizeof(short int));
-        char * buff =  img_offset;
+    img_offset  = (unsigned short int *) pmsis_l2_malloc(80 * 80 * sizeof(short int));
+    char * buff =  img_offset;
 
-        if (img_offset==NULL ){
-            PRINTF("Failed to allocate Memory for image Offset\n");
-            pmsis_exit(-4);
-        }
-        struct pi_device flash;
-        struct pi_device fs;
+    if (img_offset==NULL ){
+        PRINTF("Failed to allocate Memory for image Offset\n");
+        pmsis_exit(-4);
+    }
+    struct pi_device flash;
+    struct pi_device fs;
 
-        open_flash_filesystem(&flash, &fs);
+    open_flash_filesystem(&flash, &fs);
 
-        file = pi_fs_open(&fs, name, 0);
-        if (file == NULL){
-            printf("File %s open failed !\n", name);
-            pmsis_exit(-4);
-        } do{
-            //Read from filesystem(on flash) to a buffer in L2 memory.
-            size = pi_fs_read(file, buff+size_total, BUFFER_SIZE);
-            size_total += size;
-        } while (size_total < file->size);
-        pi_fs_close(file);
-        close_flash_filesystem(&flash,&fs);
+    file = pi_fs_open(&fs, name, 0);
+    if (file == NULL){
+        printf("File %s open failed !\n", name);
+        pmsis_exit(-4);
+    } do{
+        //Read from filesystem(on flash) to a buffer in L2 memory.
+        size = pi_fs_read(file, buff+size_total, BUFFER_SIZE);
+        size_total += size;
+    } while (size_total < file->size);
+    pi_fs_close(file);
+    close_flash_filesystem(&flash,&fs);
     #endif
 
     return 0;
@@ -158,13 +158,13 @@ static int initNN(){
 int initL3Buffers(){
     /* Init & open ram. */
     #if defined(QSPI)
-        struct pi_device *ram= &QspiRam;
+    struct pi_device *ram= &QspiRam;
         static struct pi_spiram_conf conf;
         pi_spiram_conf_init(&conf);
     #else
-        struct pi_device *ram=&HyperRam;
-        static struct pi_hyperram_conf conf;
-        pi_hyperram_conf_init(&conf);
+    struct pi_device *ram=&HyperRam;
+    static struct pi_hyperram_conf conf;
+    pi_hyperram_conf_init(&conf);
     #endif
 
     pi_open_from_conf(ram, &conf);
@@ -181,7 +181,7 @@ int initL3Buffers(){
 }
 
 void drawBboxes(bboxs_t *boundbxs, uint8_t *img){
-     for (int counter=0;counter< boundbxs->num_bb;counter++){
+    for (int counter=0;counter< boundbxs->num_bb;counter++){
         if(boundbxs->bbs[counter].alive){
             DrawRectangle(img, 80, 80, boundbxs->bbs[counter].x, boundbxs->bbs[counter].y, boundbxs->bbs[counter].w, boundbxs->bbs[counter].h, 255);
         }
@@ -197,19 +197,19 @@ void printBboxes(bboxs_t *boundbxs){
     for (int counter=0;counter< boundbxs->num_bb;counter++){
         if(boundbxs->bbs[counter].alive)
             PRINTF("bbox [%02d] : %.5f     %03d    %03d     %03d    %03d     %02d\n",
-                counter,
-                FIX2FP(boundbxs->bbs[counter].score,7 ),
-                boundbxs->bbs[counter].x,
-                boundbxs->bbs[counter].y,
-                boundbxs->bbs[counter].w,
-                boundbxs->bbs[counter].h,
-                boundbxs->bbs[counter].class);
+                   counter,
+                   FIX2FP(boundbxs->bbs[counter].score,7 ),
+                   boundbxs->bbs[counter].x,
+                   boundbxs->bbs[counter].y,
+                   boundbxs->bbs[counter].w,
+                   boundbxs->bbs[counter].h,
+                   boundbxs->bbs[counter].class);
     }
 }
 
 void CI_checks(bboxs_t *boundbxs){
     #ifdef INPUT_FILE
-        bbox_t GT[6];
+    bbox_t GT[6];
         bbox_t INF[6];
         GT[0].score = 120;
         GT[0].x = 40;
@@ -268,7 +268,7 @@ void CI_checks(bboxs_t *boundbxs){
     #endif
 
     #ifdef INPUT_RAW_FILE
-        bbox_t GT[2];
+    bbox_t GT[2];
         bbox_t INF[2];
         GT[0].score = 121;
         GT[0].x = 41;
@@ -339,7 +339,7 @@ static void RunNN(){
         }
     }
     #if !defined SILENT
-        printBboxes(&bbxs);
+    printBboxes(&bbxs);
     #endif
 
     PRINTF("Cycles NN : %10d\n",ti_nn);
@@ -473,7 +473,7 @@ int read_raw_image(char* filename, int16_t* buffer,int w,int h){
 /* This SLEEP only works in pulpos for now
  * TODO: need to be support in freeRTOS when new api available */
 #ifdef SLEEP
-    #define RTC_TIME 5
+#define RTC_TIME 5
     void go_to_sleep(){
         rt_rtc_conf_t rtc_conf;
         rt_rtc_t *rtc;
@@ -532,6 +532,16 @@ int32_t float_shutterless(int16_t* img_input_fp16,int16_t* img_offset_fp16,int w
     return error;
 }
 
+void led(int cycle, int delay, int delay1){
+    for(int i=0; i<cycle; i++){
+        pi_gpio_pin_write(NULL, GPIO_USER_LED, 0);
+        pi_time_wait_us(delay*10000);
+        pi_gpio_pin_write(NULL, GPIO_USER_LED, 1);
+        pi_time_wait_us(delay*10000);
+        pi_time_wait_us(delay1*10000);
+    }
+}
+
 #define USER_GPIO 18
 void peopleDetection(void){
     char *ImageName = "../../../samples/im2.pgm";
@@ -556,12 +566,8 @@ void peopleDetection(void){
         pi_gpio_e gpio_out_led = PI_GPIO_A0_PAD_12_A3;
         pi_gpio_pin_configure(&gpio_led, gpio_out_led, cfg_flags);
         pi_gpio_pin_write(&gpio_led, gpio_out_led, 1); //set off
-        //Blink few times at boot
-        for(volatile int i=0;i<10;i++){
-            pi_gpio_pin_write(&gpio_led, gpio_out_led, 0); //set off
-            pi_time_wait_us(50000);
-            pi_gpio_pin_write(&gpio_led, gpio_out_led, 1); //set off
-            pi_time_wait_us(50000);}
+
+        led(20,10,2);
     #endif
 
     unsigned int Wi, Hi;
@@ -570,7 +576,7 @@ void peopleDetection(void){
     unsigned int save_index=0;
     PRINTF("Entering main controller\n");
 
-    ImageInChar = (unsigned char *) pmsis_l2_malloc( W * H* sizeof(short int));
+    ImageInChar = (unsigned char *) pmsis_l2_malloc( W*H*sizeof(short int));
     if (ImageInChar == 0) {
         PRINTF("Failed to allocate Memory for Image (%d bytes)\n", W * H * sizeof(int16_t));
         return 1;
@@ -578,14 +584,14 @@ void peopleDetection(void){
     ImageIn = (int16_t *) ImageInChar;
 
     #ifdef INPUT_FILE
-        //Reading Image from Bridge
+    //Reading Image from Bridge
         PRINTF("Loading Image from File\n");
         if ((ReadImageFromFile(ImageName, &Wi, &Hi, ImageInChar, W * H * sizeof(unsigned char)) == 0) || (Wi != W) || (Hi != H)) {
             PRINTF("Failed to load image %s or dimension mismatch Expects [%dx%d], Got [%dx%d]\n", ImageName, W, H, Wi, Hi);
             pmsis_exit(-1);
         }
     #elif defined INPUT_RAW_FILE
-        //Load 16 bits raw image
+    //Load 16 bits raw image
         if(read_raw_image(RawImageName, ImageIn, W, H)){
             PRINTF("Failed to load raw image\n");
             pmsis_exit(-1);
@@ -623,34 +629,34 @@ void peopleDetection(void){
         printf("Error deallocating L1 for cluster...\n");
         pmsis_exit(-1);
     }
-    #if !defined(INPUT_RAW_FILE) && !defined(INPUT_FILE)
-        PRINTF("Opening camera\n");
-        if (open_camera_thermeye(&cam)){
-            PRINTF("Thermal Eye camera open failed !\n");
-            pmsis_exit(-1);
-        }
-        #ifdef OFFSET_IMAGE_EVERY_BOOT
-            //This taking the offset each time we turn on the board
-            PRINTF("Shooting offset, cover sensor with a black body!\n");
-            pi_gpio_pin_write(NULL, GPIO_USER_LED, 0);
-            pi_time_wait_us(2 * 1000 * 1000);
-            pi_camera_control(&cam, PI_CAMERA_CMD_START, 0);
-            pi_camera_capture(&cam, img_offset, W*H * sizeof(uint16_t));
-            pi_camera_control(&cam, PI_CAMERA_CMD_STOP, 0);
-            pi_gpio_pin_write(NULL, GPIO_USER_LED, 1);
-            PRINTF("Offset image taken!\n");
+        #if !defined(INPUT_RAW_FILE) && !defined(INPUT_FILE)
+            PRINTF("Opening camera\n");
+            if (open_camera_thermeye(&cam)){
+                PRINTF("Thermal Eye camera open failed !\n");
+                pmsis_exit(-1);
+            }
+            #ifdef OFFSET_IMAGE_EVERY_BOOT
+                //This taking the offset each time we turn on the board
+                PRINTF("Shooting offset, cover sensor with a black body!\n");
+                pi_gpio_pin_write(NULL, GPIO_USER_LED, 0);
+                pi_time_wait_us(2 * 1000 * 1000);
+                pi_camera_control(&cam, PI_CAMERA_CMD_START, 0);
+                pi_camera_capture(&cam, img_offset, W*H * sizeof(uint16_t));
+                pi_camera_control(&cam, PI_CAMERA_CMD_STOP, 0);
+                pi_gpio_pin_write(NULL, GPIO_USER_LED, 1);
+                PRINTF("Offset image taken!\n");
+            #endif
         #endif
-    #endif
 
-    #ifdef USE_BLE
-        PRINTF("Init BLE\n");
-        int status;
-        status = initHandler();
-        if(status){
-            PRINTF("User manager init failed!\n");
-            pmsis_exit(-5);
-        }
-    #endif
+        #ifdef USE_BLE
+            PRINTF("Init BLE\n");
+            int status;
+            status = initHandler();
+            if(status){
+                PRINTF("User manager init failed!\n");
+                pmsis_exit(-5);
+            }
+        #endif
 
     PRINTF("Running NN\n");
     struct pi_cluster_task *task = pmsis_l2_malloc(sizeof(struct pi_cluster_task));
@@ -665,7 +671,7 @@ void peopleDetection(void){
     task->slave_stack_size = (uint32_t) SLAVE_STACK_SIZE;
 
     #if RASPBERRY
-        //Creating GPIO TASK INPUT
+    //Creating GPIO TASK INPUT
         struct pi_gpio_conf gpio_conf = {0};
         pi_gpio_conf_init(&gpio_conf);
         pi_open_from_conf(&gpio, &gpio_conf);
@@ -708,28 +714,29 @@ void peopleDetection(void){
         #else
             #if RASPBERRY
                 while(!trigger){
-                    pi_yield();}
+                    pi_yield();
+                }
                 trigger=0;
             #endif
             PRINTF("Taking Picture!\n");
-            pi_gpio_pin_write(NULL, USER_GPIO, 0);
+            pi_gpio_pin_write(NULL, USER_GPIO, 0); // on
             pi_camera_control(&cam, PI_CAMERA_CMD_START, 0);
             pi_camera_capture(&cam, ImageIn, W*H*sizeof(int16_t));
             pi_camera_control(&cam, PI_CAMERA_CMD_STOP, 0);
-            pi_gpio_pin_write(NULL, USER_GPIO , 1);
+            pi_gpio_pin_write(NULL, USER_GPIO , 1); // off
         #endif
 
         #ifndef INPUT_FILE
-            PRINTF("Calling shutterless filtering\n");
-            //The shutterless floating point version was done just for reference...very slow on gap.
-            //if(float_shutterless(ImageIn, img_offset,W,H,8,1)){
-            int tm = pi_time_get_us();
-            if(fixed_shutterless(ImageIn, img_offset, W, H, 8)){
-                PRINTF("Error Calling prefiltering, exiting...\n");
-                pmsis_exit(-8);
-            }
-            tm = pi_time_get_us() - tm;
-            PRINTF("Shutterless %.02f ms\n", ((float)tm)/1000);
+        PRINTF("Calling shutterless filtering\n");
+        //The shutterless floating point version was done just for reference...very slow on gap.
+        //if(float_shutterless(ImageIn, img_offset,W,H,8,1)){
+        int tm = pi_time_get_us();
+        if(fixed_shutterless(ImageIn, img_offset, W, H, 8)){
+            PRINTF("Error Calling prefiltering, exiting...\n");
+            pmsis_exit(-8);
+        }
+        tm = pi_time_get_us() - tm;
+        PRINTF("Shutterless %.02f ms\n", ((float)tm)/1000);
         #endif
 
         PRINTF("Call cluster\n");
@@ -746,7 +753,7 @@ void peopleDetection(void){
 
         #if RASPBERRY
             sendResultsToRaspberry(&uart, ImageIn, &bbxs);
-            pi_gpio_pin_write(&gpio_led, gpio_out_led, 1); //set off
+            pi_gpio_pin_write(&gpio_led, gpio_out_led, 1); // off
         #endif
 
         #ifdef SAVE_TO_PC
@@ -766,7 +773,7 @@ void peopleDetection(void){
         #endif
 
         #ifdef SLEEP
-            //This is not the optimized deep sleep, when should take care of pad setting in sleep
+        //This is not the optimized deep sleep, when should take care of pad setting in sleep
             //and to properly shutdown all external devices
             go_to_sleep();
         #endif
@@ -776,7 +783,7 @@ void peopleDetection(void){
     pi_cluster_close(&cluster_dev);
 
     #ifdef CI
-        CI_checks(&bbxs);
+    CI_checks(&bbxs);
     #endif
 
     PRINTF("Ended\n");
