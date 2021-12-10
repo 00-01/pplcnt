@@ -181,7 +181,7 @@ int initL3Buffers(){
 }
 
 void drawBboxes(bboxs_t *boundbxs, uint8_t *img){
-    for (int counter=0;counter< boundbxs->num_bb;counter++){
+    for (int counter=0; counter < boundbxs->num_bb; counter++){
         if(boundbxs->bbs[counter].alive){
             DrawRectangle(img, 80, 80, boundbxs->bbs[counter].x, boundbxs->bbs[counter].y, boundbxs->bbs[counter].w, boundbxs->bbs[counter].h, 255);
         }
@@ -342,7 +342,7 @@ static void RunNN(){
         printBboxes(&bbxs);
     #endif
 
-    PRINTF("Cycles NN : %10d\n",ti_nn);
+    PRINTF("Cycles NN : %10d\n", ti_nn);
 }
 
 char bleDetString[200];
@@ -391,7 +391,7 @@ void sendResultsToBle(bboxs_t *boundbxs){
 //int detSize = 3+(MAX_OUT_BB*12);
 //char * raspDetString = (int *)malloc(detSize * sizeof(int *));
 char raspDetString[3+(MAX_OUT_BB*12)];
-void sendResultsToRaspberry(struct pi_device* uart, int16_t img, bboxs_t *boundbxs){
+void sendResultsToRaspberry(struct pi_device* uart, unsigned char *img, bboxs_t *boundbxs){
     int stringLenght = 0;
     int AliveBBs = 0;
 
@@ -417,10 +417,8 @@ void sendResultsToRaspberry(struct pi_device* uart, int16_t img, bboxs_t *boundb
     //printf("\n");
     //printf("String Size: %d\n",stringLenght);
 
-    pi_uart_write(uart, img, 80*80*sizeof(int16_t));
-    //printf("writing detections\n");
+    pi_uart_write(uart, img, 80*80*sizeof(unsigned char) * 2);
     pi_uart_write(uart, raspDetString, 3+(MAX_OUT_BB*12));
-    //waiting back threshold
     pi_uart_read(uart, &dt, 4);
     printf("dt: %d\n", dt);
 
@@ -429,7 +427,7 @@ void sendResultsToRaspberry(struct pi_device* uart, int16_t img, bboxs_t *boundb
     if(dt != old_dt) {
         old_dt = dt;
         thres = ((float)old_dt)/100;
-    }
+    } //
 //        anchor_layer_2 -> confidence_thr = FP2FIX(thres,15);
 //        anchor_layer_3 -> confidence_thr = FP2FIX(thres,15);
 //        anchor_layer_4 -> confidence_thr = FP2FIX(thres,15);
@@ -531,13 +529,13 @@ int32_t float_shutterless(int16_t* img_input_fp16,int16_t* img_offset_fp16,int w
     return error;
 }
 
-void led(int cycle, int delay, int delay1){
+void led(int cycle, int delay1, int delay2){
     for(int i=0; i<cycle; i++){
         pi_gpio_pin_write(NULL, GPIO_USER_LED, 0);
-        pi_time_wait_us(delay*10000);
-        pi_gpio_pin_write(NULL, GPIO_USER_LED, 1);
-        pi_time_wait_us(delay*10000);
         pi_time_wait_us(delay1*10000);
+        pi_gpio_pin_write(NULL, GPIO_USER_LED, 1);
+        pi_time_wait_us(delay1*10000);
+        pi_time_wait_us(delay2*10000);
     }
 }
 
@@ -568,9 +566,7 @@ void peopleDetection(void){
     #endif
 
     unsigned int Wi, Hi;
-    //Input image size
     unsigned int W = 80, H = 80;
-    unsigned int save_index=0;
     PRINTF("Entering main controller\n");
 
     ImageInChar = (unsigned char *) pmsis_l2_malloc( W*H*sizeof(short int));
@@ -706,7 +702,8 @@ void peopleDetection(void){
         }
     #endif
 
-    char iterate=1;
+    unsigned int save_index = 0;
+    char iterate = 1;
     while(iterate){
         #if defined(INPUT_RAW_FILE) || defined(INPUT_FILE)
             iterate=0;
@@ -752,7 +749,12 @@ void peopleDetection(void){
 
         #if RASPBERRY
 //            led(4, 20, 10);
-            sendResultsToRaspberry(&uart, ImageIn, &bbxs);
+//            printf("size = %\nd", H*W);
+//            for(int j = 0; j<H*W*2; j++) printf("%d, ", ((unsigned char *)ImageIn)[j]);
+//            printf("\n=====================================\n");
+//            return;
+//            sendResultsToRaspberry(&uart, ImageIn, &bbxs);
+            sendResultsToRaspberry(&uart, (unsigned char *)ImageIn, &bbxs);
             pi_gpio_pin_write(&gpio_led, gpio_out_led, 1); // off
         #endif
 
