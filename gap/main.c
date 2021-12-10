@@ -715,7 +715,7 @@ void peopleDetection(void){
         #else
             #if RASPBERRY
                 while(!trigger){
-                    printf("waiting PI signal")
+                    printf("waiting PI signal");
                     pi_yield();
                 }
                 trigger=0;
@@ -760,7 +760,7 @@ void peopleDetection(void){
 //            printf("\n=====================================\n");
 //            return;
 //            sendResultsToRaspberry(&uart, ImageIn, &bbxs);
-            printf("tx result to pi")
+            printf("tx result to pi");
             sendResultsToRaspberry(&uart, (unsigned char *)ImageIn, &bbxs);
             pi_gpio_pin_write(&gpio_led, gpio_out_led, 1); // off
         #endif
