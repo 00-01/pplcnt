@@ -149,7 +149,7 @@ static int initNN(){
         size_total += size;
     } while (size_total < file->size);
     pi_fs_close(file);
-    close_flash_filesystem(&flash,&fs);
+    close_flash_filesystem(&flash, &fs);
     #endif
 
     return 0;
@@ -524,7 +524,7 @@ int32_t float_shutterless(int16_t* img_input_fp16,int16_t* img_offset_fp16,int w
 
     int error = shutterless_float(img_input_fp16,img_offset_fp16,40,&min,&max);
 
-    for(int i=0;i<w*h;i++){
+    for(int i=0; i<w*h; i++){
         img_input_fp16[i]= (int16_t)((out_max-out_min)* (pow(((float)img_input_fp16[i]-min)/(max-min),gamma) + out_min)) ;
         img_input_fp8[i]= img_input_fp16[i] << (q_output-8);
     }
@@ -565,8 +565,6 @@ void peopleDetection(void){
         pi_gpio_e gpio_out_led = PI_GPIO_A0_PAD_12_A3;
         pi_gpio_pin_configure(&gpio_led, gpio_out_led, cfg_flags);
         pi_gpio_pin_write(&gpio_led, gpio_out_led, 1); //set off
-
-        led(5,20,5);
     #endif
 
     unsigned int Wi, Hi;
@@ -577,7 +575,7 @@ void peopleDetection(void){
 
     ImageInChar = (unsigned char *) pmsis_l2_malloc( W*H*sizeof(short int));
     if (ImageInChar == 0) {
-        PRINTF("Failed to allocate Memory for Image (%d bytes)\n", W * H * sizeof(int16_t));
+        PRINTF("Failed to allocate Memory for Image (%d bytes)\n", W * H * sizeof(uint16_t));
         return 1;
     }
     ImageIn = (int16_t *) ImageInChar;
@@ -640,7 +638,7 @@ void peopleDetection(void){
             pi_gpio_pin_write(NULL, GPIO_USER_LED, 0);
             pi_time_wait_us(2 * 1000 * 1000);
             pi_camera_control(&cam, PI_CAMERA_CMD_START, 0);
-            pi_camera_capture(&cam, img_offset, W*H * sizeof(uint16_t));
+            pi_camera_capture(&cam, img_offset, W*H * sizeof(int16_t));
             pi_camera_control(&cam, PI_CAMERA_CMD_STOP, 0);
             pi_gpio_pin_write(NULL, GPIO_USER_LED, 1);
             PRINTF("Offset image taken!\n");
@@ -671,7 +669,7 @@ void peopleDetection(void){
 
     #if RASPBERRY
     //Creating GPIO TASK INPUT
-        led(3,20,10);
+        led(3, 20, 10);
 
         struct pi_gpio_conf gpio_conf = {0};
         pi_gpio_conf_init(&gpio_conf);
@@ -753,9 +751,7 @@ void peopleDetection(void){
         pmsis_l1_malloc_free(task->stacks, STACK_SIZE+SLAVE_STACK_SIZE*7);
 
         #if RASPBERRY
-
-            led(4,20,10);
-
+//            led(4, 20, 10);
             sendResultsToRaspberry(&uart, ImageIn, &bbxs);
             pi_gpio_pin_write(&gpio_led, gpio_out_led, 1); // off
         #endif
@@ -772,7 +768,7 @@ void peopleDetection(void){
         #ifdef USE_BLE
             sendResultsToBle(&bbxs);
             #ifndef SAVE_TO_PC
-                pi_time_wait_us(2 * 1000 * 1000);
+                pi_time_wait_us(20 * 10000);
             #endif
         #endif
 
