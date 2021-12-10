@@ -419,9 +419,6 @@ void sendResultsToRaspberry(struct pi_device* uart, unsigned char *img, bboxs_t 
 
     pi_uart_write(uart, img, 80*80*sizeof(unsigned char) * 2);
     pi_uart_write(uart, raspDetString, 3+(MAX_OUT_BB*12));
-
-    printf("5\n");
-
 //////////////////////////////////////////////////////////////////////////////
 //    this is where the gap code stops due to pi code only running once     //
     pi_uart_read(uart, &dt, 4);
@@ -715,7 +712,7 @@ void peopleDetection(void){
         #else
             #if RASPBERRY
                 while(!trigger){
-                    printf("waiting PI signal");
+                    printf("waiting PI signal\n");
                     pi_yield();
                 }
                 trigger=0;
@@ -760,7 +757,7 @@ void peopleDetection(void){
 //            printf("\n=====================================\n");
 //            return;
 //            sendResultsToRaspberry(&uart, ImageIn, &bbxs);
-            printf("tx result to pi");
+            printf("tx result to pi\n");
             sendResultsToRaspberry(&uart, (unsigned char *)ImageIn, &bbxs);
             pi_gpio_pin_write(&gpio_led, gpio_out_led, 1); // off
         #endif
