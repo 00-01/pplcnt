@@ -18,9 +18,10 @@ import scp
 
 ap = argparse.ArgumentParser()
 ap.add_argument("-l", "--loop", required=False, help="run looping or not")
+ap.add_argument("-f", "--frequency", required=False, help="loop frequency")
 args = vars(ap.parse_args())
 
-print("loop is ", args["loop"])
+print("loop is", args["loop"])
 LOOP = True
 
 # set rpi serial
@@ -61,31 +62,30 @@ GPIO.output(gp, GPIO.LOW)
 w = 80
 h = 80
 size = 2
-DET_SIZE = 3 + (10 * 12)
+DET_SIZE = 3 + (30 * 12)
 threshold = 40
 
-now = datetime.now()
-dt_string = now.strftime("%Y%m%d-%H_%M_%S")
-
-# send interrupt signal to gap
-print("sending interrupt signal")
-GPIO.output(gp, GPIO.HIGH)
-time.sleep(0.1)
-GPIO.output(gp, GPIO.LOW)
-
-# capture picamera image
-print("capturing picamera image")
-os.system("/bin/bash grubFrame.sh " + NODE_NAME + " " + dt_string)
-
-# img dir
-im_dir = "images/"
-im_name = "IR_" + NODE_NAME + "_" + dt_string + ".bin"
-ser.flush()
-print("serial read begin")
 while LOOP:
+    print("="*8, "READ STARTING", "="*8)
+    now = datetime.now()
+    dt_string = now.strftime("%Y%m%d-%H_%M_%S")
+
+    ser.flush()
+    ser.reset_input_buffer()
+    ser.reset_output_buffer()
+
+    # tx threshold
+    print("tx threshold")
+    ser.write(threshold.to_bytes(4, byteorder='little'))
+
+    print("tx start signal")
+    GPIO.output(gp, GPIO.HIGH)
+    time.sleep(0.1)
+    GPIO.output(gp, GPIO.LOW)
+
+    print("rx read begin")
     if ser.in_waiting > 0:
-        print("serial read waiting")
-        # rx image
+        print("reading image")
         rx_img = ser.read(w * h * size)
         while len(rx_img) < (w * h * size):
             new_img = ser.read(w * h * size - len(rx_img))
@@ -94,6 +94,9 @@ while LOOP:
             print("incorrect size received. skipping image!")
             exit()
         ser.flush()
+
+        print("capturing picamera image")
+        os.system("/bin/bash grubFrame.sh " + NODE_NAME + " " + dt_string)
 
 
         # import cv2
@@ -119,7 +122,7 @@ while LOOP:
         # exit()
 
 
-        # rx detections
+        print("rx detection")
         rx_det = ser.read(DET_SIZE)
         while len(rx_det) < (DET_SIZE):
             new_det = ser.read(DET_SIZE - len(rx_det))
@@ -127,27 +130,27 @@ while LOOP:
         if len(rx_det) != (DET_SIZE):
             print("incorrect size received. skipping detections!")
             exit()
-
-        # tx threshold
-        ser.write(threshold.to_bytes(4, byteorder='little'))
+        ser.flush()
 
         # check image
         # im = Image.frombuffer('I;16', (w,h), rx_img, 'raw', 'L', 0, 1)
         # im.save(f"a.jpg")
 
-        # save bin
+        print("saving image")
+        im_dir = "images/"
+        im_name = "IR_" + NODE_NAME + "_" + dt_string + ".bin"
         im_int = struct.unpack('<' +'B' *w *h *2, rx_img)
         with open(im_dir + im_name, "wb") as file:
             for val in im_int:
                 file.write(val.to_bytes(2, byteorder='little', signed=True))
 
-        # save txt
+        print("saving detection")
         det_str = rx_det.decode()
         det_name = "CNT_" + NODE_NAME + "_" + dt_string + ".txt"
         with open(im_dir + det_name, "w") as file:
             file.write("%s" % det_str)
 
-        # upload to ftp
+        print("uploading to ftp")
         if USE_FTP == True:
             with FTP(FTP_ADDR, FTP_USER, FTP_PASS) as ftp:
                 ftp.cwd(NODE_NAME)
@@ -157,8 +160,8 @@ while LOOP:
                 with open(im_dir + det_name, 'rb') as file:
                     ftp.storbinary('STOR ' + det_name, file)
                 os.remove(im_dir + det_name)
-            print("saved to ftp")
-        # upload to server
+
+        print("uploading to server")
         if USE_SCP == True:
             ssh = paramiko.SSHClient()
             # ssh.load_system_host_keys()
@@ -178,20 +181,13 @@ while LOOP:
 
             sftp.close()
             ssh.close()
-            print("saved to server")
+        print("-"*8, "COMPLETE", "-"*8, "\n")
     else:
-        print("SERIAL READ FAIL")
-        ser.write(threshold.to_bytes(4, byteorder='little'))
-        time.sleep(10)
-
-        print("sending interrupt signal")
-        GPIO.output(gp, GPIO.HIGH)
-        time.sleep(0.1)
-        GPIO.output(gp, GPIO.LOW)
+        print("%"*8, "FAILED", "%"*8, "\n")
 
     LOOP = args["loop"]
     if args["loop"] == None:
         LOOP = False
 
+    time.sleep(int(args["frequency"]))
 # camera.stop_preview()
-
