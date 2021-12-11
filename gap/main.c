@@ -33,7 +33,7 @@
 
 
 #if RASPBERRY
-struct pi_device gpio;
+    struct pi_device gpio;
     struct pi_device gpio_led;
     volatile uint8_t trigger = 0;
     void __pi_cb_gpio(void *arg){
@@ -41,14 +41,13 @@ struct pi_device gpio;
         pi_gpio_pin_write(&gpio_led, gpio_out_led, 0);
 
         //wait and read again to be sure that it is not just a float pin
-        pi_time_wait_us(50000);
+        pi_time_wait_us(5 * 10000);
         pi_gpio_e gpio_pin = (pi_gpio_e) arg;
         uint32_t val = 0;
         pi_gpio_pin_read(&gpio, gpio_pin, &val);
-        if(val==1)
-            trigger = 1;
-        else
-            trigger = 0;
+
+        if(val==1) trigger = 1;
+        else trigger = 0;
         //printf("GPIO callback GPIO_A%d %d %d\n", gpio_pin & 0xFF, trigger, val);
     }
 #endif
@@ -189,14 +188,12 @@ void drawBboxes(bboxs_t *boundbxs, uint8_t *img){
 }
 
 void printBboxes(bboxs_t *boundbxs){
-    PRINTF("\n\n======================================================");
-    PRINTF("\nDetected Bounding boxes                                 ");
-    PRINTF("\n======================================================\n");
-    PRINTF("BoudingBox:  score     cx     cy     w     h    class");
-    PRINTF("\n------------------------------------------------------\n");
+    PRINTF("--------------------------------------------------\n");
+    PRINTF("BoudingBox:  score    cx    cy     w    h   class");
+    PRINTF("\n--------------------------------------------------\n");
     for (int counter=0;counter< boundbxs->num_bb;counter++){
         if(boundbxs->bbs[counter].alive)
-            PRINTF("bbox [%02d] : %.5f     %03d    %03d     %03d    %03d     %02d\n",
+            PRINTF("bbox [%02d] : %.5f   %03d   %03d   %03d   %03d   %02d\n",
                    counter,
                    FIX2FP(boundbxs->bbs[counter].score,7 ),
                    boundbxs->bbs[counter].x,
@@ -205,6 +202,7 @@ void printBboxes(bboxs_t *boundbxs){
                    boundbxs->bbs[counter].h,
                    boundbxs->bbs[counter].class);
     }
+    PRINTF("--------------------------------------------------\n");
 }
 
 void CI_checks(bboxs_t *boundbxs){
@@ -342,7 +340,7 @@ static void RunNN(){
         printBboxes(&bbxs);
     #endif
 
-    PRINTF("Cycles NN : %10d\n", ti_nn);
+    PRINTF("Cycles NN :%10d\n", ti_nn);
 }
 
 char bleDetString[200];
@@ -391,7 +389,7 @@ void sendResultsToBle(bboxs_t *boundbxs){
 //int detSize = 3+(MAX_OUT_BB*12);
 //char * raspDetString = (int *)malloc(detSize * sizeof(int *));
 char raspDetString[3+(MAX_OUT_BB*12)];
-void sendResultsToRaspberry(struct pi_device* uart, unsigned char *img, bboxs_t *boundbxs){
+void sendResultsToRaspberry(struct pi_device *uart, unsigned char *img, bboxs_t *boundbxs){
     int stringLenght = 0;
     int AliveBBs = 0;
 
@@ -417,12 +415,16 @@ void sendResultsToRaspberry(struct pi_device* uart, unsigned char *img, bboxs_t 
     //printf("\n");
     //printf("String Size: %d\n",stringLenght);
 
-    pi_uart_write(uart, img, 80*80*sizeof(unsigned char) * 2);
-    pi_uart_write(uart, raspDetString, 3+(MAX_OUT_BB*12));
 //////////////////////////////////////////////////////////////////////////////
 //    this is where the gap code stops due to pi code only running once     //
     pi_uart_read(uart, &dt, 4);
     printf("dt: %d\n", dt);
+
+    pi_uart_write(uart, img, 80*80*sizeof(unsigned char) * 2);
+    printf("---image sent---\n");
+
+    pi_uart_write(uart, raspDetString, 3+(MAX_OUT_BB*12));
+    printf("---det sent---\n");
 
 //    dt = handleDetections(raspDetString,stringLenght);
     if(dt < 10) dt = 10;
@@ -706,18 +708,22 @@ void peopleDetection(void){
 
     unsigned int save_index = 0;
     char iterate = 1;
+    clock_t t;
     while(iterate){
+    printf("\n================= STARTING INFERENCE =================\n");
+        int t = pi_time_get_us();
+
         #if defined(INPUT_RAW_FILE) || defined(INPUT_FILE)
             iterate=0;
         #else
             #if RASPBERRY
                 while(!trigger){
-                    printf("waiting PI signal\n");
+                    printf("Waiting Pi Signal\n");
                     pi_yield();
                 }
                 trigger=0;
             #endif
-            PRINTF("Taking Picture!\n");
+            PRINTF("Taking Picture\n");
             pi_gpio_pin_write(NULL, USER_GPIO, 0); // on
             pi_camera_control(&cam, PI_CAMERA_CMD_START, 0);
             pi_camera_capture(&cam, ImageIn, W*H*sizeof(int16_t));
@@ -757,7 +763,7 @@ void peopleDetection(void){
 //            printf("\n=====================================\n");
 //            return;
 //            sendResultsToRaspberry(&uart, ImageIn, &bbxs);
-            printf("tx result to pi\n");
+            printf("TX Result to Pi\n");
             sendResultsToRaspberry(&uart, (unsigned char *)ImageIn, &bbxs);
             pi_gpio_pin_write(&gpio_led, gpio_out_led, 1); // off
         #endif
@@ -783,6 +789,9 @@ void peopleDetection(void){
             //and to properly shutdown all external devices
             go_to_sleep();
         #endif
+        t = pi_time_get_us() - t;
+        PRINTF("runtime is %.02f s\n", ((float)t)/1000000);
+    printf("------------------ ENDING INFERENCE ------------------\n\n");
     }
     lynredCNN_Destruct(0);
     // Close the cluster
