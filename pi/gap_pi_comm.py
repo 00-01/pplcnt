@@ -66,7 +66,7 @@ DET_SIZE = 3 + (30 * 12)
 threshold = 40
 
 while LOOP:
-    print("="*8, "READ STARTING", "="*8)
+    print("="*12, "STARTING", "="*12)
     now = datetime.now()
     dt_string = now.strftime("%Y%m%d-%H_%M_%S")
 
@@ -181,9 +181,9 @@ while LOOP:
 
             sftp.close()
             ssh.close()
-        print("-"*8, "COMPLETE", "-"*8, "\n")
+        print("-"*12, "COMPLETE", "-"*12, "\n")
     else:
-        print("%"*8, "FAILED", "%"*8, "\n")
+        print("%"*12, "FAILED", "%"*12, "\n")
 
     LOOP = args["loop"]
     if args["loop"] == None:
