@@ -415,16 +415,15 @@ void sendResultsToRaspberry(struct pi_device *uart, unsigned char *img, bboxs_t 
     //printf("\n");
     //printf("String Size: %d\n",stringLenght);
 
-//////////////////////////////////////////////////////////////////////////////
-//    this is where the gap code stops due to pi code only running once     //
-    pi_uart_read(uart, &dt, 4);
-    printf("dt: %d\n", dt);
+    pi_uart_write(uart, raspDetString, 3+(MAX_OUT_BB*12));
+    printf("---det sent---\n");
 
     pi_uart_write(uart, img, 80*80*sizeof(unsigned char) * 2);
     printf("---image sent---\n");
 
-    pi_uart_write(uart, raspDetString, 3+(MAX_OUT_BB*12));
-    printf("---det sent---\n");
+    printf("waiting for pi rx\n");
+    pi_uart_read(uart, &dt, 4);
+    printf("dt: %d\n", dt);
 
 //    dt = handleDetections(raspDetString,stringLenght);
     if(dt < 10) dt = 10;
