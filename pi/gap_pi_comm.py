@@ -191,6 +191,6 @@ while LOOP:
         LOOP = False
 
     print("-"*12, "COMPLETE", "-"*12, "\n"*2)
-    
+
     time.sleep(int(args["frequency"]))
 # camera.stop_preview()
