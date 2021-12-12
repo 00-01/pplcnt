@@ -92,35 +92,35 @@ void close_flash_filesystem(struct pi_device *flash, struct pi_device *fs){
 
 static int initNN(){
     #ifndef INPUT_FILE
-    PRINTF("Loading Offset Image from Flash...\n");
-    pi_fs_file_t *file = NULL;
-    char *name = "Calibration.bin";
-    int32_t size = 0;
-    uint32_t size_total = 0;
+        PRINTF("Loading Offset Image from Flash...\n");
+        pi_fs_file_t *file = NULL;
+        char *name = "Calibration.bin";
+        int32_t size = 0;
+        uint32_t size_total = 0;
 
-    img_offset  = (unsigned short int *) pmsis_l2_malloc(80 * 80 * sizeof(short int));
-    char * buff =  img_offset;
+        img_offset  = (unsigned short int *) pmsis_l2_malloc(80 * 80 * sizeof(short int));
+        char * buff =  img_offset;
 
-    if (img_offset==NULL ){
-        PRINTF("Failed to allocate Memory for image Offset\n");
-        pmsis_exit(-4);
-    }
-    struct pi_device flash;
-    struct pi_device fs;
+        if (img_offset==NULL ){
+            PRINTF("Failed to allocate Memory for image Offset\n");
+            pmsis_exit(-4);
+        }
+        struct pi_device flash;
+        struct pi_device fs;
 
-    open_flash_filesystem(&flash, &fs);
+        open_flash_filesystem(&flash, &fs);
 
-    file = pi_fs_open(&fs, name, 0);
-    if (file == NULL){
-        printf("File %s open failed !\n", name);
-        pmsis_exit(-4);
-    } do{
-        //Read from filesystem(on flash) to a buffer in L2 memory.
-        size = pi_fs_read(file, buff+size_total, BUFFER_SIZE);
-        size_total += size;
-    } while (size_total < file->size);
-    pi_fs_close(file);
-    close_flash_filesystem(&flash, &fs);
+        file = pi_fs_open(&fs, name, 0);
+        if (file == NULL){
+            printf("File %s open failed !\n", name);
+            pmsis_exit(-4);
+        } do{
+            //Read from filesystem(on flash) to a buffer in L2 memory.
+            size = pi_fs_read(file, buff+size_total, BUFFER_SIZE);
+            size_total += size;
+        } while (size_total < file->size);
+        pi_fs_close(file);
+        close_flash_filesystem(&flash, &fs);
     #endif
 
     return 0;
@@ -160,7 +160,7 @@ void drawBboxes(bboxs_t *boundbxs, uint8_t *img){
 }
 
 void printBboxes(bboxs_t *boundbxs){
-    PRINTF("--------------------------------------------------\n");
+    PRINTF("- - - - - - - - - - - - - - - - - - - - - - - - - -\n");
     PRINTF("BoudingBox:  score    cx    cy     w    h   class");
     PRINTF("\n--------------------------------------------------\n");
     for (int counter=0;counter< boundbxs->num_bb;counter++){
@@ -174,7 +174,7 @@ void printBboxes(bboxs_t *boundbxs){
                    boundbxs->bbs[counter].h,
                    boundbxs->bbs[counter].class);
     }
-    PRINTF("--------------------------------------------------\n");
+    PRINTF("- - - - - - - - - - - - - - - - - - - - - - - - - -\n");
 }
 
 static void RunNN(){
@@ -240,7 +240,7 @@ static void RunNN(){
 #endif
 
 int32_t fixed_shutterless(int16_t* img_input_fp16,int16_t* img_offset_fp16,int w, int h, uint8_t q_output){
-    int16_t min,max;
+    int16_t min, max;
     int16_t out_min = 0;
     int32_t out_max = 255;
     int32_t out_space = (out_max-out_min);
@@ -274,16 +274,6 @@ int32_t float_shutterless(int16_t* img_input_fp16,int16_t* img_offset_fp16,int w
         img_input_fp8[i]= img_input_fp16[i] << (q_output-8);
     }
     return error;
-}
-
-void led(int cycle, int delay1, int delay2){
-    for(int i=0; i<cycle; i++){
-        pi_gpio_pin_write(NULL, GPIO_USER_LED, 0);
-        pi_time_wait_us(delay1*10000);
-        pi_gpio_pin_write(NULL, GPIO_USER_LED, 1);
-        pi_time_wait_us(delay1*10000);
-        pi_time_wait_us(delay2*10000);
-    }
 }
 
 #if RASPBERRY
@@ -356,6 +346,25 @@ void sendResultsToRaspberry(struct pi_device *uart, uint16_t *img, bboxs_t *boun
         old_dt = dt;
         thres = ((float)old_dt)/100;
     }
+}
+
+void led(int cycle, int delay1, int delay2){
+    for(int i=0; i<cycle; i++){
+        pi_gpio_pin_write(NULL, GPIO_USER_LED, 0);
+        pi_time_wait_us(delay1*10000);
+        pi_gpio_pin_write(NULL, GPIO_USER_LED, 1);
+        pi_time_wait_us(delay1*10000);
+        pi_time_wait_us(delay2*10000);
+    }
+}
+
+int imgTest(char n[]){
+    printf("%s: ", n);
+    for(int j = 0; j<6; j++) printf("%d, ", ImageIn[j]);
+    printf("\n");
+    for(int j = 0; j<6; j++) printf("%d, ", ((unsigned char *)ImageIn)[j]);
+    printf("\n");
+    return 0;
 }
 
 #define USER_GPIO 18
@@ -455,7 +464,6 @@ void peopleDetection(void){
         pi_gpio_e gpio_out_led = PI_GPIO_A0_PAD_12_A3;
         pi_gpio_pin_configure(&gpio_led, gpio_out_led, cfg_flags);
         pi_gpio_pin_write(&gpio_led, gpio_out_led, 1); //set off
-
         //Creating GPIO TASK INPUT
 //        led(3, 20, 10);
         struct pi_gpio_conf gpio_conf = {0};
@@ -468,7 +476,6 @@ void peopleDetection(void){
             pmsis_exit(errors);
         }
         pi_task_t cb_gpio = {0};
-
         pi_gpio_e gpio_in = PI_GPIO_A18_PAD_32_A13; //GPIO A18
         pi_gpio_notif_e irq_type = PI_GPIO_NOTIF_RISE;
         cfg_flags = PI_GPIO_INPUT|PI_GPIO_PULL_DISABLE|PI_GPIO_DRIVE_STRENGTH_HIGH;
@@ -497,7 +504,7 @@ void peopleDetection(void){
     char iterate = 1;
     clock_t t;
     while(iterate){
-    printf("\n================= STARTING INFERENCE =================\n");
+    printf("\n---------START--------------------------------------\n");
         int t = pi_time_get_us();
 
         #if RASPBERRY
@@ -514,6 +521,10 @@ void peopleDetection(void){
         pi_camera_control(&cam, PI_CAMERA_CMD_STOP, 0);
         pi_gpio_pin_write(NULL, USER_GPIO , 1); // off
 
+///////////////////////////////////////////////////////////////////////////////////////////
+    imgTest("capture");
+///////////////////////////////////////////////////////////////////////////////////////////
+
         #ifndef INPUT_FILE
             PRINTF("Calling shutterless filtering\n");
             //The shutterless floating point version was done just for reference...very slow on gap.
@@ -526,6 +537,10 @@ void peopleDetection(void){
             tm = pi_time_get_us() - tm;
             PRINTF("Shutterless %.02f ms\n", ((float)tm)/1000);
         #endif
+
+///////////////////////////////////////////////////////////////////////////////////////////
+    imgTest("shutterless");
+///////////////////////////////////////////////////////////////////////////////////////////
 
         PRINTF("Call cluster\n");
         //Explicitly allocating Cluster stack since it could also be used by shutterless
@@ -543,17 +558,28 @@ void peopleDetection(void){
             printf("TX Result to Pi\n");
 //            led(4, 20, 10);
 //            printf("size = %\nd", H*W);
-//            for(int j = 0; j<H*W*2; j++) printf("%d, ", ((unsigned char *)ImageIn)[j]);
-//            printf("\n=====================================\n");
-//            return;
+
+///////////////////////////////////////////////////////////////////////////////////////////
+            imgTest("pi prepare");
+///////////////////////////////////////////////////////////////////////////////////////////
+
             char string_buffer1[50];
             sprintf(string_buffer1, "../../../dump_out_imgs/pi_img_%04ld.pgm", save_index);
             unsigned char *img_out_ptr1 = ImageIn;
+
+///////////////////////////////////////////////////////////////////////////////////////////
+            for(int j = 0; j<6; j++) printf("%d, ", img_out_ptr1[j]);
+            printf("\n");
+///////////////////////////////////////////////////////////////////////////////////////////
+
 //            drawBboxes(&bbxs, img_out_ptr1);
             WriteImageToFile(string_buffer1, W, H, img_out_ptr1);
             save_index++;
 //            sendResultsToRaspberry(&uart, img_out_ptr1, &bbxs);
 //            sendResultsToRaspberry(&uart, (unsigned char *)ImageIn, &bbxs);
+///////////////////////////////////////////////////////////////////////////////////////////
+            imgTest("pi send");
+///////////////////////////////////////////////////////////////////////////////////////////
             sendResultsToRaspberry(&uart, ImageIn, &bbxs);
             pi_gpio_pin_write(&gpio_led, gpio_out_led, 1); // off
         #endif
@@ -565,9 +591,9 @@ void peopleDetection(void){
             drawBboxes(&bbxs, img_out_ptr);
             WriteImageToFile(string_buffer, W, H, img_out_ptr);
             save_index++;
-////            for (i=0; i<W*H*2; i++){
-////                printf("%p\n", img_out_ptr)
-////            }
+            for (i=0; i<10; i++){
+                printf("%p\n", ImageIn);
+            }
         #endif
 
         #ifdef SLEEP
@@ -577,7 +603,7 @@ void peopleDetection(void){
         #endif
         t = pi_time_get_us() - t;
         PRINTF("runtime is %.02f s\n", ((float)t)/1000000);
-    printf("------------------ ENDING INFERENCE ------------------\n\n");
+    printf("-------------------------------------FINISH---------\n\n\n");
     }
     lynredCNN_Destruct(0);
     // Close the cluster
