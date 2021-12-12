@@ -14,43 +14,15 @@
 #include "ImageDraw.h"
 #include "setup.h"
 
-#ifdef HYPER
-    #define FLASH_NAME "HYPER"
-    #include "bsp/flash/hyperflash.h"
-    struct pi_device HyperRam;
-    AT_HYPERFLASH_FS_EXT_ADDR_TYPE lynred_L3_Flash;
-#else
-    #define FLASH_NAME "QSPI"
-    #include "bsp/flash/spiflash.h"
-    struct pi_device QspiRam;
-    AT_QSPIFLASH_FS_EXT_ADDR_TYPE lynred_L3_Flash;
-#endif
+#define FLASH_NAME "HYPER"
+#include "bsp/flash/hyperflash.h"
+struct pi_device HyperRam;
+AT_HYPERFLASH_FS_EXT_ADDR_TYPE lynred_L3_Flash;
 
 #define MOUNT           1
 #define UNMOUNT         0
 #define CID             0
 #define GPIO_USER_LED   0
-
-
-#if RASPBERRY
-    struct pi_device gpio;
-    struct pi_device gpio_led;
-    volatile uint8_t trigger = 0;
-    void __pi_cb_gpio(void *arg){
-        pi_gpio_e gpio_out_led = PI_GPIO_A0_PAD_12_A3;
-        pi_gpio_pin_write(&gpio_led, gpio_out_led, 0);
-
-        //wait and read again to be sure that it is not just a float pin
-        pi_time_wait_us(5 * 10000);
-        pi_gpio_e gpio_pin = (pi_gpio_e) arg;
-        uint32_t val = 0;
-        pi_gpio_pin_read(&gpio, gpio_pin, &val);
-
-        if(val==1) trigger = 1;
-        else trigger = 0;
-        //printf("GPIO callback GPIO_A%d %d %d\n", gpio_pin & 0xFF, trigger, val);
-    }
-#endif
 
 #define FIX2FP(Val, Precision)    ((float) (Val) / (float) (1<<(Precision)))
 
@@ -243,93 +215,6 @@ static void RunNN(){
     PRINTF("Cycles NN :%10d\n", ti_nn);
 }
 
-char bleDetString[200];
-char tmpString[200];
-int dt;
-int old_dt;
-float thres;
-
-
-//int detSize = 3+(MAX_OUT_BB*12);
-//char * raspDetString = (int *)malloc(detSize * sizeof(int *));
-char raspDetString[3+(MAX_OUT_BB*12)];
-void sendResultsToRaspberry(struct pi_device *uart, unsigned char *img, bboxs_t *boundbxs){
-    int stringLenght = 0;
-    int AliveBBs = 0;
-
-    for(int i=0; i < 3+(MAX_OUT_BB*12); i++)
-        raspDetString[i] = '\0';
-
-    for (int counter=0; counter < boundbxs->num_bb; counter++){
-        if(boundbxs->bbs[counter].alive){
-            AliveBBs++;}}
-    if(AliveBBs > MAX_OUT_BB) AliveBBs = MAX_OUT_BB;
-
-    stringLenght += sprintf(raspDetString, "%d;", AliveBBs);
-
-    for (int counter=0; counter < boundbxs->num_bb; counter++){
-        if(boundbxs->bbs[counter].alive){
-            stringLenght += sprintf(tmpString,"%dx%dx%dx%d;", boundbxs->bbs[counter].x, boundbxs->bbs[counter].y, boundbxs->bbs[counter].w, boundbxs->bbs[counter].h);
-            strcat(raspDetString, tmpString);
-        }
-    }
-    //stringLenght+=sprintf(tmpString,"Gap8 Power Consuption %f mW/FPS",((float)(1/(50000000.f/12000000)) * 16.800));
-
-    //printf("%s",raspDetString);
-    //printf("\n");
-    //printf("String Size: %d\n",stringLenght);
-
-    pi_uart_write(uart, raspDetString, 3+(MAX_OUT_BB*12));
-    printf("---det sent---\n");
-
-    pi_uart_write(uart, img, 80*80*sizeof(unsigned char) * 2);
-    printf("---image sent---\n");
-
-    printf("waiting for pi rx\n");
-    pi_uart_read(uart, &dt, 4);
-    printf("dt: %d\n", dt);
-
-//    dt = handleDetections(raspDetString,stringLenght);
-    if(dt < 10) dt = 10;
-    if(dt != old_dt) {
-        old_dt = dt;
-        thres = ((float)old_dt)/100;
-    }
-}
-
-int read_raw_image(char* filename, int16_t* buffer,int w,int h){
-    struct pi_fs_conf conf;
-    static struct pi_device fs;
-    static pi_fs_file_t *file;
-    unsigned int ReadSize=0;
-
-    pi_fs_conf_init(&conf);
-    conf.type = PI_FS_HOST;
-    pi_open_from_conf(&fs, &conf);
-
-    if (pi_fs_mount(&fs)){
-        return -2;
-    }
-    file = pi_fs_open(&fs, filename, PI_FS_FLAGS_READ);
-    if (file == NULL){
-        return -3;
-    }
-    char *TargetImg = buffer;
-    unsigned int RemainSize = w*h*sizeof(int16_t);
-    while (RemainSize > 0){
-        unsigned int Chunk = Min(4096, RemainSize);
-        unsigned R = pi_fs_read(file,TargetImg, Chunk);
-        ReadSize+=R;
-        if (R!=Chunk) break;
-        TargetImg += Chunk; RemainSize -= Chunk;
-    }
-    pi_fs_close(file);
-    pi_fs_unmount(&fs);
-    printf("Image %s, [W: %d, H: %d], Gray, Size: %d bytes, Loaded sucessfully\n", filename, w, h, ReadSize);
-
-    return 0;
-}
-
 /* This SLEEP only works in pulpos for now
  * TODO: need to be support in freeRTOS when new api available */
 #ifdef SLEEP
@@ -401,6 +286,78 @@ void led(int cycle, int delay1, int delay2){
     }
 }
 
+#if RASPBERRY
+    struct pi_device gpio;
+    struct pi_device gpio_led;
+    volatile uint8_t trigger = 0;
+    void __pi_cb_gpio(void *arg){
+        pi_gpio_e gpio_out_led = PI_GPIO_A0_PAD_12_A3;
+        pi_gpio_pin_write(&gpio_led, gpio_out_led, 0);
+
+        //wait and read again to be sure that it is not just a float pin
+        pi_time_wait_us(5 * 10000);
+        pi_gpio_e gpio_pin = (pi_gpio_e) arg;
+        uint32_t val = 0;
+        pi_gpio_pin_read(&gpio, gpio_pin, &val);
+
+        if(val==1) trigger = 1;
+        else trigger = 0;
+        //printf("GPIO callback GPIO_A%d %d %d\n", gpio_pin & 0xFF, trigger, val);
+    }
+#endif
+
+char tmpString[200];
+int dt;
+int old_dt;
+float thres;
+//int detSize = 3+(MAX_OUT_BB*12);
+//char * raspDetString = (int *)malloc(detSize * sizeof(int *));
+char raspDetString[3+(MAX_OUT_BB*12)];
+void sendResultsToRaspberry(struct pi_device *uart, uint16_t *img, bboxs_t *boundbxs){
+//void sendResultsToRaspberry(struct pi_device *uart, unsigned char *img, bboxs_t *boundbxs){
+    int stringLenght = 0;
+    int AliveBBs = 0;
+
+    for(int i=0; i < 3+(MAX_OUT_BB*12); i++)
+        raspDetString[i] = '\0';
+
+    for (int counter=0; counter < boundbxs->num_bb; counter++){
+        if(boundbxs->bbs[counter].alive){
+            AliveBBs++;}}
+    if(AliveBBs > MAX_OUT_BB) AliveBBs = MAX_OUT_BB;
+
+    stringLenght += sprintf(raspDetString, "%d;", AliveBBs);
+
+    for (int counter=0; counter < boundbxs->num_bb; counter++){
+        if(boundbxs->bbs[counter].alive){
+            stringLenght += sprintf(tmpString,"%dx%dx%dx%d;", boundbxs->bbs[counter].x, boundbxs->bbs[counter].y, boundbxs->bbs[counter].w, boundbxs->bbs[counter].h);
+            strcat(raspDetString, tmpString);
+        }
+    }
+    //stringLenght+=sprintf(tmpString,"Gap8 Power Consuption %f mW/FPS",((float)(1/(50000000.f/12000000)) * 16.800));
+
+    //printf("%s",raspDetString);
+    //printf("\n");
+    //printf("String Size: %d\n",stringLenght);
+
+    pi_uart_write(uart, raspDetString, 3+(MAX_OUT_BB*12));
+    printf("---det sent---\n");
+
+    pi_uart_write(uart, img, 80*80*sizeof(unsigned char) * 2);
+    printf("---image sent---\n");
+
+    printf("waiting for pi rx\n");
+    pi_uart_read(uart, &dt, 4);
+    printf("dt: %d\n", dt);
+
+//    dt = handleDetections(raspDetString,stringLenght);
+    if(dt < 10) dt = 10;
+    if(dt != old_dt) {
+        old_dt = dt;
+        thres = ((float)old_dt)/100;
+    }
+}
+
 #define USER_GPIO 18
 void peopleDetection(void){
     char *ImageName = "../../../samples/im2.pgm";
@@ -418,14 +375,6 @@ void peopleDetection(void){
     //pi_pad_set_function(PI_PAD_32_A13_TIMER0_CH1, PI_PAD_32_A13_GPIO_A18_FUNC1);
     //pi_gpio_pin_configure(NULL, USER_GPIO, PI_GPIO_OUTPUT);
     //pi_gpio_pin_write(NULL, USER_GPIO, 1);
-
-    #if RASPBERRY
-        pi_pad_set_function(PI_PAD_12_A3_RF_PACTRL0, PI_PAD_FUNC1);
-        pi_gpio_flags_e cfg_flags = PI_GPIO_OUTPUT;
-        pi_gpio_e gpio_out_led = PI_GPIO_A0_PAD_12_A3;
-        pi_gpio_pin_configure(&gpio_led, gpio_out_led, cfg_flags);
-        pi_gpio_pin_write(&gpio_led, gpio_out_led, 1); //set off
-    #endif
 
     unsigned int Wi, Hi;
     unsigned int W = 80, H = 80;
@@ -501,9 +450,14 @@ void peopleDetection(void){
     task->slave_stack_size = (uint32_t) SLAVE_STACK_SIZE;
 
     #if RASPBERRY
-    //Creating GPIO TASK INPUT
-        led(3, 20, 10);
+        pi_pad_set_function(PI_PAD_12_A3_RF_PACTRL0, PI_PAD_FUNC1);
+        pi_gpio_flags_e cfg_flags = PI_GPIO_OUTPUT;
+        pi_gpio_e gpio_out_led = PI_GPIO_A0_PAD_12_A3;
+        pi_gpio_pin_configure(&gpio_led, gpio_out_led, cfg_flags);
+        pi_gpio_pin_write(&gpio_led, gpio_out_led, 1); //set off
 
+        //Creating GPIO TASK INPUT
+//        led(3, 20, 10);
         struct pi_gpio_conf gpio_conf = {0};
         pi_gpio_conf_init(&gpio_conf);
         pi_open_from_conf(&gpio, &gpio_conf);
@@ -524,7 +478,7 @@ void peopleDetection(void){
         pi_gpio_pin_configure(&gpio, gpio_in, cfg_flags);
         pi_gpio_pin_task_add(&gpio, gpio_in, &cb_gpio, irq_type);
         pi_gpio_pin_notif_configure(&gpio, gpio_in, irq_type);
-            //Opening UART
+        //Opening UART
         struct pi_device uart;
         struct pi_uart_conf conf;
         /* Init & open uart. */
@@ -550,9 +504,9 @@ void peopleDetection(void){
             while(!trigger){
                 printf("Waiting Pi Signal\n");
                 pi_yield();
-            }
-            trigger=0;
+            } trigger=0;
         #endif
+
         PRINTF("Taking Picture\n");
         pi_gpio_pin_write(NULL, USER_GPIO, 0); // on
         pi_camera_control(&cam, PI_CAMERA_CMD_START, 0);
@@ -586,14 +540,21 @@ void peopleDetection(void){
         pmsis_l1_malloc_free(task->stacks, STACK_SIZE+SLAVE_STACK_SIZE*7);
 
         #if RASPBERRY
+            printf("TX Result to Pi\n");
 //            led(4, 20, 10);
 //            printf("size = %\nd", H*W);
 //            for(int j = 0; j<H*W*2; j++) printf("%d, ", ((unsigned char *)ImageIn)[j]);
 //            printf("\n=====================================\n");
 //            return;
-//            sendResultsToRaspberry(&uart, ImageIn, &bbxs);
-            printf("TX Result to Pi\n");
-            sendResultsToRaspberry(&uart, (unsigned char *)ImageIn, &bbxs);
+            char string_buffer1[50];
+            sprintf(string_buffer1, "../../../dump_out_imgs/pi_img_%04ld.pgm", save_index);
+            unsigned char *img_out_ptr1 = ImageIn;
+//            drawBboxes(&bbxs, img_out_ptr1);
+            WriteImageToFile(string_buffer1, W, H, img_out_ptr1);
+            save_index++;
+//            sendResultsToRaspberry(&uart, img_out_ptr1, &bbxs);
+//            sendResultsToRaspberry(&uart, (unsigned char *)ImageIn, &bbxs);
+            sendResultsToRaspberry(&uart, ImageIn, &bbxs);
             pi_gpio_pin_write(&gpio_led, gpio_out_led, 1); // off
         #endif
 
@@ -601,9 +562,12 @@ void peopleDetection(void){
             char string_buffer[50];
             sprintf(string_buffer, "../../../dump_out_imgs/img_%04ld.pgm", save_index);
             unsigned char *img_out_ptr = ImageIn;
-            drawBboxes(&bbxs,img_out_ptr);
+            drawBboxes(&bbxs, img_out_ptr);
             WriteImageToFile(string_buffer, W, H, img_out_ptr);
             save_index++;
+////            for (i=0; i<W*H*2; i++){
+////                printf("%p\n", img_out_ptr)
+////            }
         #endif
 
         #ifdef SLEEP
