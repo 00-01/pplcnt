@@ -262,7 +262,7 @@ int32_t fixed_shutterless(int16_t *img_input_fp16, int16_t *img_offset_fp16, int
     int32_t out_max = 255;
     int32_t out_space = (out_max - out_min);
     uint8_t *img_input_fp8 = img_input_fp16;
-    
+
     //Optmized shutterless running on cluster (cluster must be open ahead and have enough free memory)
 //    int error = shutterless_fixed_cl(&cluster_dev, img_input_fp16, img_offset_fp16,          40,&min,&max);g on fabric controller
     int error = shutterless_fixed_fc(img_input_fp16,img_offset_fp16,40,&min,&max);
@@ -521,8 +521,8 @@ void peopleDetection(void){
         pi_camera_control(&cam, PI_CAMERA_CMD_STOP, 0);
         pi_gpio_pin_write(NULL, USER_GPIO , 1); // off
 
-        unsigned char *aaa = ImageIn;
-        // memcpy(aaa, img1, W*H*2*sizeof(unsigned char));
+//        unsigned char *aaa = ImageIn;
+//         memcpy(aaa, img1, W*H*2*sizeof(unsigned char));
 
         #ifndef INPUT_FILE
             PRINTF("Calling shutterless filtering\n");
@@ -533,7 +533,7 @@ void peopleDetection(void){
                 pmsis_exit(-8);
             }
         #endif
-        
+
         PRINTF("Call cluster\n");
         //Explicitly allocating Cluster stack since it could also be used by shutterless
         task->stacks = pmsis_l1_malloc(STACK_SIZE+SLAVE_STACK_SIZE*7);
@@ -545,7 +545,7 @@ void peopleDetection(void){
         pi_cluster_send_task_to_cl(&cluster_dev, task);
         lynredCNN_Destruct(1);
         pmsis_l1_malloc_free(task->stacks, STACK_SIZE+SLAVE_STACK_SIZE*7);
-        
+
         #if RASPBERRY
             printf("TX Result to Pi\n");
 //            led(4, 20, 10);
