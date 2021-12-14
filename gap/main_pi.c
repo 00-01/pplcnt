@@ -514,7 +514,7 @@ void peopleDetection(void){
         PRINTF("Caputring IR Image\n");
         pi_gpio_pin_write(NULL, USER_GPIO, 0); // on
         pi_camera_control(&cam, PI_CAMERA_CMD_START, 0);
-        pi_camera_capture(&cam, ImageIn, W*H*sizeof(int16_t));
+        pi_camera_capture(&cam, ImageIn, W*H*sizeof(uint16_t));
         pi_camera_control(&cam, PI_CAMERA_CMD_STOP, 0);
         pi_gpio_pin_write(NULL, USER_GPIO , 1); // off
 
