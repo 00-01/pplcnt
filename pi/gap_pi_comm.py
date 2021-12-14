@@ -1,20 +1,21 @@
 #!/usr/bin/env python3
+# import io
+# import PIL.Image as Image
+# import base64
+# import re
+# import numpy as np
+# from picamera import PiCamera
+# import paramiko
+# import scp
 import RPi.GPIO as GPIO
 import argparse
 import time
 import serial
 import os
-import io
-import PIL.Image as Image
-import base64
-import re
-import numpy as np
-from picamera import PiCamera
 import struct
 from datetime import datetime
 from ftplib import *
-import paramiko
-import scp
+
 
 ap = argparse.ArgumentParser()
 ap.add_argument("-l", "--loop", required=False, help="run looping or not")
@@ -48,6 +49,9 @@ FTP_ADDR = "115.68.41.211"
 FTP_USER = "gappocb"
 FTP_PASS = "gappocb!"
 
+root = "~/scripts/"
+im_dir = "images/"
+
 HOME_DIR = os.path.expanduser('~')
 with open(HOME_DIR + "/info.txt") as f:
     NODE_NAME = f.readline().rstrip()
@@ -66,7 +70,7 @@ size = 2
 img_size = w * h * size
 det_size = 3 + (30 * 12)
 threshold = 40
-finish = b'\x00\x00\x00\x00'
+# finish = b'\x00\x00\x00\x00'
 
 while LOOP:
     print("\n", "-"*6, "START", "-"*24)
@@ -113,22 +117,22 @@ while LOOP:
     ser.reset_output_buffer()
 
     # print("capturing picamera image")
-    # os.system("/bin/bash grubFrame.sh " + NODE_NAME + " " + dtime)
+    print("/bin/bash grubFrame.sh " + NODE_NAME + " " + dtime)
+    os.system("/bin/bash grubFrame.sh " + NODE_NAME + " " + dtime)
 
     # check image
     # im = Image.frombuffer('I;16', (w,h), rx_img, 'raw', 'L', 0, 1)
 
     print("saving detection")
-    im_dir = "images/"
     det_name = "CNT_" + NODE_NAME + "_" + dtime + ".txt"
     det_str = rx_det.decode(encoding='UTF-8', errors='ignore')
     with open(im_dir + det_name, "w") as file:
         file.write("%s" % det_str)
 
     print("saving image")
-    im_name = "IR_" + NODE_NAME + "_" + dtime + ".bin"
+    img_name = "IR_" + NODE_NAME + "_" + dtime + ".bin"
     im_int = struct.unpack('<' +'B' *w *h *2, rx_img)
-    with open(im_dir + im_name, "wb") as file:
+    with open(im_dir + img_name, "wb") as file:
         for val in im_int:
             file.write(val.to_bytes(2, byteorder='little', signed=True))
 
@@ -136,9 +140,9 @@ while LOOP:
         print("uploading to ftp")
         with FTP(FTP_ADDR, FTP_USER, FTP_PASS) as ftp:
             ftp.cwd(NODE_NAME)
-            with open(im_dir + im_name, 'rb') as file:
-                ftp.storbinary('STOR ' + im_name, file)
-            os.remove(im_dir + im_name)
+            with open(im_dir + img_name, 'rb') as file:
+                ftp.storbinary('STOR ' + img_name, file)
+            os.remove(im_dir + img_name)
 
             with open(im_dir + det_name, 'rb') as file:
                 ftp.storbinary('STOR ' + det_name, file)
@@ -146,31 +150,33 @@ while LOOP:
 
     if USE_SCP == True:
         print("uploading to server")
-        ssh = paramiko.SSHClient()
-        # ssh.load_system_host_keys()
-        # ssh.load_host_keys(os.path.expanduser(os.path.join("~", ".ssh", "known_hosts")))
-        ssh.set_missing_host_key_policy(paramiko.AutoAddPolicy())
-        ssh.connect(host, port, username, password)
-        sftp = ssh.open_sftp()
+        os.system(f"sudo sshpass -p {password} scp -P {port} images/* {username}@{host}:~/DATA/gappi")
+        os.system("rm images/*")
 
-        # upload det
-        localPath = im_dir + det_name
-        targetPath = '~'
-        sftp.put(localPath, targetPath)
-        os.remove(im_dir + det_name)
+        # transport = paramiko.Transport((host, port))
+        # transport.connect(username=username, password=password)
+        # sftp = paramiko.SFTPClient.from_transport(transport)
 
-        # upload image
-        localPath = im_dir + im_name
-        targetPath = '~'
-        sftp.put(localPath, targetPath)
-        os.remove(im_dir + im_name)
+        # # upload det
+        # local_det_file = im_dir + det_name
+        # target_det_path = "~/" + det_name
+        # sftp.put(local_det_file, target_det_path)
+        #
+        # # upload image
+        # local_img_file = im_dir + img_name
+        # target_img_path = "~/" + img_name
+        # sftp.put(local_img_file, target_img_path)
+
+        # os.remove(local_det_file)
+        # os.remove(local_img_file)
 
         # stdin, stdout, stderr = ssh.exec_command(command)
         # i, o, e = stdin.readlines(), stdout.readlines(), stderr.readlines()
         # print(i, "\n", o, "\n", e)
 
-        sftp.close()
-        ssh.close()
+        # sftp.close()
+        # ssh.close()
+        # transport.close()
 
     LOOP = args["loop"]
     if args["loop"] == None:
