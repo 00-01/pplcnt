@@ -34,14 +34,14 @@ ser = serial.Serial(
     timeout=None)
 
 # scp
-USE_SCP = False
+USE_SCP = True
 host = "192.168.0.5"
 port = 1111
 username = "z"
 password = "1234qwer"
 
 # ftp
-USE_FTP = True
+USE_FTP = False
 NODE_NAME = ""
 FTP_ADDR = "115.68.41.211"
 FTP_USER = "gappocb"
@@ -68,7 +68,7 @@ threshold = 40
 finish = b'\x00\x00\x00\x00'
 
 while LOOP:
-    print("-"*12, "START", "-"*12)
+    print("\n", "-"*6, "START", "-"*24)
     now = datetime.now()
     dt_string = now.strftime("%Y%m%d-%H_%M_%S")
 
@@ -114,45 +114,22 @@ while LOOP:
     print("capturing picamera image")
     os.system("/bin/bash grubFrame.sh " + NODE_NAME + " " + dt_string)
 
-    # import cv2
-    # print(len(rx_img))
-    #
-    # dt = np.dtype(np.uint8)
-    # dt = dt.newbyteorder('>')
-    # t = np.frombuffer(rx_img, dtype=dt)
-    # # p = Image.fromarray(t)
-    # # p.save('orogin.png')
-
-    # print(len(t))
-    # t2 = (t[:6400]).reshape(80, 80)
-    # t1 = (t[6400:]).reshape(80, 80)
-    # print(t2)
-    # print(t1)
-    # im = Image.fromarray(t2)
-    # im.save("aaa2.png")
-    # im1 = Image.fromarray(t1)
-    # im1.save('aaa1.png')
-    # cv2.imwrite('aaa22.png', t2)
-    # cv2.imwrite('aaa11.png', t1)
-    # exit()
-
     # check image
     # im = Image.frombuffer('I;16', (w,h), rx_img, 'raw', 'L', 0, 1)
-    # im.save(f"a.jpg")
+
+    print("saving detection")
+    im_dir = "images/"
+    det_name = "CNT_" + NODE_NAME + "_" + dt_string + ".txt"
+    det_str = rx_det.decode()#(encoding='UTF-8', errors='ignore')
+    with open(im_dir + det_name, "w") as file:
+        file.write("%s" % det_str)
 
     print("saving image")
-    im_dir = "images/"
     im_name = "IR_" + NODE_NAME + "_" + dt_string + ".bin"
     im_int = struct.unpack('<' +'B' *w *h *2, rx_img)
     with open(im_dir + im_name, "wb") as file:
         for val in im_int:
             file.write(val.to_bytes(2, byteorder='little', signed=True))
-
-    print("saving detection")
-    det_str = rx_det.decode()
-    det_name = "CNT_" + NODE_NAME + "_" + dt_string + ".txt"
-    with open(im_dir + det_name, "w") as file:
-        file.write("%s" % det_str)
 
     if USE_FTP == True:
         print("uploading to ftp")
@@ -190,7 +167,7 @@ while LOOP:
     if args["loop"] == None:
         LOOP = False
 
-    print("-"*12, "COMPLETE", "-"*12, "\n"*2)
+    print("-"*24, "FINISH", "-"*6, "\n"*2)
 
     time.sleep(int(args["frequency"]))
 # camera.stop_preview()
