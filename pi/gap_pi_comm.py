@@ -39,6 +39,7 @@ host = "192.168.0.5"
 port = 1111
 username = "z"
 password = "1234qwer"
+command = "cd ~"
 
 # ftp
 USE_FTP = False
@@ -70,7 +71,7 @@ finish = b'\x00\x00\x00\x00'
 while LOOP:
     print("\n", "-"*6, "START", "-"*24)
     now = datetime.now()
-    dt_string = now.strftime("%Y%m%d-%H_%M_%S")
+    dtime = now.strftime("%Y%m%d-%H_%M_%S")
 
     ser.flush()
     ser.reset_input_buffer()
@@ -111,21 +112,21 @@ while LOOP:
     ser.flush()
     ser.reset_output_buffer()
 
-    print("capturing picamera image")
-    os.system("/bin/bash grubFrame.sh " + NODE_NAME + " " + dt_string)
+    # print("capturing picamera image")
+    # os.system("/bin/bash grubFrame.sh " + NODE_NAME + " " + dtime)
 
     # check image
     # im = Image.frombuffer('I;16', (w,h), rx_img, 'raw', 'L', 0, 1)
 
     print("saving detection")
     im_dir = "images/"
-    det_name = "CNT_" + NODE_NAME + "_" + dt_string + ".txt"
-    det_str = rx_det.decode()#(encoding='UTF-8', errors='ignore')
+    det_name = "CNT_" + NODE_NAME + "_" + dtime + ".txt"
+    det_str = rx_det.decode(encoding='UTF-8', errors='ignore')
     with open(im_dir + det_name, "w") as file:
         file.write("%s" % det_str)
 
     print("saving image")
-    im_name = "IR_" + NODE_NAME + "_" + dt_string + ".bin"
+    im_name = "IR_" + NODE_NAME + "_" + dtime + ".bin"
     im_int = struct.unpack('<' +'B' *w *h *2, rx_img)
     with open(im_dir + im_name, "wb") as file:
         for val in im_int:
@@ -138,6 +139,7 @@ while LOOP:
             with open(im_dir + im_name, 'rb') as file:
                 ftp.storbinary('STOR ' + im_name, file)
             os.remove(im_dir + im_name)
+
             with open(im_dir + det_name, 'rb') as file:
                 ftp.storbinary('STOR ' + det_name, file)
             os.remove(im_dir + det_name)
@@ -146,19 +148,26 @@ while LOOP:
         print("uploading to server")
         ssh = paramiko.SSHClient()
         # ssh.load_system_host_keys()
+        # ssh.load_host_keys(os.path.expanduser(os.path.join("~", ".ssh", "known_hosts")))
         ssh.set_missing_host_key_policy(paramiko.AutoAddPolicy())
         ssh.connect(host, port, username, password)
         sftp = ssh.open_sftp()
 
-        # localPath = im_dir + im_name
-        # targetPath = '~/' + im_dir + im_name
-        # sftp.put(localPath, targetPath)
-        # os.remove(im_dir + im_name)
-        #
-        # localPath = im_dir + det_name
-        # targetPath = '~/' + im_dir + det_name
-        # sftp.put(localPath, targetPath)
-        # os.remove(im_dir + det_name)
+        # upload det
+        localPath = im_dir + det_name
+        targetPath = '~'
+        sftp.put(localPath, targetPath)
+        os.remove(im_dir + det_name)
+
+        # upload image
+        localPath = im_dir + im_name
+        targetPath = '~'
+        sftp.put(localPath, targetPath)
+        os.remove(im_dir + im_name)
+
+        # stdin, stdout, stderr = ssh.exec_command(command)
+        # i, o, e = stdin.readlines(), stdout.readlines(), stderr.readlines()
+        # print(i, "\n", o, "\n", e)
 
         sftp.close()
         ssh.close()
