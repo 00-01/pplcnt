@@ -122,9 +122,7 @@ static int initNN(){
         pi_fs_close(file);
         close_flash_filesystem(&flash, &fs);
     #endif
-    // printf("\n=====\n");
-    // for(int j = 0; j<80*80; j++)printf("%d, ", img_offset[j]);
-    // printf("\n=====\n");
+
     return 0;
 }
 
@@ -157,8 +155,7 @@ void drawBboxes(bboxs_t *boundbxs, uint8_t *img){
     for (int counter=0; counter < boundbxs->num_bb; counter++){
         if(boundbxs->bbs[counter].alive){
             DrawRectangle(img, 80, 80, boundbxs->bbs[counter].x, boundbxs->bbs[counter].y, boundbxs->bbs[counter].w, boundbxs->bbs[counter].h, 255);
-        }
-    }
+        }}
 }
 
 void printBboxes(bboxs_t *boundbxs){
@@ -263,17 +260,28 @@ int32_t fixed_shutterless(int16_t *img_input_fp16, int16_t *img_offset_fp16, int
     int32_t out_space = (out_max - out_min);
     uint8_t *img_input_fp8 = img_input_fp16;
 
-    //Optmized shutterless running on cluster (cluster must be open ahead and have enough free memory)
-//    int error = shutterless_fixed_cl(&cluster_dev, img_input_fp16, img_offset_fp16,          40,&min,&max);g on fabric controller
-    int error = shutterless_fixed_fc(img_input_fp16,img_offset_fp16,40,&min,&max);
+///////////////////////////////////////////////////////////////////////////////////////
+    imgTest("pre shutterless", ImageIn, 6);
+///////////////////////////////////////////////////////////////////////////////////////
+
+    //Optmized shutterless running on cluster (cluster must be open ahead and have enough free memory) g on fabric controller
+//     int error = shutterless_fixed_cl(&cluster_dev, img_input_fp16, img_offset_fp16, 40, &min, &max);
+    int error = shutterless_fixed_fc(img_input_fp16, img_offset_fp16, 40, &min, &max);
     float div = 1./(max-min);
     int32_t div_fix = FP2FIX(div, 15);
+
+///////////////////////////////////////////////////////////////////////////////////////
+    imgTest("post shutterless", ImageIn, 6);
+///////////////////////////////////////////////////////////////////////////////////////
 
     //Normalizing to 8 bit and changing fixed point format for NN
     for(int i=0; i<w*h; i++){
         img_input_fp8[i] = (uint8_t)(((out_space)*
                 ((((((int32_t)img_input_fp16[i])-(int32_t)min))*div_fix)))>>(15-q_output+8));
     }
+///////////////////////////////////////////////////////////////////////////////////////
+    imgTest("final", ImageIn, 6);
+///////////////////////////////////////////////////////////////////////////////////////
     return error;
 }
 
@@ -296,10 +304,39 @@ int32_t fixed_shutterless(int16_t *img_input_fp16, int16_t *img_offset_fp16, int
     }
 #endif
 
+char bleDetString[200];
 char tmpString[200];
 int dt;
 int old_dt;
 float thres;
+void sendResultsToBle(bboxs_t *boundbxs){
+    int stringLenght = 0;
+    int AliveBBs=0;
+    for (int counter=0; counter< boundbxs->num_bb; counter++){
+        if(boundbxs->bbs[counter].alive && boundbxs->bbs[counter].score>= FP2FIX(thres,7)){
+            AliveBBs++;    }    }
+    if(AliveBBs>MAX_OUT_BB) AliveBBs=MAX_OUT_BB;
+    stringLenght+=sprintf(bleDetString,"%d;",AliveBBs);
+    for (int counter=0;counter< boundbxs->num_bb;counter++){
+        if(boundbxs->bbs[counter].alive && boundbxs->bbs[counter].score>= FP2FIX(thres,7)){
+            boundbxs->bbs[counter].x = boundbxs->bbs[counter].x + (boundbxs->bbs[counter].w/2);
+            boundbxs->bbs[counter].y = boundbxs->bbs[counter].y + (boundbxs->bbs[counter].h/2);
+            stringLenght+=sprintf(tmpString,"%dx%d;",boundbxs->bbs[counter].x, boundbxs->bbs[counter].y);
+            strcat(bleDetString,tmpString);    }
+    }
+    //stringLenght+=sprintf(tmpString,"Gap8 Power Consuption %f mW/FPS",((float)(1/(50000000.f/12000000)) * 16.800));
+    stringLenght+=sprintf(tmpString,"A Project from GreenWaves and Lynred");
+    strcat(bleDetString,tmpString);
+    //printf("%s\n",bleDetString);
+    //printf("String Size: %d\n",stringLenght);
+    dt = handleDetections(bleDetString,stringLenght);
+    if(dt < 10)    dt = 10;
+    if(dt != old_dt){
+        old_dt = dt;
+        thres = ((float)old_dt)/100;
+    }
+}
+
 //int detSize = 3+(MAX_OUT_BB*12);
 //char * raspDetString = (int *)malloc(detSize * sizeof(int *));
 char raspDetString[3+(MAX_OUT_BB*12)];
@@ -308,12 +345,11 @@ void sendResultsToRaspberry(struct pi_device *uart, uint16_t *img, bboxs_t *boun
     int stringLenght = 0;
     int AliveBBs = 0;
 
-    for(int i=0; i < 3+(MAX_OUT_BB*12); i++)
-        raspDetString[i] = '\0';
+    for(int i=0; i < 3+(MAX_OUT_BB*12); i++) raspDetString[i] = '\0';
 
     for (int counter=0; counter < boundbxs->num_bb; counter++){
-        if(boundbxs->bbs[counter].alive){
-            AliveBBs++;}}
+        if(boundbxs->bbs[counter].alive) AliveBBs++;
+    }
     if(AliveBBs > MAX_OUT_BB) AliveBBs = MAX_OUT_BB;
 
     stringLenght += sprintf(raspDetString, "%d;", AliveBBs);
@@ -325,23 +361,20 @@ void sendResultsToRaspberry(struct pi_device *uart, uint16_t *img, bboxs_t *boun
         }
     }
     //stringLenght+=sprintf(tmpString,"Gap8 Power Consuption %f mW/FPS",((float)(1/(50000000.f/12000000)) * 16.800));
-
-    //printf("%s",raspDetString);
-    //printf("\n");
+    //printf("%s\n",raspDetString);
     //printf("String Size: %d\n",stringLenght);
 
     pi_uart_write(uart, raspDetString, 3+(MAX_OUT_BB*12));
     printf("---det sent---\n");
 
-    pi_uart_write(uart, img, 80*80*sizeof(unsigned char) * 2);
+    pi_uart_write(uart, img, 80*80*sizeof(uint16_t));
     printf("---image sent---\n");
 
     printf("waiting for pi rx\n");
     pi_uart_read(uart, &dt, 4);
     printf("dt: %d\n", dt);
-
 //    dt = handleDetections(raspDetString,stringLenght);
-    if(dt < 10) dt = 10;
+    if(dt < 10)    dt = 10;
     if(dt != old_dt) {
         old_dt = dt;
         thres = ((float)old_dt)/100;
@@ -358,8 +391,8 @@ void led(int cycle, int delay1, int delay2){
     }
 }
 
-int imgTest(char n[], unsigned short data[], int num){
-    printf("\n----------%s----------\n", n);
+int imgTest(char name[], unsigned short data[], int num){
+    printf("\n----------%s----------\n", name);
     for(int j = 0; j<num; j++) printf("%d ", ((unsigned short *)data)[j]);
     printf("\n");
     for(int j = 0; j<num; j++) printf("%d, ", ((unsigned char *)data)[j]);
@@ -446,6 +479,16 @@ void peopleDetection(void){
         #endif
     #endif
 
+    #ifdef USE_BLE
+        PRINTF("Init BLE\n");
+        int status;
+        status = initHandler();
+        if(status){
+            PRINTF("User manager init failed!\n");
+            pmsis_exit(-5);
+        }
+    #endif
+
     PRINTF("Running NN\n");
     struct pi_cluster_task *task = pmsis_l2_malloc(sizeof(struct pi_cluster_task));
     if(task==NULL){
@@ -517,7 +560,7 @@ void peopleDetection(void){
         PRINTF("Caputring IR Image\n");
         pi_gpio_pin_write(NULL, USER_GPIO, 0); // on
         pi_camera_control(&cam, PI_CAMERA_CMD_START, 0);
-        pi_camera_capture(&cam, ImageIn, W*H*sizeof(short));
+        pi_camera_capture(&cam, ImageIn, W*H*sizeof(int16_t));
         pi_camera_control(&cam, PI_CAMERA_CMD_STOP, 0);
         pi_gpio_pin_write(NULL, USER_GPIO , 1); // off
 
@@ -534,6 +577,8 @@ void peopleDetection(void){
             }
         #endif
 
+        int nn = pi_time_get_us();
+
         PRINTF("Call cluster\n");
         //Explicitly allocating Cluster stack since it could also be used by shutterless
         task->stacks = pmsis_l1_malloc(STACK_SIZE+SLAVE_STACK_SIZE*7);
@@ -546,19 +591,30 @@ void peopleDetection(void){
         lynredCNN_Destruct(1);
         pmsis_l1_malloc_free(task->stacks, STACK_SIZE+SLAVE_STACK_SIZE*7);
 
+        nn = pi_time_get_us() - nn;
+        PRINTF("model runtime is %.02f s\n", ((float)nn)/1000000);
+
         #if RASPBERRY
             printf("TX Result to Pi\n");
 //            led(4, 20, 10);
-            char string_buffer1[50];
-            sprintf(string_buffer1, "../../../dump_out_imgs/pi_img_%04ld.pgm", save_index);
+//            char string_buffer1[50];
+//            sprintf(string_buffer1, "../../../dump_out_imgs/pi_img_%04ld.pgm", save_index);
             unsigned char *img_out_ptr1 = ImageIn;
-//            drawBboxes(&bbxs, img_out_ptr1);
-            WriteImageToFile(string_buffer1, W, H, img_out_ptr1);
-            save_index++;
-//            sendResultsToRaspberry(&uart, img_out_ptr1, &bbxs);
+            drawBboxes(&bbxs, img_out_ptr1);
+//            WriteImageToFile(string_buffer1, W, H, img_out_ptr1);
+            sendResultsToRaspberry(&uart, img_out_ptr1, &bbxs);
+//            save_index++;
 //            sendResultsToRaspberry(&uart, (unsigned char *)ImageIn, &bbxs);
-            sendResultsToRaspberry(&uart, ImageIn, &bbxs);
+//            sendResultsToRaspberry(&uart, ImageIn, &bbxs);
             pi_gpio_pin_write(&gpio_led, gpio_out_led, 1); // off
+            printf("%s\n", raspDetString);
+        #endif
+
+        #if defined USE_BLE
+            sendResultsToBle(&bbxs);
+//            #ifndef SAVE_TO_PC
+//                pi_time_wait_us(2 * 1000 * 1000);
+//            #endif
         #endif
 
         #ifdef SAVE_TO_PC
@@ -576,7 +632,7 @@ void peopleDetection(void){
             go_to_sleep();
         #endif
         t = pi_time_get_us() - t;
-        PRINTF("runtime is %.02f s\n", ((float)t)/1000000);
+        PRINTF("total runtime is %.02f s\n", ((float)t)/1000000);
     printf("=====================================FINISH=========\n\n");
     }
     lynredCNN_Destruct(0);
