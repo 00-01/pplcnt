@@ -62,7 +62,7 @@ int initHandler(){
     return errors;
 }
 
-uint8_t handleDetections(char* name,int size){
+uint8_t handleDetections(char *name, int size){
     #ifdef __GAP8__
         pi_pad_set_function(CONFIG_HYPERBUS_DATA6_PAD, CONFIG_UART_RX_PAD_FUNC);
     #endif
@@ -71,13 +71,14 @@ uint8_t handleDetections(char* name,int size){
     int i;
     for(i = 0; i < size; i++)    message[i+1] = name[i];
     //insert end marker
-    message[i+1]= END_MESSAGE;
+    message[i+1] = END_MESSAGE;
+    PRINTF("Ble Sending: %s\n", message);
 
-    PRINTF("Ble Sending: %s\n",message);
     pi_ble_data_send(&ble, message,  size+2);
-    //PRINTF("Data sent, wating for thereshold\n");
-    // waiting for sound playback to continue
+    
+    PRINTF("Data sent, wating for thereshold\n");
     pi_ble_data_get(&ble, &detection_threshold, 1);
+
     PRINTF("Ble receiving: %d\n", detection_threshold);
     #ifdef __GAP8__
         pi_pad_set_function(CONFIG_HYPERBUS_DATA6_PAD, CONFIG_HYPERRAM_DATA6_PAD_FUNC);
