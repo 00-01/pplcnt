@@ -37,7 +37,7 @@ args = vars(ap.parse_args())
 # args
 print("loop is", args["loop"])
 print("frequency is", args["frequency"])
-print("show file is", args["showFile"])
+print("show file is", args["saveAsImage"])
 print("\n")
 
 # # google cloud
