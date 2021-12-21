@@ -11,7 +11,7 @@ import requests
 from google.cloud import storage
 from ftplib import *
 
-import cv2
+from cv2 import imwrite
 import RPi.GPIO as GPIO
 import argparse
 import time
@@ -25,11 +25,11 @@ from datetime import datetime
 ap = argparse.ArgumentParser()
 ap.add_argument("-l", "--loop", default=1, help="run loop")
 ap.add_argument("-f", "--frequency", default=10, help="loop frequency")
-ap.add_argument("-s", "--showFile", default=1, help="show files")
+ap.add_argument("-s", "--saveAsImage", default=1, help="save as image")
 # save location
 # ap.add_argument("-gc", "--g_cloud", default=0, help="save to google_cloud")
 ap.add_argument("-db", "--dbms", default=0, help="save to dbms")
-ap.add_argument("-ls", "--localSave", default=1, help="save to pi")
+ap.add_argument("-ls", "--localSave", default=0, help="save to pi")
 ap.add_argument("-scp", "--scp", default=1, help="save to scp")
 ap.add_argument("-ftp", "--ftp", default=0, help="save to ftp")
 args = vars(ap.parse_args())
@@ -149,6 +149,19 @@ while LOOP:
     print("/bin/bash grubFrame.sh " + device_id + " " + dtime)
     os.system("/bin/bash grubFrame.sh " + device_id + " " + dtime)
 
+    print("saving detection")
+    det_str = rx_det.decode(encoding='UTF-8', errors='ignore')
+    with open(det_file, "w") as file:
+        det_str = det_str.split(";")
+        for i in det_str:
+            if "\00" not in i:
+                file.write(f"{i} ")
+    print("saving image")
+    im_int = struct.unpack('<' + 'B' * w * h * 2, rx_img)
+    with open(img_file, "wb") as file:
+        for val in im_int:
+            file.write(val.to_bytes(2, byteorder='little', signed=1))
+
     # check image
     # im = Image.frombuffer('I;16', (w,h), rx_img, 'raw', 'L', 0, 1)
 
@@ -167,25 +180,11 @@ while LOOP:
         # print(blob.download_as_bytes())
         # blob.upload_from_string('New contents!')
 
-    if args["localSave"]:
-        print("saving detection")
-        det_str = rx_det.decode(encoding='UTF-8', errors='ignore')
-        with open(det_file, "w") as file:
-            det_str = det_str.split(";")
-            for i in det_str:
-                if "\00" not in i:
-                    file.write(f"{i} ")
-        print("saving image")
-        im_int = struct.unpack('<' +'B' *w *h *2, rx_img)
-        with open(img_file, "wb") as file:
-            for val in im_int:
-                file.write(val.to_bytes(2, byteorder='little', signed=1))
-
-    if args["showFile"]:
+    if args["saveAsImage"]:
         print("saving image as png")
         raw = np.fromfile(img_file, dtype=np.uint16).astype(np.uint8)
         raw_to_shape = np.reshape(raw[:6400], (80, 80))
-        cv2.imwrite(f"{img_file}.png", raw_to_shape)
+        imwrite(f"{img_file}.png", raw_to_shape)
 
     if args["scp"]:
         print("uploading to server")
@@ -222,8 +221,8 @@ while LOOP:
 
 ########################################################################
 
-    # remove all file in pi
-    os.system("rm images/*")
+    if not args["localSave"]:
+        os.system("rm images/*")
     LOOP = args["loop"]
 
     print("-"*24, "FINISH", "-"*6, "\n"*2)
