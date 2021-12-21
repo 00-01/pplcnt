@@ -161,6 +161,11 @@ while LOOP:
     with open(img_file, "wb") as file:
         for val in im_int:
             file.write(val.to_bytes(2, byteorder='little', signed=1))
+    # opening image and remving bytes
+    raw = np.fromfile(img_file, dtype=np.uint16).astype(np.uint8)
+    raw_to_shape = np.reshape(raw[:6400], (80, 80))
+    with open(img_file, "wb") as file:
+        file.write(raw_to_shape)
 
     # check image
     # im = Image.frombuffer('I;16', (w,h), rx_img, 'raw', 'L', 0, 1)
@@ -182,8 +187,6 @@ while LOOP:
 
     if args["saveAsImage"]:
         print("saving image as png")
-        raw = np.fromfile(img_file, dtype=np.uint16).astype(np.uint8)
-        raw_to_shape = np.reshape(raw[:6400], (80, 80))
         imwrite(f"{img_file}.png", raw_to_shape)
 
     if args["scp"]:
