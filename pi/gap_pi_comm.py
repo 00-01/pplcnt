@@ -6,8 +6,8 @@
 # from picamera import PiCamera
 # import paramiko
 # import scp
-import requests
 # from pymongo import MongoClient
+import requests
 from google.cloud import storage
 from ftplib import *
 
@@ -28,6 +28,7 @@ ap.add_argument("-f", "--frequency", default=10, help="loop frequency")
 ap.add_argument("-s", "--saveAsImage", default=1, help="save as image")
 # save location
 # ap.add_argument("-gc", "--g_cloud", default=0, help="save to google_cloud")
+ap.add_argument("-p", "--post", default=0, help="post request")
 ap.add_argument("-db", "--dbms", default=0, help="save to dbms")
 ap.add_argument("-ls", "--localSave", default=0, help="save to pi")
 ap.add_argument("-scp", "--scp", default=1, help="save to scp")
@@ -36,9 +37,11 @@ args = vars(ap.parse_args())
 
 # args
 print("loop is", args["loop"])
-print("frequency is", args["frequency"])
-print("show file is", args["saveAsImage"])
+print(f"frequency is %s seconds", args["frequency"])
+print("save file to img is", args["saveAsImage"])
 print("\n")
+
+url = 'http://192.168.0.195:8080/data'
 
 # # google cloud
 # client = storage.Client.from_service_account_json('creds.json')
@@ -150,12 +153,15 @@ while LOOP:
     os.system("/bin/bash grubFrame.sh " + device_id + " " + dtime)
 
     print("saving detection")
+    det = []
     det_str = rx_det.decode(encoding='UTF-8', errors='ignore')
     with open(det_file, "w") as file:
         det_str = det_str.split(";")
         for i in det_str:
             if "\00" not in i:
-                file.write(f"{i} ")
+                if i is not None:
+                    det.append(i)
+                    file.write(f"{i} ")
     print("saving image")
     im_int = struct.unpack('<' + 'B' * w * h * 2, rx_img)
     with open(img_file, "wb") as file:
@@ -170,7 +176,22 @@ while LOOP:
     # check image
     # im = Image.frombuffer('I;16', (w,h), rx_img, 'raw', 'L', 0, 1)
 
+    data = {
+        "datetime": dtime,
+        "device_id": device_id,
+        "predicted": det,
+        "ir_image": raw_to_shape,
+    }
+
 #############################  UPLOADING  #############################
+    if args["saveAsImage"]:
+        print("saving image as png")
+        imwrite(f"{img_file}.png", raw_to_shape)
+
+    if args["post"]:
+        print("sending data through post request")
+        r = requests.post(url, data=data)
+        print(r.text)
 
     # if args["g_cloud"]:
     #     print("uploading to google cloud")
@@ -185,22 +206,12 @@ while LOOP:
         # print(blob.download_as_bytes())
         # blob.upload_from_string('New contents!')
 
-    if args["saveAsImage"]:
-        print("saving image as png")
-        imwrite(f"{img_file}.png", raw_to_shape)
-
     if args["scp"]:
         print("uploading to server")
         os.system(f"sudo sshpass -p {password} scp -P {port} {im_dir}* {username}@{host}:{local_location}")
         os.system(f"export data={img_file}")
         print("transfering remote file to dbms")
-        payload = {
-            "dtime": dtime,
-            "device_id": device_id,
-            "ppl": det_file,
-            "image": img_file,
-        }
-        os.system(f"python3 ../insert_to_db.py")
+        # os.system(f"python3 ../insert_to_db.py")
 
     if args["ftp"]:
         print("uploading to ftp")
@@ -213,19 +224,19 @@ while LOOP:
 
     # if args["dbms"]:
     #     print("inserting to db")
-    #     payload = {
+    #     data = {
     #         "dtime": dtime,
     #         "device_id": device_id,
     #         "ppl": det_file,
     #         "image": img_file,
     #     }
-    #     db_insert = col.insert_one(payload)
+    #     db_insert = col.insert_one(data)
     #     print(db_insert.inserted_ids)
 
 ########################################################################
 
     if not args["localSave"]:
-        os.system("rm images/*")
+        os.system(f"rm {im_dir}*")
     LOOP = args["loop"]
 
     print("-"*24, "FINISH", "-"*6, "\n"*2)
