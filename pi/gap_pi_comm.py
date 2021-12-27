@@ -28,10 +28,10 @@ ap.add_argument("-f", "--frequency", default=10, help="loop frequency")
 ap.add_argument("-s", "--saveAsImage", default=1, help="save as image")
 # save location
 # ap.add_argument("-gc", "--g_cloud", default=0, help="save to google_cloud")
-ap.add_argument("-p", "--post", default=0, help="post request")
-ap.add_argument("-db", "--dbms", default=0, help="save to dbms")
-ap.add_argument("-ls", "--localSave", default=0, help="save to pi")
+ap.add_argument("-p", "--post", default=1, help="post request")
 ap.add_argument("-scp", "--scp", default=1, help="save to scp")
+ap.add_argument("-ls", "--localSave", default=0, help="save to pi")
+ap.add_argument("-db", "--dbms", default=0, help="save to dbms")
 ap.add_argument("-ftp", "--ftp", default=0, help="save to ftp")
 args = vars(ap.parse_args())
 
@@ -168,10 +168,10 @@ while LOOP:
         for val in im_int:
             file.write(val.to_bytes(2, byteorder='little', signed=1))
     # opening image and remving bytes
-    raw = np.fromfile(img_file, dtype=np.uint16).astype(np.uint8)
-    raw_to_shape = np.reshape(raw[:6400], (80, 80))
-    with open(img_file, "wb") as file:
-        file.write(raw_to_shape)
+    img = np.fromfile(img_file, dtype=np.uint16).astype(np.uint8)
+    img_to_shape = np.reshape(img[:6400], (80, 80))
+    # with open(img_file, "wb") as file:
+    #     file.write(raw_to_shape)
 
     # check image
     # im = Image.frombuffer('I;16', (w,h), rx_img, 'raw', 'L', 0, 1)
@@ -180,31 +180,18 @@ while LOOP:
         "datetime": dtime,
         "device_id": device_id,
         "predicted": det,
-        "ir_image": raw_to_shape,
+        "ir_image": img_to_shape,
     }
 
 #############################  UPLOADING  #############################
     if args["saveAsImage"]:
         print("saving image as png")
-        imwrite(f"{img_file}.png", raw_to_shape)
+        imwrite(f"{img_file}.png", img_to_shape)
 
     if args["post"]:
         print("sending data through post request")
         r = requests.post(url, data=data)
         print(r.text)
-
-    # if args["g_cloud"]:
-    #     print("uploading to google cloud")
-    #     blob.upload_from_filename(path_to_file)
-        # print(buckets = list(storage_client.list_buckets())
-
-        # # Retrieve an existing bucket
-        # # https://console.cloud.google.com/storage/browser/[bucket-id]/
-        # bucket = client.get_bucket('bucket-id')
-        # # Then do other things...
-        # blob = bucket.get_blob('remote/path/to/file.txt')
-        # print(blob.download_as_bytes())
-        # blob.upload_from_string('New contents!')
 
     if args["scp"]:
         print("uploading to server")
@@ -233,6 +220,18 @@ while LOOP:
     #     db_insert = col.insert_one(data)
     #     print(db_insert.inserted_ids)
 
+    # if args["g_cloud"]:
+    #     print("uploading to google cloud")
+    #     blob.upload_from_filename(path_to_file)
+        # print(buckets = list(storage_client.list_buckets())
+
+        # # Retrieve an existing bucket
+        # # https://console.cloud.google.com/storage/browser/[bucket-id]/
+        # bucket = client.get_bucket('bucket-id')
+        # # Then do other things...
+        # blob = bucket.get_blob('remote/path/to/file.txt')
+        # print(blob.download_as_bytes())
+        # blob.upload_from_string('New contents!')
 ########################################################################
 
     if not args["localSave"]:
