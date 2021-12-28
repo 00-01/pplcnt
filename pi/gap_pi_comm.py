@@ -98,7 +98,6 @@ size = 2
 img_size = w * h * size
 det_size = 3 + (30 * 12)
 threshold = 40
-# finish = b'\x00\x00\x00\x00'
 
 LOOP = 1
 while LOOP:
@@ -152,6 +151,7 @@ while LOOP:
     print("/bin/bash grubFrame.sh " + device_id + " " + dtime)
     os.system("/bin/bash grubFrame.sh " + device_id + " " + dtime)
     rgb_file = glob(f'{im_dir}/*.jpg')
+    rgb_file = rgb_file[-1]
     print(rgb_file)
 
     print("saving detection")
@@ -169,45 +169,41 @@ while LOOP:
     with open(ir_file, "wb") as file:
         for val in im_int:
             file.write(val.to_bytes(2, byteorder='little', signed=1))
-    # opening image and remving bytes
-    img = np.fromfile(ir_file, dtype=np.uint16).astype(np.uint8)
-    img_to_shape = np.reshape(img[:6400], (80, 80))
-    # with open(img_file, "wb") as file:
-    #     file.write(raw_to_shape)
+    # opening image and removing bytes
+    ir_raw = np.fromfile(ir_file, dtype=np.uint16).astype(np.uint8)
+    ir_image = np.reshape(ir_raw[:6400], (80, 80))
+    # print(ir_image)
+
+    # with open(ir_file, "wb") as file:
+    #     file.write(img_to_shape)
 
     # check image
     # im = Image.frombuffer('I;16', (w,h), rx_img, 'raw', 'L', 0, 1)
-
-    # ir_image = open(ir_file, "rb")
-    rgb_image = open(rgb_file[-1], "rb")
 
     data = {
         "datetime": dtime,
         "device_id": device_id,
         "predicted": det,
-        # "ir_raw": ir_image,
-        "ir_image": img_to_shape,
-        "rgb_image": rgb_image.read(),
+        "ir_image": ir_image,
     }
-
-    # ir_file.close()
-    rgb_image.close()
+    files = {
+        "rgb_image": (rgb_file, open(rgb_file, 'rb'), 'image/jpeg'),
+    }
 
 #############################  UPLOADING  ##############################
     if args["saveAsImage"]:
         print("saving image as png")
-        imwrite(f"{ir_file}.png", img_to_shape)
+        imwrite(f"{ir_file}.png", ir_image)
 
     if args["post"]:
         print("sending data through post request")
-        r = requests.post(url, data=data)
+        r = requests.post(url, data=data, files=files)
         print(r.text)
 
     if args["scp"]:
         print("uploading to server")
         os.system(f"sudo sshpass -p {password} scp -P {port} {im_dir}* {username}@{host}:{local_location}")
-        os.system(f"export data={ir_file}")
-        print("transfering remote file to dbms")
+        # os.system(f"export data={ir_file}")
         # os.system(f"python3 ../insert_to_db.py")
 
     if args["ftp"]:
