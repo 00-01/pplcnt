@@ -178,14 +178,19 @@ while LOOP:
     # check image
     # im = Image.frombuffer('I;16', (w,h), rx_img, 'raw', 'L', 0, 1)
 
+    # ir_image = open(ir_file, "rb")
     rgb_image = open(rgb_file[-1], "rb")
+
     data = {
         "datetime": dtime,
         "device_id": device_id,
         "predicted": det,
+        # "ir_raw": ir_image,
         "ir_image": img_to_shape,
         "rgb_image": rgb_image.read(),
     }
+
+    # ir_file.close()
     rgb_image.close()
 
 #############################  UPLOADING  ##############################
