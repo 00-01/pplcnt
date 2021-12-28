@@ -17,7 +17,7 @@ echo $FILE_NAME
 # configure input 1 for CSI -> MEM (raw image capture)
 v4l2-ctl --device /dev/video0 --set-input=0
 # configure format
-v4l2-ctl --device /dev/video0 --set-fmt-video=width=1280,height=720,pixelformat=MJPG
+v4l2-ctl --device /dev/video0 --set-fmt-video=width=1280,height=980,pixelformat=MJPG
 # capture 2nd frame
 v4l2-ctl --device /dev/video0 --stream-mmap --stream-skip=10 --stream-to=$LOC_DIR/$FILE_NAME --stream-count=1
 
