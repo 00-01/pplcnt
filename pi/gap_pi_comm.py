@@ -7,19 +7,19 @@
 # import paramiko
 # import scp
 # from pymongo import MongoClient
-import requests
-from google.cloud import storage
-from ftplib import *
-
-from cv2 import imwrite
-import RPi.GPIO as GPIO
 import argparse
-import time
-import serial
 import os
 import struct
-import numpy as np
+import time
 from datetime import datetime
+from ftplib import *
+from glob import glob
+
+import RPi.GPIO as GPIO
+import numpy as np
+import requests
+import serial
+from cv2 import imwrite
 
 # true == 1, false == 0
 ap = argparse.ArgumentParser()
@@ -27,12 +27,12 @@ ap.add_argument("-l", "--loop", default=1, help="run loop")
 ap.add_argument("-f", "--frequency", default=10, help="loop frequency")
 ap.add_argument("-s", "--saveAsImage", default=1, help="save as image")
 # save location
-# ap.add_argument("-gc", "--g_cloud", default=0, help="save to google_cloud")
 ap.add_argument("-p", "--post", default=1, help="post request")
 ap.add_argument("-scp", "--scp", default=1, help="save to scp")
 ap.add_argument("-ls", "--localSave", default=0, help="save to pi")
-ap.add_argument("-db", "--dbms", default=0, help="save to dbms")
 ap.add_argument("-ftp", "--ftp", default=0, help="save to ftp")
+ap.add_argument("-db", "--dbms", default=0, help="save to dbms")
+# ap.add_argument("-gc", "--g_cloud", default=0, help="save to google_cloud")
 args = vars(ap.parse_args())
 
 # args
@@ -108,7 +108,7 @@ while LOOP:
     det_name = "CNT_" + device_id + "_" + dtime + ".txt"
     det_file = im_dir + det_name
     img_name = "IR_" + device_id + "_" + dtime + ".bin"
-    img_file = im_dir + img_name
+    ir_file = im_dir + img_name
 
     ser.flush()
     ser.reset_input_buffer()
@@ -151,6 +151,8 @@ while LOOP:
     # print("capturing picamera image")
     print("/bin/bash grubFrame.sh " + device_id + " " + dtime)
     os.system("/bin/bash grubFrame.sh " + device_id + " " + dtime)
+    rgb_file = glob(f'{im_dir}/*.jpg')
+    print(rgb_file)
 
     print("saving detection")
     det = []
@@ -164,11 +166,11 @@ while LOOP:
                     file.write(f"{i} ")
     print("saving image")
     im_int = struct.unpack('<' + 'B' * w * h * 2, rx_img)
-    with open(img_file, "wb") as file:
+    with open(ir_file, "wb") as file:
         for val in im_int:
             file.write(val.to_bytes(2, byteorder='little', signed=1))
     # opening image and remving bytes
-    img = np.fromfile(img_file, dtype=np.uint16).astype(np.uint8)
+    img = np.fromfile(ir_file, dtype=np.uint16).astype(np.uint8)
     img_to_shape = np.reshape(img[:6400], (80, 80))
     # with open(img_file, "wb") as file:
     #     file.write(raw_to_shape)
@@ -176,17 +178,20 @@ while LOOP:
     # check image
     # im = Image.frombuffer('I;16', (w,h), rx_img, 'raw', 'L', 0, 1)
 
+    rgb_image = open(rgb_file[-1], "rb")
     data = {
         "datetime": dtime,
         "device_id": device_id,
         "predicted": det,
         "ir_image": img_to_shape,
+        "rgb_image": rgb_image.read(),
     }
+    rgb_image.close()
 
-#############################  UPLOADING  #############################
+#############################  UPLOADING  ##############################
     if args["saveAsImage"]:
         print("saving image as png")
-        imwrite(f"{img_file}.png", img_to_shape)
+        imwrite(f"{ir_file}.png", img_to_shape)
 
     if args["post"]:
         print("sending data through post request")
@@ -196,7 +201,7 @@ while LOOP:
     if args["scp"]:
         print("uploading to server")
         os.system(f"sudo sshpass -p {password} scp -P {port} {im_dir}* {username}@{host}:{local_location}")
-        os.system(f"export data={img_file}")
+        os.system(f"export data={ir_file}")
         print("transfering remote file to dbms")
         # os.system(f"python3 ../insert_to_db.py")
 
@@ -204,7 +209,7 @@ while LOOP:
         print("uploading to ftp")
         with FTP(FTP_ADDR, FTP_USER, FTP_PASS) as ftp:
             ftp.cwd(device_id)
-            with open(img_file, 'rb') as file:
+            with open(ir_file, 'rb') as file:
                 ftp.storbinary('STOR ' + img_name, file)
             with open(det_file, 'rb') as file:
                 ftp.storbinary('STOR ' + det_name, file)
