@@ -78,313 +78,244 @@ void LoadCNN_Copy_Library() {
     if (copy_library_loaded) return;
     copy_library_loaded = 1;
 
-	LibKernelTemplate(
-            "KerCopy_void_T",
-            CArgs(3,
-                TCArg("void *__restrict__", "In"),
-                TCArg("void *__restrict__", "Out"),
-                TCArg("unsigned int", "Size")
-                )
-	    );
+	LibKernelTemplate("KerCopy_void_T",
+                      CArgs(3,
+                        TCArg("void *__restrict__", "In"),
+                        TCArg("void *__restrict__", "Out"),
+                        TCArg("unsigned int", "Size")));
     LibKernelTemplate("CNN_FpUFp_T",
                       CArgs(5,
                         TCArg("signed short *__restrict__", "In"),
                         TCArg("unsigned short *__restrict__", "Out"),
                         TCArg("unsigned short int", "W"),
                         TCArg("unsigned short int", "H"),
-                        TCArg("signed char *__restrict__", "Infos")
-                        )
-        );
+                        TCArg("signed char *__restrict__", "Infos")));
 	LibKernelTemplate("CNN_UFpFp_T",
                       CArgs(5,
                         TCArg("unsigned short *__restrict__", "In"),
                         TCArg("signed short *__restrict__", "Out"),
                         TCArg("unsigned short int", "W"),
                         TCArg("unsigned short int", "H"),
-                        TCArg("signed char *__restrict__", "Infos")
-                        )
-        );
+                        TCArg("signed char *__restrict__", "Infos")));
 	LibKernelTemplate("CNN_FpFps_T",
-			CArgs(5,
+                      CArgs(5,
                         TCArg("signed short *__restrict__", "In"),
                         TCArg("signed char *__restrict__", "Out"),
                         TCArg("unsigned short int", "W"),
                         TCArg("unsigned short int", "H"),
-                        TCArg("signed char *__restrict__", "Infos")
-                        )
-        );
+                        TCArg("signed char *__restrict__", "Infos")));
 	LibKernelTemplate("CNN_FpUFps_T",
                       CArgs(5,
                         TCArg("signed short *__restrict__", "In"),
                         TCArg("unsigned char *__restrict__", "Out"),
                         TCArg("unsigned short int", "W"),
                         TCArg("unsigned short int", "H"),
-                        TCArg("signed char *__restrict__", "Infos")
-                        )
-        );
+                        TCArg("signed char *__restrict__", "Infos")));
 	LibKernelTemplate("CNN_UFpFps_T",
                       CArgs(5,
                         TCArg("unsigned short *__restrict__", "In"),
                         TCArg("signed char *__restrict__", "Out"),
                         TCArg("unsigned short int", "W"),
                         TCArg("unsigned short int", "H"),
-                        TCArg("signed char *__restrict__", "Infos")
-                        )
-        );
+                        TCArg("signed char *__restrict__", "Infos")));
 	LibKernelTemplate("CNN_UFpUFps_T",
                       CArgs(5,
                         TCArg("unsigned short *__restrict__", "In"),
                         TCArg("unsigned char *__restrict__", "Out"),
                         TCArg("unsigned short int", "W"),
                         TCArg("unsigned short int", "H"),
-                        TCArg("signed char *__restrict__", "Infos")
-                        )
-        );
+                        TCArg("signed char *__restrict__", "Infos")));
 	LibKernelTemplate("CNN_UFpUFp_T",
                         CArgs(5,
                         TCArg("unsigned short *__restrict__", "In"),
                         TCArg("unsigned short *__restrict__", "Out"),
                         TCArg("unsigned short int", "W"),
                         TCArg("unsigned short int", "H"),
-                        TCArg("signed char *__restrict__", "Infos")
-                        )
-        );
+                        TCArg("signed char *__restrict__", "Infos")));
 	LibKernelTemplate("CNN_FpsUFps_T",
                       CArgs(5,
                         TCArg("signed char *__restrict__", "In"),
                         TCArg("unsigned char *__restrict__", "Out"),
                         TCArg("unsigned short int", "W"),
                         TCArg("unsigned short int", "H"),
-                        TCArg("signed char *__restrict__", "Infos")
-			)
-        );
+                        TCArg("signed char *__restrict__", "Infos")));
 	LibKernelTemplate("CNN_UFpsFps_T",
                       CArgs(5,
                         TCArg("unsigned char *__restrict__", "In"),
                         TCArg("signed char *__restrict__", "Out"),
                         TCArg("unsigned short int", "W"),
                         TCArg("unsigned short int", "H"),
-                        TCArg("signed char *__restrict__", "Infos")
-                        )
-        );
+                        TCArg("signed char *__restrict__", "Infos")));
 	LibKernelTemplate("CNN_UFpsUFps_T",
                       CArgs(5,
                         TCArg("unsigned char *__restrict__", "In"),
                         TCArg("unsigned char *__restrict__", "Out"),
                         TCArg("unsigned short int", "W"),
                         TCArg("unsigned short int", "H"),
-                        TCArg("signed char *__restrict__", "Infos")
-                        )
-        );
+                        TCArg("signed char *__restrict__", "Infos")));
 	LibKernelTemplate("CNN_FpsFps_T",
                       CArgs(5,
                         TCArg("signed char *__restrict__", "In"),
                         TCArg("signed char *__restrict__", "Out"),
                         TCArg("unsigned short int", "W"),
                         TCArg("unsigned short int", "H"),
-                        TCArg("signed char *__restrict__", "Infos")
-                        )
-        );
+                        TCArg("signed char *__restrict__", "Infos")));
 	LibKernelTemplate("CNN_FpFp_T",
                       CArgs(5,
                         TCArg("signed short *__restrict__", "In"),
                         TCArg("signed short *__restrict__", "Out"),
                         TCArg("unsigned short int", "W"),
                         TCArg("unsigned short int", "H"),
-                        TCArg("signed char *__restrict__", "Infos")
-                        )
-        );
+                        TCArg("signed char *__restrict__", "Infos")));
 	LibKernelTemplate("CNN_FpsFp_T",
                       CArgs(5,
                         TCArg("signed char *__restrict__", "In"),
                         TCArg("signed short *__restrict__", "Out"),
                         TCArg("unsigned short int", "W"),
                         TCArg("unsigned short int", "H"),
-                        TCArg("signed char *__restrict__", "Infos")
-			)
-        );
+                        TCArg("signed char *__restrict__", "Infos")));
 	LibKernelTemplate("CNN_UFpsFp_T",
                       CArgs(5,
                         TCArg("unsigned char *__restrict__", "In"),
                         TCArg("signed short *__restrict__", "Out"),
                         TCArg("unsigned short int", "W"),
                         TCArg("unsigned short int", "H"),
-                        TCArg("signed char *__restrict__", "Infos")
-                        )
-        );
+                        TCArg("signed char *__restrict__", "Infos")));
     LibKernelTemplate("CNN_FpsUFp_T",
                       CArgs(5,
-                    TCArg("signed char *__restrict__", "In"),
-                    TCArg("unsigned short *__restrict__", "Out"),
-                    TCArg("unsigned short int", "W"),
-                    TCArg("unsigned short int", "H"),
-                    TCArg("signed char *__restrict__", "Infos")
-                    )
-        );
+                        TCArg("signed char *__restrict__", "In"),
+                        TCArg("unsigned short *__restrict__", "Out"),
+                        TCArg("unsigned short int", "W"),
+                        TCArg("unsigned short int", "H"),
+                        TCArg("signed char *__restrict__", "Infos")));
     LibKernelTemplate("CNN_UFpsUFp_T",
                       CArgs(5,
                         TCArg("unsigned char *__restrict__", "In"),
                         TCArg("unsigned short *__restrict__", "Out"),
                         TCArg("unsigned short int", "W"),
                         TCArg("unsigned short int", "H"),
-                        TCArg("signed char *__restrict__", "Infos")
-                        )
-        );
+                        TCArg("signed char *__restrict__", "Infos")));
 	LibKernelTemplate("CNN_Float16Fp_T",
                       CArgs(5,
                         TCArg("F16 *__restrict__", "In"),
                         TCArg("signed short *__restrict__", "Out"),
                         TCArg("unsigned short int", "W"),
                         TCArg("unsigned short int", "H"),
-                        TCArg("signed char *__restrict__", "Infos")
-                        )
-        );
+                        TCArg("signed char *__restrict__", "Infos")));
 	LibKernelTemplate("CNN_Float16UFp_T",
                       CArgs(5,
                         TCArg("F16 *__restrict__", "In"),
                         TCArg("unsigned short *__restrict__", "Out"),
                         TCArg("unsigned short int", "W"),
                         TCArg("unsigned short int", "H"),
-                        TCArg("signed char *__restrict__", "Infos")
-                        )
-        );
+                        TCArg("signed char *__restrict__", "Infos")));
 	LibKernelTemplate("CNN_Float16Fps_T",
                       CArgs(5,
                         TCArg("F16 *__restrict__", "In"),
                         TCArg("signed char *__restrict__", "Out"),
                         TCArg("unsigned short int", "W"),
                         TCArg("unsigned short int", "H"),
-                        TCArg("signed char *__restrict__", "Infos")
-                        )
-        );
+                        TCArg("signed char *__restrict__", "Infos")));
 	LibKernelTemplate("CNN_Float16UFps_T",
-                        CArgs(5,
+                      CArgs(5,
                         TCArg("F16 *__restrict__", "In"),
                         TCArg("unsigned char *__restrict__", "Out"),
                         TCArg("unsigned short int", "W"),
                         TCArg("unsigned short int", "H"),
-                        TCArg("signed char *__restrict__", "Infos")
-                        )
-        );
+                        TCArg("signed char *__restrict__", "Infos")));
 	LibKernelTemplate("CNN_FpFloat16_T",
-                        CArgs(5,
+                      CArgs(5,
                         TCArg("signed short *__restrict__", "In"),
                         TCArg("F16 *__restrict__", "Out"),
                         TCArg("unsigned short int", "W"),
                         TCArg("unsigned short int", "H"),
-                        TCArg("signed char *__restrict__", "Infos")
-                        )
-        );
+                        TCArg("signed char *__restrict__", "Infos")));
 	LibKernelTemplate("CNN_UFpFloat16_T",
-                        CArgs(5,
+                      CArgs(5,
                         TCArg("unsigned short *__restrict__", "In"),
                         TCArg("F16 *__restrict__", "Out"),
                         TCArg("unsigned short int", "W"),
                         TCArg("unsigned short int", "H"),
-                        TCArg("signed char *__restrict__", "Infos")
-                        )
-        );
+                        TCArg("signed char *__restrict__", "Infos")));
 	LibKernelTemplate("CNN_FpsFloat16_T",
-                        CArgs(5,
+                      CArgs(5,
                         TCArg("signed char *__restrict__", "In"),
                         TCArg("F16 *__restrict__", "Out"),
                         TCArg("unsigned short int", "W"),
                         TCArg("unsigned short int", "H"),
-                        TCArg("signed char *__restrict__", "Infos")
-                        )
-        );
+                        TCArg("signed char *__restrict__", "Infos")));
 	LibKernelTemplate("CNN_UFpsFloat16_T",
-                        CArgs(5,
+                      CArgs(5,
                         TCArg("unsigned char *__restrict__", "In"),
                         TCArg("F16 *__restrict__", "Out"),
                         TCArg("unsigned short int", "W"),
                         TCArg("unsigned short int", "H"),
-                        TCArg("signed char *__restrict__", "Infos")
-                        )
-        );
+                        TCArg("signed char *__restrict__", "Infos")));
     LibKernelTemplate("CNN_Float32Fp_T",
-                    CArgs(5,
-                    TCArg("float *__restrict__", "In"),
-                    TCArg("signed short *__restrict__", "Out"),
-                    TCArg("unsigned short int", "W"),
-                    TCArg("unsigned short int", "H"),
-                    TCArg("signed char *__restrict__", "Infos")
-                    )
-    );
+                      CArgs(5,
+                        TCArg("float *__restrict__", "In"),
+                        TCArg("signed short *__restrict__", "Out"),
+                        TCArg("unsigned short int", "W"),
+                        TCArg("unsigned short int", "H"),
+                        TCArg("signed char *__restrict__", "Infos")));
     LibKernelTemplate("CNN_Float32UFp_T",
-                    CArgs(5,
-                    TCArg("float *__restrict__", "In"),
-                    TCArg("unsigned short *__restrict__", "Out"),
-                    TCArg("unsigned short int", "W"),
-                    TCArg("unsigned short int", "H"),
-                    TCArg("signed char *__restrict__", "Infos")
-                    )
-    );
+                      CArgs(5,
+                        TCArg("float *__restrict__", "In"),
+                        TCArg("unsigned short *__restrict__", "Out"),
+                        TCArg("unsigned short int", "W"),
+                        TCArg("unsigned short int", "H"),
+                        TCArg("signed char *__restrict__", "Infos")));
     LibKernelTemplate("CNN_Float32Fps_T",
-                    CArgs(5,
-                    TCArg("float *__restrict__", "In"),
-                    TCArg("signed char *__restrict__", "Out"),
-                    TCArg("unsigned short int", "W"),
-                    TCArg("unsigned short int", "H"),
-                    TCArg("signed char *__restrict__", "Infos")
-                    )
-    );
+                      CArgs(5,
+                        TCArg("float *__restrict__", "In"),
+                        TCArg("signed char *__restrict__", "Out"),
+                        TCArg("unsigned short int", "W"),
+                        TCArg("unsigned short int", "H"),
+                        TCArg("signed char *__restrict__", "Infos")));
     LibKernelTemplate("CNN_Float32UFps_T",
-                    CArgs(5,
-                    TCArg("float *__restrict__", "In"),
-                    TCArg("unsigned char *__restrict__", "Out"),
-                    TCArg("unsigned short int", "W"),
-                    TCArg("unsigned short int", "H"),
-                    TCArg("signed char *__restrict__", "Infos")
-                    )
-    );
+                      CArgs(5,
+                        TCArg("float *__restrict__", "In"),
+                        TCArg("unsigned char *__restrict__", "Out"),
+                        TCArg("unsigned short int", "W"),
+                        TCArg("unsigned short int", "H"),
+                        TCArg("signed char *__restrict__", "Infos")));
     LibKernelTemplate("CNN_FpFloat32_T",
-                    CArgs(5,
-                    TCArg("signed short *__restrict__", "In"),
-                    TCArg("float *__restrict__", "Out"),
-                    TCArg("unsigned short int", "W"),
-                    TCArg("unsigned short int", "H"),
-                    TCArg("signed char *__restrict__", "Infos")
-                    )
-    );
+                      CArgs(5,
+                        TCArg("signed short *__restrict__", "In"),
+                        TCArg("float *__restrict__", "Out"),
+                        TCArg("unsigned short int", "W"),
+                        TCArg("unsigned short int", "H"),
+                        TCArg("signed char *__restrict__", "Infos")));
     LibKernelTemplate("CNN_UFpFloat32_T",
-                    CArgs(5,
-                    TCArg("unsigned short *__restrict__", "In"),
-                    TCArg("float *__restrict__", "Out"),
-                    TCArg("unsigned short int", "W"),
-                    TCArg("unsigned short int", "H"),
-                    TCArg("signed char *__restrict__", "Infos")
-                    )
-    );
+                      CArgs(5,
+                        TCArg("unsigned short *__restrict__", "In"),
+                        TCArg("float *__restrict__", "Out"),
+                        TCArg("unsigned short int", "W"),
+                        TCArg("unsigned short int", "H"),
+                        TCArg("signed char *__restrict__", "Infos")));
     LibKernelTemplate("CNN_FpsFloat32_T",
                     CArgs(5,
-                    TCArg("signed char *__restrict__", "In"),
-                    TCArg("float *__restrict__", "Out"),
-                    TCArg("unsigned short int", "W"),
-                    TCArg("unsigned short int", "H"),
-                    TCArg("signed char *__restrict__", "Infos")
-                    )
-    );
-    LibKernelTemplate("CNN_UFpsFloat32_T",
+                        TCArg("signed char *__restrict__", "In"),
+                        TCArg("float *__restrict__", "Out"),
+                        TCArg("unsigned short int", "W"),
+                        TCArg("unsigned short int", "H"),
+                        TCArg("signed char *__restrict__", "Infos")));
+        LibKernelTemplate("CNN_UFpsFloat32_T",
                     CArgs(5,
-                    TCArg("unsigned char *__restrict__", "In"),
-                    TCArg("float *__restrict__", "Out"),
-                    TCArg("unsigned short int", "W"),
-                    TCArg("unsigned short int", "H"),
-                    TCArg("signed char *__restrict__", "Infos")
-                    )
-    );
+                        TCArg("unsigned char *__restrict__", "In"),
+                        TCArg("float *__restrict__", "Out"),
+                        TCArg("unsigned short int", "W"),
+                        TCArg("unsigned short int", "H"),
+                        TCArg("signed char *__restrict__", "Infos")));
 	LibKernelTemplate("KerMatTranspose_fps_T",
                       CArgs(7,
-			TCArg("signed char *__restrict__", "In"),
-			TCArg("signed char *__restrict__", "Out"),
-			TCArg("unsigned short int", "Feat"),
-			TCArg("unsigned short int", "W"),
-			TCArg("unsigned short int", "H"),
-			TCArg("unsigned char", "Sx"),
-			TCArg("unsigned char", "Sy")
-            )
-	);
+                        TCArg("signed char *__restrict__", "In"),
+                        TCArg("signed char *__restrict__", "Out"),
+                        TCArg("unsigned short int", "Feat"),
+                        TCArg("unsigned short int", "W"),
+                        TCArg("unsigned short int", "H"),
+                        TCArg("unsigned char", "Sx"),
+                        TCArg("unsigned char", "Sy")));
 	LibKernelTemplate("KerMatTranspose_fp_T",
                       CArgs(7,
                         TCArg("short int *__restrict__", "In"),
@@ -393,35 +324,26 @@ void LoadCNN_Copy_Library() {
                         TCArg("unsigned short int", "W"),
                         TCArg("unsigned short int", "H"),
                         TCArg("unsigned char", "Sx"),
-                        TCArg("unsigned char", "Sy")
-                        )
-	);
-
+                        TCArg("unsigned char", "Sy")));
 
 	/****************************************************************************************************************/
 	/* Kernels generic copy  */
 	/****************************************************************************************************************/
-
 	LibKernel("CNN_Copy_void", CALL_PARALLEL,
-		  CArgs(3,
-		  	TCArg("void *__restrict__", "In"),
-		  	TCArg("void *__restrict__", "Out"),
-		  	TCArg("unsigned int", "N")
-		       ),
-		  "KerCopy_void_T", NULL
-	);
+              CArgs(3,
+                TCArg("void *__restrict__", "In"),
+                TCArg("void *__restrict__", "Out"),
+                TCArg("unsigned int", "N")),
+              "KerCopy_void_T", NULL);
 	LibKernel("CNN_NormRGB565_offset_fps", CALL_PARALLEL,
-		CArgs(6,
-			TCArg("unsigned short *__restrict__", "In"),
-			TCArg("signed char *__restrict__", "Out0"),
-			TCArg("signed char *__restrict__", "Out1"),
-			TCArg("signed char *__restrict__", "Out2"),
-			TCArg("unsigned short int", "W"),
-			TCArg("unsigned short int", "H")
-		     ),
-		"KerNormRGB565_fps_T", NULL
-	);
-
+            CArgs(6,
+                TCArg("unsigned short *__restrict__", "In"),
+                TCArg("signed char *__restrict__", "Out0"),
+                TCArg("signed char *__restrict__", "Out1"),
+                TCArg("signed char *__restrict__", "Out2"),
+                TCArg("unsigned short int", "W"),
+                TCArg("unsigned short int", "H")),
+            "KerNormRGB565_fps_T", NULL);
 	LibKernel("CNN_NormRGB565_shift_fps", CALL_PARALLEL,
 			CArgs(6,
 				TCArg("unsigned short *__restrict__", "In"),
@@ -429,11 +351,8 @@ void LoadCNN_Copy_Library() {
 				TCArg("signed char *__restrict__", "Out1"),
 				TCArg("signed char *__restrict__", "Out2"),
 				TCArg("unsigned short int", "W"),
-				TCArg("unsigned short int", "H")
-			     ),
-			"KerNormRGB565_fps_T", NULL
-		 );
-
+				TCArg("unsigned short int", "H")),
+			"KerNormRGB565_fps_T", NULL);
 	LibKernel("CNN_NormRGB888_offset_fps", CALL_PARALLEL,
 			CArgs(6,
 				TCArg("unsigned char *__restrict__", "In"),
@@ -441,11 +360,8 @@ void LoadCNN_Copy_Library() {
 				TCArg("signed char *__restrict__", "Out1"),
 				TCArg("signed char *__restrict__", "Out2"),
 				TCArg("unsigned short int", "W"),
-				TCArg("unsigned short int", "H")
-			     ),
-			"KerNormRGB888_fps_T", NULL
-		 );
-
+				TCArg("unsigned short int", "H")),
+			"KerNormRGB888_fps_T", NULL);
 	LibKernel("CNN_NormRGB888_shift_fps", CALL_PARALLEL,
 			CArgs(6,
 				TCArg("unsigned char *__restrict__", "In"),
@@ -453,11 +369,8 @@ void LoadCNN_Copy_Library() {
 				TCArg("signed char *__restrict__", "Out1"),
 				TCArg("signed char *__restrict__", "Out2"),
 				TCArg("unsigned short int", "W"),
-				TCArg("unsigned short int", "H")
-			     ),
-			"KerNormRGB888_fps_T", NULL
-		 );
-	
+				TCArg("unsigned short int", "H")),
+			"KerNormRGB888_fps_T", NULL);
 	LibKernel("CNN_NormRGB16_fp", CALL_PARALLEL,
 			CArgs(6,
 				TCArg("unsigned char *__restrict__", "In"),
@@ -465,45 +378,33 @@ void LoadCNN_Copy_Library() {
 				TCArg("signed short int *__restrict__", "Out1"),
 				TCArg("signed short int *__restrict__", "Out2"),
 				TCArg("unsigned short int", "W"),
-				TCArg("unsigned short int", "H")
-			     ),
-			"KerNormRGB16_fp_T", NULL
-		 );
-
+				TCArg("unsigned short int", "H")),
+			"KerNormRGB16_fp_T", NULL);
 	LibKernel("CNN_NormBW_offset_fps", CALL_PARALLEL,
 			CArgs(4,
 				TCArg("unsigned char *__restrict__", "In"),
 				TCArg("signed char *__restrict__", "Out"),
 				TCArg("unsigned short int", "W"),
-				TCArg("unsigned short int", "H")
-			     ),
-			"KerNormBW_fps_T", NULL
-		 );
-
+				TCArg("unsigned short int", "H")),
+			"KerNormBW_fps_T", NULL);
 	LibKernel("CNN_NormBW_shift_fps", CALL_PARALLEL,
 			CArgs(4,
 				TCArg("unsigned char *__restrict__", "In"),
 				TCArg("signed char *__restrict__", "Out"),
 				TCArg("unsigned short int", "W"),
-				TCArg("unsigned short int", "H")
-			     ),
-			"KerNormBW_fps_T", NULL
-		 );
-
+				TCArg("unsigned short int", "H")),
+			"KerNormBW_fps_T", NULL);
 	LibKernel("CNN_NormBW_fp", CALL_PARALLEL,
 			CArgs(4,
 				TCArg("unsigned char *__restrict__", "In"),
 				TCArg("signed short int *__restrict__", "Out"),
 				TCArg("unsigned short int", "W"),
-				TCArg("unsigned short int", "H")
-			     ),
-			"KerNormBW_fp_T", NULL
-		 );
+				TCArg("unsigned short int", "H")),
+			"KerNormBW_fp_T", NULL);
 
 	/****************************************************************************************************************/
 	/* Kernels tensor type, scale and zeropoint conversions  */
 	/****************************************************************************************************************/
-
 	LibKernel("CNN_FpsUFps", CALL_PARALLEL, 0, "CNN_FpsUFps_T",	        CNN_Match(CNN_OperList(1, KOP_CONVERT_FP_FP_ZEROPOINT),        0, 1, CNN_Type(1,0,0,0,-1), 0,0,0,0,1,1));
 	LibKernel("CNN_FpsFp", CALL_PARALLEL, 0, "CNN_FpsFp_T",	                CNN_Match(CNN_OperList(1, KOP_CONVERT_FP_FP),                  0, 1, CNN_Type(1,0,0,0,2), 0,0,0,0,1,1));
 	LibKernel("CNN_FpsFpScaled", CALL_PARALLEL, 0, "CNN_FpsFp_T",	        CNN_Match(CNN_OperList(1, KOP_CONVERT_FP_FP_SCALE),            0, 1, CNN_Type(1,0,0,0,2), 0,0,0,0,1,1));
@@ -544,20 +445,19 @@ void LoadCNN_Copy_Library() {
 	LibKernel("CNN_FpsFloat16", CALL_PARALLEL, 0, "CNN_FpsFloat16_T",	CNN_Match(CNN_OperList(1, KOP_CONVERT_FP_FL),                  0, 1, CNN_Type(1,0,0,0,2), 0,0,0,0,1,1));
 	LibKernel("CNN_UFpsFloat16", CALL_PARALLEL, 0, "CNN_UFpsFloat16_T",	CNN_Match(CNN_OperList(1, KOP_CONVERT_FP_FL),                  0, 1, CNN_Type(-1,0,0,0,2), 0,0,0,0,1,1));
 
-        LibKernel("CNN_Float32Fp", CALL_PARALLEL, 0, "CNN_Float32Fp_T",         CNN_Match(CNN_OperList(1, KOP_CONVERT_FL_FP),                  0, 1, CNN_Type(4,0,0,0,2), 0,0,0,0,1,1));
-        LibKernel("CNN_Float32UFp", CALL_PARALLEL, 0, "CNN_Float32UFp_T",       CNN_Match(CNN_OperList(1, KOP_CONVERT_FL_FP),                  0, 1, CNN_Type(4,0,0,0,-2), 0,0,0,0,1,1));
-        LibKernel("CNN_Float32Fps", CALL_PARALLEL, 0, "CNN_Float32Fps_T",       CNN_Match(CNN_OperList(1, KOP_CONVERT_FL_FP),                  0, 1, CNN_Type(4,0,0,0,1), 0,0,0,0,1,1));
-        LibKernel("CNN_Float32UFps", CALL_PARALLEL, 0, "CNN_Float32UFps_T",     CNN_Match(CNN_OperList(1, KOP_CONVERT_FL_FP),                  0, 1, CNN_Type(4,0,0,0,-1), 0,0,0,0,1,1));
+    LibKernel("CNN_Float32Fp", CALL_PARALLEL, 0, "CNN_Float32Fp_T",         CNN_Match(CNN_OperList(1, KOP_CONVERT_FL_FP),                  0, 1, CNN_Type(4,0,0,0,2), 0,0,0,0,1,1));
+    LibKernel("CNN_Float32UFp", CALL_PARALLEL, 0, "CNN_Float32UFp_T",       CNN_Match(CNN_OperList(1, KOP_CONVERT_FL_FP),                  0, 1, CNN_Type(4,0,0,0,-2), 0,0,0,0,1,1));
+    LibKernel("CNN_Float32Fps", CALL_PARALLEL, 0, "CNN_Float32Fps_T",       CNN_Match(CNN_OperList(1, KOP_CONVERT_FL_FP),                  0, 1, CNN_Type(4,0,0,0,1), 0,0,0,0,1,1));
+    LibKernel("CNN_Float32UFps", CALL_PARALLEL, 0, "CNN_Float32UFps_T",     CNN_Match(CNN_OperList(1, KOP_CONVERT_FL_FP),                  0, 1, CNN_Type(4,0,0,0,-1), 0,0,0,0,1,1));
 
-        LibKernel("CNN_FpFloat32", CALL_PARALLEL, 0, "CNN_FpFloat32_T",         CNN_Match(CNN_OperList(1, KOP_CONVERT_FP_FL),                  0, 1, CNN_Type(2,0,0,0,4), 0,0,0,0,1,1));
-        LibKernel("CNN_UFpFloat32", CALL_PARALLEL, 0, "CNN_UFpFloat32_T",       CNN_Match(CNN_OperList(1, KOP_CONVERT_FP_FL),                  0, 1, CNN_Type(-2,0,0,0,4), 0,0,0,0,1,1));
-        LibKernel("CNN_FpsFloat32", CALL_PARALLEL, 0, "CNN_FpsFloat32_T",       CNN_Match(CNN_OperList(1, KOP_CONVERT_FP_FL),                  0, 1, CNN_Type(1,0,0,0,4), 0,0,0,0,1,1));
-        LibKernel("CNN_UFpsFloat32", CALL_PARALLEL, 0, "CNN_UFpsFloat32_T",     CNN_Match(CNN_OperList(1, KOP_CONVERT_FP_FL),                  0, 1, CNN_Type(-1,0,0,0,4), 0,0,0,0,1,1));
+    LibKernel("CNN_FpFloat32", CALL_PARALLEL, 0, "CNN_FpFloat32_T",         CNN_Match(CNN_OperList(1, KOP_CONVERT_FP_FL),                  0, 1, CNN_Type(2,0,0,0,4), 0,0,0,0,1,1));
+    LibKernel("CNN_UFpFloat32", CALL_PARALLEL, 0, "CNN_UFpFloat32_T",       CNN_Match(CNN_OperList(1, KOP_CONVERT_FP_FL),                  0, 1, CNN_Type(-2,0,0,0,4), 0,0,0,0,1,1));
+    LibKernel("CNN_FpsFloat32", CALL_PARALLEL, 0, "CNN_FpsFloat32_T",       CNN_Match(CNN_OperList(1, KOP_CONVERT_FP_FL),                  0, 1, CNN_Type(1,0,0,0,4), 0,0,0,0,1,1));
+    LibKernel("CNN_UFpsFloat32", CALL_PARALLEL, 0, "CNN_UFpsFloat32_T",     CNN_Match(CNN_OperList(1, KOP_CONVERT_FP_FL),                  0, 1, CNN_Type(-1,0,0,0,4), 0,0,0,0,1,1));
 
 	/****************************************************************************************************************/
 	/* Kernels tensor/matrix transposes and permutations  */
 	/****************************************************************************************************************/
-
 	/* Matrix Transposition, byte, no scaling */
 	LibKernel("CNN_ParTranspose_fps", CALL_PARALLEL, 0, "KerMatTranspose_fps_T",	CNN_Match(CNN_OperList(1, KOP_MATTRANSP), 0, 1, CNN_Type(1,0,0,0,1), 0,0,0,0,1,1));
 	LibKernel("CNN_ParTransposeSxSy_fps", CALL_PARALLEL, 0, "KerMatTranspose_fps_T",CNN_Match(CNN_OperList(1, KOP_MATTRANSP), 0, 1, CNN_Type(1,0,0,0,1), 0,0,0,0,-1,-1));
@@ -572,16 +472,11 @@ void LoadCNN_Copy_Library() {
 	LibKernel("CNN_MatPermCHW2HCW_fps", CALL_PARALLEL, 0, "KerMatTranspose_fps_T",	CNN_Match(CNN_OperList(1, KOP_MATPERM_CHW2HCW), 0, 1, CNN_Type(1,0,0,0,1), 0,0,0,0,1,1));
 
 	/* Tensor Permutation (HWC), byte, no scaling */
-        LibKernel("CNN_MatPermHWC2HCW_fps", CALL_PARALLEL|CALL_HWC_KER, 0, "KerMatTranspose_fps_T",
-                                                                                        CNN_Match(CNN_OperList(1, KOP_MATPERM_HWC2HCW), 0, 1, CNN_Type(1,0,0,0,1), 0,0,0,0,1,1));
-        LibKernel("CNN_MatPermHWC2WCH_fps", CALL_PARALLEL|CALL_HWC_KER, 0, "KerMatTranspose_fps_T",
-                                                                                        CNN_Match(CNN_OperList(1, KOP_MATPERM_HWC2WCH), 0, 1, CNN_Type(1,0,0,0,1), 0,0,0,0,1,1));
-        LibKernel("CNN_MatPermHWC2WHC_fps", CALL_PARALLEL|CALL_HWC_KER, 0, "KerMatTranspose_fps_T",
-                                                                                        CNN_Match(CNN_OperList(1, KOP_MATPERM_HWC2WHC), 0, 1, CNN_Type(1,0,0,0,1), 0,0,0,0,1,1));
-        LibKernel("CNN_MatPermHWC2CHW_fps", CALL_PARALLEL|CALL_HWC_KER, 0, "KerMatTranspose_fps_T",
-                                                                                        CNN_Match(CNN_OperList(1, KOP_MATPERM_HWC2CHW), 0, 1, CNN_Type(1,0,0,0,1), 0,0,0,0,1,1));
-        LibKernel("CNN_MatPermHWC2CWH_fps", CALL_PARALLEL|CALL_HWC_KER, 0, "KerMatTranspose_fps_T",
-                                                                                        CNN_Match(CNN_OperList(1, KOP_MATPERM_HWC2CWH), 0, 1, CNN_Type(1,0,0,0,1), 0,0,0,0,1,1));
+    LibKernel("CNN_MatPermHWC2HCW_fps", CALL_PARALLEL|CALL_HWC_KER, 0, "KerMatTranspose_fps_T", CNN_Match(CNN_OperList(1, KOP_MATPERM_HWC2HCW), 0, 1, CNN_Type(1,0,0,0,1), 0,0,0,0,1,1));
+    LibKernel("CNN_MatPermHWC2WCH_fps", CALL_PARALLEL|CALL_HWC_KER, 0, "KerMatTranspose_fps_T", CNN_Match(CNN_OperList(1, KOP_MATPERM_HWC2WCH), 0, 1, CNN_Type(1,0,0,0,1), 0,0,0,0,1,1));
+    LibKernel("CNN_MatPermHWC2WHC_fps", CALL_PARALLEL|CALL_HWC_KER, 0, "KerMatTranspose_fps_T", CNN_Match(CNN_OperList(1, KOP_MATPERM_HWC2WHC), 0, 1, CNN_Type(1,0,0,0,1), 0,0,0,0,1,1));
+    LibKernel("CNN_MatPermHWC2CHW_fps", CALL_PARALLEL|CALL_HWC_KER, 0, "KerMatTranspose_fps_T", CNN_Match(CNN_OperList(1, KOP_MATPERM_HWC2CHW), 0, 1, CNN_Type(1,0,0,0,1), 0,0,0,0,1,1));
+    LibKernel("CNN_MatPermHWC2CWH_fps", CALL_PARALLEL|CALL_HWC_KER, 0, "KerMatTranspose_fps_T", CNN_Match(CNN_OperList(1, KOP_MATPERM_HWC2CWH), 0, 1, CNN_Type(1,0,0,0,1), 0,0,0,0,1,1));
 
 	/* Matrix Transposition, short */
 	LibKernel("CNN_ParTranspose_fp", CALL_PARALLEL, 0, "KerMatTranspose_fp_T",		CNN_Match(CNN_OperList(1, KOP_MATTRANSP), 0, 1, CNN_Type(2,0,0,0,2), 0,0,0,0,1,1));
@@ -597,16 +492,11 @@ void LoadCNN_Copy_Library() {
 	LibKernel("CNN_MatPermCHW2HCW_fp", CALL_PARALLEL, 0, "KerMatTranspose_fp_T",		CNN_Match(CNN_OperList(1, KOP_MATPERM_CHW2HCW), 0, 1, CNN_Type(2,0,0,0,2), 0,0,0,0,1,1));
 
 	/* Tensor Permutation (HCW), short, no scaling */
-        LibKernel("CNN_MatPermHWC2HCW_fp", CALL_PARALLEL|CALL_HWC_KER, 0, "KerMatTranspose_fp_T",
-                                                                                        CNN_Match(CNN_OperList(1, KOP_MATPERM_HWC2HCW), 0, 1, CNN_Type(2,0,0,0,2), 0,0,0,0,1,1));
-        LibKernel("CNN_MatPermHWC2WCH_fp", CALL_PARALLEL|CALL_HWC_KER, 0, "KerMatTranspose_fp_T",
-                                                                                        CNN_Match(CNN_OperList(1, KOP_MATPERM_HWC2WCH), 0, 1, CNN_Type(2,0,0,0,2), 0,0,0,0,1,1));
-        LibKernel("CNN_MatPermHWC2WHC_fp", CALL_PARALLEL|CALL_HWC_KER, 0, "KerMatTranspose_fp_T",
-                                                                                        CNN_Match(CNN_OperList(1, KOP_MATPERM_HWC2WHC), 0, 1, CNN_Type(2,0,0,0,2), 0,0,0,0,1,1));
-        LibKernel("CNN_MatPermHWC2CHW_fp", CALL_PARALLEL|CALL_HWC_KER, 0, "KerMatTranspose_fp_T",
-                                                                                        CNN_Match(CNN_OperList(1, KOP_MATPERM_HWC2CHW), 0, 1, CNN_Type(2,0,0,0,2), 0,0,0,0,1,1));
-        LibKernel("CNN_MatPermHWC2CWH_fp", CALL_PARALLEL|CALL_HWC_KER, 0, "KerMatTranspose_fp_T",
-                                                                                        CNN_Match(CNN_OperList(1, KOP_MATPERM_HWC2CWH), 0, 1, CNN_Type(2,0,0,0,2), 0,0,0,0,1,1));
+    LibKernel("CNN_MatPermHWC2HCW_fp", CALL_PARALLEL|CALL_HWC_KER, 0, "KerMatTranspose_fp_T", CNN_Match(CNN_OperList(1, KOP_MATPERM_HWC2HCW), 0, 1, CNN_Type(2,0,0,0,2), 0,0,0,0,1,1));
+    LibKernel("CNN_MatPermHWC2WCH_fp", CALL_PARALLEL|CALL_HWC_KER, 0, "KerMatTranspose_fp_T", CNN_Match(CNN_OperList(1, KOP_MATPERM_HWC2WCH), 0, 1, CNN_Type(2,0,0,0,2), 0,0,0,0,1,1));
+    LibKernel("CNN_MatPermHWC2WHC_fp", CALL_PARALLEL|CALL_HWC_KER, 0, "KerMatTranspose_fp_T", CNN_Match(CNN_OperList(1, KOP_MATPERM_HWC2WHC), 0, 1, CNN_Type(2,0,0,0,2), 0,0,0,0,1,1));
+    LibKernel("CNN_MatPermHWC2CHW_fp", CALL_PARALLEL|CALL_HWC_KER, 0, "KerMatTranspose_fp_T", CNN_Match(CNN_OperList(1, KOP_MATPERM_HWC2CHW), 0, 1, CNN_Type(2,0,0,0,2), 0,0,0,0,1,1));
+    LibKernel("CNN_MatPermHWC2CWH_fp", CALL_PARALLEL|CALL_HWC_KER, 0, "KerMatTranspose_fp_T", CNN_Match(CNN_OperList(1, KOP_MATPERM_HWC2CWH), 0, 1, CNN_Type(2,0,0,0,2), 0,0,0,0,1,1));
 }
 
 int CNN_Copy(char *Name, CNN_GenControl_T *Ctrl, int Sz, int FeatureSize){
@@ -616,10 +506,9 @@ int CNN_Copy(char *Name, CNN_GenControl_T *Ctrl, int Sz, int FeatureSize){
 	unsigned long long int LayerBandwidth = 0;
 
 	add_kernel_arg_func_t AddKArgDimFunc = AddKernelArgDim;
-
-        if (Ctrl) {
-		if (Ctrl->FloatDump != -1&&Ctrl->FloatDump) AddKArgDimFunc = AddKernelFloatArgDim;
-        }
+    if (Ctrl) {
+        if (Ctrl->FloatDump != -1&&Ctrl->FloatDump) AddKArgDimFunc = AddKernelFloatArgDim;
+    }
 
 	LayerBandwidth += Sz*2;
 
@@ -1184,4 +1073,3 @@ int CNN_Convert(char *Name,	int In_DataSize, int Out_DataSize, int Sz, KernelOpe
 	}
 	return (Kernel!=0);
 }
-
