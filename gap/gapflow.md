@@ -24,9 +24,9 @@
     env | grep NNTOOL
     
 ### Now the AT executable can be run:
-    export L1_MEMORY=48804
-    export L2_MEMORY=200000
-    export L3_MEMORY=83888608
+    export L1_MEMORY=64000
+    export L2_MEMORY=300000
+    export L3_MEMORY=8000000
     ./Gentile -o output/path/dir -c output/path/dir --L1 ${L1_MEMORY} --L2 ${L2_MEMORY} --L3 ${L3_MEMORY}
 
 ### It's suggested that you automate this process with usage of a build tool such as make, to see some templates you can look in the examples/nntool folder inside the GAP_SDK_HOME.
