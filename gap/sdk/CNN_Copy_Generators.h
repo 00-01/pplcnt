@@ -7,31 +7,25 @@
 
     extern void LoadCNN_Copy_Library();
 
-    /** \brief CNN_MatTranspose
-            Generator for Matrix Transposition
-            Template:
-                \param  Name:           Name of the generated user kernel
-                \param  Ctrl:           Overide generator default options (TileOrientation, Parallel Features), Def=(TILE_HOR, 1)
-                \param  Size:    	1: byte, 2: half word, size of In/Out tensor items
-                \param  InFeat          Number of matrices
-                \param  Width           For 1x1 convolution, width of an input feature map
-                \param  Height          For 1x1 convolution, height of an input feature map
-                \parama	MatTransOper    KOP_MATTRANSP
-                \param  Signature:	Name(In, Out)
-    */
-
     extern int CNN_MatTranspose(char *Name, CNN_GenControl_T *Ctrl, int DataSize, int InFeat, int Width, int Height, KernelOper_T MatTransOper);
-
+    /** \ Generator for Matrix Transposition
+            \param  Name:           Name of the generated user kernel
+            \param  Ctrl:           Overide generator default options (TileOrientation, Parallel Features), Def=(TILE_HOR, 1)
+            \param  Size:    	1: byte, 2: half word, size of In/Out tensor items
+            \param  InFeat          Number of matrices
+            \param  Width           For 1x1 convolution, width of an input feature map
+            \param  Height          For 1x1 convolution, height of an input feature map
+            \parama	MatTransOper    KOP_MATTRANSP
+            \param  Signature:	Name(In, Out)
+    */
     #define CNN_MatTranspose_SQ8(__name, __ctrl, __feat, __width, __height, __oper)\
         CNN_MatTranspose(__name, __ctrl, 1, __feat, __width, __height, __oper)
 
     #define CNN_MatTranspose_fp16(__name, __ctrl, __feat, __width, __height, __oper)\
         CNN_MatTranspose(__name, __ctrl, 2, __feat, __width, __height, __oper)
 
-
-    /** \brief CNN_3DTensorPermute
-            Generator for 3D Tensor permutations:  CHW => {CWH, HWC, WHC, WCH, HCW}, HWC => {HCW, WCH, CWH, CHW, WHC}
-            Template:
+    extern int CNN_3DTensorPermute(char *Name, CNN_GenControl_T *Ctrl, int Size, int InFeat, int Width, int Height, KernelOper_T MatPermOper);
+    /** \ Generator for 3D Tensor permutations:  CHW => {CWH, HWC, WHC, WCH, HCW}, HWC => {HCW, WCH, CWH, CHW, WHC}
                 \param	Name:           Name of the generated user kernel
                 \param	Ctrl:           Overide generator default options
                 \param	Size:    	1: byte, 2: half word, size of In/Out tensor items
@@ -42,8 +36,6 @@
                                        KOP_MATPERM_HWC2HCW, KOP_MATPERM_HWC2WCH, KOP_MATPERM_HWC2CWH, KOP_MATPERM_HWC2CHW, KOP_MATPERM_HWC2WHC
                 \param  Signature:	Name(In, Out)
     */
-    extern int CNN_3DTensorPermute(char *Name, CNN_GenControl_T *Ctrl, int Size, int InFeat, int Width, int Height, KernelOper_T MatPermOper);
-
     #define CNN_3DTensorPermute_SQ8(__name, __ctrl, __feat, __width, __height, __oper)     CNN_3DTensorPermute(__name, __ctrl, 1, __feat, __width, __height, __oper)
 
     #define CNN_3DTensorPermute_fp16(__name, __ctrl, __feat, __width, __height, __oper)    CNN_3DTensorPermute(__name, __ctrl, 2, __feat, __width, __height, __oper)
