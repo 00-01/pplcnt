@@ -29,6 +29,6 @@
     export L3_MEMORY=83888608
     ./Gentile -o output/path/dir -c output/path/dir --L1 ${L1_MEMORY} --L2 ${L2_MEMORY} --L3 ${L3_MEMORY}
 
-### We suggest that you automate this process with the usage of a build tool such as make, to see some templates you can look in the examples/nntool folder inside the GAP_SDK_HOME.
+### It's suggested that you automate this process with usage of a build tool such as make, to see some templates you can look in the examples/nntool folder inside the GAP_SDK_HOME.
 
 https://greenwaves-technologies.com/sdk-manuals/nn_quick_start_guide/
