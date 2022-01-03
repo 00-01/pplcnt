@@ -2,7 +2,7 @@
 ### [optional]
     set debug true
 ### open model
-    open path/to/model.tflite -q(if file is quantized)
+    open path/to/model.tflite -q
     adjust
     fusion --scale8
 ### [optional] normalization
