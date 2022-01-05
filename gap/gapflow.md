@@ -1,5 +1,4 @@
 ## NNTOOL
-### [optional]
     set debug true
 ### open model
     open path/to/model.tflite -q
@@ -8,6 +7,8 @@
 ### [optional] normalization
     set input_norm_func "x: x/128-1"
     imageformat input_1
+### quantization
+    aquant -s SQ8 samples/*.p* 
 ### generate and save model to c file
     gen ATModel.c -t -T path/to/tensor
 ### [optional] save above command history to file
@@ -31,4 +32,22 @@
 
 ### It's suggested that you automate this process with usage of a build tool such as make, to see some templates you can look in the examples/nntool folder inside the GAP_SDK_HOME.
 
-https://greenwaves-technologies.com/sdk-manuals/nn_quick_start_guide/
+
+
+imageformat input_1 bw8 offset_int8
+set l3_ram_ext_managed True
+set l2_ram_ext_managed False
+set graph_reorder_constant_in true
+set graph_const_exec_from_flash true
+set graph_warm_construct true
+set input_norm_func "x: x"
+#ssd_setter max_bb_before_nms 200
+#set graph_trace_exec true
+#set graph_produce_node_names true
+#set graph_produce_operinfos true
+#set graph_monitor_cycles true
+#set graph_dump_tensor 4
+#set graph_dump_one_node S127_Op_CONV_2D_0_45_TOUT_0
+#set graph_dump_one_node S137_Act_Hsigmoid
+#This line is to dump all layer output
+#set graph_dump_tensor 7
