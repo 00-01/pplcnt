@@ -11,7 +11,7 @@ LOC_DIR=images
 #FTP_PASS='gappocb!'
 
 #DATE_PATH=$(date+"%Y%m%d")
-FILE_NAME=IM-$NODE_NAME-$DATE.jpg
+FILE_NAME=$DATE\_$NODE_NAME\_RGB.jpg
 echo $FILE_NAME
 #fswebcam -F 30 -r 640x480 --no-banner $LOC_DIR/$FILE_NAME
 # configure input 1 for CSI -> MEM (raw image capture)
