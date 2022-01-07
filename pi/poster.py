@@ -42,7 +42,7 @@ def post_data(dir_name, det_file, ir_file, rgb_file):
         "ir_image": (ir_file, open(ir_file, 'rb'), 'image/png'),
         "rgb_image": (rgb_file, open(rgb_file, 'rb'), 'image/jpeg'),
     }
-    r = requests.post(url, files=files)
+    r = requests.post(url, files=files) #, data=data)
 
     if r.status_code == 200:
         os.system(f"rm -rf {dir_name}")
