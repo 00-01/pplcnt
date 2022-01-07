@@ -1,2 +1,2 @@
 # name of the device
-MVPC10_0008
+000:000:000:008
