@@ -76,11 +76,9 @@ while LOOP:
     now = datetime.now()
     dtime = now.strftime("%Y%m%d-%H%M%S")
     base_dir = f"{im_dir}{dtime}/"
-    det_name = f"{dtime}_{device_id}_DET.txt"
-    det_file = f"{base_dir}{det_name}"
-    raw_ir_name = f"{dtime}_{device_id}_IR.bin"
-    ir_name = f"{dtime}_{device_id}_IR.jpg"
-    ir_file = f"{base_dir}{raw_ir_name}"
+    det_file = f"{base_dir}{dtime}_{device_id}_DET.txt"
+    ir_name = f"{base_dir}{dtime}_{device_id}_IR.png"
+    ir_file = f"{base_dir}{dtime}_{device_id}_IR.bin"
 
     if not os.path.exists(base_dir):
         os.makedirs(base_dir)
@@ -165,7 +163,7 @@ while LOOP:
 
     # if args["scp"]:
     #     print("uploading to server")
-    #     os.system(f"sudo sshpass -p {password} scp {base_dir}* {username}@{host}:{local_location}")
+    #     os.system(f"sudo sshpass -p {password} scp {im_dir}* {username}@{host}:{local_location}")
 
     LOOP = args["loop"]
 
