@@ -7,7 +7,8 @@ import requests
 ap = argparse.ArgumentParser()
 ap.add_argument("-l", "--loop", default=1, help="run loop")
 ap.add_argument("-f", "--frequency", default=10, help="loop frequency")
-ap.add_argument("-scp", "--scp", default=1, help="save to scp")
+ap.add_argument("-d", "--delete", default=0, help="delete sent file")
+ap.add_argument("-scp", "--scp", default=0, help="save to scp")
 args = vars(ap.parse_args())
 
 # args
@@ -16,12 +17,12 @@ print(f"frequency is {args['frequency']} seconds")
 print("\n")
 
 # HOME_DIR = os.path.expanduser('~')
-# with open(f"{HOME_DIR}/info.txt") as f:
+# with open(f"{HOME_DIR}/device_id.txt") as f:
 #     device_id = f.readline().rstrip()
 
-device_id = 'MVPC10_0004'
+device_id = "65535"
 
-url = 'http://115.68.37.86:8180/api/data'
+url = 'http://192.168.0.195:8181/api/data'
 
 # scp
 host = "192.168.0.5"
@@ -32,24 +33,23 @@ local_location = "~/DATA/gappi"
 
 im_dir = "data/"
 
-
-def post_data(dir_name, det_file, ir_file, rgb_file):
-    # data = {
-    #     "predicted": det_file
-    # }
+def post_data(dir_name, det_data, ir_file, rgb_file):
+    data = {
+        "device_id": device_id,
+        "predicted": det_data,
+    }
     files = {
-        "predicted": (det_file, open(det_file, 'rb'), 'text/plain'),
+        # "predicted": (det_file, open(det_file, 'rb'), 'text/plain'),
         "ir_image": (ir_file, open(ir_file, 'rb'), 'image/png'),
         "rgb_image": (rgb_file, open(rgb_file, 'rb'), 'image/jpeg'),
     }
-    r = requests.post(url, files=files) #, data=data)
+    r = requests.post(url, data=data, files=files)
 
     if r.status_code == 200:
-        os.system(f"rm -rf {dir_name}")
+        if args['delete']:
+            os.system(f"rm -rf {dir_name}")
 
     print(r.headers)
-    print(r.url)
-    print(r.text)
 
     return r.text
 
@@ -62,13 +62,12 @@ while LOOP:
         det = glob(f"{target}/*_DET.txt")
         ir = glob(f"{target}/*_IR.png")
         rgb = glob(f"{target}/*_RGB.jpg")
-        # det = []
-        # with open(det, "r") as file:
-        #     det_str = det_str.split(" ")
-        #     for i in det_str:
-        #         det.append(i)
+
+        with open(det[0], "r") as file:
+            det_data = file.readline()
+
         if len(det) > 0:
-            result = post_data(target, det[0], ir[0], rgb[0])
+            result = post_data(target, det_data, ir[0], rgb[0])
             print(result)
 
         if args["scp"]:
