@@ -22,7 +22,7 @@ print("\n")
 
 device_id = "65535"
 
-url = 'http://192.168.0.195:8181/api/data'
+url = 'http://115.68.37.86:8180/api/data'
 
 # scp
 host = "192.168.0.5"
