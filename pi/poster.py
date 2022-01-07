@@ -30,20 +30,26 @@ username = "z"
 password = "1234qwer"
 local_location = "~/DATA/gappi"
 
+im_dir = "data/"
+
 
 def post_data(dir_name, det_file, ir_file, rgb_file):
     # data = {
     #     "predicted": det_file
     # }
     files = {
-        "predicted": (det_file, open(det_file, 'rb'), 'text/text'),
-        "ir_image": (ir_file, open(ir_file, 'rb'), 'image/jpeg'),
+        "predicted": (det_file, open(det_file, 'rb'), 'text/plain'),
+        "ir_image": (ir_file, open(ir_file, 'rb'), 'image/png'),
         "rgb_image": (rgb_file, open(rgb_file, 'rb'), 'image/jpeg'),
     }
     r = requests.post(url, files=files)
 
     if r.status_code == 200:
         os.system(f"rm -rf {dir_name}")
+
+    print(r.headers)
+    print(r.url)
+    print(r.text)
 
     return r.text
 
@@ -54,7 +60,7 @@ while LOOP:
         break
     for target in targets:
         det = glob(f"{target}/*_DET.txt")
-        ir = glob(f"{target}/*_IR.jpg")
+        ir = glob(f"{target}/*_IR.png")
         rgb = glob(f"{target}/*_RGB.jpg")
         # det = []
         # with open(det, "r") as file:
@@ -67,8 +73,6 @@ while LOOP:
 
         if args["scp"]:
             print("uploading to server")
-            os.system(f"sudo sshpass -p {password} scp data/* {username}@{host}:{local_location}")
-
-        a = 10
+            os.system(f"sudo sshpass -p {password} scp {im_dir}* {username}@{host}:{local_location}")
 
     LOOP = args["loop"]
