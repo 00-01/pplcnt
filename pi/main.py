@@ -46,9 +46,11 @@ ser = serial.Serial(
 command = "cd ~"
 im_dir = "data/"
 
-HOME_DIR = os.path.expanduser('~')
-with open(f"{HOME_DIR}/info.txt") as f:
-    device_id = f.readline().rstrip()
+# HOME_DIR = os.path.expanduser('~')
+# with open(f"{HOME_DIR}/device_id.txt") as f:
+#     device_id = f.readline().rstrip()
+
+device_id = "65535"
 
 # set gpio
 gp = 17
@@ -122,7 +124,7 @@ while LOOP:
 
     print("capturing picamera image")
     camera.capture(rgb_file)
-    camera.stop_preview()    
+    camera.stop_preview()
     # os.system(f"/bin/bash grubFrame.sh {device_id} {dtime}")
 
     print("saving detection in txt")
@@ -144,7 +146,7 @@ while LOOP:
     # opening image and remove bytes
     ir_raw = np.fromfile(ir_file, dtype=np.uint16).astype(np.uint8)
     ir_image = np.reshape(ir_raw[:6400], (80, 80))
-    
+
     print("saving image in png")
     im = Image.fromarray(ir_image)
     im.save(f"{ir_img_file}")
@@ -162,4 +164,3 @@ while LOOP:
     print("-"*24, "FINISH", "-"*6, "\n"*2)
 
     time.sleep(int(args["frequency"]))
-# camera.stop_preview()
