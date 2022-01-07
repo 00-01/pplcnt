@@ -18,14 +18,12 @@ from time import sleep
 ap = argparse.ArgumentParser()
 ap.add_argument("-l", "--loop", default=1, help="run loop")
 ap.add_argument("-f", "--frequency", default=10, help="loop frequency")
-ap.add_argument("-s", "--saveAsImage", default=1, help="save as image")
 # ap.add_argument("-scp", "--scp", default=1, help="save to scp")
 args = vars(ap.parse_args())
 
 # args
 print(f"loop is {args['loop']}")
 print(f"frequency is {args['frequency']} seconds")
-print(f"save file to img is {args['saveAsImage']}")
 print("\n")
 
 # # scp
@@ -77,8 +75,9 @@ while LOOP:
     dtime = now.strftime("%Y%m%d-%H%M%S")
     base_dir = f"{im_dir}{dtime}/"
     det_file = f"{base_dir}{dtime}_{device_id}_DET.txt"
-    ir_name = f"{base_dir}{dtime}_{device_id}_IR.png"
     ir_file = f"{base_dir}{dtime}_{device_id}_IR.bin"
+    ir_img_file = f"{base_dir}{dtime}_{device_id}_IR.png"
+    rgb_file = f"{base_dir}{dtime}_{device_id}_RGB.jpg"
 
     if not os.path.exists(base_dir):
         os.makedirs(base_dir)
@@ -122,14 +121,11 @@ while LOOP:
     ser.reset_output_buffer()
 
     print("capturing picamera image")
-    camera.capture(f"{base_dir}{dtime}_{device_id}_RGB.jpg")
-    camera.stop_preview()
+    camera.capture(rgb_file)
+    camera.stop_preview()    
     # os.system(f"/bin/bash grubFrame.sh {device_id} {dtime}")
-    # rgb_file = glob(f'{im_dir}/**/*.jpg')
-    # rgb_file = rgb_file[-1]
-    # print(rgb_file)
 
-    print("saving detection")
+    print("saving detection in txt")
     det = []
     det_str = rx_det.decode(encoding='UTF-8', errors='ignore')
     with open(det_file, "w") as file:
@@ -140,26 +136,22 @@ while LOOP:
                     det.append(i)
                     file.write(f"{i} ")
 
-    print("saving image")
+    print("saving image in bin")
     im_int = struct.unpack('<' + 'B' * w * h * 2, rx_img)
     with open(ir_file, "wb") as file:
         for val in im_int:
             file.write(val.to_bytes(2, byteorder='little', signed=1))
-    # opening image and removing bytes
+    # opening image and remove bytes
     ir_raw = np.fromfile(ir_file, dtype=np.uint16).astype(np.uint8)
     ir_image = np.reshape(ir_raw[:6400], (80, 80))
-
-    # with open(ir_file, "wb") as file:
-    #     file.write(img_to_shape)
+    
+    print("saving image in png")
+    im = Image.fromarray(ir_image)
+    im.save(f"{ir_img_file}")
+    # imwrite(f"{ir_file}.png", ir_image) #cv2
 
     # check image
     # im = Image.frombuffer('I;16', (w,h), rx_img, 'raw', 'L', 0, 1)
-
-    if args["saveAsImage"]:
-        print("saving image as png")
-        im = Image.fromarray(ir_image)
-        im.save(f"{ir_name}")
-        # imwrite(f"{ir_file}.png", ir_image)
 
     # if args["scp"]:
     #     print("uploading to server")
