@@ -1,13 +1,17 @@
-## install here
+## url
     https://github.com/GreenWaves-Technologies/gap_sdk/tree/master/tools/nntool
 
+## install here
+    cd ~/gap_sdk/tools/nntool
+    python3 -m pip install -r requirements.txt
+    pip3 install flatbuffers tflite
+    nntool
 
+## onnx
 ### url
     https://github.com/onnx/onnx
-### code
-    python3 -m pip install -r requirements.txt
-    python -m pip install -r requirements.txt
-### install onnx
+
+### install
     sudo apt install python3-pip python3-dev libprotobuf-dev protobuf-compiler
     
     export CMAKE_ARGS="-DONNX_USE_PROTOBUF_SHARED_LIBS=ON"
