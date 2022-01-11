@@ -22,4 +22,4 @@
     make -j$(nproc)
     make install
     
-    pip3 install numpy protobuf six typing-extensions cmd2 setuptools onnx
+    pip3 install numpy protobuf six typing-extensions cmd2 setuptools bfloat16 onnx
