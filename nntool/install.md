@@ -4,7 +4,11 @@
 ## install here
     cd ~/gap_sdk/tools/nntool
     python3 -m pip install -r requirements.txt
-    pip3 install flatbuffers tf-nightly
+    python -m pip install -r requirements.txt
+    make flatbuffers/fast
+    make flatbuffers
+    make
+    #pip3 install flatbuffers tf-nightly
     nntool
 
 ## onnx
