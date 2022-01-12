@@ -28,7 +28,7 @@ from graph.types import ConstantInputParameters, NNEdge
 from importer.common.clean_dangling_nodes import clean_dangling_nodes
 from importer.common.get_reasonable_name import get_reasonable_name
 from importer.tflite2.common.tflite_graph import TFLiteGraph
-from importer.tflite2.tflite.Model import Model
+from tflite.Model import Model
 from quantization.new_qrec import QRec
 from quantization.quantization_set import QuantizationSet
 from quantization.quantizer.new_quantizer import NewQuantizer
