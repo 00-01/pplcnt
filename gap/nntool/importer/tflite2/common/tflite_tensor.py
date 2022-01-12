@@ -110,7 +110,7 @@ NP_TYPES = {
 
 class TFLiteTensorWrapper(TensorBase):
     TF_TO_NUMPY_TYPE = {
-        getattr(TensorType.TensorType, key): NP_TYPES[key] for key in dir(TensorType.TensorType) if key in NP_TYPES
+        getattr(TensorType, key): NP_TYPES[key] for key in dir(TensorType) if key in NP_TYPES
     }
 
     def __init__(self, tensor, model):
