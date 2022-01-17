@@ -88,46 +88,46 @@ while LOOP:
     ser.reset_input_buffer()
     ser.reset_output_buffer()
 
-    print("TX: start signal")
+    print("[TX] start signal")
     GPIO.output(gp, GPIO.HIGH)
     time.sleep(0.1)
     GPIO.output(gp, GPIO.LOW)
 
-    print("RX: detection")
+    print("[S] capturing picamera image")
+    camera.capture(rgb_file)
+    camera.stop_preview()
+    # os.system(f"/bin/bash grubFrame.sh {device_id} {dtime}")
+
+    print("[RX] detection")
     rx_det = ser.read()
     while len(rx_det) < (det_size):
         len(rx_det)
         new_det = ser.read()
         rx_det = rx_det + new_det
     if len(rx_det) != (det_size):
-        print("incorrect size received. skipping detections!")
+        print("[E] incorrect size received. skipping detections!")
         exit()
-    ser.flush()
-    ser.reset_input_buffer()
+    # ser.flush()
+    # ser.reset_input_buffer()
 
-    print("RX: image")
+    print("[RX] image")
     rx_img = ser.read()
     while len(rx_img) < (w * h * size):
         len(rx_img)
         new_img = ser.read()
         rx_img = rx_img + new_img
     if len(rx_img) != (w * h * size):
-        print("incorrect size received. skipping image!")
+        print("[E] incorrect size received. skipping image!")
         exit()
-    ser.flush()
-    ser.reset_input_buffer()
+    # ser.flush()
+    # ser.reset_input_buffer()
 
-    print("TX: threshold")
+    print("[TX] threshold")
     ser.write(threshold.to_bytes(4, byteorder='little'))
-    ser.flush()
-    ser.reset_output_buffer()
+    # ser.flush()
+    # ser.reset_output_buffer()
 
-    print("capturing picamera image")
-    camera.capture(rgb_file)
-    camera.stop_preview()
-    # os.system(f"/bin/bash grubFrame.sh {device_id} {dtime}")
-
-    print("saving detection in txt")
+    print("[S] saving detection in txt")
     det = []
     det_str = rx_det.decode(encoding='UTF-8', errors='ignore')
     with open(det_file, "w") as file:
@@ -138,7 +138,7 @@ while LOOP:
                     det.append(i)
                     file.write(f"{i} ")
 
-    print("saving image in bin")
+    print("[S] saving image in bin")
     im_int = struct.unpack('<' + 'B' * w * h * 2, rx_img)
     with open(ir_file, "wb") as file:
         for val in im_int:
@@ -147,7 +147,7 @@ while LOOP:
     ir_raw = np.fromfile(ir_file, dtype=np.uint16).astype(np.uint8)
     ir_image = np.reshape(ir_raw[:6400], (80, 80))
 
-    print("saving image in png")
+    print("[S] saving image in png")
     im = Image.fromarray(ir_image)
     im.save(f"{ir_img_file}")
     # imwrite(f"{ir_file}.png", ir_image) #cv2
