@@ -285,7 +285,7 @@ int32_t fixed_shutterless(int16_t *img_input_fp16, int16_t *img_offset_fp16, int
     return error;
 }
 
-#if RASPBERRY
+#if UART
     struct pi_device gpio;
     struct pi_device gpio_led;
     volatile uint8_t trigger = 0;
@@ -315,9 +315,9 @@ void sendResultsToBle(bboxs_t *boundbxs){
     for (int counter=0; counter< boundbxs->num_bb; counter++){
         if(boundbxs->bbs[counter].alive && boundbxs->bbs[counter].score>= FP2FIX(thres,7)){
             AliveBBs++;    }    }
-    if(AliveBBs>MAX_OUT_BB) AliveBBs=MAX_OUT_BB;
+    if(AliveBBs>MAX_OUT_BB)    AliveBBs=MAX_OUT_BB;
     stringLenght+=sprintf(bleDetString,"%d;",AliveBBs);
-    for (int counter=0;counter< boundbxs->num_bb;counter++){
+    for (int counter=0; counter< boundbxs->num_bb; counter++){
         if(boundbxs->bbs[counter].alive && boundbxs->bbs[counter].score>= FP2FIX(thres,7)){
             boundbxs->bbs[counter].x = boundbxs->bbs[counter].x + (boundbxs->bbs[counter].w/2);
             boundbxs->bbs[counter].y = boundbxs->bbs[counter].y + (boundbxs->bbs[counter].h/2);
@@ -340,17 +340,17 @@ void sendResultsToBle(bboxs_t *boundbxs){
 //int detSize = 3+(MAX_OUT_BB*12);
 //char * raspDetString = (int *)malloc(detSize * sizeof(int *));
 char raspDetString[3+(MAX_OUT_BB*12)];
-void sendResultsToRaspberry(struct pi_device *uart, uint16_t *img, bboxs_t *boundbxs){
-//void sendResultsToRaspberry(struct pi_device *uart, unsigned char *img, bboxs_t *boundbxs){
+void sendResultsToUART(struct pi_device *uart, uint16_t *img, bboxs_t *boundbxs){
+//void sendResultsToUART(struct pi_device *uart, unsigned char *img, bboxs_t *boundbxs){
     int stringLenght = 0;
     int AliveBBs = 0;
 
-    for(int i=0; i < 3+(MAX_OUT_BB*12); i++) raspDetString[i] = '\0';
+    for(int i=0; i < 3+(MAX_OUT_BB*12); i++)    raspDetString[i] = '\0';
 
     for (int counter=0; counter < boundbxs->num_bb; counter++){
-        if(boundbxs->bbs[counter].alive) AliveBBs++;
+        if(boundbxs->bbs[counter].alive)    AliveBBs++;
     }
-    if(AliveBBs > MAX_OUT_BB) AliveBBs = MAX_OUT_BB;
+    if(AliveBBs > MAX_OUT_BB)   AliveBBs = MAX_OUT_BB;
 
     stringLenght += sprintf(raspDetString, "%d;", AliveBBs);
 
@@ -501,7 +501,7 @@ void peopleDetection(void){
     task->stack_size = (uint32_t) STACK_SIZE;
     task->slave_stack_size = (uint32_t) SLAVE_STACK_SIZE;
 
-    #if RASPBERRY
+    #if UART
         pi_pad_set_function(PI_PAD_12_A3_RF_PACTRL0, PI_PAD_FUNC1);
         pi_gpio_flags_e cfg_flags = PI_GPIO_OUTPUT;
         pi_gpio_e gpio_out_led = PI_GPIO_A0_PAD_12_A3;
@@ -547,10 +547,10 @@ void peopleDetection(void){
     char iterate = 1;
     clock_t t;
     while(iterate){
-    printf("\n\n=========START======================================\n");
+        printf("\n\n=========START======================================\n");
         int t = pi_time_get_us();
 
-        #if RASPBERRY
+        #if UART
             while(!trigger){
                 printf("Waiting Pi Signal\n");
                 pi_yield();
@@ -594,7 +594,7 @@ void peopleDetection(void){
         nn = pi_time_get_us() - nn;
         PRINTF("model runtime is %.02f s\n", ((float)nn)/1000000);
 
-        #if RASPBERRY
+        #if UART
             printf("TX Result to Pi\n");
 //            led(4, 20, 10);
 //            char string_buffer1[50];
@@ -602,10 +602,10 @@ void peopleDetection(void){
             unsigned char *img_out_ptr1 = ImageIn;
             drawBboxes(&bbxs, img_out_ptr1);
 //            WriteImageToFile(string_buffer1, W, H, img_out_ptr1);
-            sendResultsToRaspberry(&uart, img_out_ptr1, &bbxs);
+            sendResultsToUART(&uart, img_out_ptr1, &bbxs);
 //            save_index++;
-//            sendResultsToRaspberry(&uart, (unsigned char *)ImageIn, &bbxs);
-//            sendResultsToRaspberry(&uart, ImageIn, &bbxs);
+//            sendResultsToUART(&uart, (unsigned char *)ImageIn, &bbxs);
+//            sendResultsToUART(&uart, ImageIn, &bbxs);
             pi_gpio_pin_write(&gpio_led, gpio_out_led, 1); // off
             printf("%s\n", raspDetString);
         #endif
@@ -633,7 +633,7 @@ void peopleDetection(void){
         #endif
         t = pi_time_get_us() - t;
         PRINTF("total runtime is %.02f s\n", ((float)t)/1000000);
-    printf("=====================================FINISH=========\n\n");
+        printf("=====================================FINISH=========\n\n");
     }
     lynredCNN_Destruct(0);
     // Close the cluster
