@@ -17,21 +17,18 @@ from time import sleep
 # true == 1, false == 0
 ap = argparse.ArgumentParser()
 ap.add_argument("-l", "--loop", default=1, help="run loop")
-ap.add_argument("-f", "--frequency", default=10, help="loop frequency")
-# ap.add_argument("-scp", "--scp", default=1, help="save to scp")
+ap.add_argument("-s", "--sleep", default=10, help="loop sleep")
 args = vars(ap.parse_args())
 
 # args
 print(f"loop is {args['loop']}")
-print(f"frequency is {args['frequency']} seconds")
+print(f"sleep is {args['sleep']} seconds")
 print("\n")
 
-# # scp
-# host = "192.168.0.5"
-# port = 22
-# username = "z"
-# password = "1234qwer"
-# local_location = "~/DATA/gappi"
+with open('device_id.txt') as f:
+    device_id = f.readlines()
+
+im_dir = "data/"
 
 # set rpi serial
 ser = serial.Serial(
@@ -42,15 +39,6 @@ ser = serial.Serial(
     bytesize=serial.EIGHTBITS,
     timeout=None
 )
-
-command = "cd ~"
-im_dir = "data/"
-
-# HOME_DIR = os.path.expanduser('~')
-# with open(f"{HOME_DIR}/device_id.txt") as f:
-#     device_id = f.readline().rstrip()
-
-device_id = "65535"
 
 # set gpio
 gp = 17
@@ -105,7 +93,7 @@ while LOOP:
         new_det = ser.read()
         rx_det = rx_det + new_det
     if len(rx_det) != (det_size):
-        print("[E] incorrect size received. skipping detections!")
+        print("[!] incorrect size received. skipping detections!")
         exit()
     # ser.flush()
     # ser.reset_input_buffer()
@@ -117,7 +105,7 @@ while LOOP:
         new_img = ser.read()
         rx_img = rx_img + new_img
     if len(rx_img) != (w * h * size):
-        print("[E] incorrect size received. skipping image!")
+        print("[!] incorrect size received. skipping image!")
         exit()
     # ser.flush()
     # ser.reset_input_buffer()
@@ -155,12 +143,8 @@ while LOOP:
     # check image
     # im = Image.frombuffer('I;16', (w,h), rx_img, 'raw', 'L', 0, 1)
 
-    # if args["scp"]:
-    #     print("uploading to server")
-    #     os.system(f"sudo sshpass -p {password} scp {im_dir}* {username}@{host}:{local_location}")
-
     LOOP = args["loop"]
 
     print("-"*24, "FINISH", "-"*6, "\n"*2)
 
-    time.sleep(int(args["frequency"]))
+    time.sleep(int(args["sleep"]))
