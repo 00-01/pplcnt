@@ -211,7 +211,7 @@ static void RunNN(){
         printBboxes(&bbxs);
     #endif
 
-    PRINTF("Cycles NN :%10d\n", ti_nn);
+    PRINTF("[I] Cycles NN :%10d\n", ti_nn);
 }
 
 /* This SLEEP only works in pulpos for now
@@ -365,14 +365,14 @@ void sendResultsToUART(struct pi_device *uart, uint16_t *img, bboxs_t *boundbxs)
     //printf("String Size: %d\n",stringLenght);
 
     pi_uart_write(uart, raspDetString, 3+(MAX_OUT_BB*12));
-    printf("---det sent---\n");
+    printf("[TX] det\n");
 
     pi_uart_write(uart, img, 80*80*sizeof(uint16_t));
-    printf("---image sent---\n");
+    printf("[TX] image\n");
 
-    printf("waiting for pi rx\n");
+    printf("[S] waiting for rx\n");
     pi_uart_read(uart, &dt, 4);
-    printf("dt: %d\n", dt);
+    printf("[RX] dt: %d\n", dt);
 //    dt = handleDetections(raspDetString,stringLenght);
     if(dt < 10)    dt = 10;
     if(dt != old_dt) {
@@ -392,11 +392,11 @@ void led(int cycle, int delay1, int delay2){
 }
 
 int imgTest(char name[], unsigned short data[], int num){
-    printf("\n----------%s----------\n", name);
-    for(int j = 0; j<num; j++) printf("%d ", ((unsigned short *)data)[j]);
+    printf("[I] ----------%s----------\n", name);
+    for(int j=0; j<num; j++) printf("    %d ", ((unsigned short *)data)[j]);
     printf("\n");
-    for(int j = 0; j<num; j++) printf("%d, ", ((unsigned char *)data)[j]);
-    printf("\n\n");
+    for(int j=0; j<num; j++) printf("    %d, ", ((unsigned char *)data)[j]);
+    printf("\n");
     return 0;
 }
 
@@ -552,12 +552,12 @@ void peopleDetection(void){
 
         #if UART
             while(!trigger){
-                printf("Waiting Pi Signal\n");
+                printf("[S] Waiting RX Trigger\n");
                 pi_yield();
             } trigger=0;
         #endif
 
-        PRINTF("Caputring IR Image\n");
+        PRINTF("[S] Caputring IR Image\n");
         pi_gpio_pin_write(NULL, USER_GPIO, 0); // on
         pi_camera_control(&cam, PI_CAMERA_CMD_START, 0);
         pi_camera_capture(&cam, ImageIn, W*H*sizeof(int16_t));
@@ -568,7 +568,7 @@ void peopleDetection(void){
 //         memcpy(aaa, img1, W*H*2*sizeof(unsigned char));
 
         #ifndef INPUT_FILE
-            PRINTF("Calling shutterless filtering\n");
+            PRINTF("[S] Calling shutterless filtering\n");
             //shutterless floating point version was done just for reference.very slow on gap.
             //if(float_shutterless(ImageIn, img_offset,W,H,8,1)){
             if(fixed_shutterless(ImageIn, img_offset, W, H, 8)) {
@@ -579,7 +579,7 @@ void peopleDetection(void){
 
         int nn = pi_time_get_us();
 
-        PRINTF("Call cluster\n");
+        PRINTF("[S] Calling cluster\n");
         //Explicitly allocating Cluster stack since it could also be used by shutterless
         task->stacks = pmsis_l1_malloc(STACK_SIZE+SLAVE_STACK_SIZE*7);
         //Calling warm constructor to allocate only L1
@@ -592,10 +592,10 @@ void peopleDetection(void){
         pmsis_l1_malloc_free(task->stacks, STACK_SIZE+SLAVE_STACK_SIZE*7);
 
         nn = pi_time_get_us() - nn;
-        PRINTF("model runtime is %.02f s\n", ((float)nn)/1000000);
+        PRINTF("[I] INFERENCE TIME : %.02f s\n", ((float)nn)/1000000);
 
         #if UART
-            printf("TX Result to Pi\n");
+            printf("[S] TX Result to Pi\n");
 //            led(4, 20, 10);
 //            char string_buffer1[50];
 //            sprintf(string_buffer1, "../../../dump_out_imgs/pi_img_%04ld.pgm", save_index);
@@ -607,7 +607,7 @@ void peopleDetection(void){
 //            sendResultsToUART(&uart, (unsigned char *)ImageIn, &bbxs);
 //            sendResultsToUART(&uart, ImageIn, &bbxs);
             pi_gpio_pin_write(&gpio_led, gpio_out_led, 1); // off
-            printf("%s\n", raspDetString);
+            printf("[I] FOUND PPL : %s\n", raspDetString);
         #endif
 
         #if defined USE_BLE
@@ -632,7 +632,7 @@ void peopleDetection(void){
             go_to_sleep();
         #endif
         t = pi_time_get_us() - t;
-        PRINTF("total runtime is %.02f s\n", ((float)t)/1000000);
+        PRINTF("[I] TOTAL RUNTIME : %.02f s\n", ((float)t)/1000000);
         printf("=====================================FINISH=========\n\n");
     }
     lynredCNN_Destruct(0);
