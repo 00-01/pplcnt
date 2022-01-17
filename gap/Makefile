@@ -16,7 +16,7 @@ else ifeq ($(MODE),INPUT_CAMERA)
 	APP_CFLAGS += 
 endif
 
-APP_CFLAGS += -DRASPBERRY
+APP_CFLAGS += -DUART
 
 # SAVE_TO_PC=1
 
