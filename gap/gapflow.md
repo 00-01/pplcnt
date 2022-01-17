@@ -24,7 +24,7 @@
     env | grep TILER
     env | grep NNTOOL
     
-### Now the AT executable can be run:
+### run AT executable(Gentile). '.' is the output path.
     export L1_MEMORY=64000
     export L2_MEMORY=300000
     export L3_MEMORY=8000000
