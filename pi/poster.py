@@ -3,35 +3,33 @@ import argparse
 import os
 from glob import glob
 import requests
+import time
 
 ap = argparse.ArgumentParser()
 ap.add_argument("-l", "--loop", default=1, help="run loop")
-ap.add_argument("-f", "--frequency", default=10, help="loop frequency")
-ap.add_argument("-d", "--delete", default=0, help="delete sent file")
-ap.add_argument("-scp", "--scp", default=0, help="save to scp")
+ap.add_argument("-s", "--sleep", default=10, help="loop sleep")
+ap.add_argument("-d", "--delete", default=1, help="delete sent file")
+# ap.add_argument("-scp", "--scp", default=0, help="save to scp")
 args = vars(ap.parse_args())
 
 # args
 print(f"loop is {args['loop']}")
-print(f"frequency is {args['frequency']} seconds")
+print(f"sleep is {args['sleep']} seconds")
 print("\n")
 
-# HOME_DIR = os.path.expanduser('~')
-# with open(f"{HOME_DIR}/device_id.txt") as f:
-#     device_id = f.readline().rstrip()
+with open('device_id.txt') as f:
+    device_id = f.readlines()
 
-device_id = "65535"
+im_dir = "data/"
 
 url = 'http://115.68.37.86:8180/api/data'
 
-# scp
-host = "192.168.0.5"
-port = 22
-username = "z"
-password = "1234qwer"
-local_location = "~/DATA/gappi"
-
-im_dir = "data/"
+# # scp
+# host = "192.168.0.5"
+# port = 22
+# username = "z"
+# password = "1234qwer"
+# local_location = "~/DATA/gappi"
 
 def post_data(dir_name, det_data, ir_file, rgb_file):
     data = {
@@ -55,7 +53,7 @@ def post_data(dir_name, det_data, ir_file, rgb_file):
 
 LOOP = 1
 while LOOP:
-    targets = glob('/home/z/data/*')
+    targets = glob(f'{im_dir}/*')
     if len(targets) < 1:
         break
     for target in targets:
@@ -70,8 +68,10 @@ while LOOP:
             result = post_data(target, det_data, ir[0], rgb[0])
             print(result)
 
-        if args["scp"]:
-            print("uploading to server")
-            os.system(f"sudo sshpass -p {password} scp {im_dir}* {username}@{host}:{local_location}")
+        # if args["scp"]:
+        #     print("uploading to server")
+        #     os.system(f"sudo sshpass -p {password} scp {im_dir}* {username}@{host}:{local_location}")
 
     LOOP = args["loop"]
+
+    time.sleep(int(args["sleep"]))
