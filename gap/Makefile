@@ -1,3 +1,6 @@
+
+####################################################################################
+
 MODE?=INPUT_CAMERA
 ifeq ($(MODE),INPUT_FILE)
 	##  if you want to test the application with an input file from host PC use this flag:
@@ -33,6 +36,7 @@ EXT_MEM_TYPE ?= HYPER
 
 ##  To enable Sleep feature (ONLY in PulpOS):
 #APP_CFLAGS += -DSLEEP
+
 ####################################################################################
 
 ifndef GAP_SDK_HOME
