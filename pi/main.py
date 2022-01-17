@@ -93,7 +93,7 @@ while LOOP:
     time.sleep(0.1)
     GPIO.output(gp, GPIO.LOW)
 
-    print("[S] capturing RGB image")
+    print("[S] capturing rgb image")
     camera.capture(rgb_file)
     camera.stop_preview()
     # os.system(f"/bin/bash grubFrame.sh {device_id} {dtime}")
