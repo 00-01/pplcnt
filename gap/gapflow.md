@@ -17,6 +17,11 @@
     nntool -s nntool_script.txt(json) path/to/model.tflite [-q]
 
 ## AUTOTILER
+#### 1. comment out CNN_Copy_Generators.h
+#### 2. change CNN_Generators.c
+#### 3. change out CNN_Copy_Generators.c
+
+    
 ### from ATModel.c, compile and run following code in linux shell
     gcc ATModel.c -g -o Gentile -I. -I${TILER_INC} -I${TILER_EMU_INC} -I${TILER_CNN_GENERATOR_PATH} -I${TILER_CNN_GENERATOR_PATH_SQ8} -I${NNTOOL_GENERATOR_PATH} -I${TILER_CNN_KERNEL_PATH} -I${TILER_CNN_KERNEL_PATH_SQ8} -I${NNTOOL_KERNELS_PATH} ${TILER_LIB} ${TILER_CNN_GENERATOR_PATH}/CNN_Generator_Util.c ${TILER_CNN_GENERATOR_PATH_SQ8}/CNN_Generators_SQ8.c
     ######## ${NNTOOL_GENERATOR_PATH}/nntool_extra_generators.c (do not include this variable) ########
