@@ -4,7 +4,7 @@
 
 #include "CNN_Generators_SQ8.h"
 #include "CNN_Generator_Util.h"
-#include "../CNN_Generators/CNN_Copy_Generators.h"
+#include "../CNN_Generators/CNN_Copy_Generators.c"
 #include "Gap.h"
 
 #define MaxS(a, b) (((int)(a)>(int)(b))?(a):(b))
@@ -43,12 +43,11 @@
 #define AT_INF_PRENORM          9
 #define AT_INF_SQ16_DIM         10
 
-#define AT_INF_ADD_BIAS		9
-#define AT_INF_ASYM_ADD_DIM	11
+#define AT_INF_ADD_BIAS		    9
+#define AT_INF_ASYM_ADD_DIM	    11
 
 
-void LoadCNN_SQ8_Library()
-{
+void LoadCNN_SQ8_Library() {
 	LoadCNN_Copy_Library();
 	LibKernelTemplate("KerSetBias_SQ8_T",
                   CArgs(6,
