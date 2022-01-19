@@ -50,11 +50,11 @@ void open_flash_filesystem(struct pi_device *flash, struct pi_device *fs){
     struct pi_readfs_conf fsconf;
     /* Init & open flash. */
     #if defined(QSPI)
-    struct pi_spiflash_conf flash_conf;
-    pi_spiflash_conf_init(&flash_conf);
+        struct pi_spiflash_conf flash_conf;
+        pi_spiflash_conf_init(&flash_conf);
     #else
-    struct pi_hyperflash_conf flash_conf;
-    pi_hyperflash_conf_init(&flash_conf);
+        struct pi_hyperflash_conf flash_conf;
+        pi_hyperflash_conf_init(&flash_conf);
     #endif
     pi_open_from_conf(flash, &flash_conf);
     if (pi_flash_open(flash)){
@@ -211,7 +211,7 @@ static void RunNN(){
         printBboxes(&bbxs);
     #endif
 
-    PRINTF("[I] Cycles NN :%10d\n", ti_nn);
+    PRINTF("Cycles NN :%10d\n", ti_nn);
 }
 
 /* This SLEEP only works in pulpos for now
@@ -365,14 +365,14 @@ void sendResultsToUART(struct pi_device *uart, uint16_t *img, bboxs_t *boundbxs)
     //printf("String Size: %d\n",stringLenght);
 
     pi_uart_write(uart, raspDetString, 3+(MAX_OUT_BB*12));
-    printf("[TX] det\n");
+    printf("---det sent---\n");
 
     pi_uart_write(uart, img, 80*80*sizeof(uint16_t));
-    printf("[TX] image\n");
+    printf("---image sent---\n");
 
-    printf("[S] waiting for rx\n");
+    printf("waiting for pi rx\n");
     pi_uart_read(uart, &dt, 4);
-    printf("[RX] dt: %d\n", dt);
+    printf("dt: %d\n", dt);
 //    dt = handleDetections(raspDetString,stringLenght);
     if(dt < 10)    dt = 10;
     if(dt != old_dt) {
@@ -392,11 +392,11 @@ void led(int cycle, int delay1, int delay2){
 }
 
 int imgTest(char name[], unsigned short data[], int num){
-    printf("[I] ----------%s----------\n", name);
-    for(int j=0; j<num; j++) printf("    %d ", ((unsigned short *)data)[j]);
+    printf("\n----------%s----------\n", name);
+    for(int j = 0; j<num; j++) printf("%d ", ((unsigned short *)data)[j]);
     printf("\n");
-    for(int j=0; j<num; j++) printf("    %d, ", ((unsigned char *)data)[j]);
-    printf("\n");
+    for(int j = 0; j<num; j++) printf("%d, ", ((unsigned char *)data)[j]);
+    printf("\n\n");
     return 0;
 }
 
@@ -544,31 +544,36 @@ void peopleDetection(void){
     #endif
 
     unsigned int save_index = 0;
-    char iterate = 1;
+//    char LOOP = 1;
     clock_t t;
-    while(iterate){
-        printf("\n\n=========START======================================\n");
+
+    #ifdef LOOP
+        unsigned int cnt = 65535;
+    #endif
+
+    while(cnt){
+        printf("\n\n=========  START  ======================================\n");
         int t = pi_time_get_us();
 
         #if UART
             while(!trigger){
-                printf("[S] Waiting RX Trigger\n");
+                printf("Waiting Pi Signal\n");
                 pi_yield();
             } trigger=0;
-        #endif
 
-        PRINTF("[S] Caputring IR Image\n");
-        pi_gpio_pin_write(NULL, USER_GPIO, 0); // on
-        pi_camera_control(&cam, PI_CAMERA_CMD_START, 0);
-        pi_camera_capture(&cam, ImageIn, W*H*sizeof(int16_t));
-        pi_camera_control(&cam, PI_CAMERA_CMD_STOP, 0);
-        pi_gpio_pin_write(NULL, USER_GPIO , 1); // off
+            PRINTF("Caputring IR Image\n");
+            pi_gpio_pin_write(NULL, USER_GPIO, 0); // on
+            pi_camera_control(&cam, PI_CAMERA_CMD_START, 0);
+            pi_camera_capture(&cam, ImageIn, W*H*sizeof(int16_t));
+            pi_camera_control(&cam, PI_CAMERA_CMD_STOP, 0);
+            pi_gpio_pin_write(NULL, USER_GPIO , 1); // off
+        #endif
 
 //        unsigned char *aaa = ImageIn;
 //         memcpy(aaa, img1, W*H*2*sizeof(unsigned char));
 
         #ifndef INPUT_FILE
-            PRINTF("[S] Calling shutterless filtering\n");
+            PRINTF("Calling shutterless filtering\n");
             //shutterless floating point version was done just for reference.very slow on gap.
             //if(float_shutterless(ImageIn, img_offset,W,H,8,1)){
             if(fixed_shutterless(ImageIn, img_offset, W, H, 8)) {
@@ -579,7 +584,7 @@ void peopleDetection(void){
 
         int nn = pi_time_get_us();
 
-        PRINTF("[S] Calling cluster\n");
+        PRINTF("Call cluster\n");
         //Explicitly allocating Cluster stack since it could also be used by shutterless
         task->stacks = pmsis_l1_malloc(STACK_SIZE+SLAVE_STACK_SIZE*7);
         //Calling warm constructor to allocate only L1
@@ -592,10 +597,10 @@ void peopleDetection(void){
         pmsis_l1_malloc_free(task->stacks, STACK_SIZE+SLAVE_STACK_SIZE*7);
 
         nn = pi_time_get_us() - nn;
-        PRINTF("[I] INFERENCE TIME : %.02f s\n", ((float)nn)/1000000);
+        PRINTF("model runtime is %.02f s\n", ((float)nn)/1000000);
 
         #if UART
-            printf("[S] TX Result to Pi\n");
+            printf("TX Result to Pi\n");
 //            led(4, 20, 10);
 //            char string_buffer1[50];
 //            sprintf(string_buffer1, "../../../dump_out_imgs/pi_img_%04ld.pgm", save_index);
@@ -607,7 +612,7 @@ void peopleDetection(void){
 //            sendResultsToUART(&uart, (unsigned char *)ImageIn, &bbxs);
 //            sendResultsToUART(&uart, ImageIn, &bbxs);
             pi_gpio_pin_write(&gpio_led, gpio_out_led, 1); // off
-            printf("[I] FOUND PPL : %s\n", raspDetString);
+            printf("%s\n", raspDetString);
         #endif
 
         #if defined USE_BLE
@@ -630,16 +635,21 @@ void peopleDetection(void){
         //This is not the optimized deep sleep, when should take care of pad setting in sleep
             //and to properly shutdown all external devices
             go_to_sleep();
-        #endif
+        #endif;
+
         t = pi_time_get_us() - t;
-        PRINTF("[I] TOTAL RUNTIME : %.02f s\n", ((float)t)/1000000);
-        printf("=====================================FINISH=========\n\n");
+        printf("total runtime is %.02f s\n", ((float)t)/1000000);
+        printf("=====================================  FINISH  =========\n\n");
+
+        cnt -= 1;
+        printf("cnt : %d", cnt)
     }
+
     lynredCNN_Destruct(0);
-    // Close the cluster
+
     pi_cluster_close(&cluster_dev);
 
-    PRINTF("Ended\n");
+    printf("Ended\n");
     pmsis_exit(0);
 }
 
