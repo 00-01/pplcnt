@@ -1,41 +1,39 @@
-MODEL_PYTHON=python
-MODEL_SUFFIX?=
-MODEL_PREFIX?=lynred
+MODEL_PYTHON = python
+MODEL_SUFFIX ?=
+MODEL_PREFIX ?= lynred
 
-# The training of the model is slightly different depending on
-# the quantization. This is because in 8 bit mode we used signed
-# 8 bit so the input to the model needs to be shifted 1 bit
+# training model is slightly different depending on the quantization.
+# 8 bit mode signed 8 bit is used, so input to model needs to be shifted 1 bit
 ifeq ($(QUANT_BITS),8)
-    TRAIN_SUFFIX=_8BIT
-    MODEL_SQ8=1
+    TRAIN_SUFFIX = _8BIT
+    MODEL_SQ8 = 1
 else
     ifeq ($(QUANT_BITS),16)
-        TRAIN_SUFFIX=_16BIT
+        TRAIN_SUFFIX = _16BIT
     else
         $(error Dont know how to build with this bit width)
     endif
 endif
 
-MODEL_PYTHON=python
+MODEL_PYTHON = python
 
-USE_DISP?=0
+USE_DISP ?= 0
 ifdef USE_DISP
-    SDL_FLAGS= -lSDL2_ttf -LSDL2_image -lSDL2
+    SDL_FLAGS = -lSDL2_ttf -LSDL2_image -lSDL2
 else
-    SDL_FLAGS=
+    SDL_FLAGS = 
 endif
 
 # Increase this to improve accuracy
-MODEL_COMMON?=common
-MODEL_COMMON_INC?=$(GAP_SDK_HOME)/libs/gap_lib/include
-MODEL_COMMON_SRC?=$(GAP_SDK_HOME)/libs/gap_lib/img_io
+MODEL_COMMON ?= common
+MODEL_COMMON_INC ?= $(GAP_SDK_HOME)/libs/gap_lib/include
+MODEL_COMMON_SRC ?= $(GAP_SDK_HOME)/libs/gap_lib/img_io
 MODEL_COMMON_SRC_FILES ?= ImgIO.c
-MODEL_COMMON_SRCS=$(realpath $(addprefix $(MODEL_COMMON_SRC)/,$(MODEL_COMMON_SRC_FILES)))
+MODEL_COMMON_SRCS = $(realpath $(addprefix $(MODEL_COMMON_SRC)/,$(MODEL_COMMON_SRC_FILES)))
 
 MODEL_BUILD = BUILD_MODEL$(TRAIN_SUFFIX)
 MODEL_NAME = $(MODEL_PREFIX).tflite
 MODEL_TFLITE = $(MODEL_BUILD)/$(MODEL_NAME)
-
 
 TENSORS_DIR = $(MODEL_BUILD)/tensors
 MODEL_TENSORS = $(MODEL_BUILD)/$(MODEL_PREFIX)_L3_Flash_Const.dat
@@ -54,11 +52,11 @@ EXTRA_GENERATOR_SRC =
 
 $(info script $(NNTOOL_SCRIPT))
 ifndef NNTOOL_SCRIPT
-    NNTOOL_SCRIPT=model/nntool_script
+    NNTOOL_SCRIPT = model/nntool_script
 endif
 IMAGES = images
-RM=rm -f
+RM = rm -f
 
-NNTOOL=nntool
+NNTOOL = nntool
 
 include $(RULES_DIR)/at_common_decl.mk
