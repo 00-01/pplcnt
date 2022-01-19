@@ -38,18 +38,21 @@ endif
 
 APP_CFLAGS += -DLOOP
 
-## QSPI_FLASH/RAM OR Hyper Flash/Ram: QSPI or HYPER
-EXT_MEM_TYPE ?= HYPER
-#EXT_MEM_TYPE ?= QSPI
-
+EXT_MEM_TYPE ?= HYPER    #HYPER or QSPI
 APP_CFLAGS += -D$(EXT_MEM_TYPE)
 
+APP_CFLAGS += -DNN_8BIT
+
+pulpChip = GAP
+APP = PeopleDetection
 BOARD_NAME = gapoc_b
 PMSIS_OS ?= pulpos
-
+io = host
 TRAINED_TFLITE_MODEL = model/OM_V2.tflite
 MODEL_PREFIX = lynred
+MODEL_SUFFIX = _8BIT
 QUANT_BITS = 8
+
 ifndef NN_BITS
     NN_BITS = 8
 endif
@@ -60,14 +63,11 @@ $(info Building GAP8 with $(NN_BITS) bit quantization)
 
 # training of the model is slightly different depending on quantization.
 # 8 bit mode signed 8 bit is used so the input to the model needs to be shifted 1 bit
-APP_CFLAGS += -DNN_8BIT
 ifeq ($(EXT_MEM_TYPE), HYPER)
     NNTOOL_SCRIPT = model/nntool_script8
 else
     NNTOOL_SCRIPT = model/nntool_script8_spi
 endif
-
-MODEL_SUFFIX = _8BIT
 
 MAIN_STACK_SIZE = 4096
 
@@ -83,19 +83,12 @@ else
 endif
 
 ifeq ($(EXT_MEM_TYPE), HYPER)
-    # hram - HyperBus RAM
-    MODEL_L3_EXEC = hram
-    # hflash - HyperBus Flash
-    MODEL_L3_CONST = hflash
+    MODEL_L3_EXEC = hram    # hram = HyperBus RAM
+    MODEL_L3_CONST = hflash    # hflash = HyperBus Flash
 else
-    # qspiram - Quad SPI RAM
-    MODEL_L3_EXEC = qspiram
-    # qpsiflash - Quad SPI Flash
-    MODEL_L3_CONST = qspiflash
+    MODEL_L3_EXEC = qspiram    # qspiram = Quad SPI RAM
+    MODEL_L3_CONST = qspiflash    # qpsiflash = Quad SPI Flash
 endif
-
-pulpChip = GAP
-APP = PeopleDetection
 
 #APP_SRCS += main.c ImgIO.c SSDParams.c $(MODEL_GEN_C) SSDBasicKernels.c $(MODEL_LIB_POW2) $(SSD_MODEL_GEN_C) ImageDraw.c BleNotifier.c
 APP_SRCS += main.c ImgIO.c $(CNN_LIB) $(MODEL_GEN_C) ImageDraw.c BleNotifier.c
@@ -112,9 +105,6 @@ else
     READFS_FILES += $(realpath $(MODEL_TENSORS)) $(realpath Calibration.bin)
     PLPBRIDGE_FLAGS += -f
 endif
-
-io=host
-
 
 ifeq ($(SAVE_TO_PC), 1)
     APP_CFLAGS += -DSAVE_TO_PC=1
