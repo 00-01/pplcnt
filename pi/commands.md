@@ -4,3 +4,6 @@
 ### crontab
     @reboot sudo chmod 666 /dev/ttyS0 && /usr/bin/python3 main.py
     @reboot /usr/bin/python3 post_requester.py
+
+### scp
+     scp -r data/* z@192.168.0.16:~/data
