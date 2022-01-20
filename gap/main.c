@@ -552,7 +552,7 @@ void peopleDetection(void){
     #endif
 
     while(cnt){
-        printf("\n\n=========  START  ======================================\n");
+        printf("\n\n=========  START  =======================================\n");
         int t = pi_time_get_us();
 
         #if UART
@@ -602,13 +602,9 @@ void peopleDetection(void){
         #if UART
             printf("TX Result to Pi\n");
 //            led(4, 20, 10);
-//            char string_buffer1[50];
-//            sprintf(string_buffer1, "../../../dump_out_imgs/pi_img_%04ld.pgm", save_index);
             unsigned char *img_out_ptr1 = ImageIn;
             drawBboxes(&bbxs, img_out_ptr1);
-//            WriteImageToFile(string_buffer1, W, H, img_out_ptr1);
-            sendResultsToUART(&uart, img_out_ptr1, &bbxs);
-//            save_index++;
+            sendResultsToUART(&uart, *img_out_ptr1, &bbxs);
 //            sendResultsToUART(&uart, (unsigned char *)ImageIn, &bbxs);
 //            sendResultsToUART(&uart, ImageIn, &bbxs);
             pi_gpio_pin_write(&gpio_led, gpio_out_led, 1); // off
@@ -639,10 +635,10 @@ void peopleDetection(void){
 
         t = pi_time_get_us() - t;
         printf("total runtime is %.02f s\n", ((float)t)/1000000);
-        printf("=====================================  FINISH  =========\n\n");
+        printf("======================================  FINISH  =========\n\n");
 
         cnt -= 1;
-        printf("cnt : %d", cnt)
+        printf("cnt : %d", cnt);
     }
 
     lynredCNN_Destruct(0);
