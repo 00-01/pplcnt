@@ -551,6 +551,8 @@ void peopleDetection(void){
 
     #ifdef LOOP
         unsigned int cnt = 65535;
+    #else
+        unsigned int cnt = 1;
     #endif
 
     while(cnt){
