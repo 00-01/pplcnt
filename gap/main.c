@@ -606,7 +606,7 @@ void peopleDetection(void){
 //            led(4, 20, 10);
             unsigned char *img_out_ptr1 = ImageIn;
             drawBboxes(&bbxs, img_out_ptr1);
-            sendResultsToUART(&uart, *img_out_ptr1, &bbxs);
+            sendResultsToUART(&uart, img_out_ptr1, &bbxs);
 //            sendResultsToUART(&uart, (unsigned char *)ImageIn, &bbxs);
 //            sendResultsToUART(&uart, ImageIn, &bbxs);
             pi_gpio_pin_write(&gpio_led, gpio_out_led, 1); // off
