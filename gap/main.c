@@ -394,8 +394,9 @@ void led(int cycle, int delay1, int delay2){
 
 int imgTest(char name[], unsigned short data[], int num){
     printf("[I] ----------%s----------\n", name);
+    printf("    ");
     for(int j = 0; j<num; j++) printf("%d ", ((unsigned short *)data)[j]);
-    printf("\n");
+    printf("\n    ");
     for(int j = 0; j<num; j++) printf("%d ", ((unsigned char *)data)[j]);
     printf("\n");
     return 0;
@@ -562,7 +563,7 @@ void peopleDetection(void){
                 pi_yield();
             } trigger=0;
 
-            PRINTF("Caputring IR Image\n");
+            PRINTF("[I] Caputring IR Image\n");
             pi_gpio_pin_write(NULL, USER_GPIO, 0); // on
             pi_camera_control(&cam, PI_CAMERA_CMD_START, 0);
             pi_camera_capture(&cam, ImageIn, W*H*sizeof(int16_t));
@@ -598,7 +599,7 @@ void peopleDetection(void){
         pmsis_l1_malloc_free(task->stacks, STACK_SIZE+SLAVE_STACK_SIZE*7);
 
         nn = pi_time_get_us() - nn;
-        PRINTF("model runtime is %.02f s\n", ((float)nn)/1000000);
+        PRINTF("[I] model runtime is %.02f s\n", ((float)nn)/1000000);
 
         #if UART
             printf("[I] TX Result to Pi\n");
@@ -635,7 +636,7 @@ void peopleDetection(void){
         #endif
 
         t = pi_time_get_us() - t;
-        printf("total runtime is %.02f s\n", ((float)t)/1000000);
+        printf("[I] total runtime is %.02f s\n", ((float)t)/1000000);
         printf("======================================  FINISH  =========\n\n");
 
         cnt -= 1;
