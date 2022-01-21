@@ -624,10 +624,10 @@ void peopleDetection(void){
         #ifdef SAVE_TO_PC
             char string_buffer[50];
             sprintf(string_buffer, "../../../dump_out_imgs/img_%04ld.pgm", save_index);
+            save_index++;
             unsigned char *img_out_ptr = ImageIn;
             drawBboxes(&bbxs, img_out_ptr);
             WriteImageToFile(string_buffer, W, H, img_out_ptr);
-            save_index++;
         #endif
 
         #ifdef SLEEP
