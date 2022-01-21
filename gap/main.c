@@ -56,6 +56,7 @@ void open_flash_filesystem(struct pi_device *flash, struct pi_device *fs){
         struct pi_hyperflash_conf flash_conf;
         pi_hyperflash_conf_init(&flash_conf);
     #endif
+
     pi_open_from_conf(flash, &flash_conf);
     if (pi_flash_open(flash)){
         printf("Error flash open !\n");
@@ -92,7 +93,7 @@ void close_flash_filesystem(struct pi_device *flash, struct pi_device *fs){
 
 static int initNN(){
     #ifndef INPUT_FILE
-        PRINTF("Loading Offset Image from Flash...\n");
+        PRINTF("[I] Loading Offset Image from Flash...\n");
         pi_fs_file_t *file = NULL;
         char *name = "Calibration.bin";
         int32_t size = 0;
@@ -102,7 +103,7 @@ static int initNN(){
         char * buff =  img_offset;
 
         if (img_offset==NULL ){
-            PRINTF("Failed to allocate Memory for image Offset\n");
+            PRINTF("[!] Failed to allocate Memory for image Offset\n");
             pmsis_exit(-4);
         }
         struct pi_device flash;
@@ -112,7 +113,7 @@ static int initNN(){
 
         file = pi_fs_open(&fs, name, 0);
         if (file == NULL){
-            printf("File %s open failed !\n", name);
+            printf("[!] File %s open failed !\n", name);
             pmsis_exit(-4);
         } do{
             //Read from filesystem(on flash) to a buffer in L2 memory.
@@ -140,7 +141,7 @@ int initL3Buffers(){
 
     pi_open_from_conf(ram, &conf);
     if (pi_ram_open(ram)){
-        printf("Error ram open !\n");
+        printf("[!] Error ram open !\n");
         return -1;
     }
     bbxs.bbs = pmsis_l2_malloc(sizeof(bbox_t)*MAX_BB);
@@ -211,7 +212,7 @@ static void RunNN(){
         printBboxes(&bbxs);
     #endif
 
-    PRINTF("Cycles NN :%10d\n", ti_nn);
+    PRINTF("[I] Cycles NN :%10d\n", ti_nn);
 }
 
 /* This SLEEP only works in pulpos for now
@@ -365,14 +366,14 @@ void sendResultsToUART(struct pi_device *uart, uint16_t *img, bboxs_t *boundbxs)
     //printf("String Size: %d\n",stringLenght);
 
     pi_uart_write(uart, raspDetString, 3+(MAX_OUT_BB*12));
-    printf("---det sent---\n");
+    printf("[TX] det\n");
 
     pi_uart_write(uart, img, 80*80*sizeof(uint16_t));
-    printf("---image sent---\n");
+    printf("[TX] image sent\n");
 
-    printf("waiting for pi rx\n");
+    printf("[I] waiting for rx\n");
     pi_uart_read(uart, &dt, 4);
-    printf("dt: %d\n", dt);
+    printf("[RX] dt: %d\n", dt);
 //    dt = handleDetections(raspDetString,stringLenght);
     if(dt < 10)    dt = 10;
     if(dt != old_dt) {
@@ -392,11 +393,11 @@ void led(int cycle, int delay1, int delay2){
 }
 
 int imgTest(char name[], unsigned short data[], int num){
-    printf("\n----------%s----------\n", name);
+    printf("[I] ----------%s----------\n", name);
     for(int j = 0; j<num; j++) printf("%d ", ((unsigned short *)data)[j]);
     printf("\n");
-    for(int j = 0; j<num; j++) printf("%d, ", ((unsigned char *)data)[j]);
-    printf("\n\n");
+    for(int j = 0; j<num; j++) printf("%d ", ((unsigned char *)data)[j]);
+    printf("\n");
     return 0;
 }
 
@@ -420,7 +421,7 @@ void peopleDetection(void){
 
     unsigned int Wi, Hi;
     unsigned int W = 80, H = 80;
-    PRINTF("Entering main controller\n");
+    PRINTF("[I] Entering main controller\n");
 
     ImageInChar = (unsigned char *) pmsis_l2_malloc( W*H*sizeof(short int));
     if (ImageInChar == 0) {
@@ -434,36 +435,36 @@ void peopleDetection(void){
     cl_conf.id = 0;
     pi_open_from_conf(&cluster_dev, (void *) &cl_conf);
     if (pi_cluster_open(&cluster_dev)) {
-        PRINTF("Cluster open failed !\n");
+        PRINTF("[!] Cluster open failed !\n");
         pmsis_exit(-7);
     }
     pi_freq_set(PI_FREQ_DOMAIN_FC,250000000);
     pi_freq_set(PI_FREQ_DOMAIN_CL,150000000);
 
-    PRINTF("Init NN\n");
+    PRINTF("[I] Init NN\n");
     if(initNN()) {
-        PRINTF("NN Init exited with an error\n");
+        PRINTF("[!] NN Init exited with an error\n");
         return 1;
     }
-    PRINTF("Allocating Buffers in L3\n");
+    PRINTF("[I] Allocating Buffers in L3\n");
     if (initL3Buffers()) {
-        PRINTF("L3 Allocation exited with an error\n");
+        PRINTF("[!] L3 Allocation exited with an error\n");
         return 1;
     }
-    PRINTF("Constructor\n");
+    PRINTF("[I] Constructor\n");
     if (lynredCNN_Construct(0)){
-        PRINTF("Graph constructor exited with an error\n");
+        PRINTF("[!] Graph constructor exited with an error\n");
         return 1;
     }
     //Deallocating L1 to be used by other cluster calls
     if(lynredCNN_Destruct(1)){
-        printf("Error deallocating L1 for cluster...\n");
+        printf("[!] Error deallocating L1 for cluster...\n");
         pmsis_exit(-1);
     }
     #if !defined(INPUT_RAW_FILE) && !defined(INPUT_FILE)
-        PRINTF("Opening camera\n");
+        PRINTF("[I] Opening camera\n");
         if (open_camera_thermeye(&cam)){
-            PRINTF("Thermal Eye camera open failed !\n");
+            PRINTF("[!] Thermal Eye camera open failed !\n");
             pmsis_exit(-1);
         }
         #ifdef OFFSET_IMAGE_EVERY_BOOT
@@ -489,10 +490,10 @@ void peopleDetection(void){
         }
     #endif
 
-    PRINTF("Running NN\n");
+    PRINTF("[I] Running NN\n");
     struct pi_cluster_task *task = pmsis_l2_malloc(sizeof(struct pi_cluster_task));
     if(task==NULL){
-        PRINTF("Alloc Error! \n");
+        PRINTF("[!] Alloc Error! \n");
         pmsis_exit(-7);
     }
     memset(task, 0, sizeof(struct pi_cluster_task));
@@ -557,7 +558,7 @@ void peopleDetection(void){
 
         #if UART
             while(!trigger){
-                printf("Waiting Pi Signal\n");
+                printf("[I] Waiting Pi Signal\n");
                 pi_yield();
             } trigger=0;
 
@@ -573,23 +574,23 @@ void peopleDetection(void){
 //         memcpy(aaa, img1, W*H*2*sizeof(unsigned char));
 
         #ifndef INPUT_FILE
-            PRINTF("Calling shutterless filtering\n");
+            PRINTF("[I] Calling shutterless filtering\n");
             //shutterless floating point version was done just for reference.very slow on gap.
             //if(float_shutterless(ImageIn, img_offset,W,H,8,1)){
             if(fixed_shutterless(ImageIn, img_offset, W, H, 8)) {
-                PRINTF("Error Calling prefiltering, exiting...\n");
+                PRINTF("[!] Error Calling prefiltering, exiting...\n");
                 pmsis_exit(-8);
             }
         #endif
 
         int nn = pi_time_get_us();
 
-        PRINTF("Call cluster\n");
+        PRINTF("[I] Call cluster\n");
         //Explicitly allocating Cluster stack since it could also be used by shutterless
         task->stacks = pmsis_l1_malloc(STACK_SIZE+SLAVE_STACK_SIZE*7);
         //Calling warm constructor to allocate only L1
         if(lynredCNN_Construct(1)){
-            printf("Error allocating L1 for cluster...\n");
+            printf("[I] Error allocating L1 for cluster...\n");
             pmsis_exit(-1);
         }
         pi_cluster_send_task_to_cl(&cluster_dev, task);
@@ -600,7 +601,7 @@ void peopleDetection(void){
         PRINTF("model runtime is %.02f s\n", ((float)nn)/1000000);
 
         #if UART
-            printf("TX Result to Pi\n");
+            printf("[I] TX Result to Pi\n");
 //            led(4, 20, 10);
             unsigned char *img_out_ptr1 = ImageIn;
             drawBboxes(&bbxs, img_out_ptr1);
@@ -608,7 +609,7 @@ void peopleDetection(void){
 //            sendResultsToUART(&uart, (unsigned char *)ImageIn, &bbxs);
 //            sendResultsToUART(&uart, ImageIn, &bbxs);
             pi_gpio_pin_write(&gpio_led, gpio_out_led, 1); // off
-            printf("%s\n", raspDetString);
+            printf("[I] FOUND PPL : %s\n", raspDetString);
         #endif
 
         #if defined USE_BLE
@@ -631,7 +632,7 @@ void peopleDetection(void){
         //This is not the optimized deep sleep, when should take care of pad setting in sleep
             //and to properly shutdown all external devices
             go_to_sleep();
-        #endif;
+        #endif
 
         t = pi_time_get_us() - t;
         printf("total runtime is %.02f s\n", ((float)t)/1000000);
@@ -645,7 +646,7 @@ void peopleDetection(void){
 
     pi_cluster_close(&cluster_dev);
 
-    printf("Ended\n");
+    printf("[I] Ended\n");
     pmsis_exit(0);
 }
 
