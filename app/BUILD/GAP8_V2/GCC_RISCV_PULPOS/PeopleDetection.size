@@ -1,0 +1,605 @@
+   text	   data	    bss	    dec	    hex	filename
+0x23dfc	 0x2280	  0x5f0	 157292	  2666c	/home/vz/gap_sdk_v4.7.0/occupancy_management/gap8_project_v2/BUILD/GAP8_V2/GCC_RISCV_PULPOS/PeopleDetection
+/home/vz/gap_sdk_v4.7.0/occupancy_management/gap8_project_v2/BUILD/GAP8_V2/GCC_RISCV_PULPOS/PeopleDetection:1b001408 00000001 D camera_isAwaked	/home/vz/gap_sdk/rtos/pulp/pulp-os/drivers_deprecated/camera/himax.c:150
+/home/vz/gap_sdk_v4.7.0/occupancy_management/gap8_project_v2/BUILD/GAP8_V2/GCC_RISCV_PULPOS/PeopleDetection:00000338 00000001 D __rt_hyper_pending_emu_do_memcpy	/home/vz/gap_sdk/rtos/pulp/pulp-os/drivers/hyper/hyperram-v1.c:53
+/home/vz/gap_sdk_v4.7.0/occupancy_management/gap8_project_v2/BUILD/GAP8_V2/GCC_RISCV_PULPOS/PeopleDetection:1c024774 00000001 B trigger
+/home/vz/gap_sdk_v4.7.0/occupancy_management/gap8_project_v2/BUILD/GAP8_V2/GCC_RISCV_PULPOS/PeopleDetection:1c01b6a6 00000002 T __flash_conf_init	/home/vz/gap_sdk/rtos/pmsis/pmsis_bsp/flash/flash.c:33
+/home/vz/gap_sdk_v4.7.0/occupancy_management/gap8_project_v2/BUILD/GAP8_V2/GCC_RISCV_PULPOS/PeopleDetection:1c01e54c 00000002 W illegal_insn_handler_c	/home/vz/gap_sdk/rtos/pulp/pulp-os/kernel/irq.c:89
+/home/vz/gap_sdk_v4.7.0/occupancy_management/gap8_project_v2/BUILD/GAP8_V2/GCC_RISCV_PULPOS/PeopleDetection:1c01bf8c 00000002 t __pi_host_fs_unmount	/home/vz/gap_sdk/rtos/pmsis/pmsis_bsp/fs/host_fs/host_fs.c:40
+/home/vz/gap_sdk_v4.7.0/occupancy_management/gap8_project_v2/BUILD/GAP8_V2/GCC_RISCV_PULPOS/PeopleDetection:1c01d40e 00000002 T pi_partition_table_free	/home/vz/gap_sdk/rtos/pmsis/pmsis_bsp/partition/partition.c:46
+/home/vz/gap_sdk_v4.7.0/occupancy_management/gap8_project_v2/BUILD/GAP8_V2/GCC_RISCV_PULPOS/PeopleDetection:1c01ec3a 00000002 T pi_task_push_delayed_us	/home/vz/gap_sdk/rtos/pulp/pulp-os/kernel/events.c:273
+/home/vz/gap_sdk_v4.7.0/occupancy_management/gap8_project_v2/BUILD/GAP8_V2/GCC_RISCV_PULPOS/PeopleDetection:1c01f79c 00000002 T __rt_fll_deinit	/home/vz/gap_sdk/rtos/pulp/pulp-os/kernel/gap/pmu_driver.c:876
+/home/vz/gap_sdk_v4.7.0/occupancy_management/gap8_project_v2/BUILD/GAP8_V2/GCC_RISCV_PULPOS/PeopleDetection:1c01f79e 00000002 T __rt_flls_constructor	/home/vz/gap_sdk/rtos/pulp/pulp-os/kernel/gap/pmu_driver.c:880
+/home/vz/gap_sdk_v4.7.0/occupancy_management/gap8_project_v2/BUILD/GAP8_V2/GCC_RISCV_PULPOS/PeopleDetection:1c0242e0 00000003 d ToHWDCDC_Pos	/home/vz/gap_sdk/rtos/pulp/pulp-os/kernel/gap/pmu_driver.c:192
+/home/vz/gap_sdk_v4.7.0/occupancy_management/gap8_project_v2/BUILD/GAP8_V2/GCC_RISCV_PULPOS/PeopleDetection:1c023004 00000004 t ctor_list	/home/vz/gap_sdk/rtos/pulp/pulp-os/kernel/init.c:29
+/home/vz/gap_sdk_v4.7.0/occupancy_management/gap8_project_v2/BUILD/GAP8_V2/GCC_RISCV_PULPOS/PeopleDetection:1c024910 00000004 B dt
+/home/vz/gap_sdk_v4.7.0/occupancy_management/gap8_project_v2/BUILD/GAP8_V2/GCC_RISCV_PULPOS/PeopleDetection:1c023050 00000004 t dtor_list	/home/vz/gap_sdk/rtos/pulp/pulp-os/kernel/init.c:30
+/home/vz/gap_sdk_v4.7.0/occupancy_management/gap8_project_v2/BUILD/GAP8_V2/GCC_RISCV_PULPOS/PeopleDetection:1c0249f8 00000004 B first_delayed
+/home/vz/gap_sdk_v4.7.0/occupancy_management/gap8_project_v2/BUILD/GAP8_V2/GCC_RISCV_PULPOS/PeopleDetection:1c0242bc 00000004 D ImageIn
+/home/vz/gap_sdk_v4.7.0/occupancy_management/gap8_project_v2/BUILD/GAP8_V2/GCC_RISCV_PULPOS/PeopleDetection:1c0242b8 00000004 D ImageInChar
+/home/vz/gap_sdk_v4.7.0/occupancy_management/gap8_project_v2/BUILD/GAP8_V2/GCC_RISCV_PULPOS/PeopleDetection:1c0242c0 00000004 D img_offset
+/home/vz/gap_sdk_v4.7.0/occupancy_management/gap8_project_v2/BUILD/GAP8_V2/GCC_RISCV_PULPOS/PeopleDetection:1000001c 00000004 D lynred_L1_Memory
+/home/vz/gap_sdk_v4.7.0/occupancy_management/gap8_project_v2/BUILD/GAP8_V2/GCC_RISCV_PULPOS/PeopleDetection:1c0242ac 00000004 D lynred_L2_Memory
+/home/vz/gap_sdk_v4.7.0/occupancy_management/gap8_project_v2/BUILD/GAP8_V2/GCC_RISCV_PULPOS/PeopleDetection:1c024900 00000004 B lynred_L3_Flash
+/home/vz/gap_sdk_v4.7.0/occupancy_management/gap8_project_v2/BUILD/GAP8_V2/GCC_RISCV_PULPOS/PeopleDetection:1c0249e8 00000004 B lynred_L3_Memory
+/home/vz/gap_sdk_v4.7.0/occupancy_management/gap8_project_v2/BUILD/GAP8_V2/GCC_RISCV_PULPOS/PeopleDetection:1c02487c 00000004 B old_dt
+/home/vz/gap_sdk_v4.7.0/occupancy_management/gap8_project_v2/BUILD/GAP8_V2/GCC_RISCV_PULPOS/PeopleDetection:1c0242c4 00000004 D out_boxes
+/home/vz/gap_sdk_v4.7.0/occupancy_management/gap8_project_v2/BUILD/GAP8_V2/GCC_RISCV_PULPOS/PeopleDetection:1c01c0d4 00000004 t __pi_host_fs_direct_read_async
+/home/vz/gap_sdk_v4.7.0/occupancy_management/gap8_project_v2/BUILD/GAP8_V2/GCC_RISCV_PULPOS/PeopleDetection:1c024784 00000004 b __pi_hyper_cluster_reqs_first	/home/vz/gap_sdk/rtos/pulp/pulp-os/drivers/hyper/hyperram-v1.c:62
+/home/vz/gap_sdk_v4.7.0/occupancy_management/gap8_project_v2/BUILD/GAP8_V2/GCC_RISCV_PULPOS/PeopleDetection:1c01e4fc 00000004 T pi_open_from_conf	/home/vz/gap_sdk/rtos/pulp/pulp-os/kernel/init.c:325
+/home/vz/gap_sdk_v4.7.0/occupancy_management/gap8_project_v2/BUILD/GAP8_V2/GCC_RISCV_PULPOS/PeopleDetection:1c01d410 00000004 T pi_partition_table_load	/home/vz/gap_sdk/rtos/pmsis/pmsis_bsp/partition/partition.c:51
+/home/vz/gap_sdk_v4.7.0/occupancy_management/gap8_project_v2/BUILD/GAP8_V2/GCC_RISCV_PULPOS/PeopleDetection:1c01ef68 00000004 T pi_time_wait_us	/home/vz/gap_sdk/rtos/pulp/pulp-os/kernel/time.c:131
+/home/vz/gap_sdk_v4.7.0/occupancy_management/gap8_project_v2/BUILD/GAP8_V2/GCC_RISCV_PULPOS/PeopleDetection:1c0242e4 00000004 D PMURetentionState
+/home/vz/gap_sdk_v4.7.0/occupancy_management/gap8_project_v2/BUILD/GAP8_V2/GCC_RISCV_PULPOS/PeopleDetection:000003a4 00000004 D pwmEventsStatus	/home/vz/gap_sdk/rtos/pulp/pulp-os/drivers/pwm/pwm.c:9
+/home/vz/gap_sdk_v4.7.0/occupancy_management/gap8_project_v2/BUILD/GAP8_V2/GCC_RISCV_PULPOS/PeopleDetection:1c0242f0 00000004 d RetPMUStateToPMUState	/home/vz/gap_sdk/rtos/pulp/pulp-os/kernel/gap/pmu_driver.c:185
+/home/vz/gap_sdk_v4.7.0/occupancy_management/gap8_project_v2/BUILD/GAP8_V2/GCC_RISCV_PULPOS/PeopleDetection:1c0249f4 00000004 B __rt_alloc_fc_tcdm
+/home/vz/gap_sdk_v4.7.0/occupancy_management/gap8_project_v2/BUILD/GAP8_V2/GCC_RISCV_PULPOS/PeopleDetection:1c0249ec 00000004 B __rt_alloc_l1
+/home/vz/gap_sdk_v4.7.0/occupancy_management/gap8_project_v2/BUILD/GAP8_V2/GCC_RISCV_PULPOS/PeopleDetection:1c0249f0 00000004 B __rt_alloc_l2
+/home/vz/gap_sdk_v4.7.0/occupancy_management/gap8_project_v2/BUILD/GAP8_V2/GCC_RISCV_PULPOS/PeopleDetection:00000014 00000004 d __rt_bridge_eeprom_handle	/home/vz/gap_sdk/rtos/pulp/pulp-os/kernel/bridge.c:25
+/home/vz/gap_sdk_v4.7.0/occupancy_management/gap8_project_v2/BUILD/GAP8_V2/GCC_RISCV_PULPOS/PeopleDetection:00000010 00000004 d __rt_bridge_flash_cs	/home/vz/gap_sdk/rtos/pulp/pulp-os/kernel/bridge.c:29
+/home/vz/gap_sdk_v4.7.0/occupancy_management/gap8_project_v2/BUILD/GAP8_V2/GCC_RISCV_PULPOS/PeopleDetection:00000004 00000004 d __rt_bridge_flash_handle	/home/vz/gap_sdk/rtos/pulp/pulp-os/kernel/bridge.c:26
+/home/vz/gap_sdk_v4.7.0/occupancy_management/gap8_project_v2/BUILD/GAP8_V2/GCC_RISCV_PULPOS/PeopleDetection:0000000c 00000004 d __rt_bridge_flash_itf	/home/vz/gap_sdk/rtos/pulp/pulp-os/kernel/bridge.c:28
+/home/vz/gap_sdk_v4.7.0/occupancy_management/gap8_project_v2/BUILD/GAP8_V2/GCC_RISCV_PULPOS/PeopleDetection:00000008 00000004 d __rt_bridge_flash_type	/home/vz/gap_sdk/rtos/pulp/pulp-os/kernel/bridge.c:27
+/home/vz/gap_sdk_v4.7.0/occupancy_management/gap8_project_v2/BUILD/GAP8_V2/GCC_RISCV_PULPOS/PeopleDetection:000003e0 00000004 D __rtc_handler	/home/vz/gap_sdk/rtos/pulp/pulp-os/drivers_deprecated/dolphin/rtc.c:25
+/home/vz/gap_sdk_v4.7.0/occupancy_management/gap8_project_v2/BUILD/GAP8_V2/GCC_RISCV_PULPOS/PeopleDetection:10000020 00000004 D __rt_cluster_fc_task_lock	/home/vz/gap_sdk/rtos/pulp/pulp-os/kernel/cluster.c:59
+/home/vz/gap_sdk_v4.7.0/occupancy_management/gap8_project_v2/BUILD/GAP8_V2/GCC_RISCV_PULPOS/PeopleDetection:00000018 00000004 D __rt_cluster_nb_active_pe
+/home/vz/gap_sdk_v4.7.0/occupancy_management/gap8_project_v2/BUILD/GAP8_V2/GCC_RISCV_PULPOS/PeopleDetection:1c024a08 00000004 B __rt_cluster_tasks	/home/vz/gap_sdk/rtos/pulp/pulp-os/kernel/cluster.c:41
+/home/vz/gap_sdk_v4.7.0/occupancy_management/gap8_project_v2/BUILD/GAP8_V2/GCC_RISCV_PULPOS/PeopleDetection:1b0013ec 00000004 D __rt_debug_config
+/home/vz/gap_sdk_v4.7.0/occupancy_management/gap8_project_v2/BUILD/GAP8_V2/GCC_RISCV_PULPOS/PeopleDetection:1b0013e8 00000004 D __rt_debug_config_trace
+/home/vz/gap_sdk_v4.7.0/occupancy_management/gap8_project_v2/BUILD/GAP8_V2/GCC_RISCV_PULPOS/PeopleDetection:00000014 00000004 D __rt_dma_first_pending
+/home/vz/gap_sdk_v4.7.0/occupancy_management/gap8_project_v2/BUILD/GAP8_V2/GCC_RISCV_PULPOS/PeopleDetection:00000010 00000004 D __rt_dma_last_pending
+/home/vz/gap_sdk_v4.7.0/occupancy_management/gap8_project_v2/BUILD/GAP8_V2/GCC_RISCV_PULPOS/PeopleDetection:1c024780 00000004 b __rt_fc_cluster_device	/home/vz/gap_sdk/rtos/pulp/pulp-os/kernel/pulpos_emu.c:25
+/home/vz/gap_sdk_v4.7.0/occupancy_management/gap8_project_v2/BUILD/GAP8_V2/GCC_RISCV_PULPOS/PeopleDetection:1c024234 00000004 V __rt_fc_stack_size
+/home/vz/gap_sdk_v4.7.0/occupancy_management/gap8_project_v2/BUILD/GAP8_V2/GCC_RISCV_PULPOS/PeopleDetection:00000018 00000004 D __rt_first_free
+/home/vz/gap_sdk_v4.7.0/occupancy_management/gap8_project_v2/BUILD/GAP8_V2/GCC_RISCV_PULPOS/PeopleDetection:00000324 00000004 D __rt_hyper_current_task	/home/vz/gap_sdk/rtos/pulp/pulp-os/drivers/hyper/hyperram-v1.c:27
+/home/vz/gap_sdk_v4.7.0/occupancy_management/gap8_project_v2/BUILD/GAP8_V2/GCC_RISCV_PULPOS/PeopleDetection:00000320 00000004 D __rt_hyper_end_task	/home/vz/gap_sdk/rtos/pulp/pulp-os/drivers/hyper/hyperram-v1.c:25
+/home/vz/gap_sdk_v4.7.0/occupancy_management/gap8_project_v2/BUILD/GAP8_V2/GCC_RISCV_PULPOS/PeopleDetection:1c024788 00000004 b __rt_hyper_open_count	/home/vz/gap_sdk/rtos/pulp/pulp-os/drivers/hyper/hyperram-v1.c:65
+/home/vz/gap_sdk_v4.7.0/occupancy_management/gap8_project_v2/BUILD/GAP8_V2/GCC_RISCV_PULPOS/PeopleDetection:00000314 00000004 D __rt_hyper_pending_addr	/home/vz/gap_sdk/rtos/pulp/pulp-os/drivers/hyper/hyperram-v1.c:33
+/home/vz/gap_sdk_v4.7.0/occupancy_management/gap8_project_v2/BUILD/GAP8_V2/GCC_RISCV_PULPOS/PeopleDetection:0000030c 00000004 D __rt_hyper_pending_base	/home/vz/gap_sdk/rtos/pulp/pulp-os/drivers/hyper/hyperram-v1.c:31
+/home/vz/gap_sdk_v4.7.0/occupancy_management/gap8_project_v2/BUILD/GAP8_V2/GCC_RISCV_PULPOS/PeopleDetection:00000330 00000004 D __rt_hyper_pending_emu_addr	/home/vz/gap_sdk/rtos/pulp/pulp-os/drivers/hyper/hyperram-v1.c:48
+/home/vz/gap_sdk_v4.7.0/occupancy_management/gap8_project_v2/BUILD/GAP8_V2/GCC_RISCV_PULPOS/PeopleDetection:00000328 00000004 D __rt_hyper_pending_emu_channel	/home/vz/gap_sdk/rtos/pulp/pulp-os/drivers/hyper/hyperram-v1.c:46
+/home/vz/gap_sdk_v4.7.0/occupancy_management/gap8_project_v2/BUILD/GAP8_V2/GCC_RISCV_PULPOS/PeopleDetection:0000032c 00000004 D __rt_hyper_pending_emu_hyper_addr	/home/vz/gap_sdk/rtos/pulp/pulp-os/drivers/hyper/hyperram-v1.c:47
+/home/vz/gap_sdk_v4.7.0/occupancy_management/gap8_project_v2/BUILD/GAP8_V2/GCC_RISCV_PULPOS/PeopleDetection:0000034c 00000004 D __rt_hyper_pending_emu_length	/home/vz/gap_sdk/rtos/pulp/pulp-os/drivers/hyper/hyperram-v1.c:51
+/home/vz/gap_sdk_v4.7.0/occupancy_management/gap8_project_v2/BUILD/GAP8_V2/GCC_RISCV_PULPOS/PeopleDetection:00000334 00000004 D __rt_hyper_pending_emu_size	/home/vz/gap_sdk/rtos/pulp/pulp-os/drivers/hyper/hyperram-v1.c:49
+/home/vz/gap_sdk_v4.7.0/occupancy_management/gap8_project_v2/BUILD/GAP8_V2/GCC_RISCV_PULPOS/PeopleDetection:00000348 00000004 D __rt_hyper_pending_emu_size_2d	/home/vz/gap_sdk/rtos/pulp/pulp-os/drivers/hyper/hyperram-v1.c:50
+/home/vz/gap_sdk_v4.7.0/occupancy_management/gap8_project_v2/BUILD/GAP8_V2/GCC_RISCV_PULPOS/PeopleDetection:00000350 00000004 D __rt_hyper_pending_emu_stride	/home/vz/gap_sdk/rtos/pulp/pulp-os/drivers/hyper/hyperram-v1.c:52
+/home/vz/gap_sdk_v4.7.0/occupancy_management/gap8_project_v2/BUILD/GAP8_V2/GCC_RISCV_PULPOS/PeopleDetection:0000033c 00000004 D __rt_hyper_pending_emu_task	/home/vz/gap_sdk/rtos/pulp/pulp-os/drivers/hyper/hyperram-v1.c:54
+/home/vz/gap_sdk_v4.7.0/occupancy_management/gap8_project_v2/BUILD/GAP8_V2/GCC_RISCV_PULPOS/PeopleDetection:00000310 00000004 D __rt_hyper_pending_hyper_addr	/home/vz/gap_sdk/rtos/pulp/pulp-os/drivers/hyper/hyperram-v1.c:32
+/home/vz/gap_sdk_v4.7.0/occupancy_management/gap8_project_v2/BUILD/GAP8_V2/GCC_RISCV_PULPOS/PeopleDetection:00000318 00000004 D __rt_hyper_pending_repeat	/home/vz/gap_sdk/rtos/pulp/pulp-os/drivers/hyper/hyperram-v1.c:34
+/home/vz/gap_sdk_v4.7.0/occupancy_management/gap8_project_v2/BUILD/GAP8_V2/GCC_RISCV_PULPOS/PeopleDetection:0000031c 00000004 D __rt_hyper_pending_repeat_size	/home/vz/gap_sdk/rtos/pulp/pulp-os/drivers/hyper/hyperram-v1.c:35
+/home/vz/gap_sdk_v4.7.0/occupancy_management/gap8_project_v2/BUILD/GAP8_V2/GCC_RISCV_PULPOS/PeopleDetection:00000340 00000004 D __rt_hyper_pending_tasks	/home/vz/gap_sdk/rtos/pulp/pulp-os/drivers/hyper/hyperram-v1.c:39
+/home/vz/gap_sdk_v4.7.0/occupancy_management/gap8_project_v2/BUILD/GAP8_V2/GCC_RISCV_PULPOS/PeopleDetection:00000344 00000004 D __rt_hyper_pending_tasks_last	/home/vz/gap_sdk/rtos/pulp/pulp-os/drivers/hyper/hyperram-v1.c:40
+/home/vz/gap_sdk_v4.7.0/occupancy_management/gap8_project_v2/BUILD/GAP8_V2/GCC_RISCV_PULPOS/PeopleDetection:1c0205ea 00000004 T __rt_hyper_resume_copy	/home/vz/gap_sdk/rtos/pulp/pulp-os/drivers/hyper/hyperram-v1.c:988
+/home/vz/gap_sdk_v4.7.0/occupancy_management/gap8_project_v2/BUILD/GAP8_V2/GCC_RISCV_PULPOS/PeopleDetection:00000308 00000004 D __rt_hyper_udma_handle
+/home/vz/gap_sdk_v4.7.0/occupancy_management/gap8_project_v2/BUILD/GAP8_V2/GCC_RISCV_PULPOS/PeopleDetection:1c02478c 00000004 b __rt_i2s_first	/home/vz/gap_sdk/rtos/pulp/pulp-os/drivers_deprecated/i2s/i2s-v1.c:40
+/home/vz/gap_sdk_v4.7.0/occupancy_management/gap8_project_v2/BUILD/GAP8_V2/GCC_RISCV_PULPOS/PeopleDetection:1c024238 00000004 V __rt_iodev
+/home/vz/gap_sdk_v4.7.0/occupancy_management/gap8_project_v2/BUILD/GAP8_V2/GCC_RISCV_PULPOS/PeopleDetection:1c02423c 00000004 V __rt_iodev_uart_baudrate
+/home/vz/gap_sdk_v4.7.0/occupancy_management/gap8_project_v2/BUILD/GAP8_V2/GCC_RISCV_PULPOS/PeopleDetection:1c024778 00000004 V __rt_iodev_uart_channel
+/home/vz/gap_sdk_v4.7.0/occupancy_management/gap8_project_v2/BUILD/GAP8_V2/GCC_RISCV_PULPOS/PeopleDetection:1c024798 00000004 b __rt_io_event_current	/home/vz/gap_sdk/rtos/pulp/pulp-os/libs/io/io.c:40
+/home/vz/gap_sdk_v4.7.0/occupancy_management/gap8_project_v2/BUILD/GAP8_V2/GCC_RISCV_PULPOS/PeopleDetection:1c02479c 00000004 b __rt_io_pending_flush	/home/vz/gap_sdk/rtos/pulp/pulp-os/libs/io/io.c:50
+/home/vz/gap_sdk_v4.7.0/occupancy_management/gap8_project_v2/BUILD/GAP8_V2/GCC_RISCV_PULPOS/PeopleDetection:1c0247a4 00000004 b _rt_io_uart	/home/vz/gap_sdk/rtos/pulp/pulp-os/libs/io/io.c:38
+/home/vz/gap_sdk_v4.7.0/occupancy_management/gap8_project_v2/BUILD/GAP8_V2/GCC_RISCV_PULPOS/PeopleDetection:1c024240 00000004 V __rt_platform
+/home/vz/gap_sdk_v4.7.0/occupancy_management/gap8_project_v2/BUILD/GAP8_V2/GCC_RISCV_PULPOS/PeopleDetection:1c0247a0 00000004 b __rt_putc_host_buffer_index	/home/vz/gap_sdk/rtos/pulp/pulp-os/libs/io/io.c:48
+/home/vz/gap_sdk_v4.7.0/occupancy_management/gap8_project_v2/BUILD/GAP8_V2/GCC_RISCV_PULPOS/PeopleDetection:000003dc 00000004 D __rt_rtc_init_done	/home/vz/gap_sdk/rtos/pulp/pulp-os/drivers_deprecated/dolphin/rtc.c:26
+/home/vz/gap_sdk_v4.7.0/occupancy_management/gap8_project_v2/BUILD/GAP8_V2/GCC_RISCV_PULPOS/PeopleDetection:1c024a04 00000004 B __rt_wakeup_use_fast	/home/vz/gap_sdk/rtos/pulp/pulp-os/kernel/gap/pmu_driver.c:173
+/home/vz/gap_sdk_v4.7.0/occupancy_management/gap8_project_v2/BUILD/GAP8_V2/GCC_RISCV_PULPOS/PeopleDetection:1c024880 00000004 B thres
+/home/vz/gap_sdk_v4.7.0/occupancy_management/gap8_project_v2/BUILD/GAP8_V2/GCC_RISCV_PULPOS/PeopleDetection:1c02477c 00000004 b timer_count	/home/vz/gap_sdk/rtos/pulp/pulp-os/kernel/time.c:23
+/home/vz/gap_sdk_v4.7.0/occupancy_management/gap8_project_v2/BUILD/GAP8_V2/GCC_RISCV_PULPOS/PeopleDetection:1c01ee16 00000006 T pi_cl_l1_malloc	/home/vz/gap_sdk/rtos/pulp/pulp-os/kernel/alloc.c:582
+/home/vz/gap_sdk_v4.7.0/occupancy_management/gap8_project_v2/BUILD/GAP8_V2/GCC_RISCV_PULPOS/PeopleDetection:1c01f996 00000006 T pi_cluster_conf_init	/home/vz/gap_sdk/rtos/pulp/pulp-os/kernel/cluster.c:337
+/home/vz/gap_sdk_v4.7.0/occupancy_management/gap8_project_v2/BUILD/GAP8_V2/GCC_RISCV_PULPOS/PeopleDetection:1c020d62 00000006 T pi_gpio_conf_init	/home/vz/gap_sdk/rtos/pulp/pulp-os/drivers/gpio/gpio-v2.c:89
+/home/vz/gap_sdk_v4.7.0/occupancy_management/gap8_project_v2/BUILD/GAP8_V2/GCC_RISCV_PULPOS/PeopleDetection:1c01bfb2 00000006 t __pi_host_fs_seek	/home/vz/gap_sdk/rtos/pmsis/pmsis_bsp/fs/host_fs/host_fs.c:109
+/home/vz/gap_sdk_v4.7.0/occupancy_management/gap8_project_v2/BUILD/GAP8_V2/GCC_RISCV_PULPOS/PeopleDetection:1c01b9f2 00000006 t __pi_read_fs_unmount	/home/vz/gap_sdk/rtos/pmsis/pmsis_bsp/fs/read_fs/read_fs.c:230
+/home/vz/gap_sdk_v4.7.0/occupancy_management/gap8_project_v2/BUILD/GAP8_V2/GCC_RISCV_PULPOS/PeopleDetection:1c021db0 00000006 T putchar	/home/vz/gap_sdk/rtos/pulp/pulp-os/libs/io/io.c:621
+/home/vz/gap_sdk_v4.7.0/occupancy_management/gap8_project_v2/BUILD/GAP8_V2/GCC_RISCV_PULPOS/PeopleDetection:1c01f7a0 00000006 T __rt_fll_set_freq	/home/vz/gap_sdk/rtos/pulp/pulp-os/kernel/gap/pmu_driver.c:884
+/home/vz/gap_sdk_v4.7.0/occupancy_management/gap8_project_v2/BUILD/GAP8_V2/GCC_RISCV_PULPOS/PeopleDetection:1c0242c8 00000007 d SystemStateToSCUFastSeq	/home/vz/gap_sdk/rtos/pulp/pulp-os/kernel/gap/pmu_driver.c:176
+/home/vz/gap_sdk_v4.7.0/occupancy_management/gap8_project_v2/BUILD/GAP8_V2/GCC_RISCV_PULPOS/PeopleDetection:1c0242b0 00000008 D bbxs
+/home/vz/gap_sdk_v4.7.0/occupancy_management/gap8_project_v2/BUILD/GAP8_V2/GCC_RISCV_PULPOS/PeopleDetection:1c01ce56 00000008 T extern_alloc_deinit	/home/vz/gap_sdk/rtos/pmsis/pmsis_bsp/ram/alloc_extern.c:128
+/home/vz/gap_sdk_v4.7.0/occupancy_management/gap8_project_v2/BUILD/GAP8_V2/GCC_RISCV_PULPOS/PeopleDetection:1c0242e8 00000008 D FllsFrequency
+/home/vz/gap_sdk_v4.7.0/occupancy_management/gap8_project_v2/BUILD/GAP8_V2/GCC_RISCV_PULPOS/PeopleDetection:1c01ec3c 00000008 T pi_cl_send_task_to_fc	/home/vz/gap_sdk/rtos/pulp/pulp-os/kernel/events.c:280
+/home/vz/gap_sdk_v4.7.0/occupancy_management/gap8_project_v2/BUILD/GAP8_V2/GCC_RISCV_PULPOS/PeopleDetection:1c01b8ce 00000008 t pi_flash_read_async	/home/vz/gap_sdk/rtos/pmsis/pmsis_bsp/include/bsp/flash.h:428
+/home/vz/gap_sdk_v4.7.0/occupancy_management/gap8_project_v2/BUILD/GAP8_V2/GCC_RISCV_PULPOS/PeopleDetection:1c01b786 00000008 T pi_fs_close	/home/vz/gap_sdk/rtos/pmsis/pmsis_bsp/fs/fs.c:80
+/home/vz/gap_sdk_v4.7.0/occupancy_management/gap8_project_v2/BUILD/GAP8_V2/GCC_RISCV_PULPOS/PeopleDetection:1c01b77e 00000008 T pi_fs_open	/home/vz/gap_sdk/rtos/pmsis/pmsis_bsp/fs/fs.c:74
+/home/vz/gap_sdk_v4.7.0/occupancy_management/gap8_project_v2/BUILD/GAP8_V2/GCC_RISCV_PULPOS/PeopleDetection:1c01b78e 00000008 T pi_fs_read_async	/home/vz/gap_sdk/rtos/pmsis/pmsis_bsp/fs/fs.c:85
+/home/vz/gap_sdk_v4.7.0/occupancy_management/gap8_project_v2/BUILD/GAP8_V2/GCC_RISCV_PULPOS/PeopleDetection:1c01b776 00000008 T pi_fs_unmount	/home/vz/gap_sdk/rtos/pmsis/pmsis_bsp/fs/fs.c:68
+/home/vz/gap_sdk_v4.7.0/occupancy_management/gap8_project_v2/BUILD/GAP8_V2/GCC_RISCV_PULPOS/PeopleDetection:1c01b7c0 00000008 T pi_fs_write_async	/home/vz/gap_sdk/rtos/pmsis/pmsis_bsp/fs/fs.c:98
+/home/vz/gap_sdk_v4.7.0/occupancy_management/gap8_project_v2/BUILD/GAP8_V2/GCC_RISCV_PULPOS/PeopleDetection:1c01cfe4 00000008 t __pi_thermeye_capture_async	/home/vz/gap_sdk/rtos/pmsis/pmsis_bsp/camera/thermeye/thermeye.c:333
+/home/vz/gap_sdk_v4.7.0/occupancy_management/gap8_project_v2/BUILD/GAP8_V2/GCC_RISCV_PULPOS/PeopleDetection:1c0249fc 00000008 B __rt_freq_domains
+/home/vz/gap_sdk_v4.7.0/occupancy_management/gap8_project_v2/BUILD/GAP8_V2/GCC_RISCV_PULPOS/PeopleDetection:1c0205e2 00000008 T __rt_hyper_resume_emu_task	/home/vz/gap_sdk/rtos/pulp/pulp-os/drivers/hyper/hyperram-v1.c:980
+/home/vz/gap_sdk_v4.7.0/occupancy_management/gap8_project_v2/BUILD/GAP8_V2/GCC_RISCV_PULPOS/PeopleDetection:000002b0 00000008 D __rt_socevents_status
+/home/vz/gap_sdk_v4.7.0/occupancy_management/gap8_project_v2/BUILD/GAP8_V2/GCC_RISCV_PULPOS/PeopleDetection:1c024790 00000008 b __rt_spim_open_count	/home/vz/gap_sdk/rtos/pulp/pulp-os/drivers_deprecated/spim/spim-v2.c:26
+/home/vz/gap_sdk_v4.7.0/occupancy_management/gap8_project_v2/BUILD/GAP8_V2/GCC_RISCV_PULPOS/PeopleDetection:1c01e198 00000008 T semihost_close	/home/vz/gap_sdk/rtos/pmsis/pmsis_bsp/fs/host_fs/semihost.c:18
+/home/vz/gap_sdk_v4.7.0/occupancy_management/gap8_project_v2/BUILD/GAP8_V2/GCC_RISCV_PULPOS/PeopleDetection:1c01e1f2 00000008 T semihost_exit	/home/vz/gap_sdk/rtos/pmsis/pmsis_bsp/fs/host_fs/semihost.c:47
+/home/vz/gap_sdk_v4.7.0/occupancy_management/gap8_project_v2/BUILD/GAP8_V2/GCC_RISCV_PULPOS/PeopleDetection:1c01e164 00000008 T semihost_write0	/home/vz/gap_sdk/rtos/pmsis/pmsis_bsp/fs/host_fs/semihost.c:6
+/home/vz/gap_sdk_v4.7.0/occupancy_management/gap8_project_v2/BUILD/GAP8_V2/GCC_RISCV_PULPOS/PeopleDetection:1c021e54 0000000a T abort	/home/vz/gap_sdk/rtos/pulp/pulp-os/libs/io/io.c:739
+/home/vz/gap_sdk_v4.7.0/occupancy_management/gap8_project_v2/BUILD/GAP8_V2/GCC_RISCV_PULPOS/PeopleDetection:1c01e228 0000000a T bsp_hyperflash_conf_init	/home/vz/gap_sdk/rtos/pmsis/pmsis_bsp/bsp/gapoc_b_v2.c:74
+/home/vz/gap_sdk_v4.7.0/occupancy_management/gap8_project_v2/BUILD/GAP8_V2/GCC_RISCV_PULPOS/PeopleDetection:1c024294 0000000a D output_2
+/home/vz/gap_sdk_v4.7.0/occupancy_management/gap8_project_v2/BUILD/GAP8_V2/GCC_RISCV_PULPOS/PeopleDetection:1c0242a0 0000000a D output_3
+/home/vz/gap_sdk_v4.7.0/occupancy_management/gap8_project_v2/BUILD/GAP8_V2/GCC_RISCV_PULPOS/PeopleDetection:1c02061c 0000000a T pi_cpi_conf_init	/home/vz/gap_sdk/rtos/pulp/pulp-os/drivers/cpi/cpi-v1.c:29
+/home/vz/gap_sdk_v4.7.0/occupancy_management/gap8_project_v2/BUILD/GAP8_V2/GCC_RISCV_PULPOS/PeopleDetection:1c01b7fc 0000000a T pi_fs_copy_2d_async	/home/vz/gap_sdk/rtos/pmsis/pmsis_bsp/fs/fs.c:137
+/home/vz/gap_sdk_v4.7.0/occupancy_management/gap8_project_v2/BUILD/GAP8_V2/GCC_RISCV_PULPOS/PeopleDetection:1c01b7f2 0000000a T pi_fs_copy_async	/home/vz/gap_sdk/rtos/pmsis/pmsis_bsp/fs/fs.c:124
+/home/vz/gap_sdk_v4.7.0/occupancy_management/gap8_project_v2/BUILD/GAP8_V2/GCC_RISCV_PULPOS/PeopleDetection:1c01d404 0000000a T pi_partition_get_flash_offset	/home/vz/gap_sdk/rtos/pmsis/pmsis_bsp/partition/partition.c:38
+/home/vz/gap_sdk_v4.7.0/occupancy_management/gap8_project_v2/BUILD/GAP8_V2/GCC_RISCV_PULPOS/PeopleDetection:1c0215c6 0000000a T rt_extern_alloc_deinit	/home/vz/gap_sdk/rtos/pulp/pulp-os/kernel/alloc_extern.c:129
+/home/vz/gap_sdk_v4.7.0/occupancy_management/gap8_project_v2/BUILD/GAP8_V2/GCC_RISCV_PULPOS/PeopleDetection:1c021726 0000000a T __rt_himax_init	/home/vz/gap_sdk/rtos/pulp/pulp-os/drivers_deprecated/camera/himax.c:400
+/home/vz/gap_sdk_v4.7.0/occupancy_management/gap8_project_v2/BUILD/GAP8_V2/GCC_RISCV_PULPOS/PeopleDetection:1c024448 0000000c b cam
+/home/vz/gap_sdk_v4.7.0/occupancy_management/gap8_project_v2/BUILD/GAP8_V2/GCC_RISCV_PULPOS/PeopleDetection:1c024454 0000000c b cluster_dev
+/home/vz/gap_sdk_v4.7.0/occupancy_management/gap8_project_v2/BUILD/GAP8_V2/GCC_RISCV_PULPOS/PeopleDetection:1c024904 0000000c B gpio
+/home/vz/gap_sdk_v4.7.0/occupancy_management/gap8_project_v2/BUILD/GAP8_V2/GCC_RISCV_PULPOS/PeopleDetection:1c024914 0000000c B gpio_led
+/home/vz/gap_sdk_v4.7.0/occupancy_management/gap8_project_v2/BUILD/GAP8_V2/GCC_RISCV_PULPOS/PeopleDetection:1c024870 0000000c B HyperRam
+/home/vz/gap_sdk_v4.7.0/occupancy_management/gap8_project_v2/BUILD/GAP8_V2/GCC_RISCV_PULPOS/PeopleDetection:1c01cbd0 0000000c T hyperram_free	/home/vz/gap_sdk/rtos/pmsis/pmsis_bsp/ram/hyperram/hyperram.c:169
+/home/vz/gap_sdk_v4.7.0/occupancy_management/gap8_project_v2/BUILD/GAP8_V2/GCC_RISCV_PULPOS/PeopleDetection:1c01c150 0000000c T pi_camera_open	/home/vz/gap_sdk/rtos/pmsis/pmsis_bsp/camera/camera.c:24
+/home/vz/gap_sdk_v4.7.0/occupancy_management/gap8_project_v2/BUILD/GAP8_V2/GCC_RISCV_PULPOS/PeopleDetection:1c01ee1c 0000000c T pi_cl_l1_free	/home/vz/gap_sdk/rtos/pulp/pulp-os/kernel/alloc.c:587
+/home/vz/gap_sdk_v4.7.0/occupancy_management/gap8_project_v2/BUILD/GAP8_V2/GCC_RISCV_PULPOS/PeopleDetection:1c01b69a 0000000c T pi_flash_open	/home/vz/gap_sdk/rtos/pmsis/pmsis_bsp/flash/flash.c:24
+/home/vz/gap_sdk_v4.7.0/occupancy_management/gap8_project_v2/BUILD/GAP8_V2/GCC_RISCV_PULPOS/PeopleDetection:1c01bf80 0000000c t __pi_host_fs_mount	/home/vz/gap_sdk/rtos/pmsis/pmsis_bsp/fs/host_fs/host_fs.c:34
+/home/vz/gap_sdk_v4.7.0/occupancy_management/gap8_project_v2/BUILD/GAP8_V2/GCC_RISCV_PULPOS/PeopleDetection:1c01cd5c 0000000c T pi_ram_open	/home/vz/gap_sdk/rtos/pmsis/pmsis_bsp/ram/ram.c:23
+/home/vz/gap_sdk_v4.7.0/occupancy_management/gap8_project_v2/BUILD/GAP8_V2/GCC_RISCV_PULPOS/PeopleDetection:00000004 0000000c D __rt_cluster_pool
+/home/vz/gap_sdk_v4.7.0/occupancy_management/gap8_project_v2/BUILD/GAP8_V2/GCC_RISCV_PULPOS/PeopleDetection:1c021562 0000000c T __rt_padframe_init	/home/vz/gap_sdk/rtos/pulp/pulp-os/drivers_deprecated/pads/pads-v1.c:58
+/home/vz/gap_sdk_v4.7.0/occupancy_management/gap8_project_v2/BUILD/GAP8_V2/GCC_RISCV_PULPOS/PeopleDetection:1c02163c 0000000c T __rt_udma_channel_reg_data	/home/vz/gap_sdk/rtos/pulp/pulp-os/drivers/udma/udma-v2.c:100
+/home/vz/gap_sdk_v4.7.0/occupancy_management/gap8_project_v2/BUILD/GAP8_V2/GCC_RISCV_PULPOS/PeopleDetection:1c01c1b8 0000000e t hyperflash_ioctl	/home/vz/gap_sdk/rtos/pmsis/pmsis_bsp/flash/hyperflash/hyperflash.c:285
+/home/vz/gap_sdk_v4.7.0/occupancy_management/gap8_project_v2/BUILD/GAP8_V2/GCC_RISCV_PULPOS/PeopleDetection:1c01c1c6 0000000e t hyperflash_set_reg_exec	/home/vz/gap_sdk/rtos/pmsis/pmsis_bsp/flash/hyperflash/hyperflash.c:94
+/home/vz/gap_sdk_v4.7.0/occupancy_management/gap8_project_v2/BUILD/GAP8_V2/GCC_RISCV_PULPOS/PeopleDetection:1c01e156 0000000e t __internal_semihost	/home/vz/gap_sdk/rtos/pmsis/pmsis_bsp/fs/host_fs/semihost.h:75
+/home/vz/gap_sdk_v4.7.0/occupancy_management/gap8_project_v2/BUILD/GAP8_V2/GCC_RISCV_PULPOS/PeopleDetection:1c01ee46 0000000e T pi_fc_l1_malloc	/home/vz/gap_sdk/rtos/pulp/pulp-os/kernel/alloc.c:606
+/home/vz/gap_sdk_v4.7.0/occupancy_management/gap8_project_v2/BUILD/GAP8_V2/GCC_RISCV_PULPOS/PeopleDetection:1c01ee28 0000000e T pi_l2_malloc	/home/vz/gap_sdk/rtos/pulp/pulp-os/kernel/alloc.c:595
+/home/vz/gap_sdk_v4.7.0/occupancy_management/gap8_project_v2/BUILD/GAP8_V2/GCC_RISCV_PULPOS/PeopleDetection:1c020b36 0000000e T pi_pwm_conf_init	/home/vz/gap_sdk/rtos/pulp/pulp-os/drivers/pwm/pwm-v1.c:46
+/home/vz/gap_sdk_v4.7.0/occupancy_management/gap8_project_v2/BUILD/GAP8_V2/GCC_RISCV_PULPOS/PeopleDetection:1c021754 0000000e t __rt_io_end_of_flush	/home/vz/gap_sdk/rtos/pulp/pulp-os/libs/io/io.c:366
+/home/vz/gap_sdk_v4.7.0/occupancy_management/gap8_project_v2/BUILD/GAP8_V2/GCC_RISCV_PULPOS/PeopleDetection:1c01cbee 00000010 t hyperram_copy_async	/home/vz/gap_sdk/rtos/pmsis/pmsis_bsp/ram/hyperram/hyperram.c:133
+/home/vz/gap_sdk_v4.7.0/occupancy_management/gap8_project_v2/BUILD/GAP8_V2/GCC_RISCV_PULPOS/PeopleDetection:1c021b60 00000010 T memset	/home/vz/gap_sdk/rtos/pulp/pulp-os/libs/io/io.c:150
+/home/vz/gap_sdk_v4.7.0/occupancy_management/gap8_project_v2/BUILD/GAP8_V2/GCC_RISCV_PULPOS/PeopleDetection:1c01ee54 00000010 T pi_fc_l1_free	/home/vz/gap_sdk/rtos/pulp/pulp-os/kernel/alloc.c:611
+/home/vz/gap_sdk_v4.7.0/occupancy_management/gap8_project_v2/BUILD/GAP8_V2/GCC_RISCV_PULPOS/PeopleDetection:1c01feb4 00000010 T pi_hyper_conf_init	/home/vz/gap_sdk/rtos/pulp/pulp-os/drivers/hyper/hyperram-v1.c:200
+/home/vz/gap_sdk_v4.7.0/occupancy_management/gap8_project_v2/BUILD/GAP8_V2/GCC_RISCV_PULPOS/PeopleDetection:1c01ee36 00000010 T pi_l2_free	/home/vz/gap_sdk/rtos/pulp/pulp-os/kernel/alloc.c:600
+/home/vz/gap_sdk_v4.7.0/occupancy_management/gap8_project_v2/BUILD/GAP8_V2/GCC_RISCV_PULPOS/PeopleDetection:1c01b914 00000010 t __pi_read_fs_seek	/home/vz/gap_sdk/rtos/pmsis/pmsis_bsp/fs/read_fs/read_fs.c:517
+/home/vz/gap_sdk_v4.7.0/occupancy_management/gap8_project_v2/BUILD/GAP8_V2/GCC_RISCV_PULPOS/PeopleDetection:1c01eeba 00000010 T pi_time_get_us	/home/vz/gap_sdk/rtos/pulp/pulp-os/kernel/time.c:53
+/home/vz/gap_sdk_v4.7.0/occupancy_management/gap8_project_v2/BUILD/GAP8_V2/GCC_RISCV_PULPOS/PeopleDetection:1c0242d0 00000010 D PMUState
+/home/vz/gap_sdk_v4.7.0/occupancy_management/gap8_project_v2/BUILD/GAP8_V2/GCC_RISCV_PULPOS/PeopleDetection:1b00140c 00000010 d __rt_io_fc_lock	/home/vz/gap_sdk/rtos/pulp/pulp-os/libs/io/io.c:35
+/home/vz/gap_sdk_v4.7.0/occupancy_management/gap8_project_v2/BUILD/GAP8_V2/GCC_RISCV_PULPOS/PeopleDetection:1c02412c 00000010 V __rt_padframe_default	/home/vz/gap_sdk/rtos/pulp/pulp-os/drivers_deprecated/pads/pads-v1.c:28
+/home/vz/gap_sdk_v4.7.0/occupancy_management/gap8_project_v2/BUILD/GAP8_V2/GCC_RISCV_PULPOS/PeopleDetection:1c02413c 00000010 V __rt_padframe_hyper	/home/vz/gap_sdk/rtos/pulp/pulp-os/drivers_deprecated/pads/pads-v1.c:30
+/home/vz/gap_sdk_v4.7.0/occupancy_management/gap8_project_v2/BUILD/GAP8_V2/GCC_RISCV_PULPOS/PeopleDetection:1c02414c 00000010 V __rt_padframe_hyper_gpio	/home/vz/gap_sdk/rtos/pulp/pulp-os/drivers_deprecated/pads/pads-v1.c:32
+/home/vz/gap_sdk_v4.7.0/occupancy_management/gap8_project_v2/BUILD/GAP8_V2/GCC_RISCV_PULPOS/PeopleDetection:1c024764 00000010 b __rt_uart	/home/vz/gap_sdk/rtos/pulp/pulp-os/drivers_deprecated/uart/uart.c:43
+/home/vz/gap_sdk_v4.7.0/occupancy_management/gap8_project_v2/BUILD/GAP8_V2/GCC_RISCV_PULPOS/PeopleDetection:1c022c78 00000010 T rt_uart_conf_init
+/home/vz/gap_sdk_v4.7.0/occupancy_management/gap8_project_v2/BUILD/GAP8_V2/GCC_RISCV_PULPOS/PeopleDetection:1c01cbdc 00000012 t hyperram_copy_2d_async	/home/vz/gap_sdk/rtos/pmsis/pmsis_bsp/ram/hyperram/hyperram.c:145
+/home/vz/gap_sdk_v4.7.0/occupancy_management/gap8_project_v2/BUILD/GAP8_V2/GCC_RISCV_PULPOS/PeopleDetection:1c01b738 00000012 T pi_fs_conf_init	/home/vz/gap_sdk/rtos/pmsis/pmsis_bsp/fs/fs.c:26
+/home/vz/gap_sdk_v4.7.0/occupancy_management/gap8_project_v2/BUILD/GAP8_V2/GCC_RISCV_PULPOS/PeopleDetection:1c01f78a 00000012 T __rt_fll_init	/home/vz/gap_sdk/rtos/pulp/pulp-os/kernel/gap/pmu_driver.c:871
+/home/vz/gap_sdk_v4.7.0/occupancy_management/gap8_project_v2/BUILD/GAP8_V2/GCC_RISCV_PULPOS/PeopleDetection:1c021730 00000012 T __rt_rtc_init	/home/vz/gap_sdk/rtos/pulp/pulp-os/drivers_deprecated/dolphin/rtc.c:414
+/home/vz/gap_sdk_v4.7.0/occupancy_management/gap8_project_v2/BUILD/GAP8_V2/GCC_RISCV_PULPOS/PeopleDetection:1c021742 00000012 T __rt_spim_init	/home/vz/gap_sdk/rtos/pulp/pulp-os/drivers_deprecated/spim/spim-v2.c:446
+/home/vz/gap_sdk_v4.7.0/occupancy_management/gap8_project_v2/BUILD/GAP8_V2/GCC_RISCV_PULPOS/PeopleDetection:1c01fdf2 00000014 t l2_memcpy	/home/vz/gap_sdk/rtos/pulp/pulp-os/drivers/hyper/hyperram-v1.c:897
+/home/vz/gap_sdk_v4.7.0/occupancy_management/gap8_project_v2/BUILD/GAP8_V2/GCC_RISCV_PULPOS/PeopleDetection:1c020aca 00000014 T pi_i2c_conf_init	/home/vz/gap_sdk/rtos/pulp/pulp-os/drivers/i2c/i2c-v2.c:300
+/home/vz/gap_sdk_v4.7.0/occupancy_management/gap8_project_v2/BUILD/GAP8_V2/GCC_RISCV_PULPOS/PeopleDetection:1c02070e 00000014 t __rt_cpi_init	/home/vz/gap_sdk/rtos/pulp/pulp-os/drivers/cpi/cpi-v1.c:115
+/home/vz/gap_sdk_v4.7.0/occupancy_management/gap8_project_v2/BUILD/GAP8_V2/GCC_RISCV_PULPOS/PeopleDetection:1c01ec26 00000014 T __rt_event_sched_init	/home/vz/gap_sdk/rtos/pulp/pulp-os/kernel/events.c:264
+/home/vz/gap_sdk_v4.7.0/occupancy_management/gap8_project_v2/BUILD/GAP8_V2/GCC_RISCV_PULPOS/PeopleDetection:0000001c 00000014 D __rt_sched
+/home/vz/gap_sdk_v4.7.0/occupancy_management/gap8_project_v2/BUILD/GAP8_V2/GCC_RISCV_PULPOS/PeopleDetection:1c021b16 00000014 T strcmp	/home/vz/gap_sdk/rtos/pulp/pulp-os/libs/io/io.c:97
+/home/vz/gap_sdk_v4.7.0/occupancy_management/gap8_project_v2/BUILD/GAP8_V2/GCC_RISCV_PULPOS/PeopleDetection:1c021ba6 00000014 T strcpy	/home/vz/gap_sdk/rtos/pulp/pulp-os/libs/io/io.c:217
+/home/vz/gap_sdk_v4.7.0/occupancy_management/gap8_project_v2/BUILD/GAP8_V2/GCC_RISCV_PULPOS/PeopleDetection:1c01e232 00000016 T bsp_hyperflash_open
+/home/vz/gap_sdk_v4.7.0/occupancy_management/gap8_project_v2/BUILD/GAP8_V2/GCC_RISCV_PULPOS/PeopleDetection:1c01e212 00000016 T bsp_hyperram_open
+/home/vz/gap_sdk_v4.7.0/occupancy_management/gap8_project_v2/BUILD/GAP8_V2/GCC_RISCV_PULPOS/PeopleDetection:1c0201b8 00000016 T pi_hyper_read_async	/home/vz/gap_sdk/rtos/pulp/pulp-os/drivers/hyper/hyperram-v1.c:380
+/home/vz/gap_sdk_v4.7.0/occupancy_management/gap8_project_v2/BUILD/GAP8_V2/GCC_RISCV_PULPOS/PeopleDetection:1c01e1dc 00000016 T semihost_seek	/home/vz/gap_sdk/rtos/pmsis/pmsis_bsp/fs/host_fs/semihost.c:36
+/home/vz/gap_sdk_v4.7.0/occupancy_management/gap8_project_v2/BUILD/GAP8_V2/GCC_RISCV_PULPOS/PeopleDetection:1c021b4a 00000016 T strlen	/home/vz/gap_sdk/rtos/pulp/pulp-os/libs/io/io.c:124
+/home/vz/gap_sdk_v4.7.0/occupancy_management/gap8_project_v2/BUILD/GAP8_V2/GCC_RISCV_PULPOS/PeopleDetection:1c01e1fa 00000018 T bsp_hyperram_conf_init	/home/vz/gap_sdk/rtos/pmsis/pmsis_bsp/bsp/gapoc_b_v2.c:59
+/home/vz/gap_sdk_v4.7.0/occupancy_management/gap8_project_v2/BUILD/GAP8_V2/GCC_RISCV_PULPOS/PeopleDetection:1b0013f0 00000018 d cbsys_first	/home/vz/gap_sdk/rtos/pulp/pulp-os/kernel/utils.c:30
+/home/vz/gap_sdk_v4.7.0/occupancy_management/gap8_project_v2/BUILD/GAP8_V2/GCC_RISCV_PULPOS/PeopleDetection:1c0239c0 00000018 r FractionExpLUT
+/home/vz/gap_sdk_v4.7.0/occupancy_management/gap8_project_v2/BUILD/GAP8_V2/GCC_RISCV_PULPOS/PeopleDetection:1c0240f8 00000018 d hyperram_api	/home/vz/gap_sdk/rtos/pmsis/pmsis_bsp/ram/hyperram/hyperram.c:225
+/home/vz/gap_sdk_v4.7.0/occupancy_management/gap8_project_v2/BUILD/GAP8_V2/GCC_RISCV_PULPOS/PeopleDetection:1c0239d8 00000018 r IntegerExpLUT
+/home/vz/gap_sdk_v4.7.0/occupancy_management/gap8_project_v2/BUILD/GAP8_V2/GCC_RISCV_PULPOS/PeopleDetection:1c0205b0 00000018 T pi_hyper_read_2d_async	/home/vz/gap_sdk/rtos/pulp/pulp-os/drivers/hyper/hyperram-v1.c:420
+/home/vz/gap_sdk_v4.7.0/occupancy_management/gap8_project_v2/BUILD/GAP8_V2/GCC_RISCV_PULPOS/PeopleDetection:1c0201f0 00000018 T pi_hyper_write_async	/home/vz/gap_sdk/rtos/pulp/pulp-os/drivers/hyper/hyperram-v1.c:400
+/home/vz/gap_sdk_v4.7.0/occupancy_management/gap8_project_v2/BUILD/GAP8_V2/GCC_RISCV_PULPOS/PeopleDetection:1c01b97e 00000018 t __pi_read_fs_copy_2d_async	/home/vz/gap_sdk/rtos/pmsis/pmsis_bsp/fs/read_fs/read_fs.c:657
+/home/vz/gap_sdk_v4.7.0/occupancy_management/gap8_project_v2/BUILD/GAP8_V2/GCC_RISCV_PULPOS/PeopleDetection:1c01b966 00000018 t __pi_read_fs_copy_async	/home/vz/gap_sdk/rtos/pmsis/pmsis_bsp/fs/read_fs/read_fs.c:648
+/home/vz/gap_sdk_v4.7.0/occupancy_management/gap8_project_v2/BUILD/GAP8_V2/GCC_RISCV_PULPOS/PeopleDetection:1c02415c 00000018 V __rt_padframe_profiles
+/home/vz/gap_sdk_v4.7.0/occupancy_management/gap8_project_v2/BUILD/GAP8_V2/GCC_RISCV_PULPOS/PeopleDetection:1c01ee64 00000018 t __rt_time_poweroff	/home/vz/gap_sdk/rtos/pulp/pulp-os/kernel/time.c:28
+/home/vz/gap_sdk_v4.7.0/occupancy_management/gap8_project_v2/BUILD/GAP8_V2/GCC_RISCV_PULPOS/PeopleDetection:1c01ee7c 00000018 t __rt_time_poweron	/home/vz/gap_sdk/rtos/pulp/pulp-os/kernel/time.c:37
+/home/vz/gap_sdk_v4.7.0/occupancy_management/gap8_project_v2/BUILD/GAP8_V2/GCC_RISCV_PULPOS/PeopleDetection:1c021624 00000018 T __rt_udma_channel_init	/home/vz/gap_sdk/rtos/pulp/pulp-os/drivers/udma/udma-v2.c:89
+/home/vz/gap_sdk_v4.7.0/occupancy_management/gap8_project_v2/BUILD/GAP8_V2/GCC_RISCV_PULPOS/PeopleDetection:1c01ea8e 00000018 T __rt_wait_event_prepare_blocking	/home/vz/gap_sdk/rtos/pulp/pulp-os/kernel/events.c:42
+/home/vz/gap_sdk_v4.7.0/occupancy_management/gap8_project_v2/BUILD/GAP8_V2/GCC_RISCV_PULPOS/PeopleDetection:1c021d66 0000001a T fputc_locked
+/home/vz/gap_sdk_v4.7.0/occupancy_management/gap8_project_v2/BUILD/GAP8_V2/GCC_RISCV_PULPOS/PeopleDetection:1c01c29e 0000001a t hyperflash_copy_2d_async
+/home/vz/gap_sdk_v4.7.0/occupancy_management/gap8_project_v2/BUILD/GAP8_V2/GCC_RISCV_PULPOS/PeopleDetection:1c01ccb4 0000001a T pi_hyperram_conf_init	/home/vz/gap_sdk/rtos/pmsis/pmsis_bsp/ram/hyperram/hyperram.c:235
+/home/vz/gap_sdk_v4.7.0/occupancy_management/gap8_project_v2/BUILD/GAP8_V2/GCC_RISCV_PULPOS/PeopleDetection:1c0205c8 0000001a T pi_hyper_write_2d_async	/home/vz/gap_sdk/rtos/pulp/pulp-os/drivers/hyper/hyperram-v1.c:440
+/home/vz/gap_sdk_v4.7.0/occupancy_management/gap8_project_v2/BUILD/GAP8_V2/GCC_RISCV_PULPOS/PeopleDetection:1c01cf68 0000001a t __pi_thermeye_reg_set	/home/vz/gap_sdk/rtos/pmsis/pmsis_bsp/camera/thermeye/thermeye.c:347
+/home/vz/gap_sdk_v4.7.0/occupancy_management/gap8_project_v2/BUILD/GAP8_V2/GCC_RISCV_PULPOS/PeopleDetection:1c021324 0000001a T pi_uart_conf_init	/home/vz/gap_sdk/rtos/pulp/pulp-os/drivers/uart/uart.c:215
+/home/vz/gap_sdk_v4.7.0/occupancy_management/gap8_project_v2/BUILD/GAP8_V2/GCC_RISCV_PULPOS/PeopleDetection:1c021452 0000001a T pi_uart_read_async	/home/vz/gap_sdk/rtos/pulp/pulp-os/drivers/uart/uart.c:472
+/home/vz/gap_sdk_v4.7.0/occupancy_management/gap8_project_v2/BUILD/GAP8_V2/GCC_RISCV_PULPOS/PeopleDetection:1c021438 0000001a T pi_uart_write_async	/home/vz/gap_sdk/rtos/pulp/pulp-os/drivers/uart/uart.c:462
+/home/vz/gap_sdk_v4.7.0/occupancy_management/gap8_project_v2/BUILD/GAP8_V2/GCC_RISCV_PULPOS/PeopleDetection:1c01eb1c 0000001a T rt_event_get	/home/vz/gap_sdk/rtos/pulp/pulp-os/kernel/events.c:105
+/home/vz/gap_sdk_v4.7.0/occupancy_management/gap8_project_v2/BUILD/GAP8_V2/GCC_RISCV_PULPOS/PeopleDetection:1c01ec0c 0000001a T rt_event_wait	/home/vz/gap_sdk/rtos/pulp/pulp-os/kernel/events.c:257
+/home/vz/gap_sdk_v4.7.0/occupancy_management/gap8_project_v2/BUILD/GAP8_V2/GCC_RISCV_PULPOS/PeopleDetection:1c021bda 0000001a T strchr	/home/vz/gap_sdk/rtos/pulp/pulp-os/libs/io/io.c:278
+/home/vz/gap_sdk_v4.7.0/occupancy_management/gap8_project_v2/BUILD/GAP8_V2/GCC_RISCV_PULPOS/PeopleDetection:1c01e248 0000001c T bsp_thermeye_conf_init	/home/vz/gap_sdk/rtos/pmsis/pmsis_bsp/bsp/gapoc_b_v2.c:150
+/home/vz/gap_sdk_v4.7.0/occupancy_management/gap8_project_v2/BUILD/GAP8_V2/GCC_RISCV_PULPOS/PeopleDetection:1c024484 0000001c b HyperFlash
+/home/vz/gap_sdk_v4.7.0/occupancy_management/gap8_project_v2/BUILD/GAP8_V2/GCC_RISCV_PULPOS/PeopleDetection:1c01c76c 0000001c t hyperflash_copy_async	/home/vz/gap_sdk/rtos/pmsis/pmsis_bsp/flash/hyperflash/hyperflash.c:844
+/home/vz/gap_sdk_v4.7.0/occupancy_management/gap8_project_v2/BUILD/GAP8_V2/GCC_RISCV_PULPOS/PeopleDetection:1c01c0d8 0000001c t __pi_host_fs_close	/home/vz/gap_sdk/rtos/pmsis/pmsis_bsp/fs/host_fs/host_fs.c:67
+/home/vz/gap_sdk_v4.7.0/occupancy_management/gap8_project_v2/BUILD/GAP8_V2/GCC_RISCV_PULPOS/PeopleDetection:1c01c19c 0000001c t __rt_event_enqueue	/home/vz/gap_sdk/install/GAP8_V2/include/rt/rt_event.h:397
+/home/vz/gap_sdk_v4.7.0/occupancy_management/gap8_project_v2/BUILD/GAP8_V2/GCC_RISCV_PULPOS/PeopleDetection:1c01e7d0 0000001c t __rt_event_enqueue	/home/vz/gap_sdk/install/GAP8_V2/include/rt/rt_event.h:397
+/home/vz/gap_sdk_v4.7.0/occupancy_management/gap8_project_v2/BUILD/GAP8_V2/GCC_RISCV_PULPOS/PeopleDetection:1c024110 0000001c d thermeye_api	/home/vz/gap_sdk/rtos/pmsis/pmsis_bsp/camera/thermeye/thermeye.c:355
+/home/vz/gap_sdk_v4.7.0/occupancy_management/gap8_project_v2/BUILD/GAP8_V2/GCC_RISCV_PULPOS/PeopleDetection:1c01c788 0000001e t hyperflash_close	/home/vz/gap_sdk/rtos/pmsis/pmsis_bsp/flash/hyperflash/hyperflash.c:276
+/home/vz/gap_sdk_v4.7.0/occupancy_management/gap8_project_v2/BUILD/GAP8_V2/GCC_RISCV_PULPOS/PeopleDetection:1c01cbb2 0000001e T hyperram_alloc	/home/vz/gap_sdk/rtos/pmsis/pmsis_bsp/ram/hyperram/hyperram.c:158
+/home/vz/gap_sdk_v4.7.0/occupancy_management/gap8_project_v2/BUILD/GAP8_V2/GCC_RISCV_PULPOS/PeopleDetection:1c01cd3e 0000001e t __pi_ram_cluster_req_done	/home/vz/gap_sdk/rtos/pmsis/pmsis_bsp/ram/ram.c:55
+/home/vz/gap_sdk_v4.7.0/occupancy_management/gap8_project_v2/BUILD/GAP8_V2/GCC_RISCV_PULPOS/PeopleDetection:1c01cfc6 0000001e t __pi_thermeye_reg_get	/home/vz/gap_sdk/rtos/pmsis/pmsis_bsp/camera/thermeye/thermeye.c:340
+/home/vz/gap_sdk_v4.7.0/occupancy_management/gap8_project_v2/BUILD/GAP8_V2/GCC_RISCV_PULPOS/PeopleDetection:1c01e916 0000001e T __rt_bridge_set_available	/home/vz/gap_sdk/rtos/pulp/pulp-os/kernel/bridge.c:725
+/home/vz/gap_sdk_v4.7.0/occupancy_management/gap8_project_v2/BUILD/GAP8_V2/GCC_RISCV_PULPOS/PeopleDetection:1c01e1a0 0000001e T semihost_read	/home/vz/gap_sdk/rtos/pmsis/pmsis_bsp/fs/host_fs/semihost.c:24
+/home/vz/gap_sdk_v4.7.0/occupancy_management/gap8_project_v2/BUILD/GAP8_V2/GCC_RISCV_PULPOS/PeopleDetection:1c01e1be 0000001e T semihost_write	/home/vz/gap_sdk/rtos/pmsis/pmsis_bsp/fs/host_fs/semihost.c:30
+/home/vz/gap_sdk_v4.7.0/occupancy_management/gap8_project_v2/BUILD/GAP8_V2/GCC_RISCV_PULPOS/PeopleDetection:1c022adc 0000001e t sprintf_out
+/home/vz/gap_sdk_v4.7.0/occupancy_management/gap8_project_v2/BUILD/GAP8_V2/GCC_RISCV_PULPOS/PeopleDetection:1c01cf48 00000020 t __pi_thermeye_reg_write	/home/vz/gap_sdk/rtos/pmsis/pmsis_bsp/camera/thermeye/thermeye.c:52
+/home/vz/gap_sdk_v4.7.0/occupancy_management/gap8_project_v2/BUILD/GAP8_V2/GCC_RISCV_PULPOS/PeopleDetection:1c021f8e 00000020 t _rlrshift	/home/vz/gap_sdk/rtos/pulp/pulp-os/libs/io/prf.c:122
+/home/vz/gap_sdk_v4.7.0/occupancy_management/gap8_project_v2/BUILD/GAP8_V2/GCC_RISCV_PULPOS/PeopleDetection:1c01e7ec 00000020 t __rt_bridge_check_bridge_req.part.5	/home/vz/gap_sdk/rtos/pulp/pulp-os/kernel/bridge.c:638
+/home/vz/gap_sdk_v4.7.0/occupancy_management/gap8_project_v2/BUILD/GAP8_V2/GCC_RISCV_PULPOS/PeopleDetection:1c0245d4 00000020 b __rt_cpi	/home/vz/gap_sdk/rtos/pulp/pulp-os/drivers/cpi/cpi-v1.c:23
+/home/vz/gap_sdk_v4.7.0/occupancy_management/gap8_project_v2/BUILD/GAP8_V2/GCC_RISCV_PULPOS/PeopleDetection:1c02184e 00000020 t rt_event_execute.isra.4.constprop.12	/home/vz/gap_sdk/rtos/pulp/pulp-os/libs/io/io.c:795
+/home/vz/gap_sdk_v4.7.0/occupancy_management/gap8_project_v2/BUILD/GAP8_V2/GCC_RISCV_PULPOS/PeopleDetection:1c01ec44 00000020 T rt_user_alloc_init	/home/vz/gap_sdk/rtos/pulp/pulp-os/kernel/alloc.c:193
+/home/vz/gap_sdk_v4.7.0/occupancy_management/gap8_project_v2/BUILD/GAP8_V2/GCC_RISCV_PULPOS/PeopleDetection:1c021bba 00000020 T strcat	/home/vz/gap_sdk/rtos/pulp/pulp-os/libs/io/io.c:229
+/home/vz/gap_sdk_v4.7.0/occupancy_management/gap8_project_v2/BUILD/GAP8_V2/GCC_RISCV_PULPOS/PeopleDetection:1c021b2a 00000020 T strncmp	/home/vz/gap_sdk/rtos/pulp/pulp-os/libs/io/io.c:108
+/home/vz/gap_sdk_v4.7.0/occupancy_management/gap8_project_v2/BUILD/GAP8_V2/GCC_RISCV_PULPOS/PeopleDetection:1c01cbfe 00000022 t hyperram_close	/home/vz/gap_sdk/rtos/pmsis/pmsis_bsp/ram/hyperram/hyperram.c:123
+/home/vz/gap_sdk_v4.7.0/occupancy_management/gap8_project_v2/BUILD/GAP8_V2/GCC_RISCV_PULPOS/PeopleDetection:1c01964c 00000022 t MinCond
+/home/vz/gap_sdk_v4.7.0/occupancy_management/gap8_project_v2/BUILD/GAP8_V2/GCC_RISCV_PULPOS/PeopleDetection:1c0201ce 00000022 T pi_hyper_read	/home/vz/gap_sdk/rtos/pulp/pulp-os/drivers/hyper/hyperram-v1.c:390
+/home/vz/gap_sdk_v4.7.0/occupancy_management/gap8_project_v2/BUILD/GAP8_V2/GCC_RISCV_PULPOS/PeopleDetection:1c020208 00000022 T pi_hyper_write	/home/vz/gap_sdk/rtos/pulp/pulp-os/drivers/hyper/hyperram-v1.c:411
+/home/vz/gap_sdk_v4.7.0/occupancy_management/gap8_project_v2/BUILD/GAP8_V2/GCC_RISCV_PULPOS/PeopleDetection:1c01bf5e 00000022 T pi_readfs_conf_init	/home/vz/gap_sdk/rtos/pmsis/pmsis_bsp/fs/read_fs/read_fs.c:680
+/home/vz/gap_sdk_v4.7.0/occupancy_management/gap8_project_v2/BUILD/GAP8_V2/GCC_RISCV_PULPOS/PeopleDetection:1c01d3e2 00000022 T pi_thermeye_conf_init	/home/vz/gap_sdk/rtos/pmsis/pmsis_bsp/camera/thermeye/thermeye.c:366
+/home/vz/gap_sdk_v4.7.0/occupancy_management/gap8_project_v2/BUILD/GAP8_V2/GCC_RISCV_PULPOS/PeopleDetection:1c01e956 00000022 T __rt_bridge_clear_notif	/home/vz/gap_sdk/rtos/pulp/pulp-os/kernel/bridge.c:838
+/home/vz/gap_sdk_v4.7.0/occupancy_management/gap8_project_v2/BUILD/GAP8_V2/GCC_RISCV_PULPOS/PeopleDetection:1c01e934 00000022 T __rt_bridge_send_notif	/home/vz/gap_sdk/rtos/pulp/pulp-os/kernel/bridge.c:821
+/home/vz/gap_sdk_v4.7.0/occupancy_management/gap8_project_v2/BUILD/GAP8_V2/GCC_RISCV_PULPOS/PeopleDetection:1c01eb36 00000022 T rt_event_get_blocking	/home/vz/gap_sdk/rtos/pulp/pulp-os/kernel/events.c:127
+/home/vz/gap_sdk_v4.7.0/occupancy_management/gap8_project_v2/BUILD/GAP8_V2/GCC_RISCV_PULPOS/PeopleDetection:1c0210b6 00000022 t __rt_uart_setfreq_after	/home/vz/gap_sdk/rtos/pulp/pulp-os/drivers/uart/uart.c:316
+/home/vz/gap_sdk_v4.7.0/occupancy_management/gap8_project_v2/BUILD/GAP8_V2/GCC_RISCV_PULPOS/PeopleDetection:1c022b80 00000022 t __rt_uart_setfreq_after	/home/vz/gap_sdk/rtos/pulp/pulp-os/drivers_deprecated/uart/uart.c:135
+/home/vz/gap_sdk_v4.7.0/occupancy_management/gap8_project_v2/BUILD/GAP8_V2/GCC_RISCV_PULPOS/PeopleDetection:1c01e6da 00000022 T __rt_utils_init	/home/vz/gap_sdk/rtos/pulp/pulp-os/kernel/utils.c:84
+/home/vz/gap_sdk_v4.7.0/occupancy_management/gap8_project_v2/BUILD/GAP8_V2/GCC_RISCV_PULPOS/PeopleDetection:1c024460 00000024 b conf.18407
+/home/vz/gap_sdk_v4.7.0/occupancy_management/gap8_project_v2/BUILD/GAP8_V2/GCC_RISCV_PULPOS/PeopleDetection:1c01d5ea 00000024 T flash_partition_table_free	/home/vz/gap_sdk/rtos/pmsis/pmsis_bsp/partition/flash_partition.c:221
+/home/vz/gap_sdk_v4.7.0/occupancy_management/gap8_project_v2/BUILD/GAP8_V2/GCC_RISCV_PULPOS/PeopleDetection:1c01ca86 00000024 t hyperflash_erase	/home/vz/gap_sdk/rtos/pmsis/pmsis_bsp/flash/hyperflash/hyperflash.c:899
+/home/vz/gap_sdk_v4.7.0/occupancy_management/gap8_project_v2/BUILD/GAP8_V2/GCC_RISCV_PULPOS/PeopleDetection:1c01c8b6 00000024 t hyperflash_erase_chip	/home/vz/gap_sdk/rtos/pmsis/pmsis_bsp/flash/hyperflash/hyperflash.c:883
+/home/vz/gap_sdk_v4.7.0/occupancy_management/gap8_project_v2/BUILD/GAP8_V2/GCC_RISCV_PULPOS/PeopleDetection:1c01c892 00000024 t hyperflash_erase_sector	/home/vz/gap_sdk/rtos/pmsis/pmsis_bsp/flash/hyperflash/hyperflash.c:891
+/home/vz/gap_sdk_v4.7.0/occupancy_management/gap8_project_v2/BUILD/GAP8_V2/GCC_RISCV_PULPOS/PeopleDetection:1c01c946 00000024 t hyperflash_program	/home/vz/gap_sdk/rtos/pmsis/pmsis_bsp/flash/hyperflash/hyperflash.c:875
+/home/vz/gap_sdk_v4.7.0/occupancy_management/gap8_project_v2/BUILD/GAP8_V2/GCC_RISCV_PULPOS/PeopleDetection:1c01c8da 00000024 t hyperflash_read	/home/vz/gap_sdk/rtos/pmsis/pmsis_bsp/flash/hyperflash/hyperflash.c:866
+/home/vz/gap_sdk_v4.7.0/occupancy_management/gap8_project_v2/BUILD/GAP8_V2/GCC_RISCV_PULPOS/PeopleDetection:1c01c8fe 00000024 t hyperflash_reg_get	/home/vz/gap_sdk/rtos/pmsis/pmsis_bsp/flash/hyperflash/hyperflash.c:916
+/home/vz/gap_sdk_v4.7.0/occupancy_management/gap8_project_v2/BUILD/GAP8_V2/GCC_RISCV_PULPOS/PeopleDetection:1c01c922 00000024 t hyperflash_reg_set	/home/vz/gap_sdk/rtos/pmsis/pmsis_bsp/flash/hyperflash/hyperflash.c:908
+/home/vz/gap_sdk_v4.7.0/occupancy_management/gap8_project_v2/BUILD/GAP8_V2/GCC_RISCV_PULPOS/PeopleDetection:1c02092e 00000024 T pi_i2c_read	/home/vz/gap_sdk/rtos/pulp/pulp-os/drivers/i2c/i2c-v2.c:230
+/home/vz/gap_sdk_v4.7.0/occupancy_management/gap8_project_v2/BUILD/GAP8_V2/GCC_RISCV_PULPOS/PeopleDetection:1c02084e 00000024 T pi_i2c_write	/home/vz/gap_sdk/rtos/pulp/pulp-os/drivers/i2c/i2c-v2.c:182
+/home/vz/gap_sdk_v4.7.0/occupancy_management/gap8_project_v2/BUILD/GAP8_V2/GCC_RISCV_PULPOS/PeopleDetection:1c01ed56 00000024 T __rt_alloc_init_l1	/home/vz/gap_sdk/rtos/pulp/pulp-os/kernel/alloc.c:445
+/home/vz/gap_sdk_v4.7.0/occupancy_management/gap8_project_v2/BUILD/GAP8_V2/GCC_RISCV_PULPOS/PeopleDetection:1c01b6a8 00000024 t rt_event_enqueue	/home/vz/gap_sdk/install/GAP8_V2/include/rt/rt_event.h:411
+/home/vz/gap_sdk_v4.7.0/occupancy_management/gap8_project_v2/BUILD/GAP8_V2/GCC_RISCV_PULPOS/PeopleDetection:1c01b996 00000024 t rt_event_enqueue	/home/vz/gap_sdk/install/GAP8_V2/include/rt/rt_event.h:411
+/home/vz/gap_sdk_v4.7.0/occupancy_management/gap8_project_v2/BUILD/GAP8_V2/GCC_RISCV_PULPOS/PeopleDetection:1c01bf8e 00000024 t rt_event_enqueue	/home/vz/gap_sdk/install/GAP8_V2/include/rt/rt_event.h:411
+/home/vz/gap_sdk_v4.7.0/occupancy_management/gap8_project_v2/BUILD/GAP8_V2/GCC_RISCV_PULPOS/PeopleDetection:1c01fe06 00000024 t rt_event_enqueue	/home/vz/gap_sdk/install/GAP8_V2/include/rt/rt_event.h:411
+/home/vz/gap_sdk_v4.7.0/occupancy_management/gap8_project_v2/BUILD/GAP8_V2/GCC_RISCV_PULPOS/PeopleDetection:1c01eb58 00000024 T rt_event_push	/home/vz/gap_sdk/rtos/pulp/pulp-os/kernel/events.c:139
+/home/vz/gap_sdk_v4.7.0/occupancy_management/gap8_project_v2/BUILD/GAP8_V2/GCC_RISCV_PULPOS/PeopleDetection:1c01ef44 00000024 T rt_time_wait_us	/home/vz/gap_sdk/rtos/pulp/pulp-os/kernel/time.c:124
+/home/vz/gap_sdk_v4.7.0/occupancy_management/gap8_project_v2/BUILD/GAP8_V2/GCC_RISCV_PULPOS/PeopleDetection:1c022b5c 00000024 t __rt_uart_setup.isra.5	/home/vz/gap_sdk/rtos/pulp/pulp-os/drivers_deprecated/uart/uart.c:222
+/home/vz/gap_sdk_v4.7.0/occupancy_management/gap8_project_v2/BUILD/GAP8_V2/GCC_RISCV_PULPOS/PeopleDetection:1c01e346 00000026 t cluster_start	/home/vz/gap_sdk/rtos/pulp/pulp-os/kernel/init.c:198
+/home/vz/gap_sdk_v4.7.0/occupancy_management/gap8_project_v2/BUILD/GAP8_V2/GCC_RISCV_PULPOS/PeopleDetection:1c01c066 00000026 t __pi_host_fs_read_async	/home/vz/gap_sdk/rtos/pmsis/pmsis_bsp/fs/host_fs/host_fs.c:74
+/home/vz/gap_sdk_v4.7.0/occupancy_management/gap8_project_v2/BUILD/GAP8_V2/GCC_RISCV_PULPOS/PeopleDetection:1c01ee94 00000026 T rt_time_get_us	/home/vz/gap_sdk/rtos/pulp/pulp-os/kernel/time.c:45
+/home/vz/gap_sdk_v4.7.0/occupancy_management/gap8_project_v2/BUILD/GAP8_V2/GCC_RISCV_PULPOS/PeopleDetection:1c022b36 00000026 T __rt_uart_cluster_req_done	/home/vz/gap_sdk/rtos/pulp/pulp-os/drivers_deprecated/uart/uart.c:253
+/home/vz/gap_sdk_v4.7.0/occupancy_management/gap8_project_v2/BUILD/GAP8_V2/GCC_RISCV_PULPOS/PeopleDetection:1c01f386 00000026 t soc_eu_fcEventMask_setEvent	/home/vz/gap_sdk/install/GAP8_V2/include/hal/soc_eu/soc_eu_v1.h:60
+/home/vz/gap_sdk_v4.7.0/occupancy_management/gap8_project_v2/BUILD/GAP8_V2/GCC_RISCV_PULPOS/PeopleDetection:1c020722 00000026 t soc_eu_fcEventMask_setEvent	/home/vz/gap_sdk/install/GAP8_V2/include/hal/soc_eu/soc_eu_v1.h:60
+/home/vz/gap_sdk_v4.7.0/occupancy_management/gap8_project_v2/BUILD/GAP8_V2/GCC_RISCV_PULPOS/PeopleDetection:1c022c52 00000026 t soc_eu_fcEventMask_setEvent	/home/vz/gap_sdk/install/GAP8_V2/include/hal/soc_eu/soc_eu_v1.h:60
+/home/vz/gap_sdk_v4.7.0/occupancy_management/gap8_project_v2/BUILD/GAP8_V2/GCC_RISCV_PULPOS/PeopleDetection:1c02407c 00000028 D __pi_host_fs_api
+/home/vz/gap_sdk_v4.7.0/occupancy_management/gap8_project_v2/BUILD/GAP8_V2/GCC_RISCV_PULPOS/PeopleDetection:1c024054 00000028 D __pi_read_fs_api
+/home/vz/gap_sdk_v4.7.0/occupancy_management/gap8_project_v2/BUILD/GAP8_V2/GCC_RISCV_PULPOS/PeopleDetection:1c020cb4 00000028 t __pos_pwm_init	/home/vz/gap_sdk/rtos/pulp/pulp-os/drivers/pwm/pwm-v1.c:185
+/home/vz/gap_sdk_v4.7.0/occupancy_management/gap8_project_v2/BUILD/GAP8_V2/GCC_RISCV_PULPOS/PeopleDetection:1c021db6 00000028 T _prf_locked	/home/vz/gap_sdk/rtos/pulp/pulp-os/libs/io/io.c:626
+/home/vz/gap_sdk_v4.7.0/occupancy_management/gap8_project_v2/BUILD/GAP8_V2/GCC_RISCV_PULPOS/PeopleDetection:1c01e4d4 00000028 T __rt_deinit	/home/vz/gap_sdk/rtos/pulp/pulp-os/kernel/init.c:163
+/home/vz/gap_sdk_v4.7.0/occupancy_management/gap8_project_v2/BUILD/GAP8_V2/GCC_RISCV_PULPOS/PeopleDetection:1c01ea66 00000028 T __rt_event_init	/home/vz/gap_sdk/rtos/pulp/pulp-os/kernel/events.c:32
+/home/vz/gap_sdk_v4.7.0/occupancy_management/gap8_project_v2/BUILD/GAP8_V2/GCC_RISCV_PULPOS/PeopleDetection:1c024a0c 00000028 B __rt_fc_cluster_data
+/home/vz/gap_sdk_v4.7.0/occupancy_management/gap8_project_v2/BUILD/GAP8_V2/GCC_RISCV_PULPOS/PeopleDetection:1c021aee 00000028 t __rt_io_stop	/home/vz/gap_sdk/rtos/pulp/pulp-os/libs/io/io.c:769
+/home/vz/gap_sdk_v4.7.0/occupancy_management/gap8_project_v2/BUILD/GAP8_V2/GCC_RISCV_PULPOS/PeopleDetection:1c02153a 00000028 T rt_padframe_set	/home/vz/gap_sdk/rtos/pulp/pulp-os/drivers_deprecated/pads/pads-v1.c:77
+/home/vz/gap_sdk_v4.7.0/occupancy_management/gap8_project_v2/BUILD/GAP8_V2/GCC_RISCV_PULPOS/PeopleDetection:000002b8 00000028 D __rt_udma_extra_callback
+/home/vz/gap_sdk_v4.7.0/occupancy_management/gap8_project_v2/BUILD/GAP8_V2/GCC_RISCV_PULPOS/PeopleDetection:000002e0 00000028 D __rt_udma_extra_callback_arg
+/home/vz/gap_sdk_v4.7.0/occupancy_management/gap8_project_v2/BUILD/GAP8_V2/GCC_RISCV_PULPOS/PeopleDetection:1c001e60 0000002a T __ashldi3	/home/haugoug/src/riscv-gnu-toolchain/riscv-gcc/libgcc/libgcc2.c:431
+/home/vz/gap_sdk_v4.7.0/occupancy_management/gap8_project_v2/BUILD/GAP8_V2/GCC_RISCV_PULPOS/PeopleDetection:1c001e36 0000002a T __lshrdi3	/home/haugoug/src/riscv-gnu-toolchain/riscv-gcc/libgcc/libgcc2.c:403
+/home/vz/gap_sdk_v4.7.0/occupancy_management/gap8_project_v2/BUILD/GAP8_V2/GCC_RISCV_PULPOS/PeopleDetection:1c01b796 0000002a T pi_fs_read	/home/vz/gap_sdk/rtos/pmsis/pmsis_bsp/fs/fs.c:90
+/home/vz/gap_sdk_v4.7.0/occupancy_management/gap8_project_v2/BUILD/GAP8_V2/GCC_RISCV_PULPOS/PeopleDetection:1c01b7c8 0000002a T pi_fs_write	/home/vz/gap_sdk/rtos/pmsis/pmsis_bsp/fs/fs.c:103
+/home/vz/gap_sdk_v4.7.0/occupancy_management/gap8_project_v2/BUILD/GAP8_V2/GCC_RISCV_PULPOS/PeopleDetection:1c01c03c 0000002a t __pi_host_fs_write_async	/home/vz/gap_sdk/rtos/pmsis/pmsis_bsp/fs/host_fs/host_fs.c:100
+/home/vz/gap_sdk_v4.7.0/occupancy_management/gap8_project_v2/BUILD/GAP8_V2/GCC_RISCV_PULPOS/PeopleDetection:1c01ed7a 0000002a T __rt_alloc_init_l1_for_fc	/home/vz/gap_sdk/rtos/pulp/pulp-os/kernel/alloc.c:452
+/home/vz/gap_sdk_v4.7.0/occupancy_management/gap8_project_v2/BUILD/GAP8_V2/GCC_RISCV_PULPOS/PeopleDetection:1c02167c 0000002a t __rt_i2s_setfreq_after	/home/vz/gap_sdk/rtos/pulp/pulp-os/drivers_deprecated/i2s/i2s-v1.c:235
+/home/vz/gap_sdk_v4.7.0/occupancy_management/gap8_project_v2/BUILD/GAP8_V2/GCC_RISCV_PULPOS/PeopleDetection:1c01c866 0000002c t hyperflash_copy_2d	/home/vz/gap_sdk/rtos/pmsis/pmsis_bsp/flash/hyperflash/hyperflash.c:934
+/home/vz/gap_sdk_v4.7.0/occupancy_management/gap8_project_v2/BUILD/GAP8_V2/GCC_RISCV_PULPOS/PeopleDetection:1c01b74a 0000002c T pi_fs_mount	/home/vz/gap_sdk/rtos/pmsis/pmsis_bsp/fs/fs.c:40
+/home/vz/gap_sdk_v4.7.0/occupancy_management/gap8_project_v2/BUILD/GAP8_V2/GCC_RISCV_PULPOS/PeopleDetection:1c01fe88 0000002c T __pi_hyper_pin_reset_settings	/home/vz/gap_sdk/rtos/pulp/pulp-os/drivers/hyper/hyperram-v1.c:189
+/home/vz/gap_sdk_v4.7.0/occupancy_management/gap8_project_v2/BUILD/GAP8_V2/GCC_RISCV_PULPOS/PeopleDetection:1c01fe5c 0000002c T __pi_hyper_pin_settings	/home/vz/gap_sdk/rtos/pulp/pulp-os/drivers/hyper/hyperram-v1.c:181
+/home/vz/gap_sdk_v4.7.0/occupancy_management/gap8_project_v2/BUILD/GAP8_V2/GCC_RISCV_PULPOS/PeopleDetection:1c021ed0 0000002c T printf	/home/vz/gap_sdk/rtos/pulp/pulp-os/libs/io/fprintf.c:41
+/home/vz/gap_sdk_v4.7.0/occupancy_management/gap8_project_v2/BUILD/GAP8_V2/GCC_RISCV_PULPOS/PeopleDetection:1c021d3a 0000002c T puts	/home/vz/gap_sdk/rtos/pulp/pulp-os/libs/io/io.c:576
+/home/vz/gap_sdk_v4.7.0/occupancy_management/gap8_project_v2/BUILD/GAP8_V2/GCC_RISCV_PULPOS/PeopleDetection:1c0216a6 0000002c t __rt_i2s_setfreq_before	/home/vz/gap_sdk/rtos/pulp/pulp-os/drivers_deprecated/i2s/i2s-v1.c:219
+/home/vz/gap_sdk_v4.7.0/occupancy_management/gap8_project_v2/BUILD/GAP8_V2/GCC_RISCV_PULPOS/PeopleDetection:1c024528 0000002c b __rt_pulpos_emu_global_cluster_task	/home/vz/gap_sdk/rtos/pulp/pulp-os/kernel/pulpos_emu.c:26
+/home/vz/gap_sdk_v4.7.0/occupancy_management/gap8_project_v2/BUILD/GAP8_V2/GCC_RISCV_PULPOS/PeopleDetection:1c021264 0000002c t __rt_uart_setfreq_before	/home/vz/gap_sdk/rtos/pulp/pulp-os/drivers/uart/uart.c:283
+/home/vz/gap_sdk_v4.7.0/occupancy_management/gap8_project_v2/BUILD/GAP8_V2/GCC_RISCV_PULPOS/PeopleDetection:1c022be4 0000002c t __rt_uart_setfreq_before	/home/vz/gap_sdk/rtos/pulp/pulp-os/drivers_deprecated/uart/uart.c:102
+/home/vz/gap_sdk_v4.7.0/occupancy_management/gap8_project_v2/BUILD/GAP8_V2/GCC_RISCV_PULPOS/PeopleDetection:1c01ebe0 0000002c T __rt_wait_event	/home/vz/gap_sdk/rtos/pulp/pulp-os/kernel/events.c:247
+/home/vz/gap_sdk_v4.7.0/occupancy_management/gap8_project_v2/BUILD/GAP8_V2/GCC_RISCV_PULPOS/PeopleDetection:1c01e16c 0000002c T semihost_open	/home/vz/gap_sdk/rtos/pmsis/pmsis_bsp/fs/host_fs/semihost.c:11
+/home/vz/gap_sdk_v4.7.0/occupancy_management/gap8_project_v2/BUILD/GAP8_V2/GCC_RISCV_PULPOS/PeopleDetection:1c01f35a 0000002c t SetFllMultDivFactors
+/home/vz/gap_sdk_v4.7.0/occupancy_management/gap8_project_v2/BUILD/GAP8_V2/GCC_RISCV_PULPOS/PeopleDetection:1c01c96a 0000002e t hyperflash_copy	/home/vz/gap_sdk/rtos/pmsis/pmsis_bsp/flash/hyperflash/hyperflash.c:924
+/home/vz/gap_sdk_v4.7.0/occupancy_management/gap8_project_v2/BUILD/GAP8_V2/GCC_RISCV_PULPOS/PeopleDetection:1c021170 0000002e t __pi_uart_copy_enqueue_exec.isra.14	/home/vz/gap_sdk/install/GAP8_V2/include/hal/udma/uart/udma_uart_v1.h:217
+/home/vz/gap_sdk_v4.7.0/occupancy_management/gap8_project_v2/BUILD/GAP8_V2/GCC_RISCV_PULPOS/PeopleDetection:1c02149a 0000002e T pi_uart_read	/home/vz/gap_sdk/rtos/pulp/pulp-os/drivers/uart/uart.c:493
+/home/vz/gap_sdk_v4.7.0/occupancy_management/gap8_project_v2/BUILD/GAP8_V2/GCC_RISCV_PULPOS/PeopleDetection:1c02146c 0000002e T pi_uart_write	/home/vz/gap_sdk/rtos/pulp/pulp-os/drivers/uart/uart.c:482
+/home/vz/gap_sdk_v4.7.0/occupancy_management/gap8_project_v2/BUILD/GAP8_V2/GCC_RISCV_PULPOS/PeopleDetection:1c01ed28 0000002e T rt_free
+/home/vz/gap_sdk_v4.7.0/occupancy_management/gap8_project_v2/BUILD/GAP8_V2/GCC_RISCV_PULPOS/PeopleDetection:1c0205ee 0000002e t __rt_hyper_init	/home/vz/gap_sdk/rtos/pulp/pulp-os/drivers/hyper/hyperram-v1.c:995
+/home/vz/gap_sdk_v4.7.0/occupancy_management/gap8_project_v2/BUILD/GAP8_V2/GCC_RISCV_PULPOS/PeopleDetection:1c0195d0 00000030 t FirstDefinedOutput
+/home/vz/gap_sdk_v4.7.0/occupancy_management/gap8_project_v2/BUILD/GAP8_V2/GCC_RISCV_PULPOS/PeopleDetection:1c021d80 00000030 T fputc	/home/vz/gap_sdk/rtos/pulp/pulp-os/libs/io/io.c:603
+/home/vz/gap_sdk_v4.7.0/occupancy_management/gap8_project_v2/BUILD/GAP8_V2/GCC_RISCV_PULPOS/PeopleDetection:1c01caaa 00000030 t hyperflash_get_status_reg	/home/vz/gap_sdk/rtos/pmsis/pmsis_bsp/flash/hyperflash/hyperflash.c:184
+/home/vz/gap_sdk_v4.7.0/occupancy_management/gap8_project_v2/BUILD/GAP8_V2/GCC_RISCV_PULPOS/PeopleDetection:1c002c16 00000030 T main
+/home/vz/gap_sdk_v4.7.0/occupancy_management/gap8_project_v2/BUILD/GAP8_V2/GCC_RISCV_PULPOS/PeopleDetection:1c01cfec 00000030 t __pi_thermeye_close	/home/vz/gap_sdk/rtos/pmsis/pmsis_bsp/camera/thermeye/thermeye.c:275
+/home/vz/gap_sdk_v4.7.0/occupancy_management/gap8_project_v2/BUILD/GAP8_V2/GCC_RISCV_PULPOS/PeopleDetection:1c01ecf8 00000030 T rt_alloc
+/home/vz/gap_sdk_v4.7.0/occupancy_management/gap8_project_v2/BUILD/GAP8_V2/GCC_RISCV_PULPOS/PeopleDetection:1c01e6aa 00000030 T __rt_cbsys_exec	/home/vz/gap_sdk/rtos/pulp/pulp-os/kernel/utils.c:71
+/home/vz/gap_sdk_v4.7.0/occupancy_management/gap8_project_v2/BUILD/GAP8_V2/GCC_RISCV_PULPOS/PeopleDetection:1c01df50 00000032 T MD5_Init	/home/vz/gap_sdk/rtos/pmsis/pmsis_bsp/crc/md5.c:207
+/home/vz/gap_sdk_v4.7.0/occupancy_management/gap8_project_v2/BUILD/GAP8_V2/GCC_RISCV_PULPOS/PeopleDetection:1c01fa74 00000032 T pi_cluster_close	/home/vz/gap_sdk/rtos/pulp/pulp-os/kernel/cluster.c:370
+/home/vz/gap_sdk_v4.7.0/occupancy_management/gap8_project_v2/BUILD/GAP8_V2/GCC_RISCV_PULPOS/PeopleDetection:1c020dcc 00000032 T pi_gpio_pin_write	/home/vz/gap_sdk/rtos/pulp/pulp-os/drivers/gpio/gpio-v2.c:158
+/home/vz/gap_sdk_v4.7.0/occupancy_management/gap8_project_v2/BUILD/GAP8_V2/GCC_RISCV_PULPOS/PeopleDetection:1c01cb80 00000032 T pi_hyperflash_conf_init	/home/vz/gap_sdk/rtos/pmsis/pmsis_bsp/flash/hyperflash/hyperflash.c:970
+/home/vz/gap_sdk_v4.7.0/occupancy_management/gap8_project_v2/BUILD/GAP8_V2/GCC_RISCV_PULPOS/PeopleDetection:1c021290 00000032 t pi_task_wait_on.isra.20	/home/vz/gap_sdk/install/GAP8_V2/include/hal/udma/uart/udma_uart_v1.h:217
+/home/vz/gap_sdk_v4.7.0/occupancy_management/gap8_project_v2/BUILD/GAP8_V2/GCC_RISCV_PULPOS/PeopleDetection:1c01b706 00000032 t pi_task_wait_on.isra.3	/home/vz/gap_sdk/install/GAP8_V2/include/rt/rt_cluster.h:239
+/home/vz/gap_sdk_v4.7.0/occupancy_management/gap8_project_v2/BUILD/GAP8_V2/GCC_RISCV_PULPOS/PeopleDetection:1c01c834 00000032 t pi_task_wait_on.isra.3	/home/vz/gap_sdk/rtos/pmsis/pmsis_bsp/flash/hyperflash/hyperflash.c:219
+/home/vz/gap_sdk_v4.7.0/occupancy_management/gap8_project_v2/BUILD/GAP8_V2/GCC_RISCV_PULPOS/PeopleDetection:1c020748 00000032 t pi_task_wait_on.isra.3	/home/vz/gap_sdk/rtos/pulp/pulp-os/drivers/i2c/i2c-v2.c:110
+/home/vz/gap_sdk_v4.7.0/occupancy_management/gap8_project_v2/BUILD/GAP8_V2/GCC_RISCV_PULPOS/PeopleDetection:1c01fe2a 00000032 t pi_task_wait_on.isra.4	/home/vz/gap_sdk/rtos/pulp/pulp-os/drivers/hyper/hyperram-v1.c:1039
+/home/vz/gap_sdk_v4.7.0/occupancy_management/gap8_project_v2/BUILD/GAP8_V2/GCC_RISCV_PULPOS/PeopleDetection:1c01e6fc 00000032 T __rt_fc_lock	/home/vz/gap_sdk/rtos/pulp/pulp-os/kernel/utils.c:92
+/home/vz/gap_sdk_v4.7.0/occupancy_management/gap8_project_v2/BUILD/GAP8_V2/GCC_RISCV_PULPOS/PeopleDetection:000003a8 00000034 D dev_rtc	/home/vz/gap_sdk/rtos/pulp/pulp-os/drivers_deprecated/dolphin/rtc.c:24
+/home/vz/gap_sdk_v4.7.0/occupancy_management/gap8_project_v2/BUILD/GAP8_V2/GCC_RISCV_PULPOS/PeopleDetection:1c021ff2 00000034 t _get_digit	/home/vz/gap_sdk/rtos/pulp/pulp-os/libs/io/prf.c:167
+/home/vz/gap_sdk_v4.7.0/occupancy_management/gap8_project_v2/BUILD/GAP8_V2/GCC_RISCV_PULPOS/PeopleDetection:1c023ca4 00000034 r __hyper_pad	/home/vz/gap_sdk/rtos/pulp/pulp-os/drivers/hyper/hyperram-v1.c:164
+/home/vz/gap_sdk_v4.7.0/occupancy_management/gap8_project_v2/BUILD/GAP8_V2/GCC_RISCV_PULPOS/PeopleDetection:1c01b85a 00000034 T __pi_cl_fs_copy_req_done	/home/vz/gap_sdk/rtos/pmsis/pmsis_bsp/fs/fs.c:340
+/home/vz/gap_sdk_v4.7.0/occupancy_management/gap8_project_v2/BUILD/GAP8_V2/GCC_RISCV_PULPOS/PeopleDetection:1c01fdbe 00000034 T pi_pad_set_function	/home/vz/gap_sdk/rtos/pulp/pulp-os/drivers/pads/pads-v1.c:24
+/home/vz/gap_sdk_v4.7.0/occupancy_management/gap8_project_v2/BUILD/GAP8_V2/GCC_RISCV_PULPOS/PeopleDetection:1c020c0c 00000034 T pi_pwm_ioctl	/home/vz/gap_sdk/rtos/pulp/pulp-os/drivers/pwm/pwm-v1.c:108
+/home/vz/gap_sdk_v4.7.0/occupancy_management/gap8_project_v2/BUILD/GAP8_V2/GCC_RISCV_PULPOS/PeopleDetection:1c01ea32 00000034 T __rt_bridge_init	/home/vz/gap_sdk/rtos/pulp/pulp-os/kernel/bridge.c:851
+/home/vz/gap_sdk_v4.7.0/occupancy_management/gap8_project_v2/BUILD/GAP8_V2/GCC_RISCV_PULPOS/PeopleDetection:1c01e72e 00000034 T __rt_fc_unlock	/home/vz/gap_sdk/rtos/pulp/pulp-os/kernel/utils.c:127
+/home/vz/gap_sdk_v4.7.0/occupancy_management/gap8_project_v2/BUILD/GAP8_V2/GCC_RISCV_PULPOS/PeopleDetection:1c021648 00000034 t __rt_i2s_resume	/home/vz/gap_sdk/rtos/pulp/pulp-os/drivers_deprecated/i2s/i2s-v1.c:186
+/home/vz/gap_sdk_v4.7.0/occupancy_management/gap8_project_v2/BUILD/GAP8_V2/GCC_RISCV_PULPOS/PeopleDetection:1c0218de 00000034 t __rt_putc_host_cluster_req	/home/vz/gap_sdk/rtos/pulp/pulp-os/libs/io/io.c:451
+/home/vz/gap_sdk_v4.7.0/occupancy_management/gap8_project_v2/BUILD/GAP8_V2/GCC_RISCV_PULPOS/PeopleDetection:1c022d64 00000034 T rt_uart_cluster_write	/home/vz/gap_sdk/rtos/pulp/pulp-os/drivers_deprecated/uart/uart.c:277
+/home/vz/gap_sdk_v4.7.0/occupancy_management/gap8_project_v2/BUILD/GAP8_V2/GCC_RISCV_PULPOS/PeopleDetection:1c021b70 00000036 T memcpy	/home/vz/gap_sdk/rtos/pulp/pulp-os/libs/io/io.c:159
+/home/vz/gap_sdk_v4.7.0/occupancy_management/gap8_project_v2/BUILD/GAP8_V2/GCC_RISCV_PULPOS/PeopleDetection:1c0206d8 00000036 T pi_cpi_capture_async	/home/vz/gap_sdk/rtos/pulp/pulp-os/drivers/cpi/cpi-v1.c:102
+/home/vz/gap_sdk_v4.7.0/occupancy_management/gap8_project_v2/BUILD/GAP8_V2/GCC_RISCV_PULPOS/PeopleDetection:1c020f60 00000036 T pi_gpio_pin_configure	/home/vz/gap_sdk/rtos/pulp/pulp-os/drivers/gpio/gpio-v2.c:146
+/home/vz/gap_sdk_v4.7.0/occupancy_management/gap8_project_v2/BUILD/GAP8_V2/GCC_RISCV_PULPOS/PeopleDetection:1c020bd6 00000036 T pi_pwm_close	/home/vz/gap_sdk/rtos/pulp/pulp-os/drivers/pwm/pwm-v1.c:91
+/home/vz/gap_sdk_v4.7.0/occupancy_management/gap8_project_v2/BUILD/GAP8_V2/GCC_RISCV_PULPOS/PeopleDetection:1c01e79a 00000036 T __rt_fc_cluster_unlock	/home/vz/gap_sdk/rtos/pulp/pulp-os/kernel/utils.c:199
+/home/vz/gap_sdk_v4.7.0/occupancy_management/gap8_project_v2/BUILD/GAP8_V2/GCC_RISCV_PULPOS/PeopleDetection:1c01b9ba 00000038 t __pi_fs_free	/home/vz/gap_sdk/rtos/pmsis/pmsis_bsp/fs/read_fs/read_fs.c:122
+/home/vz/gap_sdk_v4.7.0/occupancy_management/gap8_project_v2/BUILD/GAP8_V2/GCC_RISCV_PULPOS/PeopleDetection:1c020dfe 00000038 T pi_gpio_pin_read	/home/vz/gap_sdk/rtos/pulp/pulp-os/drivers/gpio/gpio-v2.c:171
+/home/vz/gap_sdk_v4.7.0/occupancy_management/gap8_project_v2/BUILD/GAP8_V2/GCC_RISCV_PULPOS/PeopleDetection:1c01e762 00000038 T __rt_fc_cluster_lock	/home/vz/gap_sdk/rtos/pulp/pulp-os/kernel/utils.c:189
+/home/vz/gap_sdk_v4.7.0/occupancy_management/gap8_project_v2/BUILD/GAP8_V2/GCC_RISCV_PULPOS/PeopleDetection:1c01b6cc 0000003a T __pi_cl_fs_copy_req	/home/vz/gap_sdk/rtos/pmsis/pmsis_bsp/fs/fs.c:381
+/home/vz/gap_sdk_v4.7.0/occupancy_management/gap8_project_v2/BUILD/GAP8_V2/GCC_RISCV_PULPOS/PeopleDetection:1c01fb16 0000003c T __rt_cluster_new	/home/vz/gap_sdk/rtos/pulp/pulp-os/kernel/cluster.c:445
+/home/vz/gap_sdk_v4.7.0/occupancy_management/gap8_project_v2/BUILD/GAP8_V2/GCC_RISCV_PULPOS/PeopleDetection:1c01fb52 0000003c t __rt_cluster_pulpos_emu_init	/home/vz/gap_sdk/rtos/pulp/pulp-os/kernel/pulpos_emu.c:29
+/home/vz/gap_sdk_v4.7.0/occupancy_management/gap8_project_v2/BUILD/GAP8_V2/GCC_RISCV_PULPOS/PeopleDetection:1c021c52 0000003c T __rt_putc_uart	/home/vz/gap_sdk/rtos/pulp/pulp-os/libs/io/io.c:412
+/home/vz/gap_sdk_v4.7.0/occupancy_management/gap8_project_v2/BUILD/GAP8_V2/GCC_RISCV_PULPOS/PeopleDetection:1c022afa 0000003c T sprintf	/home/vz/gap_sdk/rtos/pulp/pulp-os/libs/io/sprintf.c:55
+/home/vz/gap_sdk_v4.7.0/occupancy_management/gap8_project_v2/BUILD/GAP8_V2/GCC_RISCV_PULPOS/PeopleDetection:1c01b8d6 0000003e t __pi_read_fs_write	/home/vz/gap_sdk/rtos/pmsis/pmsis_bsp/fs/read_fs/read_fs.c:499
+/home/vz/gap_sdk_v4.7.0/occupancy_management/gap8_project_v2/BUILD/GAP8_V2/GCC_RISCV_PULPOS/PeopleDetection:1c01e66c 0000003e T __rt_cbsys_add	/home/vz/gap_sdk/rtos/pulp/pulp-os/kernel/utils.c:57
+/home/vz/gap_sdk_v4.7.0/occupancy_management/gap8_project_v2/BUILD/GAP8_V2/GCC_RISCV_PULPOS/PeopleDetection:1c01f31c 0000003e T __rt_freq_init	/home/vz/gap_sdk/rtos/pulp/pulp-os/kernel/gap/freq.c:62
+/home/vz/gap_sdk_v4.7.0/occupancy_management/gap8_project_v2/BUILD/GAP8_V2/GCC_RISCV_PULPOS/PeopleDetection:1c01c1d4 00000040 t hyperflash_stall_task	/home/vz/gap_sdk/rtos/pmsis/pmsis_bsp/flash/hyperflash/hyperflash.c:489
+/home/vz/gap_sdk_v4.7.0/occupancy_management/gap8_project_v2/BUILD/GAP8_V2/GCC_RISCV_PULPOS/PeopleDetection:1c01c15c 00000040 T pi_camera_capture	/home/vz/gap_sdk/rtos/pmsis/pmsis_bsp/camera/camera.c:34
+/home/vz/gap_sdk_v4.7.0/occupancy_management/gap8_project_v2/BUILD/GAP8_V2/GCC_RISCV_PULPOS/PeopleDetection:1c01b88e 00000040 T pi_cl_fs_copy	/home/vz/gap_sdk/rtos/pmsis/pmsis_bsp/fs/fs.c:406
+/home/vz/gap_sdk_v4.7.0/occupancy_management/gap8_project_v2/BUILD/GAP8_V2/GCC_RISCV_PULPOS/PeopleDetection:1c002c46 00000042 T Ker_SSD_Init
+/home/vz/gap_sdk_v4.7.0/occupancy_management/gap8_project_v2/BUILD/GAP8_V2/GCC_RISCV_PULPOS/PeopleDetection:1c01cd68 00000042 T pi_cl_ram_copy	/home/vz/gap_sdk/rtos/pmsis/pmsis_bsp/ram/ram.c:71
+/home/vz/gap_sdk_v4.7.0/occupancy_management/gap8_project_v2/BUILD/GAP8_V2/GCC_RISCV_PULPOS/PeopleDetection:1c01b924 00000042 t __pi_read_fs_direct_read_async	/home/vz/gap_sdk/rtos/pmsis/pmsis_bsp/fs/read_fs/read_fs.c:624
+/home/vz/gap_sdk_v4.7.0/occupancy_management/gap8_project_v2/BUILD/GAP8_V2/GCC_RISCV_PULPOS/PeopleDetection:1c01bf1c 00000042 t __pi_read_fs_read_async	/home/vz/gap_sdk/rtos/pmsis/pmsis_bsp/fs/read_fs/read_fs.c:586
+/home/vz/gap_sdk_v4.7.0/occupancy_management/gap8_project_v2/BUILD/GAP8_V2/GCC_RISCV_PULPOS/PeopleDetection:1c01e978 00000042 T __rt_bridge_printf_flush
+/home/vz/gap_sdk_v4.7.0/occupancy_management/gap8_project_v2/BUILD/GAP8_V2/GCC_RISCV_PULPOS/PeopleDetection:1c0217b2 00000042 t __rt_do_putc_host	/home/vz/gap_sdk/rtos/pulp/pulp-os/libs/io/io.c:430
+/home/vz/gap_sdk_v4.7.0/occupancy_management/gap8_project_v2/BUILD/GAP8_V2/GCC_RISCV_PULPOS/PeopleDetection:1c022c10 00000042 t __rt_uart_cluster_req	/home/vz/gap_sdk/rtos/pulp/pulp-os/drivers_deprecated/uart/uart.c:266
+/home/vz/gap_sdk_v4.7.0/occupancy_management/gap8_project_v2/BUILD/GAP8_V2/GCC_RISCV_PULPOS/PeopleDetection:1c021222 00000042 t __rt_uart_wait_tx_done.isra.17	/home/vz/gap_sdk/install/GAP8_V2/include/hal/udma/uart/udma_uart_v1.h:217
+/home/vz/gap_sdk_v4.7.0/occupancy_management/gap8_project_v2/BUILD/GAP8_V2/GCC_RISCV_PULPOS/PeopleDetection:1c022ba2 00000042 t __rt_uart_wait_tx_done.isra.6	/home/vz/gap_sdk/rtos/pulp/pulp-os/drivers_deprecated/uart/uart.c:222
+/home/vz/gap_sdk_v4.7.0/occupancy_management/gap8_project_v2/BUILD/GAP8_V2/GCC_RISCV_PULPOS/PeopleDetection:1c01ca42 00000044 t hyperflash_erase_async	/home/vz/gap_sdk/rtos/pmsis/pmsis_bsp/flash/hyperflash/hyperflash.c:827
+/home/vz/gap_sdk_v4.7.0/occupancy_management/gap8_project_v2/BUILD/GAP8_V2/GCC_RISCV_PULPOS/PeopleDetection:1c01f68a 00000044 T InitFlls	/home/vz/gap_sdk/rtos/pulp/pulp-os/kernel/gap/pmu_driver.c:858
+/home/vz/gap_sdk_v4.7.0/occupancy_management/gap8_project_v2/BUILD/GAP8_V2/GCC_RISCV_PULPOS/PeopleDetection:1c021fae 00000044 t _ldiv5	/home/vz/gap_sdk/rtos/pulp/pulp-os/libs/io/prf.c:143
+/home/vz/gap_sdk_v4.7.0/occupancy_management/gap8_project_v2/BUILD/GAP8_V2/GCC_RISCV_PULPOS/PeopleDetection:1c01cf82 00000044 t __pi_thermeye_reg_read	/home/vz/gap_sdk/rtos/pmsis/pmsis_bsp/camera/thermeye/thermeye.c:39
+/home/vz/gap_sdk_v4.7.0/occupancy_management/gap8_project_v2/BUILD/GAP8_V2/GCC_RISCV_PULPOS/PeopleDetection:1c02011c 00000046 t __pi_hyper_copy_exec
+/home/vz/gap_sdk_v4.7.0/occupancy_management/gap8_project_v2/BUILD/GAP8_V2/GCC_RISCV_PULPOS/PeopleDetection:1c01e80c 00000046 t __rt_bridge_wait
+/home/vz/gap_sdk_v4.7.0/occupancy_management/gap8_project_v2/BUILD/GAP8_V2/GCC_RISCV_PULPOS/PeopleDetection:1c020690 00000048 T pi_cpi_close	/home/vz/gap_sdk/rtos/pulp/pulp-os/drivers/cpi/cpi-v1.c:73
+/home/vz/gap_sdk_v4.7.0/occupancy_management/gap8_project_v2/BUILD/GAP8_V2/GCC_RISCV_PULPOS/PeopleDetection:1c01c08c 00000048 t __pi_host_fs_copy_async	/home/vz/gap_sdk/rtos/pmsis/pmsis_bsp/fs/host_fs/host_fs.c:115
+/home/vz/gap_sdk_v4.7.0/occupancy_management/gap8_project_v2/BUILD/GAP8_V2/GCC_RISCV_PULPOS/PeopleDetection:1c02437c 00000048 d __rt_uart	/home/vz/gap_sdk/rtos/pulp/pulp-os/drivers/uart/uart.c:66
+/home/vz/gap_sdk_v4.7.0/occupancy_management/gap8_project_v2/BUILD/GAP8_V2/GCC_RISCV_PULPOS/PeopleDetection:1c01ec64 00000048 T rt_user_alloc	/home/vz/gap_sdk/rtos/pulp/pulp-os/kernel/alloc.c:207
+/home/vz/gap_sdk_v4.7.0/occupancy_management/gap8_project_v2/BUILD/GAP8_V2/GCC_RISCV_PULPOS/PeopleDetection:1c01fd74 0000004a T pi_cluster_send_task_to_cl	/home/vz/gap_sdk/rtos/pulp/pulp-os/kernel/cluster_call.c:149
+/home/vz/gap_sdk_v4.7.0/occupancy_management/gap8_project_v2/BUILD/GAP8_V2/GCC_RISCV_PULPOS/PeopleDetection:1c01f2d2 0000004a T rt_freq_set_and_get	/home/vz/gap_sdk/rtos/pulp/pulp-os/kernel/gap/freq.c:30
+/home/vz/gap_sdk_v4.7.0/occupancy_management/gap8_project_v2/BUILD/GAP8_V2/GCC_RISCV_PULPOS/PeopleDetection:1c02106c 0000004a t __rt_uart_setup	/home/vz/gap_sdk/rtos/pulp/pulp-os/drivers/uart/uart.c:264
+/home/vz/gap_sdk_v4.7.0/occupancy_management/gap8_project_v2/BUILD/GAP8_V2/GCC_RISCV_PULPOS/PeopleDetection:1c019600 0000004c t LastDefinedOutput
+/home/vz/gap_sdk_v4.7.0/occupancy_management/gap8_project_v2/BUILD/GAP8_V2/GCC_RISCV_PULPOS/PeopleDetection:1c01e8ca 0000004c T __rt_bridge_check_connection
+/home/vz/gap_sdk_v4.7.0/occupancy_management/gap8_project_v2/BUILD/GAP8_V2/GCC_RISCV_PULPOS/PeopleDetection:1c01e500 0000004c T rt_irq_set_handler	/home/vz/gap_sdk/rtos/pulp/pulp-os/kernel/irq.c:61
+/home/vz/gap_sdk_v4.7.0/occupancy_management/gap8_project_v2/BUILD/GAP8_V2/GCC_RISCV_PULPOS/PeopleDetection:1c01ecac 0000004c T rt_user_free	/home/vz/gap_sdk/rtos/pulp/pulp-os/kernel/alloc.c:291
+/home/vz/gap_sdk_v4.7.0/occupancy_management/gap8_project_v2/BUILD/GAP8_V2/GCC_RISCV_PULPOS/PeopleDetection:1c01bc48 0000004e t __pi_read_fs_close
+/home/vz/gap_sdk_v4.7.0/occupancy_management/gap8_project_v2/BUILD/GAP8_V2/GCC_RISCV_PULPOS/PeopleDetection:1c022d16 0000004e T rt_uart_close	/home/vz/gap_sdk/rtos/pulp/pulp-os/drivers_deprecated/uart/uart.c:228
+/home/vz/gap_sdk_v4.7.0/occupancy_management/gap8_project_v2/BUILD/GAP8_V2/GCC_RISCV_PULPOS/PeopleDetection:1c0043aa 00000050 t KerConv3x2from3x3Stride1_H_SQ8.isra.16
+/home/vz/gap_sdk_v4.7.0/occupancy_management/gap8_project_v2/BUILD/GAP8_V2/GCC_RISCV_PULPOS/PeopleDetection:1c003e1e 00000050 t KerConv3x2from3x3Stride2_H_SQ8.isra.23
+/home/vz/gap_sdk_v4.7.0/occupancy_management/gap8_project_v2/BUILD/GAP8_V2/GCC_RISCV_PULPOS/PeopleDetection:1c024244 00000050 D output_1
+/home/vz/gap_sdk_v4.7.0/occupancy_management/gap8_project_v2/BUILD/GAP8_V2/GCC_RISCV_PULPOS/PeopleDetection:1c020f10 00000050 T pi_gpio_mask_configure	/home/vz/gap_sdk/rtos/pulp/pulp-os/drivers/gpio/gpio-v2.c:279
+/home/vz/gap_sdk_v4.7.0/occupancy_management/gap8_project_v2/BUILD/GAP8_V2/GCC_RISCV_PULPOS/PeopleDetection:1c01e54e 00000050 T __rt_handle_illegal_instr	/home/vz/gap_sdk/rtos/pulp/pulp-os/kernel/irq.c:94
+/home/vz/gap_sdk_v4.7.0/occupancy_management/gap8_project_v2/BUILD/GAP8_V2/GCC_RISCV_PULPOS/PeopleDetection:1c021762 00000050 t __rt_io_uart_wait_req	/home/vz/gap_sdk/rtos/pulp/pulp-os/libs/io/io.c:315
+/home/vz/gap_sdk_v4.7.0/occupancy_management/gap8_project_v2/BUILD/GAP8_V2/GCC_RISCV_PULPOS/PeopleDetection:00000354 00000050 D __rt_udma_channels
+/home/vz/gap_sdk_v4.7.0/occupancy_management/gap8_project_v2/BUILD/GAP8_V2/GCC_RISCV_PULPOS/PeopleDetection:1c02022a 00000052 t exec_pending_task	/home/vz/gap_sdk/rtos/pulp/pulp-os/drivers/hyper/hyperram-v1.c:867
+/home/vz/gap_sdk_v4.7.0/occupancy_management/gap8_project_v2/BUILD/GAP8_V2/GCC_RISCV_PULPOS/PeopleDetection:1c01ce04 00000052 T extern_alloc_init	/home/vz/gap_sdk/rtos/pmsis/pmsis_bsp/ram/alloc_extern.c:104
+/home/vz/gap_sdk_v4.7.0/occupancy_management/gap8_project_v2/BUILD/GAP8_V2/GCC_RISCV_PULPOS/PeopleDetection:1c01cb2e 00000052 t hyperflash_check_program	/home/vz/gap_sdk/rtos/pmsis/pmsis_bsp/flash/hyperflash/hyperflash.c:673
+/home/vz/gap_sdk_v4.7.0/occupancy_management/gap8_project_v2/BUILD/GAP8_V2/GCC_RISCV_PULPOS/PeopleDetection:1c01e59e 00000052 T __rt_irq_init	/home/vz/gap_sdk/rtos/pulp/pulp-os/kernel/irq.c:103
+/home/vz/gap_sdk_v4.7.0/occupancy_management/gap8_project_v2/BUILD/GAP8_V2/GCC_RISCV_PULPOS/PeopleDetection:1c0240a4 00000054 d hyperflash_api	/home/vz/gap_sdk/rtos/pmsis/pmsis_bsp/flash/hyperflash/hyperflash.c:944
+/home/vz/gap_sdk_v4.7.0/occupancy_management/gap8_project_v2/BUILD/GAP8_V2/GCC_RISCV_PULPOS/PeopleDetection:1c01cada 00000054 t hyperflash_check_erase	/home/vz/gap_sdk/rtos/pmsis/pmsis_bsp/flash/hyperflash/hyperflash.c:709
+/home/vz/gap_sdk_v4.7.0/occupancy_management/gap8_project_v2/BUILD/GAP8_V2/GCC_RISCV_PULPOS/PeopleDetection:1c0045f4 00000054 t KerConv3x2from3x3Stride2_H_SQ8.isra.19
+/home/vz/gap_sdk_v4.7.0/occupancy_management/gap8_project_v2/BUILD/GAP8_V2/GCC_RISCV_PULPOS/PeopleDetection:1c01b806 00000054 T __pi_cl_fs_copy_req_exec	/home/vz/gap_sdk/rtos/pmsis/pmsis_bsp/fs/fs.c:359
+/home/vz/gap_sdk_v4.7.0/occupancy_management/gap8_project_v2/BUILD/GAP8_V2/GCC_RISCV_PULPOS/PeopleDetection:1c0216d2 00000054 T __rt_i2s_init	/home/vz/gap_sdk/rtos/pulp/pulp-os/drivers_deprecated/i2s/i2s-v1.c:268
+/home/vz/gap_sdk_v4.7.0/occupancy_management/gap8_project_v2/BUILD/GAP8_V2/GCC_RISCV_PULPOS/PeopleDetection:1c0215d0 00000054 T __rt_udma_copy_enqueue	/home/vz/gap_sdk/rtos/pulp/pulp-os/drivers/udma/udma-v2.c:55
+/home/vz/gap_sdk_v4.7.0/occupancy_management/gap8_project_v2/BUILD/GAP8_V2/GCC_RISCV_PULPOS/PeopleDetection:1c001a9e 00000056 T __fixsfsi	/home/haugoug/src/riscv-gnu-toolchain/riscv-gcc/libgcc/soft-fp/fixsfsi.c:35
+/home/vz/gap_sdk_v4.7.0/occupancy_management/gap8_project_v2/BUILD/GAP8_V2/GCC_RISCV_PULPOS/PeopleDetection:1c01c606 00000056 t hyperflash_reg_set_async	/home/vz/gap_sdk/rtos/pmsis/pmsis_bsp/flash/hyperflash/hyperflash.c:312
+/home/vz/gap_sdk_v4.7.0/occupancy_management/gap8_project_v2/BUILD/GAP8_V2/GCC_RISCV_PULPOS/PeopleDetection:1c020162 00000056 t __pi_hyper_copy	/home/vz/gap_sdk/rtos/pulp/pulp-os/drivers/hyper/hyperram-v1.c:914
+/home/vz/gap_sdk_v4.7.0/occupancy_management/gap8_project_v2/BUILD/GAP8_V2/GCC_RISCV_PULPOS/PeopleDetection:1c01f21e 00000056 T __rt_periph_wait_event	/home/vz/gap_sdk/rtos/pulp/pulp-os/kernel/periph-v2.c:237
+/home/vz/gap_sdk_v4.7.0/occupancy_management/gap8_project_v2/BUILD/GAP8_V2/GCC_RISCV_PULPOS/PeopleDetection:1c00165c 00000058 T __floatsidf	/home/haugoug/src/riscv-gnu-toolchain/riscv-gcc/libgcc/soft-fp/floatsidf.c:36
+/home/vz/gap_sdk_v4.7.0/occupancy_management/gap8_project_v2/BUILD/GAP8_V2/GCC_RISCV_PULPOS/PeopleDetection:1c0200c4 00000058 T __pi_hyper_copy_aligned	/home/vz/gap_sdk/rtos/pulp/pulp-os/drivers/hyper/hyperram-v1.c:480
+/home/vz/gap_sdk_v4.7.0/occupancy_management/gap8_project_v2/BUILD/GAP8_V2/GCC_RISCV_PULPOS/PeopleDetection:1c0245f4 00000058 b __pos_pwm	/home/vz/gap_sdk/rtos/pulp/pulp-os/drivers/pwm/pwm-v1.c:43
+/home/vz/gap_sdk_v4.7.0/occupancy_management/gap8_project_v2/BUILD/GAP8_V2/GCC_RISCV_PULPOS/PeopleDetection:1c02156e 00000058 T rt_extern_alloc_init	/home/vz/gap_sdk/rtos/pulp/pulp-os/kernel/alloc_extern.c:105
+/home/vz/gap_sdk_v4.7.0/occupancy_management/gap8_project_v2/BUILD/GAP8_V2/GCC_RISCV_PULPOS/PeopleDetection:1c020ade 00000058 t __rt_i2c_init	/home/vz/gap_sdk/rtos/pulp/pulp-os/drivers/i2c/i2c-v2.c:307
+/home/vz/gap_sdk_v4.7.0/occupancy_management/gap8_project_v2/BUILD/GAP8_V2/GCC_RISCV_PULPOS/PeopleDetection:1c01cdaa 0000005a T pi_cl_ram_copy_2d	/home/vz/gap_sdk/rtos/pmsis/pmsis_bsp/ram/ram.c:92
+/home/vz/gap_sdk_v4.7.0/occupancy_management/gap8_project_v2/BUILD/GAP8_V2/GCC_RISCV_PULPOS/PeopleDetection:1c0217f4 0000005a t __rt_io_start	/home/vz/gap_sdk/rtos/pulp/pulp-os/libs/io/io.c:746
+/home/vz/gap_sdk_v4.7.0/occupancy_management/gap8_project_v2/BUILD/GAP8_V2/GCC_RISCV_PULPOS/PeopleDetection:1c001600 0000005c T __fixdfsi	/home/haugoug/src/riscv-gnu-toolchain/riscv-gcc/libgcc/soft-fp/fixdfsi.c:35
+/home/vz/gap_sdk_v4.7.0/occupancy_management/gap8_project_v2/BUILD/GAP8_V2/GCC_RISCV_PULPOS/PeopleDetection:1c01c0f4 0000005c t __pi_host_fs_open	/home/vz/gap_sdk/rtos/pmsis/pmsis_bsp/fs/host_fs/host_fs.c:44
+/home/vz/gap_sdk_v4.7.0/occupancy_management/gap8_project_v2/BUILD/GAP8_V2/GCC_RISCV_PULPOS/PeopleDetection:1c01fc1e 0000005c T rt_cluster_mount	/home/vz/gap_sdk/rtos/pulp/pulp-os/kernel/pulpos_emu.c:68
+/home/vz/gap_sdk_v4.7.0/occupancy_management/gap8_project_v2/BUILD/GAP8_V2/GCC_RISCV_PULPOS/PeopleDetection:1c022d98 0000005c T __rt_uart_init	/home/vz/gap_sdk/rtos/pulp/pulp-os/drivers_deprecated/uart/uart.c:292
+/home/vz/gap_sdk_v4.7.0/occupancy_management/gap8_project_v2/BUILD/GAP8_V2/GCC_RISCV_PULPOS/PeopleDetection:1c01ce5e 0000005e T extern_alloc	/home/vz/gap_sdk/rtos/pmsis/pmsis_bsp/ram/alloc_extern.c:135
+/home/vz/gap_sdk_v4.7.0/occupancy_management/gap8_project_v2/BUILD/GAP8_V2/GCC_RISCV_PULPOS/PeopleDetection:1c01c70e 0000005e t hyperflash_program_async	/home/vz/gap_sdk/rtos/pmsis/pmsis_bsp/flash/hyperflash/hyperflash.c:691
+/home/vz/gap_sdk_v4.7.0/occupancy_management/gap8_project_v2/BUILD/GAP8_V2/GCC_RISCV_PULPOS/PeopleDetection:1c01d414 0000005e T pi_partition_find_first	/home/vz/gap_sdk/rtos/pmsis/pmsis_bsp/partition/partition.c:65
+/home/vz/gap_sdk_v4.7.0/occupancy_management/gap8_project_v2/BUILD/GAP8_V2/GCC_RISCV_PULPOS/PeopleDetection:1c01f274 0000005e T __rt_periph_init	/home/vz/gap_sdk/rtos/pulp/pulp-os/kernel/periph-v2.c:276
+/home/vz/gap_sdk_v4.7.0/occupancy_management/gap8_project_v2/BUILD/GAP8_V2/GCC_RISCV_PULPOS/PeopleDetection:1c021bf4 0000005e T __rt_putc_debug_bridge	/home/vz/gap_sdk/rtos/pulp/pulp-os/libs/io/io.c:288
+/home/vz/gap_sdk_v4.7.0/occupancy_management/gap8_project_v2/BUILD/GAP8_V2/GCC_RISCV_PULPOS/PeopleDetection:1c01c5a6 00000060 t hyperflash_reg_get_async	/home/vz/gap_sdk/rtos/pmsis/pmsis_bsp/flash/hyperflash/hyperflash.c:326
+/home/vz/gap_sdk_v4.7.0/occupancy_management/gap8_project_v2/BUILD/GAP8_V2/GCC_RISCV_PULPOS/PeopleDetection:1c001e8a 00000060 T __pi_cb_gpio
+/home/vz/gap_sdk_v4.7.0/occupancy_management/gap8_project_v2/BUILD/GAP8_V2/GCC_RISCV_PULPOS/PeopleDetection:1c020a6a 00000060 T pi_i2c_close	/home/vz/gap_sdk/rtos/pulp/pulp-os/drivers/i2c/i2c-v2.c:277
+/home/vz/gap_sdk_v4.7.0/occupancy_management/gap8_project_v2/BUILD/GAP8_V2/GCC_RISCV_PULPOS/PeopleDetection:1c0212c2 00000062 T __pi_uart_handle_copy	/home/vz/gap_sdk/rtos/pulp/pulp-os/drivers/uart/uart.c:68
+/home/vz/gap_sdk_v4.7.0/occupancy_management/gap8_project_v2/BUILD/GAP8_V2/GCC_RISCV_PULPOS/PeopleDetection:1c01f7a6 00000062 t __rt_init_cluster_data	/home/vz/gap_sdk/rtos/pulp/pulp-os/kernel/cluster.c:72
+/home/vz/gap_sdk_v4.7.0/occupancy_management/gap8_project_v2/BUILD/GAP8_V2/GCC_RISCV_PULPOS/PeopleDetection:1c020d68 00000064 T pi_gpio_open	/home/vz/gap_sdk/rtos/pulp/pulp-os/drivers/gpio/gpio-v2.c:96
+/home/vz/gap_sdk_v4.7.0/occupancy_management/gap8_project_v2/BUILD/GAP8_V2/GCC_RISCV_PULPOS/PeopleDetection:1c020e36 00000064 T pi_gpio_pin_notif_configure	/home/vz/gap_sdk/rtos/pulp/pulp-os/drivers/gpio/gpio-v2.c:193
+/home/vz/gap_sdk_v4.7.0/occupancy_management/gap8_project_v2/BUILD/GAP8_V2/GCC_RISCV_PULPOS/PeopleDetection:1c01f808 00000064 t __rt_cluster_init	/home/vz/gap_sdk/rtos/pulp/pulp-os/kernel/cluster.c:382
+/home/vz/gap_sdk_v4.7.0/occupancy_management/gap8_project_v2/BUILD/GAP8_V2/GCC_RISCV_PULPOS/PeopleDetection:1c01eb7c 00000064 T __rt_event_execute	/home/vz/gap_sdk/rtos/pulp/pulp-os/kernel/events.c:189
+/home/vz/gap_sdk_v4.7.0/occupancy_management/gap8_project_v2/BUILD/GAP8_V2/GCC_RISCV_PULPOS/PeopleDetection:1c020626 0000006a T pi_cpi_open	/home/vz/gap_sdk/rtos/pulp/pulp-os/drivers/cpi/cpi-v1.c:37
+/home/vz/gap_sdk_v4.7.0/occupancy_management/gap8_project_v2/BUILD/GAP8_V2/GCC_RISCV_PULPOS/PeopleDetection:1c01d60e 0000006c T flash_partition_find_first	/home/vz/gap_sdk/rtos/pmsis/pmsis_bsp/partition/flash_partition.c:228
+/home/vz/gap_sdk_v4.7.0/occupancy_management/gap8_project_v2/BUILD/GAP8_V2/GCC_RISCV_PULPOS/PeopleDetection:1c01ccce 00000070 t __pi_ram_cluster_req
+/home/vz/gap_sdk_v4.7.0/occupancy_management/gap8_project_v2/BUILD/GAP8_V2/GCC_RISCV_PULPOS/PeopleDetection:1c01faa6 00000070 T __rt_cluster_push_fc_event	/home/vz/gap_sdk/rtos/pulp/pulp-os/kernel/cluster.c:413
+/home/vz/gap_sdk_v4.7.0/occupancy_management/gap8_project_v2/BUILD/GAP8_V2/GCC_RISCV_PULPOS/PeopleDetection:1c02186e 00000070 t __rt_io_lock
+/home/vz/gap_sdk_v4.7.0/occupancy_management/gap8_project_v2/BUILD/GAP8_V2/GCC_RISCV_PULPOS/PeopleDetection:1c021912 00000070 t __rt_io_unlock
+/home/vz/gap_sdk_v4.7.0/occupancy_management/gap8_project_v2/BUILD/GAP8_V2/GCC_RISCV_PULPOS/PeopleDetection:1c01bd32 00000072 t __pi_fs_read_cached	/home/vz/gap_sdk/rtos/pmsis/pmsis_bsp/fs/read_fs/read_fs.c:434
+/home/vz/gap_sdk_v4.7.0/occupancy_management/gap8_project_v2/BUILD/GAP8_V2/GCC_RISCV_PULPOS/PeopleDetection:1c0214c8 00000072 T __pi_uart_init	/home/vz/gap_sdk/rtos/pulp/pulp-os/drivers/uart/uart.c:630
+/home/vz/gap_sdk_v4.7.0/occupancy_management/gap8_project_v2/BUILD/GAP8_V2/GCC_RISCV_PULPOS/PeopleDetection:1c01eda4 00000072 T __rt_allocs_init	/home/vz/gap_sdk/rtos/pulp/pulp-os/kernel/alloc.c:465
+/home/vz/gap_sdk_v4.7.0/occupancy_management/gap8_project_v2/BUILD/GAP8_V2/GCC_RISCV_PULPOS/PeopleDetection:1c021e5e 00000072 T __rt_io_init	/home/vz/gap_sdk/rtos/pulp/pulp-os/libs/io/io.c:800
+/home/vz/gap_sdk_v4.7.0/occupancy_management/gap8_project_v2/BUILD/GAP8_V2/GCC_RISCV_PULPOS/PeopleDetection:1c01d472 00000074 T flash_partition_table_verify	/home/vz/gap_sdk/rtos/pmsis/pmsis_bsp/partition/flash_partition.c:80
+/home/vz/gap_sdk_v4.7.0/occupancy_management/gap8_project_v2/BUILD/GAP8_V2/GCC_RISCV_PULPOS/PeopleDetection:1c020c40 00000074 T pi_pwm_duty_cycle_set	/home/vz/gap_sdk/rtos/pulp/pulp-os/drivers/pwm/pwm-v1.c:141
+/home/vz/gap_sdk_v4.7.0/occupancy_management/gap8_project_v2/BUILD/GAP8_V2/GCC_RISCV_PULPOS/PeopleDetection:1c021dde 00000076 T exit	/home/vz/gap_sdk/rtos/pulp/pulp-os/libs/io/io.c:690
+/home/vz/gap_sdk_v4.7.0/occupancy_management/gap8_project_v2/BUILD/GAP8_V2/GCC_RISCV_PULPOS/PeopleDetection:1c01c42a 00000076 t hyperflash_read_async	/home/vz/gap_sdk/rtos/pmsis/pmsis_bsp/flash/hyperflash/hyperflash.c:340
+/home/vz/gap_sdk_v4.7.0/occupancy_management/gap8_project_v2/BUILD/GAP8_V2/GCC_RISCV_PULPOS/PeopleDetection:1c020e9a 00000076 T pi_gpio_pin_task_add	/home/vz/gap_sdk/rtos/pulp/pulp-os/drivers/gpio/gpio-v2.c:238
+/home/vz/gap_sdk_v4.7.0/occupancy_management/gap8_project_v2/BUILD/GAP8_V2/GCC_RISCV_PULPOS/PeopleDetection:1c01eaa6 00000076 T rt_event_alloc	/home/vz/gap_sdk/rtos/pulp/pulp-os/kernel/events.c:52
+/home/vz/gap_sdk_v4.7.0/occupancy_management/gap8_project_v2/BUILD/GAP8_V2/GCC_RISCV_PULPOS/PeopleDetection:1c01e852 00000078 T __rt_bridge_handle_notif	/home/vz/gap_sdk/rtos/pulp/pulp-os/kernel/bridge.c:644
+/home/vz/gap_sdk_v4.7.0/occupancy_management/gap8_project_v2/BUILD/GAP8_V2/GCC_RISCV_PULPOS/PeopleDetection:1c01e9ba 00000078 T __rt_bridge_req_shutdown	/home/vz/gap_sdk/rtos/pulp/pulp-os/kernel/bridge.c:774
+/home/vz/gap_sdk_v4.7.0/occupancy_management/gap8_project_v2/BUILD/GAP8_V2/GCC_RISCV_PULPOS/PeopleDetection:1c01eeca 0000007a T rt_event_push_delayed	/home/vz/gap_sdk/rtos/pulp/pulp-os/kernel/time.c:59
+/home/vz/gap_sdk_v4.7.0/occupancy_management/gap8_project_v2/BUILD/GAP8_V2/GCC_RISCV_PULPOS/PeopleDetection:1c024884 0000007b B raspDetString
+/home/vz/gap_sdk_v4.7.0/occupancy_management/gap8_project_v2/BUILD/GAP8_V2/GCC_RISCV_PULPOS/PeopleDetection:1c006288 0000007c t __cl_dma_wait
+/home/vz/gap_sdk_v4.7.0/occupancy_management/gap8_project_v2/BUILD/GAP8_V2/GCC_RISCV_PULPOS/PeopleDetection:1c01e5f0 0000007c t __rt_fc_cluster_lock_req	/home/vz/gap_sdk/rtos/pulp/pulp-os/kernel/utils.c:142
+/home/vz/gap_sdk_v4.7.0/occupancy_management/gap8_project_v2/BUILD/GAP8_V2/GCC_RISCV_PULPOS/PeopleDetection:1c024554 00000080 b __pi_hyper_temp_buffer	/home/vz/gap_sdk/rtos/pulp/pulp-os/drivers/hyper/hyperram-v1.c:160
+/home/vz/gap_sdk_v4.7.0/occupancy_management/gap8_project_v2/BUILD/GAP8_V2/GCC_RISCV_PULPOS/PeopleDetection:1c0246e4 00000080 b __rt_io_event	/home/vz/gap_sdk/rtos/pulp/pulp-os/libs/io/io.c:39
+/home/vz/gap_sdk_v4.7.0/occupancy_management/gap8_project_v2/BUILD/GAP8_V2/GCC_RISCV_PULPOS/PeopleDetection:1c0243c4 00000080 d __rt_putc_host_buffer	/home/vz/gap_sdk/rtos/pulp/pulp-os/libs/io/io.c:47
+/home/vz/gap_sdk_v4.7.0/occupancy_management/gap8_project_v2/BUILD/GAP8_V2/GCC_RISCV_PULPOS/PeopleDetection:1c01bfb8 00000084 t __pi_host_fs_copy_2d_async	/home/vz/gap_sdk/rtos/pmsis/pmsis_bsp/fs/host_fs/host_fs.c:126
+/home/vz/gap_sdk_v4.7.0/occupancy_management/gap8_project_v2/BUILD/GAP8_V2/GCC_RISCV_PULPOS/PeopleDetection:1c02119e 00000084 t __pi_uart_copy_enqueue	/home/vz/gap_sdk/rtos/pulp/pulp-os/drivers/uart/uart.c:170
+/home/vz/gap_sdk_v4.7.0/occupancy_management/gap8_project_v2/BUILD/GAP8_V2/GCC_RISCV_PULPOS/PeopleDetection:1c020cdc 00000086 T __pi_gpio_handler	/home/vz/gap_sdk/rtos/pulp/pulp-os/drivers/gpio/gpio-v2.c:54
+/home/vz/gap_sdk_v4.7.0/occupancy_management/gap8_project_v2/BUILD/GAP8_V2/GCC_RISCV_PULPOS/PeopleDetection:1c0244a0 00000088 b bsp_fs_data	/home/vz/gap_sdk/rtos/pmsis/pmsis_bsp/fs/host_fs/host_fs.c:27
+/home/vz/gap_sdk_v4.7.0/occupancy_management/gap8_project_v2/BUILD/GAP8_V2/GCC_RISCV_PULPOS/PeopleDetection:1c001c9a 00000088 T __extendsfdf2	/home/haugoug/src/riscv-gnu-toolchain/riscv-gcc/libgcc/soft-fp/extendsfdf2.c:37
+/home/vz/gap_sdk_v4.7.0/occupancy_management/gap8_project_v2/BUILD/GAP8_V2/GCC_RISCV_PULPOS/PeopleDetection:1c0242f4 00000088 d __rt_i2c	/home/vz/gap_sdk/rtos/pulp/pulp-os/drivers/i2c/i2c-v2.c:25
+/home/vz/gap_sdk_v4.7.0/occupancy_management/gap8_project_v2/BUILD/GAP8_V2/GCC_RISCV_PULPOS/PeopleDetection:1c01c214 0000008a t hyperflash_read_2d_async	/home/vz/gap_sdk/rtos/pmsis/pmsis_bsp/flash/hyperflash/hyperflash.c:352
+/home/vz/gap_sdk_v4.7.0/occupancy_management/gap8_project_v2/BUILD/GAP8_V2/GCC_RISCV_PULPOS/PeopleDetection:1c01cebc 0000008c T extern_free	/home/vz/gap_sdk/rtos/pmsis/pmsis_bsp/ram/alloc_extern.c:202
+/home/vz/gap_sdk_v4.7.0/occupancy_management/gap8_project_v2/BUILD/GAP8_V2/GCC_RISCV_PULPOS/PeopleDetection:1c01ef6c 0000008c T __rt_time_init	/home/vz/gap_sdk/rtos/pulp/pulp-os/kernel/time.c:136
+/home/vz/gap_sdk_v4.7.0/occupancy_management/gap8_project_v2/BUILD/GAP8_V2/GCC_RISCV_PULPOS/PeopleDetection:1c01c7a6 0000008e t hyperflash_open	/home/vz/gap_sdk/rtos/pmsis/pmsis_bsp/flash/hyperflash/hyperflash.c:224
+/home/vz/gap_sdk_v4.7.0/occupancy_management/gap8_project_v2/BUILD/GAP8_V2/GCC_RISCV_PULPOS/PeopleDetection:1c022c88 0000008e T __rt_uart_open	/home/vz/gap_sdk/rtos/pulp/pulp-os/drivers_deprecated/uart/uart.c:151
+/home/vz/gap_sdk_v4.7.0/occupancy_management/gap8_project_v2/BUILD/GAP8_V2/GCC_RISCV_PULPOS/PeopleDetection:1c01fb8e 00000090 T rt_cluster_call	/home/vz/gap_sdk/rtos/pulp/pulp-os/kernel/pulpos_emu.c:40
+/home/vz/gap_sdk_v4.7.0/occupancy_management/gap8_project_v2/BUILD/GAP8_V2/GCC_RISCV_PULPOS/PeopleDetection:1c01f3ac 00000090 T __rt_pmu_cluster_power_down	/home/vz/gap_sdk/rtos/pulp/pulp-os/kernel/gap/pmu_driver.c:205
+/home/vz/gap_sdk_v4.7.0/occupancy_management/gap8_project_v2/BUILD/GAP8_V2/GCC_RISCV_PULPOS/PeopleDetection:1c020b44 00000092 T pi_pwm_open	/home/vz/gap_sdk/rtos/pulp/pulp-os/drivers/pwm/pwm-v1.c:53
+/home/vz/gap_sdk_v4.7.0/occupancy_management/gap8_project_v2/BUILD/GAP8_V2/GCC_RISCV_PULPOS/PeopleDetection:1c021a5c 00000092 t __rt_io_uart_wait_pending	/home/vz/gap_sdk/rtos/pulp/pulp-os/libs/io/io.c:332
+/home/vz/gap_sdk_v4.7.0/occupancy_management/gap8_project_v2/BUILD/GAP8_V2/GCC_RISCV_PULPOS/PeopleDetection:1c021efc 00000092 t _to_x	/home/vz/gap_sdk/rtos/pulp/pulp-os/libs/io/prf.c:44
+/home/vz/gap_sdk_v4.7.0/occupancy_management/gap8_project_v2/BUILD/GAP8_V2/GCC_RISCV_PULPOS/PeopleDetection:1c01cc20 00000094 t hyperram_open	/home/vz/gap_sdk/rtos/pmsis/pmsis_bsp/ram/hyperram/hyperram.c:40
+/home/vz/gap_sdk_v4.7.0/occupancy_management/gap8_project_v2/BUILD/GAP8_V2/GCC_RISCV_PULPOS/PeopleDetection:1c017582 00000094 T lynredCNN_Destruct
+/home/vz/gap_sdk_v4.7.0/occupancy_management/gap8_project_v2/BUILD/GAP8_V2/GCC_RISCV_PULPOS/PeopleDetection:1c01be88 00000094 t __pi_read_fs_try_read	/home/vz/gap_sdk/rtos/pmsis/pmsis_bsp/fs/read_fs/read_fs.c:537
+/home/vz/gap_sdk_v4.7.0/occupancy_management/gap8_project_v2/BUILD/GAP8_V2/GCC_RISCV_PULPOS/PeopleDetection:1c0039c6 00000098 T KerParReduct_CC_ReLU_SQ8
+/home/vz/gap_sdk_v4.7.0/occupancy_management/gap8_project_v2/BUILD/GAP8_V2/GCC_RISCV_PULPOS/PeopleDetection:1c0210d8 00000098 t __pi_uart_copy_enqueue_exec_flow_control
+/home/vz/gap_sdk_v4.7.0/occupancy_management/gap8_project_v2/BUILD/GAP8_V2/GCC_RISCV_PULPOS/PeopleDetection:1c02464c 00000098 b __rt_gpio	/home/vz/gap_sdk/rtos/pulp/pulp-os/drivers/gpio/gpio-v2.c:34
+/home/vz/gap_sdk_v4.7.0/occupancy_management/gap8_project_v2/BUILD/GAP8_V2/GCC_RISCV_PULPOS/PeopleDetection:1c01df82 0000009c T MD5_Update	/home/vz/gap_sdk/rtos/pmsis/pmsis_bsp/crc/md5.c:218
+/home/vz/gap_sdk_v4.7.0/occupancy_management/gap8_project_v2/BUILD/GAP8_V2/GCC_RISCV_PULPOS/PeopleDetection:1c01bc96 0000009c t __pi_read_fs_mount	/home/vz/gap_sdk/rtos/pmsis/pmsis_bsp/fs/read_fs/read_fs.c:242
+/home/vz/gap_sdk_v4.7.0/occupancy_management/gap8_project_v2/BUILD/GAP8_V2/GCC_RISCV_PULPOS/PeopleDetection:1c020512 0000009e t __pi_hyper_copy_2d	/home/vz/gap_sdk/rtos/pulp/pulp-os/drivers/hyper/hyperram-v1.c:946
+/home/vz/gap_sdk_v4.7.0/occupancy_management/gap8_project_v2/BUILD/GAP8_V2/GCC_RISCV_PULPOS/PeopleDetection:1c020024 000000a0 T pi_hyper_close	/home/vz/gap_sdk/rtos/pulp/pulp-os/drivers/hyper/hyperram-v1.c:337
+/home/vz/gap_sdk_v4.7.0/occupancy_management/gap8_project_v2/BUILD/GAP8_V2/GCC_RISCV_PULPOS/PeopleDetection:1c001af4 000000a4 T __floatsisf	/home/haugoug/src/riscv-gnu-toolchain/riscv-gcc/libgcc/soft-fp/floatsisf.c:35
+/home/vz/gap_sdk_v4.7.0/occupancy_management/gap8_project_v2/BUILD/GAP8_V2/GCC_RISCV_PULPOS/PeopleDetection:1c01f51c 000000a4 T InitOneFll	/home/vz/gap_sdk/rtos/pulp/pulp-os/kernel/gap/pmu_driver.c:771
+/home/vz/gap_sdk_v4.7.0/occupancy_management/gap8_project_v2/BUILD/GAP8_V2/GCC_RISCV_PULPOS/PeopleDetection:1c0063ac 000000a8 t __cl_dma_memcpy.constprop.12
+/home/vz/gap_sdk_v4.7.0/occupancy_management/gap8_project_v2/BUILD/GAP8_V2/GCC_RISCV_PULPOS/PeopleDetection:1c006304 000000a8 t __cl_dma_memcpy.constprop.13
+/home/vz/gap_sdk_v4.7.0/occupancy_management/gap8_project_v2/BUILD/GAP8_V2/GCC_RISCV_PULPOS/PeopleDetection:1c01c998 000000aa t hyperflash_erase_resume	/home/vz/gap_sdk/rtos/pmsis/pmsis_bsp/flash/hyperflash/hyperflash.c:766
+/home/vz/gap_sdk_v4.7.0/occupancy_management/gap8_project_v2/BUILD/GAP8_V2/GCC_RISCV_PULPOS/PeopleDetection:1c021c8e 000000ac t tfp_putc.isra.9	/home/vz/gap_sdk/rtos/pulp/pulp-os/libs/io/io.c:795
+/home/vz/gap_sdk_v4.7.0/occupancy_management/gap8_project_v2/BUILD/GAP8_V2/GCC_RISCV_PULPOS/PeopleDetection:1c01c65c 000000b2 t hyperflash_program_resume	/home/vz/gap_sdk/rtos/pmsis/pmsis_bsp/flash/hyperflash/hyperflash.c:604
+/home/vz/gap_sdk_v4.7.0/occupancy_management/gap8_project_v2/BUILD/GAP8_V2/GCC_RISCV_PULPOS/PeopleDetection:1c01c376 000000b4 t hyperflash_erase_chip_async	/home/vz/gap_sdk/rtos/pmsis/pmsis_bsp/flash/hyperflash/hyperflash.c:726
+/home/vz/gap_sdk_v4.7.0/occupancy_management/gap8_project_v2/BUILD/GAP8_V2/GCC_RISCV_PULPOS/PeopleDetection:1c003be4 000000b4 T KerParSetBiasB32_SQ8
+/home/vz/gap_sdk_v4.7.0/occupancy_management/gap8_project_v2/BUILD/GAP8_V2/GCC_RISCV_PULPOS/PeopleDetection:1c020872 000000bc T pi_i2c_read_async	/home/vz/gap_sdk/rtos/pulp/pulp-os/drivers/i2c/i2c-v2.c:190
+/home/vz/gap_sdk_v4.7.0/occupancy_management/gap8_project_v2/BUILD/GAP8_V2/GCC_RISCV_PULPOS/PeopleDetection:1c01f6ce 000000bc T __rt_pmu_init	/home/vz/gap_sdk/rtos/pulp/pulp-os/kernel/gap/pmu_driver.c:472
+/home/vz/gap_sdk_v4.7.0/occupancy_management/gap8_project_v2/BUILD/GAP8_V2/GCC_RISCV_PULPOS/PeopleDetection:1c01c2b8 000000be t hyperflash_erase_sector_async	/home/vz/gap_sdk/rtos/pmsis/pmsis_bsp/flash/hyperflash/hyperflash.c:745
+/home/vz/gap_sdk_v4.7.0/occupancy_management/gap8_project_v2/BUILD/GAP8_V2/GCC_RISCV_PULPOS/PeopleDetection:1c024174 000000c0 D __hal_debug_struct
+/home/vz/gap_sdk_v4.7.0/occupancy_management/gap8_project_v2/BUILD/GAP8_V2/GCC_RISCV_PULPOS/PeopleDetection:1c00415c 000000c2 t KerConv2x3from3x3Stride1_V_SQ8
+/home/vz/gap_sdk_v4.7.0/occupancy_management/gap8_project_v2/BUILD/GAP8_V2/GCC_RISCV_PULPOS/PeopleDetection:1c0042e8 000000c2 t KerConv3x3Stride1_Body_SQ8.isra.15
+/home/vz/gap_sdk_v4.7.0/occupancy_management/gap8_project_v2/BUILD/GAP8_V2/GCC_RISCV_PULPOS/PeopleDetection:1c003d5c 000000c2 t KerConv3x3Stride2_Body_SQ8.isra.22
+/home/vz/gap_sdk_v4.7.0/occupancy_management/gap8_project_v2/BUILD/GAP8_V2/GCC_RISCV_PULPOS/PeopleDetection:1c003c98 000000c4 t KerConv2x3from3x3Stride2_V_SQ8
+/home/vz/gap_sdk_v4.7.0/occupancy_management/gap8_project_v2/BUILD/GAP8_V2/GCC_RISCV_PULPOS/PeopleDetection:1c024920 000000c8 B bleDetString
+/home/vz/gap_sdk_v4.7.0/occupancy_management/gap8_project_v2/BUILD/GAP8_V2/GCC_RISCV_PULPOS/PeopleDetection:1c00452c 000000c8 t KerConv3x3Stride2_Body_SQ8.isra.18
+/home/vz/gap_sdk_v4.7.0/occupancy_management/gap8_project_v2/BUILD/GAP8_V2/GCC_RISCV_PULPOS/PeopleDetection:1c0247a8 000000c8 B tmpString
+/home/vz/gap_sdk_v4.7.0/occupancy_management/gap8_project_v2/BUILD/GAP8_V2/GCC_RISCV_PULPOS/PeopleDetection:1c00364e 000000ca T CNN_Transpose_fps
+/home/vz/gap_sdk_v4.7.0/occupancy_management/gap8_project_v2/BUILD/GAP8_V2/GCC_RISCV_PULPOS/PeopleDetection:1c00421e 000000ca t KerConv2x3from3x3Stride2_V_SQ8
+/home/vz/gap_sdk_v4.7.0/occupancy_management/gap8_project_v2/BUILD/GAP8_V2/GCC_RISCV_PULPOS/PeopleDetection:1c01f5c0 000000ca T __rt_pmu_cluster_power_up
+/home/vz/gap_sdk_v4.7.0/occupancy_management/gap8_project_v2/BUILD/GAP8_V2/GCC_RISCV_PULPOS/PeopleDetection:1c02077a 000000d4 T pi_i2c_write_async	/home/vz/gap_sdk/rtos/pulp/pulp-os/drivers/i2c/i2c-v2.c:114
+/home/vz/gap_sdk_v4.7.0/occupancy_management/gap8_project_v2/BUILD/GAP8_V2/GCC_RISCV_PULPOS/PeopleDetection:1c020f96 000000d6 t __pi_uart_flow_control_enable	/home/vz/gap_sdk/rtos/pulp/pulp-os/drivers/uart/uart.c:553
+/home/vz/gap_sdk_v4.7.0/occupancy_management/gap8_project_v2/BUILD/GAP8_V2/GCC_RISCV_PULPOS/PeopleDetection:1c01f99c 000000d8 T pi_cluster_open	/home/vz/gap_sdk/rtos/pulp/pulp-os/kernel/cluster.c:343
+/home/vz/gap_sdk_v4.7.0/occupancy_management/gap8_project_v2/BUILD/GAP8_V2/GCC_RISCV_PULPOS/PeopleDetection:1c021982 000000da t __rt_io_uart_flush.constprop.11	/home/vz/gap_sdk/rtos/pulp/pulp-os/libs/io/io.c:795
+/home/vz/gap_sdk_v4.7.0/occupancy_management/gap8_project_v2/BUILD/GAP8_V2/GCC_RISCV_PULPOS/PeopleDetection:1c01f43c 000000e0 T SetFllFrequency
+/home/vz/gap_sdk_v4.7.0/occupancy_management/gap8_project_v2/BUILD/GAP8_V2/GCC_RISCV_PULPOS/PeopleDetection:1c01e264 000000e2 T bsp_thermeye_open	/home/vz/gap_sdk/rtos/pmsis/pmsis_bsp/bsp/gapoc_b_v2.c:161
+/home/vz/gap_sdk_v4.7.0/occupancy_management/gap8_project_v2/BUILD/GAP8_V2/GCC_RISCV_PULPOS/PeopleDetection:1c01bda4 000000e4 T __pi_fs_read	/home/vz/gap_sdk/rtos/pmsis/pmsis_bsp/fs/read_fs/read_fs.c:455
+/home/vz/gap_sdk_v4.7.0/occupancy_management/gap8_project_v2/BUILD/GAP8_V2/GCC_RISCV_PULPOS/PeopleDetection:1c01523e 000000f0 T S115_Op_CONV_2D_0_41_trans_out0
+/home/vz/gap_sdk_v4.7.0/occupancy_management/gap8_project_v2/BUILD/GAP8_V2/GCC_RISCV_PULPOS/PeopleDetection:1c016688 000000f0 T S133_Op_CONV_2D_0_49_trans_out0
+/home/vz/gap_sdk_v4.7.0/occupancy_management/gap8_project_v2/BUILD/GAP8_V2/GCC_RISCV_PULPOS/PeopleDetection:1c01eff8 000000f2 T __rt_timer_handler	/home/vz/gap_sdk/rtos/pulp/pulp-os/kernel/time_irq.c:30
+/home/vz/gap_sdk_v4.7.0/occupancy_management/gap8_project_v2/BUILD/GAP8_V2/GCC_RISCV_PULPOS/PeopleDetection:1c016374 000000f2 T S126_Op_CONV_2D_0_45_trans_out0
+/home/vz/gap_sdk_v4.7.0/occupancy_management/gap8_project_v2/BUILD/GAP8_V2/GCC_RISCV_PULPOS/PeopleDetection:1c01fc7a 000000fa T pi_cluster_send_task_to_cl_async	/home/vz/gap_sdk/rtos/pulp/pulp-os/kernel/cluster_call.c:65
+/home/vz/gap_sdk_v4.7.0/occupancy_management/gap8_project_v2/BUILD/GAP8_V2/GCC_RISCV_PULPOS/PeopleDetection:1c02133e 000000fa T pi_uart_open	/home/vz/gap_sdk/rtos/pulp/pulp-os/drivers/uart/uart.c:332
+/home/vz/gap_sdk_v4.7.0/occupancy_management/gap8_project_v2/BUILD/GAP8_V2/GCC_RISCV_PULPOS/PeopleDetection:1c0138f8 000000fa T S99_Op_CONV_2D_0_35_trans_out0
+/home/vz/gap_sdk_v4.7.0/occupancy_management/gap8_project_v2/BUILD/GAP8_V2/GCC_RISCV_PULPOS/PeopleDetection:1c014df6 000000fc T S110_Op_CONV_2D_0_39_trans_out0
+/home/vz/gap_sdk_v4.7.0/occupancy_management/gap8_project_v2/BUILD/GAP8_V2/GCC_RISCV_PULPOS/PeopleDetection:1c00cafa 000000fc T S46_Op_CONV_2D_0_15_trans_out0
+/home/vz/gap_sdk_v4.7.0/occupancy_management/gap8_project_v2/BUILD/GAP8_V2/GCC_RISCV_PULPOS/PeopleDetection:1c00d286 000000fc T S51_Op_CONV_2D_0_17_trans_out0
+/home/vz/gap_sdk_v4.7.0/occupancy_management/gap8_project_v2/BUILD/GAP8_V2/GCC_RISCV_PULPOS/PeopleDetection:1c013168 000000fc T S94_Op_CONV_2D_0_33_trans_out0
+/home/vz/gap_sdk_v4.7.0/occupancy_management/gap8_project_v2/BUILD/GAP8_V2/GCC_RISCV_PULPOS/PeopleDetection:1c023260 00000100 R __clz_tab
+/home/vz/gap_sdk_v4.7.0/occupancy_management/gap8_project_v2/BUILD/GAP8_V2/GCC_RISCV_PULPOS/PeopleDetection:1c001b98 00000102 T __floatdisf	/home/haugoug/src/riscv-gnu-toolchain/riscv-gcc/libgcc/soft-fp/floatdisf.c:35
+/home/vz/gap_sdk_v4.7.0/occupancy_management/gap8_project_v2/BUILD/GAP8_V2/GCC_RISCV_PULPOS/PeopleDetection:1c01d4e6 00000104 T flash_partition_table_load	/home/vz/gap_sdk/rtos/pmsis/pmsis_bsp/partition/flash_partition.c:114
+/home/vz/gap_sdk_v4.7.0/occupancy_management/gap8_project_v2/BUILD/GAP8_V2/GCC_RISCV_PULPOS/PeopleDetection:1c01c4a0 00000106 t hyperflash_handle_pending_task	/home/vz/gap_sdk/rtos/pmsis/pmsis_bsp/flash/hyperflash/hyperflash.c:366
+/home/vz/gap_sdk_v4.7.0/occupancy_management/gap8_project_v2/BUILD/GAP8_V2/GCC_RISCV_PULPOS/PeopleDetection:1c003718 0000010a T CNN_MatPermCHW2HWC_fps
+/home/vz/gap_sdk_v4.7.0/occupancy_management/gap8_project_v2/BUILD/GAP8_V2/GCC_RISCV_PULPOS/PeopleDetection:1c001d22 00000114 T __truncdfsf2	/home/haugoug/src/riscv-gnu-toolchain/riscv-gcc/libgcc/soft-fp/truncdfsf2.c:36
+/home/vz/gap_sdk_v4.7.0/occupancy_management/gap8_project_v2/BUILD/GAP8_V2/GCC_RISCV_PULPOS/PeopleDetection:1c020952 00000118 T pi_i2c_open	/home/vz/gap_sdk/rtos/pulp/pulp-os/drivers/i2c/i2c-v2.c:238
+/home/vz/gap_sdk_v4.7.0/occupancy_management/gap8_project_v2/BUILD/GAP8_V2/GCC_RISCV_PULPOS/PeopleDetection:1c003e6e 00000122 t KerConv3x3BorderStride2_SQ8.isra.24
+/home/vz/gap_sdk_v4.7.0/occupancy_management/gap8_project_v2/BUILD/GAP8_V2/GCC_RISCV_PULPOS/PeopleDetection:1c01b9f8 00000126 t __pi_read_fs_open	/home/vz/gap_sdk/rtos/pmsis/pmsis_bsp/fs/read_fs/read_fs.c:295
+/home/vz/gap_sdk_v4.7.0/occupancy_management/gap8_project_v2/BUILD/GAP8_V2/GCC_RISCV_PULPOS/PeopleDetection:1c01bb1e 0000012a t __pi_fs_mount_step	/home/vz/gap_sdk/rtos/pmsis/pmsis_bsp/fs/read_fs/read_fs.c:140
+/home/vz/gap_sdk_v4.7.0/occupancy_management/gap8_project_v2/BUILD/GAP8_V2/GCC_RISCV_PULPOS/PeopleDetection:1c01f86c 0000012a t __rt_cluster_mount_step	/home/vz/gap_sdk/rtos/pulp/pulp-os/kernel/cluster.c:221
+/home/vz/gap_sdk_v4.7.0/occupancy_management/gap8_project_v2/BUILD/GAP8_V2/GCC_RISCV_PULPOS/PeopleDetection:1c0043fa 00000132 t KerConv3x3BorderStride1_SQ8.isra.17
+/home/vz/gap_sdk_v4.7.0/occupancy_management/gap8_project_v2/BUILD/GAP8_V2/GCC_RISCV_PULPOS/PeopleDetection:1c01f0ea 00000134 T rt_periph_copy	/home/vz/gap_sdk/rtos/pulp/pulp-os/kernel/periph-v2.c:58
+/home/vz/gap_sdk_v4.7.0/occupancy_management/gap8_project_v2/BUILD/GAP8_V2/GCC_RISCV_PULPOS/PeopleDetection:1c01e01e 00000138 T MD5_Final	/home/vz/gap_sdk/rtos/pmsis/pmsis_bsp/crc/md5.c:258
+/home/vz/gap_sdk_v4.7.0/occupancy_management/gap8_project_v2/BUILD/GAP8_V2/GCC_RISCV_PULPOS/PeopleDetection:1c004648 0000013c t KerConv3x3BorderStride2_SQ8.isra.20
+/home/vz/gap_sdk_v4.7.0/occupancy_management/gap8_project_v2/BUILD/GAP8_V2/GCC_RISCV_PULPOS/PeopleDetection:1c01fec4 00000160 T pi_hyper_open	/home/vz/gap_sdk/rtos/pulp/pulp-os/drivers/hyper/hyperram-v1.c:261
+/home/vz/gap_sdk_v4.7.0/occupancy_management/gap8_project_v2/BUILD/GAP8_V2/GCC_RISCV_PULPOS/PeopleDetection:1c01e36c 00000168 T __rt_init	/home/vz/gap_sdk/rtos/pulp/pulp-os/kernel/init.c:74
+/home/vz/gap_sdk_v4.7.0/occupancy_management/gap8_project_v2/BUILD/GAP8_V2/GCC_RISCV_PULPOS/PeopleDetection:1c006454 00000180 T S1_Op_input_1_formatter
+/home/vz/gap_sdk_v4.7.0/occupancy_management/gap8_project_v2/BUILD/GAP8_V2/GCC_RISCV_PULPOS/PeopleDetection:1c003a5e 00000186 T Ker_Sigmoid_SQ8
+/home/vz/gap_sdk_v4.7.0/occupancy_management/gap8_project_v2/BUILD/GAP8_V2/GCC_RISCV_PULPOS/PeopleDetection:1c01a536 0000018a t ConvMxNStrideS_Body_fp16
+/home/vz/gap_sdk_v4.7.0/occupancy_management/gap8_project_v2/BUILD/GAP8_V2/GCC_RISCV_PULPOS/PeopleDetection:1c003822 000001a4 T CNN_NormBW_offset_fps
+/home/vz/gap_sdk_v4.7.0/occupancy_management/gap8_project_v2/BUILD/GAP8_V2/GCC_RISCV_PULPOS/PeopleDetection:1c004784 000001b6 T KerParConvDW3x3Stride1B32_SQ8
+/home/vz/gap_sdk_v4.7.0/occupancy_management/gap8_project_v2/BUILD/GAP8_V2/GCC_RISCV_PULPOS/PeopleDetection:1c003f90 000001cc T KerParConv3x3Stride2_SQ8
+/home/vz/gap_sdk_v4.7.0/occupancy_management/gap8_project_v2/BUILD/GAP8_V2/GCC_RISCV_PULPOS/PeopleDetection:1c0193fc 000001d4 T DrawRectangle
+/home/vz/gap_sdk_v4.7.0/occupancy_management/gap8_project_v2/BUILD/GAP8_V2/GCC_RISCV_PULPOS/PeopleDetection:1c01619c 000001d8 T S125_Conv2d_32x256x1x1
+/home/vz/gap_sdk_v4.7.0/occupancy_management/gap8_project_v2/BUILD/GAP8_V2/GCC_RISCV_PULPOS/PeopleDetection:1c01d206 000001dc t __pi_thermeye_control	/home/vz/gap_sdk/rtos/pmsis/pmsis_bsp/camera/thermeye/thermeye.c:292
+/home/vz/gap_sdk_v4.7.0/occupancy_management/gap8_project_v2/BUILD/GAP8_V2/GCC_RISCV_PULPOS/PeopleDetection:1c00493a 000001e8 T KerParConvDW3x3Stride2B32_SQ8
+/home/vz/gap_sdk_v4.7.0/occupancy_management/gap8_project_v2/BUILD/GAP8_V2/GCC_RISCV_PULPOS/PeopleDetection:1c01d01c 000001ea t __pi_thermeye_open	/home/vz/gap_sdk/rtos/pmsis/pmsis_bsp/camera/thermeye/thermeye.c:174
+/home/vz/gap_sdk_v4.7.0/occupancy_management/gap8_project_v2/BUILD/GAP8_V2/GCC_RISCV_PULPOS/PeopleDetection:1c0018b2 000001ec T __mulsf3	/home/haugoug/src/riscv-gnu-toolchain/riscv-gcc/libgcc/soft-fp/mulsf3.c:35
+/home/vz/gap_sdk_v4.7.0/occupancy_management/gap8_project_v2/BUILD/GAP8_V2/GCC_RISCV_PULPOS/PeopleDetection:1c0016b4 000001fe T __divsf3	/home/haugoug/src/riscv-gnu-toolchain/riscv-gcc/libgcc/soft-fp/divsf3.c:35
+/home/vz/gap_sdk_v4.7.0/occupancy_management/gap8_project_v2/BUILD/GAP8_V2/GCC_RISCV_PULPOS/PeopleDetection:1c023e54 00000200 D SIGMOID_LUT_uint16
+/home/vz/gap_sdk_v4.7.0/occupancy_management/gap8_project_v2/BUILD/GAP8_V2/GCC_RISCV_PULPOS/PeopleDetection:1c0021c8 0000020c T sendResultsToUART
+/home/vz/gap_sdk_v4.7.0/occupancy_management/gap8_project_v2/BUILD/GAP8_V2/GCC_RISCV_PULPOS/PeopleDetection:1c016466 00000222 T S132_Conv2d_16x256x1x1_Sigmoid
+/home/vz/gap_sdk_v4.7.0/occupancy_management/gap8_project_v2/BUILD/GAP8_V2/GCC_RISCV_PULPOS/PeopleDetection:00000030 00000280 D periph_channels
+/home/vz/gap_sdk_v4.7.0/occupancy_management/gap8_project_v2/BUILD/GAP8_V2/GCC_RISCV_PULPOS/PeopleDetection:1c004b22 00000282 T KerMatAdd_SQ8
+/home/vz/gap_sdk_v4.7.0/occupancy_management/gap8_project_v2/BUILD/GAP8_V2/GCC_RISCV_PULPOS/PeopleDetection:1c0033bc 00000292 t CNN_Transpose_Body_fps
+/home/vz/gap_sdk_v4.7.0/occupancy_management/gap8_project_v2/BUILD/GAP8_V2/GCC_RISCV_PULPOS/PeopleDetection:1c02027c 00000296 t __pi_hyper_copy_misaligned	/home/vz/gap_sdk/rtos/pulp/pulp-os/drivers/hyper/hyperram-v1.c:806
+/home/vz/gap_sdk_v4.7.0/occupancy_management/gap8_project_v2/BUILD/GAP8_V2/GCC_RISCV_PULPOS/PeopleDetection:1c003116 000002a6 T Ker_SSD_NMS
+/home/vz/gap_sdk_v4.7.0/occupancy_management/gap8_project_v2/BUILD/GAP8_V2/GCC_RISCV_PULPOS/PeopleDetection:1c001eea 000002de t RunNN
+/home/vz/gap_sdk_v4.7.0/occupancy_management/gap8_project_v2/BUILD/GAP8_V2/GCC_RISCV_PULPOS/PeopleDetection:1c014ae6 00000310 T S109_Conv2d_32x256x1x1
+/home/vz/gap_sdk_v4.7.0/occupancy_management/gap8_project_v2/BUILD/GAP8_V2/GCC_RISCV_PULPOS/PeopleDetection:1c010786 00000316 T S78_MatAdd_64x20x20
+/home/vz/gap_sdk_v4.7.0/occupancy_management/gap8_project_v2/BUILD/GAP8_V2/GCC_RISCV_PULPOS/PeopleDetection:1c0009c6 0000032e T __umoddi3	/home/haugoug/src/riscv-gnu-toolchain/riscv-gcc/libgcc/libgcc2.c:1305
+/home/vz/gap_sdk_v4.7.0/occupancy_management/gap8_project_v2/BUILD/GAP8_V2/GCC_RISCV_PULPOS/PeopleDetection:1c00068a 0000033c T __udivdi3	/home/haugoug/src/riscv-gnu-toolchain/riscv-gcc/libgcc/libgcc2.c:1317
+/home/vz/gap_sdk_v4.7.0/occupancy_management/gap8_project_v2/BUILD/GAP8_V2/GCC_RISCV_PULPOS/PeopleDetection:1c014ef2 0000034c T S114_Conv2d_16x256x1x1_Sigmoid
+/home/vz/gap_sdk_v4.7.0/occupancy_management/gap8_project_v2/BUILD/GAP8_V2/GCC_RISCV_PULPOS/PeopleDetection:1c0065d4 000003b8 T S4_Conv2d_32x1x3x3_Relu
+/home/vz/gap_sdk_v4.7.0/occupancy_management/gap8_project_v2/BUILD/GAP8_V2/GCC_RISCV_PULPOS/PeopleDetection:1c0011c6 0000043a T __muldf3	/home/haugoug/src/riscv-gnu-toolchain/riscv-gcc/libgcc/soft-fp/muldf3.c:35
+/home/vz/gap_sdk_v4.7.0/occupancy_management/gap8_project_v2/BUILD/GAP8_V2/GCC_RISCV_PULPOS/PeopleDetection:1c00f60a 0000048c T S68_MatAdd_64x20x20
+/home/vz/gap_sdk_v4.7.0/occupancy_management/gap8_project_v2/BUILD/GAP8_V2/GCC_RISCV_PULPOS/PeopleDetection:1c002c88 0000048e T Ker_SSD_Decoder
+/home/vz/gap_sdk_v4.7.0/occupancy_management/gap8_project_v2/BUILD/GAP8_V2/GCC_RISCV_PULPOS/PeopleDetection:1c005dc4 000004c4 T KerParMatMulB32_SF_SQ8
+/home/vz/gap_sdk_v4.7.0/occupancy_management/gap8_project_v2/BUILD/GAP8_V2/GCC_RISCV_PULPOS/PeopleDetection:1c000cf4 000004d2 T __divdf3	/home/haugoug/src/riscv-gnu-toolchain/riscv-gcc/libgcc/soft-fp/divdf3.c:35
+/home/vz/gap_sdk_v4.7.0/occupancy_management/gap8_project_v2/BUILD/GAP8_V2/GCC_RISCV_PULPOS/PeopleDetection:1c01a6c0 000004e8 t Conv2d_fp16
+/home/vz/gap_sdk_v4.7.0/occupancy_management/gap8_project_v2/BUILD/GAP8_V2/GCC_RISCV_PULPOS/PeopleDetection:1c00698c 0000052c T S7_Conv2d_32x1x3x3_Relu
+/home/vz/gap_sdk_v4.7.0/occupancy_management/gap8_project_v2/BUILD/GAP8_V2/GCC_RISCV_PULPOS/PeopleDetection:1c00c5c0 0000053a T S45_Conv2d_12x192x1x1
+/home/vz/gap_sdk_v4.7.0/occupancy_management/gap8_project_v2/BUILD/GAP8_V2/GCC_RISCV_PULPOS/PeopleDetection:1c009da6 0000054c T S29_MatAdd_32x40x40
+/home/vz/gap_sdk_v4.7.0/occupancy_management/gap8_project_v2/BUILD/GAP8_V2/GCC_RISCV_PULPOS/PeopleDetection:1c00b988 0000055a T S39_MatAdd_32x40x40
+/home/vz/gap_sdk_v4.7.0/occupancy_management/gap8_project_v2/BUILD/GAP8_V2/GCC_RISCV_PULPOS/PeopleDetection:1c006eb8 00000564 T S10_Conv2d_24x32x1x1
+/home/vz/gap_sdk_v4.7.0/occupancy_management/gap8_project_v2/BUILD/GAP8_V2/GCC_RISCV_PULPOS/PeopleDetection:1c00f020 000005ea T S67_Conv2d_64x384x1x1
+/home/vz/gap_sdk_v4.7.0/occupancy_management/gap8_project_v2/BUILD/GAP8_V2/GCC_RISCV_PULPOS/PeopleDetection:1c01019c 000005ea T S77_Conv2d_64x384x1x1
+/home/vz/gap_sdk_v4.7.0/occupancy_management/gap8_project_v2/BUILD/GAP8_V2/GCC_RISCV_PULPOS/PeopleDetection:1c0097b4 000005f2 T S28_Conv2d_32x192x1x1
+/home/vz/gap_sdk_v4.7.0/occupancy_management/gap8_project_v2/BUILD/GAP8_V2/GCC_RISCV_PULPOS/PeopleDetection:1c008944 000005f6 T S22_Conv2d_192x32x1x1_Relu
+/home/vz/gap_sdk_v4.7.0/occupancy_management/gap8_project_v2/BUILD/GAP8_V2/GCC_RISCV_PULPOS/PeopleDetection:1c00a2f2 000005fa T S32_Conv2d_192x32x1x1_Relu
+/home/vz/gap_sdk_v4.7.0/occupancy_management/gap8_project_v2/BUILD/GAP8_V2/GCC_RISCV_PULPOS/PeopleDetection:1c01532e 000005fe T S119_Conv2d_128x256x1x1_Relu
+/home/vz/gap_sdk_v4.7.0/occupancy_management/gap8_project_v2/BUILD/GAP8_V2/GCC_RISCV_PULPOS/PeopleDetection:1c00da44 0000061c T S58_Conv2d_64x192x1x1
+/home/vz/gap_sdk_v4.7.0/occupancy_management/gap8_project_v2/BUILD/GAP8_V2/GCC_RISCV_PULPOS/PeopleDetection:1c00830c 00000638 T S19_Conv2d_32x144x1x1
+/home/vz/gap_sdk_v4.7.0/occupancy_management/gap8_project_v2/BUILD/GAP8_V2/GCC_RISCV_PULPOS/PeopleDetection:1c016778 00000640 T S137_Op_CUSTOM_0_53
+/home/vz/gap_sdk_v4.7.0/occupancy_management/gap8_project_v2/BUILD/GAP8_V2/GCC_RISCV_PULPOS/PeopleDetection:1c00741c 00000650 T S13_Conv2d_144x24x1x1_Relu
+/home/vz/gap_sdk_v4.7.0/occupancy_management/gap8_project_v2/BUILD/GAP8_V2/GCC_RISCV_PULPOS/PeopleDetection:1c00cbf6 00000690 T S50_Conv2d_6x192x1x1_Sigmoid
+/home/vz/gap_sdk_v4.7.0/occupancy_management/gap8_project_v2/BUILD/GAP8_V2/GCC_RISCV_PULPOS/PeopleDetection:1c013264 00000694 T S98_Conv2d_16x576x1x1_Sigmoid
+/home/vz/gap_sdk_v4.7.0/occupancy_management/gap8_project_v2/BUILD/GAP8_V2/GCC_RISCV_PULPOS/PeopleDetection:1c00e97a 000006a6 T S64_Conv2d_384x1x3x3_Relu
+/home/vz/gap_sdk_v4.7.0/occupancy_management/gap8_project_v2/BUILD/GAP8_V2/GCC_RISCV_PULPOS/PeopleDetection:1c012aa8 000006c0 T S93_Conv2d_32x576x1x1
+/home/vz/gap_sdk_v4.7.0/occupancy_management/gap8_project_v2/BUILD/GAP8_V2/GCC_RISCV_PULPOS/PeopleDetection:1c00d382 000006c2 T S55_Conv2d_192x1x3x3_Relu
+/home/vz/gap_sdk_v4.7.0/occupancy_management/gap8_project_v2/BUILD/GAP8_V2/GCC_RISCV_PULPOS/PeopleDetection:1c00bee2 000006de T S42_Conv2d_192x32x1x1_Relu
+/home/vz/gap_sdk_v4.7.0/occupancy_management/gap8_project_v2/BUILD/GAP8_V2/GCC_RISCV_PULPOS/PeopleDetection:1c00fa96 00000706 T S71_Conv2d_384x64x1x1_Relu
+/home/vz/gap_sdk_v4.7.0/occupancy_management/gap8_project_v2/BUILD/GAP8_V2/GCC_RISCV_PULPOS/PeopleDetection:1c00b254 00000734 T S38_Conv2d_32x192x1x1
+/home/vz/gap_sdk_v4.7.0/occupancy_management/gap8_project_v2/BUILD/GAP8_V2/GCC_RISCV_PULPOS/PeopleDetection:1c011344 0000078e T S84_Conv2d_384x1x3x3_Relu
+/home/vz/gap_sdk_v4.7.0/occupancy_management/gap8_project_v2/BUILD/GAP8_V2/GCC_RISCV_PULPOS/PeopleDetection:1c011ad2 00000794 T S87_Conv2d_96x384x1x1
+/home/vz/gap_sdk_v4.7.0/occupancy_management/gap8_project_v2/BUILD/GAP8_V2/GCC_RISCV_PULPOS/PeopleDetection:1c016db8 000007ca T lynredCNN_Construct
+/home/vz/gap_sdk_v4.7.0/occupancy_management/gap8_project_v2/BUILD/GAP8_V2/GCC_RISCV_PULPOS/PeopleDetection:1c014314 000007d2 T S106_Conv2d_256x128x3x3_Relu
+/home/vz/gap_sdk_v4.7.0/occupancy_management/gap8_project_v2/BUILD/GAP8_V2/GCC_RISCV_PULPOS/PeopleDetection:1c0055b4 00000810 T KerParMatMulB32_2x4_ReLU_SQ8
+/home/vz/gap_sdk_v4.7.0/occupancy_management/gap8_project_v2/BUILD/GAP8_V2/GCC_RISCV_PULPOS/PeopleDetection:1c004da4 00000810 T KerParMatMulB32_2x4_SQ8
+/home/vz/gap_sdk_v4.7.0/occupancy_management/gap8_project_v2/BUILD/GAP8_V2/GCC_RISCV_PULPOS/PeopleDetection:1c0023d4 00000842 T peopleDetection
+/home/vz/gap_sdk_v4.7.0/occupancy_management/gap8_project_v2/BUILD/GAP8_V2/GCC_RISCV_PULPOS/PeopleDetection:1c012266 00000842 T S90_Conv2d_576x96x1x1_Relu
+/home/vz/gap_sdk_v4.7.0/occupancy_management/gap8_project_v2/BUILD/GAP8_V2/GCC_RISCV_PULPOS/PeopleDetection:1c01592c 00000870 T S122_Conv2d_256x128x3x3_Relu
+/home/vz/gap_sdk_v4.7.0/occupancy_management/gap8_project_v2/BUILD/GAP8_V2/GCC_RISCV_PULPOS/PeopleDetection:1c008f3a 0000087a T S25_Conv2d_192x1x3x3_Relu
+/home/vz/gap_sdk_v4.7.0/occupancy_management/gap8_project_v2/BUILD/GAP8_V2/GCC_RISCV_PULPOS/PeopleDetection:1c007a6c 000008a0 T S16_Conv2d_144x1x3x3_Relu
+/home/vz/gap_sdk_v4.7.0/occupancy_management/gap8_project_v2/BUILD/GAP8_V2/GCC_RISCV_PULPOS/PeopleDetection:1c010a9c 000008a8 T S81_Conv2d_384x64x1x1_Relu
+/home/vz/gap_sdk_v4.7.0/occupancy_management/gap8_project_v2/BUILD/GAP8_V2/GCC_RISCV_PULPOS/PeopleDetection:1c01d67a 000008d6 t body	/home/vz/gap_sdk/rtos/pmsis/pmsis_bsp/crc/md5.c:100
+/home/vz/gap_sdk_v4.7.0/occupancy_management/gap8_project_v2/BUILD/GAP8_V2/GCC_RISCV_PULPOS/PeopleDetection:1c00e060 0000091a T S61_Conv2d_384x64x1x1_Relu
+/home/vz/gap_sdk_v4.7.0/occupancy_management/gap8_project_v2/BUILD/GAP8_V2/GCC_RISCV_PULPOS/PeopleDetection:1c0139f2 00000922 T S103_Conv2d_128x576x1x1_Relu
+/home/vz/gap_sdk_v4.7.0/occupancy_management/gap8_project_v2/BUILD/GAP8_V2/GCC_RISCV_PULPOS/PeopleDetection:1c00a8ec 00000968 T S35_Conv2d_192x1x3x3_Relu
+/home/vz/gap_sdk_v4.7.0/occupancy_management/gap8_project_v2/BUILD/GAP8_V2/GCC_RISCV_PULPOS/PeopleDetection:1c022026 00000ab6 T _prf	/home/vz/gap_sdk/rtos/pulp/pulp-os/libs/io/prf.c:437
+/home/vz/gap_sdk_v4.7.0/occupancy_management/gap8_project_v2/BUILD/GAP8_V2/GCC_RISCV_PULPOS/PeopleDetection:1c01aba8 00000af2 T shutterless_fixed_fc
+/home/vz/gap_sdk_v4.7.0/occupancy_management/gap8_project_v2/BUILD/GAP8_V2/GCC_RISCV_PULPOS/PeopleDetection:1c01966e 00000ec8 t ConvMxNStrideS_Border_fp16
+/home/vz/gap_sdk_v4.7.0/occupancy_management/gap8_project_v2/BUILD/GAP8_V2/GCC_RISCV_PULPOS/PeopleDetection:1b0003e8 00001000 D __rt_fc_stack
+/home/vz/gap_sdk_v4.7.0/occupancy_management/gap8_project_v2/BUILD/GAP8_V2/GCC_RISCV_PULPOS/PeopleDetection:1c017616 00001de6 T lynredCNN

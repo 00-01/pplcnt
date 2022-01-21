@@ -1,0 +1,710 @@
+#ifndef LYNRED_GRAPHINFO_H
+#define LYNRED_GRAPHINFO_H
+// Quantized scales can be used round_norm(val * QSCALE, QNORM) giving the real value in Q8
+
+// Input_1
+#define lynred_Input_1_OUT_SCALE	1.0
+#define lynred_Input_1_OUT_QSCALE	64
+#define lynred_Input_1_OUT_QNORM	6
+#define lynred_Input_1_OUT_ZERO_POINT	0
+// S1_Op_input_1_formatter
+#define lynred_S1_Op_input_1_formatter_OUT_SCALE	0.0078125
+#define lynred_S1_Op_input_1_formatter_OUT_QSCALE	64
+#define lynred_S1_Op_input_1_formatter_OUT_QNORM	13
+#define lynred_S1_Op_input_1_formatter_OUT_ZERO_POINT	0
+// S2_Op_stdconstant21
+#define lynred_S2_Op_stdconstant21_OUT_SCALE	0.024155383929610252
+#define lynred_S2_Op_stdconstant21_OUT_QSCALE	99
+#define lynred_S2_Op_stdconstant21_OUT_QNORM	12
+#define lynred_S2_Op_stdconstant21_OUT_ZERO_POINT	0
+// S3_Op_1_convbias
+#define lynred_S3_Op_1_convbias_OUT_SCALE	0.0001887139369500801
+#define lynred_S3_Op_1_convbias_OUT_QSCALE	99
+#define lynred_S3_Op_1_convbias_OUT_QNORM	19
+#define lynred_S3_Op_1_convbias_OUT_ZERO_POINT	0
+// S4_Conv2d_32x1x3x3_Relu
+#define lynred_S4_Conv2d_32x1x3x3_Relu_OUT_SCALE	0.08847927483986681
+#define lynred_S4_Conv2d_32x1x3x3_Relu_OUT_QSCALE	91
+#define lynred_S4_Conv2d_32x1x3x3_Relu_OUT_QNORM	10
+#define lynred_S4_Conv2d_32x1x3x3_Relu_OUT_ZERO_POINT	0
+// S5_Op_stdconstant50
+#define lynred_S5_Op_stdconstant50_OUT_SCALE	0.009284053929150105
+#define lynred_S5_Op_stdconstant50_OUT_QSCALE	76
+#define lynred_S5_Op_stdconstant50_OUT_QNORM	13
+#define lynred_S5_Op_stdconstant50_OUT_ZERO_POINT	0
+// S6_Op_stdconstant3
+#define lynred_S6_Op_stdconstant3_OUT_SCALE	0.0008214463592254174
+#define lynred_S6_Op_stdconstant3_OUT_QSCALE	108
+#define lynred_S6_Op_stdconstant3_OUT_QNORM	17
+#define lynred_S6_Op_stdconstant3_OUT_ZERO_POINT	0
+// S7_Conv2d_32x1x3x3_Relu
+#define lynred_S7_Conv2d_32x1x3x3_Relu_OUT_SCALE	0.15248933927280697
+#define lynred_S7_Conv2d_32x1x3x3_Relu_OUT_QSCALE	78
+#define lynred_S7_Conv2d_32x1x3x3_Relu_OUT_QNORM	9
+#define lynred_S7_Conv2d_32x1x3x3_Relu_OUT_ZERO_POINT	0
+// S8_Op_stdconstant22
+#define lynred_S8_Op_stdconstant22_OUT_SCALE	0.0026080987881869078
+#define lynred_S8_Op_stdconstant22_OUT_QSCALE	85
+#define lynred_S8_Op_stdconstant22_OUT_QNORM	15
+#define lynred_S8_Op_stdconstant22_OUT_ZERO_POINT	0
+// S9_Op_stdconstant51
+#define lynred_S9_Op_stdconstant51_OUT_SCALE	0.0003977072609688301
+#define lynred_S9_Op_stdconstant51_OUT_QSCALE	104
+#define lynred_S9_Op_stdconstant51_OUT_QNORM	18
+#define lynred_S9_Op_stdconstant51_OUT_ZERO_POINT	0
+// S10_Conv2d_24x32x1x1
+#define lynred_S10_Conv2d_24x32x1x1_OUT_SCALE	0.12519993369034896
+#define lynred_S10_Conv2d_24x32x1x1_OUT_QSCALE	64
+#define lynred_S10_Conv2d_24x32x1x1_OUT_QNORM	9
+#define lynred_S10_Conv2d_24x32x1x1_OUT_ZERO_POINT	0
+// S11_Op_stdconstant23
+#define lynred_S11_Op_stdconstant23_OUT_SCALE	0.0032492405734956264
+#define lynred_S11_Op_stdconstant23_OUT_QSCALE	106
+#define lynred_S11_Op_stdconstant23_OUT_QNORM	15
+#define lynred_S11_Op_stdconstant23_OUT_ZERO_POINT	0
+// S12_Op_stdconstant4
+#define lynred_S12_Op_stdconstant4_OUT_SCALE	0.00040680470434564385
+#define lynred_S12_Op_stdconstant4_OUT_QSCALE	107
+#define lynred_S12_Op_stdconstant4_OUT_QNORM	18
+#define lynred_S12_Op_stdconstant4_OUT_ZERO_POINT	0
+// S13_Conv2d_144x24x1x1_Relu
+#define lynred_S13_Conv2d_144x24x1x1_Relu_OUT_SCALE	0.14148082883339227
+#define lynred_S13_Conv2d_144x24x1x1_Relu_OUT_QSCALE	72
+#define lynred_S13_Conv2d_144x24x1x1_Relu_OUT_QNORM	9
+#define lynred_S13_Conv2d_144x24x1x1_Relu_OUT_ZERO_POINT	0
+// S14_Op_stdconstant52
+#define lynred_S14_Op_stdconstant52_OUT_SCALE	0.009687157347798347
+#define lynred_S14_Op_stdconstant52_OUT_QSCALE	79
+#define lynred_S14_Op_stdconstant52_OUT_QNORM	13
+#define lynred_S14_Op_stdconstant52_OUT_ZERO_POINT	0
+// S15_Op_stdconstant5
+#define lynred_S15_Op_stdconstant5_OUT_SCALE	0.0013705470506059963
+#define lynred_S15_Op_stdconstant5_OUT_QSCALE	90
+#define lynred_S15_Op_stdconstant5_OUT_QNORM	16
+#define lynred_S15_Op_stdconstant5_OUT_ZERO_POINT	0
+// S16_Conv2d_144x1x3x3_Relu
+#define lynred_S16_Conv2d_144x1x3x3_Relu_OUT_SCALE	0.14758967602346826
+#define lynred_S16_Conv2d_144x1x3x3_Relu_OUT_QSCALE	76
+#define lynred_S16_Conv2d_144x1x3x3_Relu_OUT_QNORM	9
+#define lynred_S16_Conv2d_144x1x3x3_Relu_OUT_ZERO_POINT	0
+// S17_Op_stdconstant24
+#define lynred_S17_Op_stdconstant24_OUT_SCALE	0.002317846054211259
+#define lynred_S17_Op_stdconstant24_OUT_QSCALE	76
+#define lynred_S17_Op_stdconstant24_OUT_QNORM	15
+#define lynred_S17_Op_stdconstant24_OUT_ZERO_POINT	0
+// S18_Op_stdconstant53
+#define lynred_S18_Op_stdconstant53_OUT_SCALE	0.00034209014821331394
+#define lynred_S18_Op_stdconstant53_OUT_QSCALE	90
+#define lynred_S18_Op_stdconstant53_OUT_QNORM	18
+#define lynred_S18_Op_stdconstant53_OUT_ZERO_POINT	0
+// S19_Conv2d_32x144x1x1
+#define lynred_S19_Conv2d_32x144x1x1_OUT_SCALE	0.0992155522108078
+#define lynred_S19_Conv2d_32x144x1x1_OUT_QSCALE	102
+#define lynred_S19_Conv2d_32x144x1x1_OUT_QNORM	10
+#define lynred_S19_Conv2d_32x144x1x1_OUT_ZERO_POINT	0
+// S20_Op_stdconstant25
+#define lynred_S20_Op_stdconstant25_OUT_SCALE	0.0033358740620315075
+#define lynred_S20_Op_stdconstant25_OUT_QSCALE	109
+#define lynred_S20_Op_stdconstant25_OUT_QNORM	15
+#define lynred_S20_Op_stdconstant25_OUT_ZERO_POINT	0
+// S21_Op_stdconstant6
+#define lynred_S21_Op_stdconstant6_OUT_SCALE	0.00033097058717016653
+#define lynred_S21_Op_stdconstant6_OUT_QSCALE	87
+#define lynred_S21_Op_stdconstant6_OUT_QNORM	18
+#define lynred_S21_Op_stdconstant6_OUT_ZERO_POINT	0
+// S22_Conv2d_192x32x1x1_Relu
+#define lynred_S22_Conv2d_192x32x1x1_Relu_OUT_SCALE	0.12040799809253122
+#define lynred_S22_Conv2d_192x32x1x1_Relu_OUT_QSCALE	123
+#define lynred_S22_Conv2d_192x32x1x1_Relu_OUT_QNORM	10
+#define lynred_S22_Conv2d_192x32x1x1_Relu_OUT_ZERO_POINT	0
+// S23_Op_stdconstant54
+#define lynred_S23_Op_stdconstant54_OUT_SCALE	0.009077462367713451
+#define lynred_S23_Op_stdconstant54_OUT_QSCALE	74
+#define lynred_S23_Op_stdconstant54_OUT_QNORM	13
+#define lynred_S23_Op_stdconstant54_OUT_ZERO_POINT	0
+// S24_Op_stdconstant7
+#define lynred_S24_Op_stdconstant7_OUT_SCALE	0.0010929990714566651
+#define lynred_S24_Op_stdconstant7_OUT_QSCALE	72
+#define lynred_S24_Op_stdconstant7_OUT_QNORM	16
+#define lynred_S24_Op_stdconstant7_OUT_ZERO_POINT	0
+// S25_Conv2d_192x1x3x3_Relu
+#define lynred_S25_Conv2d_192x1x3x3_Relu_OUT_SCALE	0.14558030676654005
+#define lynred_S25_Conv2d_192x1x3x3_Relu_OUT_QSCALE	75
+#define lynred_S25_Conv2d_192x1x3x3_Relu_OUT_QNORM	9
+#define lynred_S25_Conv2d_192x1x3x3_Relu_OUT_ZERO_POINT	0
+// S26_Op_stdconstant26
+#define lynred_S26_Op_stdconstant26_OUT_SCALE	0.0019248059252277017
+#define lynred_S26_Op_stdconstant26_OUT_QSCALE	126
+#define lynred_S26_Op_stdconstant26_OUT_QNORM	16
+#define lynred_S26_Op_stdconstant26_OUT_ZERO_POINT	0
+// S27_Op_stdconstant55
+#define lynred_S27_Op_stdconstant55_OUT_SCALE	0.00028021383706070273
+#define lynred_S27_Op_stdconstant55_OUT_QSCALE	73
+#define lynred_S27_Op_stdconstant55_OUT_QNORM	18
+#define lynred_S27_Op_stdconstant55_OUT_ZERO_POINT	0
+// S28_Conv2d_32x192x1x1
+#define lynred_S28_Conv2d_32x192x1x1_OUT_SCALE	0.10438374647005337
+#define lynred_S28_Conv2d_32x192x1x1_OUT_QSCALE	107
+#define lynred_S28_Conv2d_32x192x1x1_OUT_QNORM	10
+#define lynred_S28_Conv2d_32x192x1x1_OUT_ZERO_POINT	0
+// S29_MatAdd_32x40x40
+#define lynred_S29_MatAdd_32x40x40_OUT_SCALE	0.15095078475832
+#define lynred_S29_MatAdd_32x40x40_OUT_QSCALE	77
+#define lynred_S29_MatAdd_32x40x40_OUT_QNORM	9
+#define lynred_S29_MatAdd_32x40x40_OUT_ZERO_POINT	0
+// S30_Op_stdconstant27
+#define lynred_S30_Op_stdconstant27_OUT_SCALE	0.0020454071927815676
+#define lynred_S30_Op_stdconstant27_OUT_QSCALE	67
+#define lynred_S30_Op_stdconstant27_OUT_QNORM	15
+#define lynred_S30_Op_stdconstant27_OUT_ZERO_POINT	0
+// S31_Op_stdconstant8
+#define lynred_S31_Op_stdconstant8_OUT_SCALE	0.00030875582090068995
+#define lynred_S31_Op_stdconstant8_OUT_QSCALE	81
+#define lynred_S31_Op_stdconstant8_OUT_QNORM	18
+#define lynred_S31_Op_stdconstant8_OUT_ZERO_POINT	0
+// S32_Conv2d_192x32x1x1_Relu
+#define lynred_S32_Conv2d_192x32x1x1_Relu_OUT_SCALE	0.110528502877303
+#define lynred_S32_Conv2d_192x32x1x1_Relu_OUT_QSCALE	113
+#define lynred_S32_Conv2d_192x32x1x1_Relu_OUT_QNORM	10
+#define lynred_S32_Conv2d_192x32x1x1_Relu_OUT_ZERO_POINT	0
+// S33_Op_stdconstant56
+#define lynred_S33_Op_stdconstant56_OUT_SCALE	0.00632309028878808
+#define lynred_S33_Op_stdconstant56_OUT_QSCALE	104
+#define lynred_S33_Op_stdconstant56_OUT_QNORM	14
+#define lynred_S33_Op_stdconstant56_OUT_ZERO_POINT	0
+// S34_Op_stdconstant9
+#define lynred_S34_Op_stdconstant9_OUT_SCALE	0.00069888170317776
+#define lynred_S34_Op_stdconstant9_OUT_QSCALE	92
+#define lynred_S34_Op_stdconstant9_OUT_QNORM	17
+#define lynred_S34_Op_stdconstant9_OUT_ZERO_POINT	0
+// S35_Conv2d_192x1x3x3_Relu
+#define lynred_S35_Conv2d_192x1x3x3_Relu_OUT_SCALE	0.1331327843853808
+#define lynred_S35_Conv2d_192x1x3x3_Relu_OUT_QSCALE	68
+#define lynred_S35_Conv2d_192x1x3x3_Relu_OUT_QNORM	9
+#define lynred_S35_Conv2d_192x1x3x3_Relu_OUT_ZERO_POINT	0
+// S36_Op_stdconstant28
+#define lynred_S36_Op_stdconstant28_OUT_SCALE	0.0027784148696810007
+#define lynred_S36_Op_stdconstant28_OUT_QSCALE	91
+#define lynred_S36_Op_stdconstant28_OUT_QNORM	15
+#define lynred_S36_Op_stdconstant28_OUT_ZERO_POINT	0
+// S37_Op_stdconstant57
+#define lynred_S37_Op_stdconstant57_OUT_SCALE	0.0003698981077783765
+#define lynred_S37_Op_stdconstant57_OUT_QSCALE	97
+#define lynred_S37_Op_stdconstant57_OUT_QNORM	18
+#define lynred_S37_Op_stdconstant57_OUT_ZERO_POINT	0
+// S38_Conv2d_32x192x1x1
+#define lynred_S38_Conv2d_32x192x1x1_OUT_SCALE	0.12313851033608744
+#define lynred_S38_Conv2d_32x192x1x1_OUT_QSCALE	126
+#define lynred_S38_Conv2d_32x192x1x1_OUT_QNORM	10
+#define lynred_S38_Conv2d_32x192x1x1_OUT_ZERO_POINT	0
+// S39_MatAdd_32x40x40
+#define lynred_S39_MatAdd_32x40x40_OUT_SCALE	0.2134548848069559
+#define lynred_S39_MatAdd_32x40x40_OUT_QSCALE	109
+#define lynred_S39_MatAdd_32x40x40_OUT_QNORM	9
+#define lynred_S39_MatAdd_32x40x40_OUT_ZERO_POINT	0
+// S40_Op_stdconstant29
+#define lynred_S40_Op_stdconstant29_OUT_SCALE	0.0011333798756822944
+#define lynred_S40_Op_stdconstant29_OUT_QSCALE	74
+#define lynred_S40_Op_stdconstant29_OUT_QNORM	16
+#define lynred_S40_Op_stdconstant29_OUT_ZERO_POINT	0
+// S41_Op_stdconstant10
+#define lynred_S41_Op_stdconstant10_OUT_SCALE	0.00024192547080628614
+#define lynred_S41_Op_stdconstant10_OUT_QSCALE	127
+#define lynred_S41_Op_stdconstant10_OUT_QNORM	19
+#define lynred_S41_Op_stdconstant10_OUT_ZERO_POINT	0
+// S42_Conv2d_192x32x1x1_Relu
+#define lynred_S42_Conv2d_192x32x1x1_Relu_OUT_SCALE	0.09281165205587552
+#define lynred_S42_Conv2d_192x32x1x1_Relu_OUT_QSCALE	95
+#define lynred_S42_Conv2d_192x32x1x1_Relu_OUT_QNORM	10
+#define lynred_S42_Conv2d_192x32x1x1_Relu_OUT_ZERO_POINT	0
+// S43_Op_stdconstant30
+#define lynred_S43_Op_stdconstant30_OUT_SCALE	0.001524979597888887
+#define lynred_S43_Op_stdconstant30_OUT_QSCALE	100
+#define lynred_S43_Op_stdconstant30_OUT_QNORM	16
+#define lynred_S43_Op_stdconstant30_OUT_ZERO_POINT	0
+// S44_Op_BoxPredictorConvolutionalBoxHe
+#define lynred_S44_Op_BoxPredictorConvolutionalBoxHe_OUT_SCALE	0.00014153587583157234
+#define lynred_S44_Op_BoxPredictorConvolutionalBoxHe_OUT_QSCALE	74
+#define lynred_S44_Op_BoxPredictorConvolutionalBoxHe_OUT_QNORM	19
+#define lynred_S44_Op_BoxPredictorConvolutionalBoxHe_OUT_ZERO_POINT	0
+// S45_Conv2d_12x192x1x1
+#define lynred_S45_Conv2d_12x192x1x1_OUT_SCALE	0.1068309874046506
+#define lynred_S45_Conv2d_12x192x1x1_OUT_QSCALE	109
+#define lynred_S45_Conv2d_12x192x1x1_OUT_QNORM	10
+#define lynred_S45_Conv2d_12x192x1x1_OUT_ZERO_POINT	0
+// S46_Op_CONV_2D_0_15_trans_out0
+#define lynred_S46_Op_CONV_2D_0_15_trans_out0_OUT_SCALE	0.1068309874046506
+#define lynred_S46_Op_CONV_2D_0_15_trans_out0_OUT_QSCALE	109
+#define lynred_S46_Op_CONV_2D_0_15_trans_out0_OUT_QNORM	10
+#define lynred_S46_Op_CONV_2D_0_15_trans_out0_OUT_ZERO_POINT	0
+// S47_Op_RESHAPE_0_16
+#define lynred_S47_Op_RESHAPE_0_16_OUT_SCALE	0.1068309874046506
+#define lynred_S47_Op_RESHAPE_0_16_OUT_QSCALE	109
+#define lynred_S47_Op_RESHAPE_0_16_OUT_QNORM	10
+#define lynred_S47_Op_RESHAPE_0_16_OUT_ZERO_POINT	0
+// S48_Op_stdconstant31
+#define lynred_S48_Op_stdconstant31_OUT_SCALE	0.0001668095646891743
+#define lynred_S48_Op_stdconstant31_OUT_QSCALE	87
+#define lynred_S48_Op_stdconstant31_OUT_QNORM	19
+#define lynred_S48_Op_stdconstant31_OUT_ZERO_POINT	0
+// S49_Op_BoxPredictorConvolutionalClass
+#define lynred_S49_Op_BoxPredictorConvolutionalClass_OUT_SCALE	1.5481871277523703e-05
+#define lynred_S49_Op_BoxPredictorConvolutionalClass_OUT_QSCALE	65
+#define lynred_S49_Op_BoxPredictorConvolutionalClass_OUT_QNORM	22
+#define lynred_S49_Op_BoxPredictorConvolutionalClass_OUT_ZERO_POINT	0
+// S50_Conv2d_6x192x1x1_Sigmoid
+#define lynred_S50_Conv2d_6x192x1x1_Sigmoid_OUT_SCALE	0.007874015748031496
+#define lynred_S50_Conv2d_6x192x1x1_Sigmoid_OUT_QSCALE	65
+#define lynred_S50_Conv2d_6x192x1x1_Sigmoid_OUT_QNORM	13
+#define lynred_S50_Conv2d_6x192x1x1_Sigmoid_OUT_ZERO_POINT	0
+// S51_Op_CONV_2D_0_17_trans_out0
+#define lynred_S51_Op_CONV_2D_0_17_trans_out0_OUT_SCALE	0.007874015748031496
+#define lynred_S51_Op_CONV_2D_0_17_trans_out0_OUT_QSCALE	65
+#define lynred_S51_Op_CONV_2D_0_17_trans_out0_OUT_QNORM	13
+#define lynred_S51_Op_CONV_2D_0_17_trans_out0_OUT_ZERO_POINT	0
+// S52_Op_RESHAPE_0_18
+#define lynred_S52_Op_RESHAPE_0_18_OUT_SCALE	0.007874015748031496
+#define lynred_S52_Op_RESHAPE_0_18_OUT_QSCALE	65
+#define lynred_S52_Op_RESHAPE_0_18_OUT_QNORM	13
+#define lynred_S52_Op_RESHAPE_0_18_OUT_ZERO_POINT	0
+// S53_Op_stdconstant58
+#define lynred_S53_Op_stdconstant58_OUT_SCALE	0.00485919089987874
+#define lynred_S53_Op_stdconstant58_OUT_QSCALE	80
+#define lynred_S53_Op_stdconstant58_OUT_QNORM	14
+#define lynred_S53_Op_stdconstant58_OUT_ZERO_POINT	0
+// S54_Op_stdconstant11
+#define lynred_S54_Op_stdconstant11_OUT_SCALE	0.00045098953507262233
+#define lynred_S54_Op_stdconstant11_OUT_QSCALE	118
+#define lynred_S54_Op_stdconstant11_OUT_QNORM	18
+#define lynred_S54_Op_stdconstant11_OUT_ZERO_POINT	0
+// S55_Conv2d_192x1x3x3_Relu
+#define lynred_S55_Conv2d_192x1x3x3_Relu_OUT_SCALE	0.12466998363104392
+#define lynred_S55_Conv2d_192x1x3x3_Relu_OUT_QSCALE	64
+#define lynred_S55_Conv2d_192x1x3x3_Relu_OUT_QNORM	11
+#define lynred_S55_Conv2d_192x1x3x3_Relu_OUT_ZERO_POINT	0
+// S56_Op_stdconstant32
+#define lynred_S56_Op_stdconstant32_OUT_SCALE	0.0012061529560014606
+#define lynred_S56_Op_stdconstant32_OUT_QSCALE	79
+#define lynred_S56_Op_stdconstant32_OUT_QNORM	16
+#define lynred_S56_Op_stdconstant32_OUT_ZERO_POINT	0
+// S57_Op_stdconstant59
+#define lynred_S57_Op_stdconstant59_OUT_SCALE	0.00015037106928123732
+#define lynred_S57_Op_stdconstant59_OUT_QSCALE	79
+#define lynred_S57_Op_stdconstant59_OUT_QNORM	19
+#define lynred_S57_Op_stdconstant59_OUT_ZERO_POINT	0
+// S58_Conv2d_64x192x1x1
+#define lynred_S58_Conv2d_64x192x1x1_OUT_SCALE	0.07385383816215936
+#define lynred_S58_Conv2d_64x192x1x1_OUT_QSCALE	76
+#define lynred_S58_Conv2d_64x192x1x1_OUT_QNORM	10
+#define lynred_S58_Conv2d_64x192x1x1_OUT_ZERO_POINT	0
+// S59_Op_stdconstant33
+#define lynred_S59_Op_stdconstant33_OUT_SCALE	0.0023358173202723265
+#define lynred_S59_Op_stdconstant33_OUT_QSCALE	77
+#define lynred_S59_Op_stdconstant33_OUT_QNORM	15
+#define lynred_S59_Op_stdconstant33_OUT_ZERO_POINT	0
+// S60_Op_stdconstant12
+#define lynred_S60_Op_stdconstant12_OUT_SCALE	0.00017250907434776115
+#define lynred_S60_Op_stdconstant12_OUT_QSCALE	90
+#define lynred_S60_Op_stdconstant12_OUT_QNORM	19
+#define lynred_S60_Op_stdconstant12_OUT_ZERO_POINT	0
+// S61_Conv2d_384x64x1x1_Relu
+#define lynred_S61_Conv2d_384x64x1x1_Relu_OUT_SCALE	0.08125377264548475
+#define lynred_S61_Conv2d_384x64x1x1_Relu_OUT_QSCALE	83
+#define lynred_S61_Conv2d_384x64x1x1_Relu_OUT_QNORM	10
+#define lynred_S61_Conv2d_384x64x1x1_Relu_OUT_ZERO_POINT	0
+// S62_Op_stdconstant60
+#define lynred_S62_Op_stdconstant60_OUT_SCALE	0.008400126360356808
+#define lynred_S62_Op_stdconstant60_OUT_QSCALE	69
+#define lynred_S62_Op_stdconstant60_OUT_QNORM	13
+#define lynred_S62_Op_stdconstant60_OUT_ZERO_POINT	0
+// S63_Op_stdconstant13
+#define lynred_S63_Op_stdconstant13_OUT_SCALE	0.0006825419574777754
+#define lynred_S63_Op_stdconstant13_OUT_QSCALE	89
+#define lynred_S63_Op_stdconstant13_OUT_QNORM	17
+#define lynred_S63_Op_stdconstant13_OUT_ZERO_POINT	0
+// S64_Conv2d_384x1x3x3_Relu
+#define lynred_S64_Conv2d_384x1x3x3_Relu_OUT_SCALE	0.09787202069139857
+#define lynred_S64_Conv2d_384x1x3x3_Relu_OUT_QSCALE	100
+#define lynred_S64_Conv2d_384x1x3x3_Relu_OUT_QNORM	10
+#define lynred_S64_Conv2d_384x1x3x3_Relu_OUT_ZERO_POINT	0
+// S65_Op_stdconstant34
+#define lynred_S65_Op_stdconstant34_OUT_SCALE	0.001514345407485962
+#define lynred_S65_Op_stdconstant34_OUT_QSCALE	99
+#define lynred_S65_Op_stdconstant34_OUT_QNORM	16
+#define lynred_S65_Op_stdconstant34_OUT_ZERO_POINT	0
+// S66_Op_stdconstant61
+#define lynred_S66_Op_stdconstant61_OUT_SCALE	0.00014821204505539046
+#define lynred_S66_Op_stdconstant61_OUT_QSCALE	78
+#define lynred_S66_Op_stdconstant61_OUT_QNORM	19
+#define lynred_S66_Op_stdconstant61_OUT_ZERO_POINT	0
+// S67_Conv2d_64x384x1x1
+#define lynred_S67_Conv2d_64x384x1x1_OUT_SCALE	0.06881189721775806
+#define lynred_S67_Conv2d_64x384x1x1_OUT_QSCALE	70
+#define lynred_S67_Conv2d_64x384x1x1_OUT_QNORM	10
+#define lynred_S67_Conv2d_64x384x1x1_OUT_ZERO_POINT	0
+// S68_MatAdd_64x20x20
+#define lynred_S68_MatAdd_64x20x20_OUT_SCALE	0.09020660430427611
+#define lynred_S68_MatAdd_64x20x20_OUT_QSCALE	92
+#define lynred_S68_MatAdd_64x20x20_OUT_QNORM	10
+#define lynred_S68_MatAdd_64x20x20_OUT_ZERO_POINT	0
+// S69_Op_stdconstant35
+#define lynred_S69_Op_stdconstant35_OUT_SCALE	0.0015499922446906567
+#define lynred_S69_Op_stdconstant35_OUT_QSCALE	102
+#define lynred_S69_Op_stdconstant35_OUT_QNORM	16
+#define lynred_S69_Op_stdconstant35_OUT_ZERO_POINT	0
+// S70_Op_stdconstant14
+#define lynred_S70_Op_stdconstant14_OUT_SCALE	0.00013981953709150678
+#define lynred_S70_Op_stdconstant14_OUT_QSCALE	73
+#define lynred_S70_Op_stdconstant14_OUT_QNORM	19
+#define lynred_S70_Op_stdconstant14_OUT_ZERO_POINT	0
+// S71_Conv2d_384x64x1x1_Relu
+#define lynred_S71_Conv2d_384x64x1x1_Relu_OUT_SCALE	0.07655589787040169
+#define lynred_S71_Conv2d_384x64x1x1_Relu_OUT_QSCALE	78
+#define lynred_S71_Conv2d_384x64x1x1_Relu_OUT_QNORM	10
+#define lynred_S71_Conv2d_384x64x1x1_Relu_OUT_ZERO_POINT	0
+// S72_Op_stdconstant62
+#define lynred_S72_Op_stdconstant62_OUT_SCALE	0.006932914722710848
+#define lynred_S72_Op_stdconstant62_OUT_QSCALE	114
+#define lynred_S72_Op_stdconstant62_OUT_QNORM	14
+#define lynred_S72_Op_stdconstant62_OUT_ZERO_POINT	0
+// S73_Op_stdconstant15
+#define lynred_S73_Op_stdconstant15_OUT_SCALE	0.0005307555114560559
+#define lynred_S73_Op_stdconstant15_OUT_QSCALE	70
+#define lynred_S73_Op_stdconstant15_OUT_QNORM	17
+#define lynred_S73_Op_stdconstant15_OUT_ZERO_POINT	0
+// S74_Conv2d_384x1x3x3_Relu
+#define lynred_S74_Conv2d_384x1x3x3_Relu_OUT_SCALE	0.08896764620082585
+#define lynred_S74_Conv2d_384x1x3x3_Relu_OUT_QSCALE	91
+#define lynred_S74_Conv2d_384x1x3x3_Relu_OUT_QNORM	10
+#define lynred_S74_Conv2d_384x1x3x3_Relu_OUT_ZERO_POINT	0
+// S75_Op_stdconstant36
+#define lynred_S75_Op_stdconstant36_OUT_SCALE	0.001619794056750834
+#define lynred_S75_Op_stdconstant36_OUT_QSCALE	106
+#define lynred_S75_Op_stdconstant36_OUT_QNORM	16
+#define lynred_S75_Op_stdconstant36_OUT_ZERO_POINT	0
+// S76_Op_stdconstant63
+#define lynred_S76_Op_stdconstant63_OUT_SCALE	0.00014410926455920865
+#define lynred_S76_Op_stdconstant63_OUT_QSCALE	76
+#define lynred_S76_Op_stdconstant63_OUT_QNORM	19
+#define lynred_S76_Op_stdconstant63_OUT_ZERO_POINT	0
+// S77_Conv2d_64x384x1x1
+#define lynred_S77_Conv2d_64x384x1x1_OUT_SCALE	0.09142316983440729
+#define lynred_S77_Conv2d_64x384x1x1_OUT_QSCALE	94
+#define lynred_S77_Conv2d_64x384x1x1_OUT_QNORM	10
+#define lynred_S77_Conv2d_64x384x1x1_OUT_ZERO_POINT	0
+// S78_MatAdd_64x20x20
+#define lynred_S78_MatAdd_64x20x20_OUT_SCALE	0.12348304958794061
+#define lynred_S78_MatAdd_64x20x20_OUT_QSCALE	126
+#define lynred_S78_MatAdd_64x20x20_OUT_QNORM	10
+#define lynred_S78_MatAdd_64x20x20_OUT_ZERO_POINT	0
+// S79_Op_stdconstant37
+#define lynred_S79_Op_stdconstant37_OUT_SCALE	0.0012553575215861201
+#define lynred_S79_Op_stdconstant37_OUT_QSCALE	82
+#define lynred_S79_Op_stdconstant37_OUT_QNORM	16
+#define lynred_S79_Op_stdconstant37_OUT_ZERO_POINT	0
+// S80_Op_stdconstant16
+#define lynred_S80_Op_stdconstant16_OUT_SCALE	0.0001550153750886131
+#define lynred_S80_Op_stdconstant16_OUT_QSCALE	81
+#define lynred_S80_Op_stdconstant16_OUT_QNORM	19
+#define lynred_S80_Op_stdconstant16_OUT_ZERO_POINT	0
+// S81_Conv2d_384x64x1x1_Relu
+#define lynred_S81_Conv2d_384x64x1x1_Relu_OUT_SCALE	0.07552007990559255
+#define lynred_S81_Conv2d_384x64x1x1_Relu_OUT_QSCALE	77
+#define lynred_S81_Conv2d_384x64x1x1_Relu_OUT_QNORM	10
+#define lynred_S81_Conv2d_384x64x1x1_Relu_OUT_ZERO_POINT	0
+// S82_Op_stdconstant64
+#define lynred_S82_Op_stdconstant64_OUT_SCALE	0.004889742936939001
+#define lynred_S82_Op_stdconstant64_OUT_QSCALE	80
+#define lynred_S82_Op_stdconstant64_OUT_QNORM	14
+#define lynred_S82_Op_stdconstant64_OUT_ZERO_POINT	0
+// S83_Op_stdconstant17
+#define lynred_S83_Op_stdconstant17_OUT_SCALE	0.00036927377731544014
+#define lynred_S83_Op_stdconstant17_OUT_QSCALE	97
+#define lynred_S83_Op_stdconstant17_OUT_QNORM	18
+#define lynred_S83_Op_stdconstant17_OUT_ZERO_POINT	0
+// S84_Conv2d_384x1x3x3_Relu
+#define lynred_S84_Conv2d_384x1x3x3_Relu_OUT_SCALE	0.10489036530021607
+#define lynred_S84_Conv2d_384x1x3x3_Relu_OUT_QSCALE	107
+#define lynred_S84_Conv2d_384x1x3x3_Relu_OUT_QNORM	10
+#define lynred_S84_Conv2d_384x1x3x3_Relu_OUT_ZERO_POINT	0
+// S85_Op_stdconstant38
+#define lynred_S85_Op_stdconstant38_OUT_SCALE	0.0011274750577285886
+#define lynred_S85_Op_stdconstant38_OUT_QSCALE	74
+#define lynred_S85_Op_stdconstant38_OUT_QNORM	16
+#define lynred_S85_Op_stdconstant38_OUT_ZERO_POINT	0
+// S86_Op_stdconstant65
+#define lynred_S86_Op_stdconstant65_OUT_SCALE	0.00011826127067203386
+#define lynred_S86_Op_stdconstant65_OUT_QSCALE	124
+#define lynred_S86_Op_stdconstant65_OUT_QNORM	20
+#define lynred_S86_Op_stdconstant65_OUT_ZERO_POINT	0
+// S87_Conv2d_96x384x1x1
+#define lynred_S87_Conv2d_96x384x1x1_OUT_SCALE	0.06141714035995363
+#define lynred_S87_Conv2d_96x384x1x1_OUT_QSCALE	126
+#define lynred_S87_Conv2d_96x384x1x1_OUT_QNORM	11
+#define lynred_S87_Conv2d_96x384x1x1_OUT_ZERO_POINT	0
+// S88_Op_stdconstant39
+#define lynred_S88_Op_stdconstant39_OUT_SCALE	0.0010896743042394519
+#define lynred_S88_Op_stdconstant39_OUT_QSCALE	71
+#define lynred_S88_Op_stdconstant39_OUT_QNORM	16
+#define lynred_S88_Op_stdconstant39_OUT_ZERO_POINT	0
+// S89_Op_stdconstant18
+#define lynred_S89_Op_stdconstant18_OUT_SCALE	6.692467969010923e-05
+#define lynred_S89_Op_stdconstant18_OUT_QSCALE	70
+#define lynred_S89_Op_stdconstant18_OUT_QNORM	20
+#define lynred_S89_Op_stdconstant18_OUT_ZERO_POINT	0
+// S90_Conv2d_576x96x1x1_Relu
+#define lynred_S90_Conv2d_576x96x1x1_Relu_OUT_SCALE	0.06757337465060978
+#define lynred_S90_Conv2d_576x96x1x1_Relu_OUT_QSCALE	69
+#define lynred_S90_Conv2d_576x96x1x1_Relu_OUT_QNORM	10
+#define lynred_S90_Conv2d_576x96x1x1_Relu_OUT_ZERO_POINT	0
+// S91_Op_stdconstant40
+#define lynred_S91_Op_stdconstant40_OUT_SCALE	0.00044467567931860685
+#define lynred_S91_Op_stdconstant40_OUT_QSCALE	117
+#define lynred_S91_Op_stdconstant40_OUT_QNORM	18
+#define lynred_S91_Op_stdconstant40_OUT_ZERO_POINT	0
+// S92_Op_BoxPredictorConvolutionalBoxHe_319ba674
+#define lynred_S92_Op_BoxPredictorConvolutionalBoxHe_319ba674_OUT_SCALE	3.0048236276610633e-05
+#define lynred_S92_Op_BoxPredictorConvolutionalBoxHe_319ba674_OUT_QSCALE	126
+#define lynred_S92_Op_BoxPredictorConvolutionalBoxHe_319ba674_OUT_QNORM	22
+#define lynred_S92_Op_BoxPredictorConvolutionalBoxHe_319ba674_OUT_ZERO_POINT	0
+// S93_Conv2d_32x576x1x1
+#define lynred_S93_Conv2d_32x576x1x1_OUT_SCALE	0.1068309874046506
+#define lynred_S93_Conv2d_32x576x1x1_OUT_QSCALE	109
+#define lynred_S93_Conv2d_32x576x1x1_OUT_QNORM	10
+#define lynred_S93_Conv2d_32x576x1x1_OUT_ZERO_POINT	0
+// S94_Op_CONV_2D_0_33_trans_out0
+#define lynred_S94_Op_CONV_2D_0_33_trans_out0_OUT_SCALE	0.1068309874046506
+#define lynred_S94_Op_CONV_2D_0_33_trans_out0_OUT_QSCALE	109
+#define lynred_S94_Op_CONV_2D_0_33_trans_out0_OUT_QNORM	10
+#define lynred_S94_Op_CONV_2D_0_33_trans_out0_OUT_ZERO_POINT	0
+// S95_Op_RESHAPE_0_34
+#define lynred_S95_Op_RESHAPE_0_34_OUT_SCALE	0.1068309874046506
+#define lynred_S95_Op_RESHAPE_0_34_OUT_QSCALE	109
+#define lynred_S95_Op_RESHAPE_0_34_OUT_QNORM	10
+#define lynred_S95_Op_RESHAPE_0_34_OUT_ZERO_POINT	0
+// S96_Op_stdconstant41
+#define lynred_S96_Op_stdconstant41_OUT_SCALE	0.0001566509308759123
+#define lynred_S96_Op_stdconstant41_OUT_QSCALE	82
+#define lynred_S96_Op_stdconstant41_OUT_QNORM	19
+#define lynred_S96_Op_stdconstant41_OUT_ZERO_POINT	0
+// S97_Op_BoxPredictorConvolutionalClass_ba179d10
+#define lynred_S97_Op_BoxPredictorConvolutionalClass_ba179d10_OUT_SCALE	1.0585432041444798e-05
+#define lynred_S97_Op_BoxPredictorConvolutionalClass_ba179d10_OUT_QSCALE	89
+#define lynred_S97_Op_BoxPredictorConvolutionalClass_ba179d10_OUT_QNORM	23
+#define lynred_S97_Op_BoxPredictorConvolutionalClass_ba179d10_OUT_ZERO_POINT	0
+// S98_Conv2d_16x576x1x1_Sigmoid
+#define lynred_S98_Conv2d_16x576x1x1_Sigmoid_OUT_SCALE	0.007874015748031496
+#define lynred_S98_Conv2d_16x576x1x1_Sigmoid_OUT_QSCALE	65
+#define lynred_S98_Conv2d_16x576x1x1_Sigmoid_OUT_QNORM	13
+#define lynred_S98_Conv2d_16x576x1x1_Sigmoid_OUT_ZERO_POINT	0
+// S99_Op_CONV_2D_0_35_trans_out0
+#define lynred_S99_Op_CONV_2D_0_35_trans_out0_OUT_SCALE	0.007874015748031496
+#define lynred_S99_Op_CONV_2D_0_35_trans_out0_OUT_QSCALE	65
+#define lynred_S99_Op_CONV_2D_0_35_trans_out0_OUT_QNORM	13
+#define lynred_S99_Op_CONV_2D_0_35_trans_out0_OUT_ZERO_POINT	0
+// S100_Op_RESHAPE_0_36
+#define lynred_S100_Op_RESHAPE_0_36_OUT_SCALE	0.007874015748031496
+#define lynred_S100_Op_RESHAPE_0_36_OUT_QSCALE	65
+#define lynred_S100_Op_RESHAPE_0_36_OUT_QNORM	13
+#define lynred_S100_Op_RESHAPE_0_36_OUT_ZERO_POINT	0
+// S101_Op_stdconstant42
+#define lynred_S101_Op_stdconstant42_OUT_SCALE	0.000702669785823673
+#define lynred_S101_Op_stdconstant42_OUT_QSCALE	92
+#define lynred_S101_Op_stdconstant42_OUT_QNORM	17
+#define lynred_S101_Op_stdconstant42_OUT_ZERO_POINT	0
+// S102_Op_stdconstant19
+#define lynred_S102_Op_stdconstant19_OUT_SCALE	4.748176869312679e-05
+#define lynred_S102_Op_stdconstant19_OUT_QSCALE	100
+#define lynred_S102_Op_stdconstant19_OUT_QNORM	21
+#define lynred_S102_Op_stdconstant19_OUT_ZERO_POINT	0
+// S103_Conv2d_128x576x1x1_Relu
+#define lynred_S103_Conv2d_128x576x1x1_Relu_OUT_SCALE	0.06562098555677519
+#define lynred_S103_Conv2d_128x576x1x1_Relu_OUT_QSCALE	67
+#define lynred_S103_Conv2d_128x576x1x1_Relu_OUT_QNORM	10
+#define lynred_S103_Conv2d_128x576x1x1_Relu_OUT_ZERO_POINT	0
+// S104_Op_stdconstant43
+#define lynred_S104_Op_stdconstant43_OUT_SCALE	0.0007984530529938638
+#define lynred_S104_Op_stdconstant43_OUT_QSCALE	105
+#define lynred_S104_Op_stdconstant43_OUT_QNORM	17
+#define lynred_S104_Op_stdconstant43_OUT_ZERO_POINT	0
+// S105_Op_13_convbias
+#define lynred_S105_Op_13_convbias_OUT_SCALE	5.2395276258273394e-05
+#define lynred_S105_Op_13_convbias_OUT_QSCALE	110
+#define lynred_S105_Op_13_convbias_OUT_QNORM	21
+#define lynred_S105_Op_13_convbias_OUT_ZERO_POINT	0
+// S106_Conv2d_256x128x3x3_Relu
+#define lynred_S106_Conv2d_256x128x3x3_Relu_OUT_SCALE	0.06099729462871401
+#define lynred_S106_Conv2d_256x128x3x3_Relu_OUT_QSCALE	125
+#define lynred_S106_Conv2d_256x128x3x3_Relu_OUT_QNORM	11
+#define lynred_S106_Conv2d_256x128x3x3_Relu_OUT_ZERO_POINT	0
+// S107_Op_stdconstant44
+#define lynred_S107_Op_stdconstant44_OUT_SCALE	0.0006015245453454554
+#define lynred_S107_Op_stdconstant44_OUT_QSCALE	79
+#define lynred_S107_Op_stdconstant44_OUT_QNORM	17
+#define lynred_S107_Op_stdconstant44_OUT_ZERO_POINT	0
+// S108_Op_BoxPredictorConvolutionalBoxHe_8bd56dc8
+#define lynred_S108_Op_BoxPredictorConvolutionalBoxHe_8bd56dc8_OUT_SCALE	3.669136991883998e-05
+#define lynred_S108_Op_BoxPredictorConvolutionalBoxHe_8bd56dc8_OUT_QSCALE	77
+#define lynred_S108_Op_BoxPredictorConvolutionalBoxHe_8bd56dc8_OUT_QNORM	21
+#define lynred_S108_Op_BoxPredictorConvolutionalBoxHe_8bd56dc8_OUT_ZERO_POINT	0
+// S109_Conv2d_32x256x1x1
+#define lynred_S109_Conv2d_32x256x1x1_OUT_SCALE	0.1068309874046506
+#define lynred_S109_Conv2d_32x256x1x1_OUT_QSCALE	109
+#define lynred_S109_Conv2d_32x256x1x1_OUT_QNORM	10
+#define lynred_S109_Conv2d_32x256x1x1_OUT_ZERO_POINT	0
+// S110_Op_CONV_2D_0_39_trans_out0
+#define lynred_S110_Op_CONV_2D_0_39_trans_out0_OUT_SCALE	0.1068309874046506
+#define lynred_S110_Op_CONV_2D_0_39_trans_out0_OUT_QSCALE	109
+#define lynred_S110_Op_CONV_2D_0_39_trans_out0_OUT_QNORM	10
+#define lynred_S110_Op_CONV_2D_0_39_trans_out0_OUT_ZERO_POINT	0
+// S111_Op_RESHAPE_0_40
+#define lynred_S111_Op_RESHAPE_0_40_OUT_SCALE	0.1068309874046506
+#define lynred_S111_Op_RESHAPE_0_40_OUT_QSCALE	109
+#define lynred_S111_Op_RESHAPE_0_40_OUT_QNORM	10
+#define lynred_S111_Op_RESHAPE_0_40_OUT_ZERO_POINT	0
+// S112_Op_stdconstant45
+#define lynred_S112_Op_stdconstant45_OUT_SCALE	0.00016461107588838786
+#define lynred_S112_Op_stdconstant45_OUT_QSCALE	86
+#define lynred_S112_Op_stdconstant45_OUT_QNORM	19
+#define lynred_S112_Op_stdconstant45_OUT_ZERO_POINT	0
+// S113_Op_BoxPredictorConvolutionalClass_24772bd8
+#define lynred_S113_Op_BoxPredictorConvolutionalClass_24772bd8_OUT_SCALE	1.0040830295113595e-05
+#define lynred_S113_Op_BoxPredictorConvolutionalClass_24772bd8_OUT_QSCALE	84
+#define lynred_S113_Op_BoxPredictorConvolutionalClass_24772bd8_OUT_QNORM	23
+#define lynred_S113_Op_BoxPredictorConvolutionalClass_24772bd8_OUT_ZERO_POINT	0
+// S114_Conv2d_16x256x1x1_Sigmoid
+#define lynred_S114_Conv2d_16x256x1x1_Sigmoid_OUT_SCALE	0.007874015748031496
+#define lynred_S114_Conv2d_16x256x1x1_Sigmoid_OUT_QSCALE	65
+#define lynred_S114_Conv2d_16x256x1x1_Sigmoid_OUT_QNORM	13
+#define lynred_S114_Conv2d_16x256x1x1_Sigmoid_OUT_ZERO_POINT	0
+// S115_Op_CONV_2D_0_41_trans_out0
+#define lynred_S115_Op_CONV_2D_0_41_trans_out0_OUT_SCALE	0.007874015748031496
+#define lynred_S115_Op_CONV_2D_0_41_trans_out0_OUT_QSCALE	65
+#define lynred_S115_Op_CONV_2D_0_41_trans_out0_OUT_QNORM	13
+#define lynred_S115_Op_CONV_2D_0_41_trans_out0_OUT_ZERO_POINT	0
+// S116_Op_RESHAPE_0_42
+#define lynred_S116_Op_RESHAPE_0_42_OUT_SCALE	0.007874015748031496
+#define lynred_S116_Op_RESHAPE_0_42_OUT_QSCALE	65
+#define lynred_S116_Op_RESHAPE_0_42_OUT_QNORM	13
+#define lynred_S116_Op_RESHAPE_0_42_OUT_ZERO_POINT	0
+// S117_Op_stdconstant46
+#define lynred_S117_Op_stdconstant46_OUT_SCALE	0.0011720441980287433
+#define lynred_S117_Op_stdconstant46_OUT_QSCALE	77
+#define lynred_S117_Op_stdconstant46_OUT_QNORM	16
+#define lynred_S117_Op_stdconstant46_OUT_ZERO_POINT	0
+// S118_Op_stdconstant20
+#define lynred_S118_Op_stdconstant20_OUT_SCALE	7.149152526503409e-05
+#define lynred_S118_Op_stdconstant20_OUT_QSCALE	75
+#define lynred_S118_Op_stdconstant20_OUT_QNORM	20
+#define lynred_S118_Op_stdconstant20_OUT_ZERO_POINT	0
+// S119_Conv2d_128x256x1x1_Relu
+#define lynred_S119_Conv2d_128x256x1x1_Relu_OUT_SCALE	0.05421365903118464
+#define lynred_S119_Conv2d_128x256x1x1_Relu_OUT_QSCALE	111
+#define lynred_S119_Conv2d_128x256x1x1_Relu_OUT_QNORM	11
+#define lynred_S119_Conv2d_128x256x1x1_Relu_OUT_ZERO_POINT	0
+// S120_Op_stdconstant47
+#define lynred_S120_Op_stdconstant47_OUT_SCALE	0.0007106108823791146
+#define lynred_S120_Op_stdconstant47_OUT_QSCALE	93
+#define lynred_S120_Op_stdconstant47_OUT_QNORM	17
+#define lynred_S120_Op_stdconstant47_OUT_ZERO_POINT	0
+// S121_Op_15_convbias
+#define lynred_S121_Op_15_convbias_OUT_SCALE	3.852481608115057e-05
+#define lynred_S121_Op_15_convbias_OUT_QSCALE	81
+#define lynred_S121_Op_15_convbias_OUT_QNORM	21
+#define lynred_S121_Op_15_convbias_OUT_ZERO_POINT	0
+// S122_Conv2d_256x128x3x3_Relu
+#define lynred_S122_Conv2d_256x128x3x3_Relu_OUT_SCALE	0.060975018448717014
+#define lynred_S122_Conv2d_256x128x3x3_Relu_OUT_QSCALE	125
+#define lynred_S122_Conv2d_256x128x3x3_Relu_OUT_QNORM	11
+#define lynred_S122_Conv2d_256x128x3x3_Relu_OUT_ZERO_POINT	0
+// S123_Op_stdconstant48
+#define lynred_S123_Op_stdconstant48_OUT_SCALE	0.0005219500162638724
+#define lynred_S123_Op_stdconstant48_OUT_QSCALE	68
+#define lynred_S123_Op_stdconstant48_OUT_QNORM	17
+#define lynred_S123_Op_stdconstant48_OUT_ZERO_POINT	0
+// S124_Op_BoxPredictorConvolutionalBoxHe_db4937ca
+#define lynred_S124_Op_BoxPredictorConvolutionalBoxHe_db4937ca_OUT_SCALE	3.1825911870997766e-05
+#define lynred_S124_Op_BoxPredictorConvolutionalBoxHe_db4937ca_OUT_QSCALE	67
+#define lynred_S124_Op_BoxPredictorConvolutionalBoxHe_db4937ca_OUT_QNORM	21
+#define lynred_S124_Op_BoxPredictorConvolutionalBoxHe_db4937ca_OUT_ZERO_POINT	0
+// S125_Conv2d_32x256x1x1
+#define lynred_S125_Conv2d_32x256x1x1_OUT_SCALE	0.1068309874046506
+#define lynred_S125_Conv2d_32x256x1x1_OUT_QSCALE	109
+#define lynred_S125_Conv2d_32x256x1x1_OUT_QNORM	10
+#define lynred_S125_Conv2d_32x256x1x1_OUT_ZERO_POINT	0
+// S126_Op_CONV_2D_0_45_trans_out0
+#define lynred_S126_Op_CONV_2D_0_45_trans_out0_OUT_SCALE	0.1068309874046506
+#define lynred_S126_Op_CONV_2D_0_45_trans_out0_OUT_QSCALE	109
+#define lynred_S126_Op_CONV_2D_0_45_trans_out0_OUT_QNORM	10
+#define lynred_S126_Op_CONV_2D_0_45_trans_out0_OUT_ZERO_POINT	0
+// S127_Op_RESHAPE_0_46
+#define lynred_S127_Op_RESHAPE_0_46_OUT_SCALE	0.1068309874046506
+#define lynred_S127_Op_RESHAPE_0_46_OUT_QSCALE	109
+#define lynred_S127_Op_RESHAPE_0_46_OUT_QNORM	10
+#define lynred_S127_Op_RESHAPE_0_46_OUT_ZERO_POINT	0
+// S128_Concat
+#define lynred_S128_Concat_OUT_SCALE	0.1068309874046506
+#define lynred_S128_Concat_OUT_QSCALE	109
+#define lynred_S128_Concat_OUT_QNORM	10
+#define lynred_S128_Concat_OUT_ZERO_POINT	0
+// S129_Op_RESHAPE_0_48
+#define lynred_S129_Op_RESHAPE_0_48_OUT_SCALE	0.1068309874046506
+#define lynred_S129_Op_RESHAPE_0_48_OUT_QSCALE	109
+#define lynred_S129_Op_RESHAPE_0_48_OUT_QNORM	10
+#define lynred_S129_Op_RESHAPE_0_48_OUT_ZERO_POINT	0
+// S130_Op_stdconstant49
+#define lynred_S130_Op_stdconstant49_OUT_SCALE	0.00021755001216661185
+#define lynred_S130_Op_stdconstant49_OUT_QSCALE	114
+#define lynred_S130_Op_stdconstant49_OUT_QNORM	19
+#define lynred_S130_Op_stdconstant49_OUT_ZERO_POINT	0
+// S131_Op_BoxPredictorConvolutionalClass_20f59186
+#define lynred_S131_Op_BoxPredictorConvolutionalClass_20f59186_OUT_SCALE	1.3265116005377768e-05
+#define lynred_S131_Op_BoxPredictorConvolutionalClass_20f59186_OUT_QSCALE	111
+#define lynred_S131_Op_BoxPredictorConvolutionalClass_20f59186_OUT_QNORM	23
+#define lynred_S131_Op_BoxPredictorConvolutionalClass_20f59186_OUT_ZERO_POINT	0
+// S132_Conv2d_16x256x1x1_Sigmoid
+#define lynred_S132_Conv2d_16x256x1x1_Sigmoid_OUT_SCALE	0.007874015748031496
+#define lynred_S132_Conv2d_16x256x1x1_Sigmoid_OUT_QSCALE	65
+#define lynred_S132_Conv2d_16x256x1x1_Sigmoid_OUT_QNORM	13
+#define lynred_S132_Conv2d_16x256x1x1_Sigmoid_OUT_ZERO_POINT	0
+// S133_Op_CONV_2D_0_49_trans_out0
+#define lynred_S133_Op_CONV_2D_0_49_trans_out0_OUT_SCALE	0.007874015748031496
+#define lynred_S133_Op_CONV_2D_0_49_trans_out0_OUT_QSCALE	65
+#define lynred_S133_Op_CONV_2D_0_49_trans_out0_OUT_QNORM	13
+#define lynred_S133_Op_CONV_2D_0_49_trans_out0_OUT_ZERO_POINT	0
+// S134_Op_RESHAPE_0_50
+#define lynred_S134_Op_RESHAPE_0_50_OUT_SCALE	0.007874015748031496
+#define lynred_S134_Op_RESHAPE_0_50_OUT_QSCALE	65
+#define lynred_S134_Op_RESHAPE_0_50_OUT_QNORM	13
+#define lynred_S134_Op_RESHAPE_0_50_OUT_ZERO_POINT	0
+// S135_Concat
+#define lynred_S135_Concat_OUT_SCALE	0.007874015748031496
+#define lynred_S135_Concat_OUT_QSCALE	65
+#define lynred_S135_Concat_OUT_QNORM	13
+#define lynred_S135_Concat_OUT_ZERO_POINT	0
+// S136_Op_stdconstant2
+#define lynred_S136_Op_stdconstant2_OUT_SCALE	0.007775591114374597
+#define lynred_S136_Op_stdconstant2_OUT_QSCALE	127
+#define lynred_S136_Op_stdconstant2_OUT_QNORM	14
+#define lynred_S136_Op_stdconstant2_OUT_ZERO_POINT	0
+// S137_Op_CUSTOM_0_53
+#define lynred_S137_Op_CUSTOM_0_53_OUT_SCALE	6.103515625e-05
+#define lynred_S137_Op_CUSTOM_0_53_OUT_QSCALE	64
+#define lynred_S137_Op_CUSTOM_0_53_OUT_QNORM	20
+#define lynred_S137_Op_CUSTOM_0_53_OUT_ZERO_POINT	0
+// Output_1
+#define lynred_Output_1_OUT_SCALE	6.103515625e-05
+#define lynred_Output_1_OUT_QSCALE	64
+#define lynred_Output_1_OUT_QNORM	20
+#define lynred_Output_1_OUT_ZERO_POINT	0
+// Output_2
+#define lynred_Output_2_OUT_SCALE	1.0
+#define lynred_Output_2_OUT_QSCALE	64
+#define lynred_Output_2_OUT_QNORM	6
+#define lynred_Output_2_OUT_ZERO_POINT	0
+// Output_3
+#define lynred_Output_3_OUT_SCALE	0.007874015748031496
+#define lynred_Output_3_OUT_QSCALE	65
+#define lynred_Output_3_OUT_QNORM	13
+#define lynred_Output_3_OUT_ZERO_POINT	0
+#endif //LYNRED_GRAPHINFO_H
