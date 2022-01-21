@@ -546,7 +546,6 @@ void peopleDetection(void){
     #endif
 
     unsigned int save_index = 0;
-//    char LOOP = 1;
     clock_t t;
 
     #ifdef LOOP
