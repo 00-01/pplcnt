@@ -593,7 +593,7 @@ void peopleDetection(void){
         pmsis_l1_malloc_free(task->stacks, STACK_SIZE+SLAVE_STACK_SIZE*7);
 
         nn = pi_time_get_us() - nn;
-        PRINTF("[I] model runtime is %.02f s\n", ((float)nn)/1000000);
+        PRINTF("[I] models runtime is %.02f s\n", ((float)nn)/1000000);
 
         #if UART
             printf("[I] TX Result to Pi\n");

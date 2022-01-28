@@ -2,8 +2,8 @@ MODEL_PYTHON = python
 MODEL_SUFFIX ?=
 MODEL_PREFIX ?= lynred
 
-# training model is slightly different depending on the quantization.
-# 8 bit mode signed 8 bit is used, so input to model needs to be shifted 1 bit
+# training models is slightly different depending on the quantization.
+# 8 bit mode signed 8 bit is used, so input to models needs to be shifted 1 bit
 ifeq ($(QUANT_BITS),8)
     TRAIN_SUFFIX = _8BIT
     MODEL_SQ8 = 1

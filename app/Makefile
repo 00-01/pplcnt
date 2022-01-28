@@ -61,8 +61,8 @@ MAKEFILE_PATH := $(dir $(realpath $(firstword $(MAKEFILE_LIST))))
 
 $(info Building GAP8 with $(NN_BITS) bit quantization)
 
-# training of the model is slightly different depending on quantization.
-# 8 bit mode signed 8 bit is used so the input to the model needs to be shifted 1 bit
+# training of the models is slightly different depending on quantization.
+# 8 bit mode signed 8 bit is used so the input to the models needs to be shifted 1 bit
 ifeq ($(EXT_MEM_TYPE), HYPER)
     NNTOOL_SCRIPT = model/nntool_script8
 else
@@ -117,7 +117,7 @@ else
 endif
 
 
-all:: model prepare_debug    # all depends on the model
+all:: models prepare_debug    # all depends on the models
 
 clean_all:: clean_model
 	rm -rf BUILD*

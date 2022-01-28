@@ -33,7 +33,7 @@ $(MODEL_TFLITE): $(TRAINED_TFLITE_MODEL) | $(MODEL_BUILD)
 # Creates an NNTOOL state file by running the commands in the script
 # These commands could be run interactively
 # The commands:
-# 	Adjust the model to match AutoTiler tensor order
+# 	Adjust the models to match AutoTiler tensor order
 #	Fuse nodes together to match fused AutoTiler generators
 #	Save the graph state files
 
@@ -43,14 +43,14 @@ $(MODEL_STATE): $(MODEL_TFLITE) $(NNTOOL_SCRIPT) | $(MODEL_BUILD)
 
 nntool_state: $(MODEL_STATE)
 
-# Runs NNTOOL with its state file to generate the autotiler model code
+# Runs NNTOOL with its state file to generate the autotiler models code
 $(MODEL_BUILD)/$(MODEL_SRC): $(MODEL_STATE) $(MODEL_TFLITE) | $(MODEL_BUILD)
 	echo "GENERATING AUTOTILER MODEL"
 	$(NNTOOL) -g -M $(MODEL_BUILD) -m $(MODEL_SRC) -T $(TENSORS_DIR) -H $(MODEL_HEADER) $(MODEL_GENFLAGS_EXTRA) $<
 
 nntool_gen: $(MODEL_BUILD)/$(MODEL_SRC)
 
-# Build the code generator from the model code
+# Build the code generator from the models code
 $(MODEL_GEN_EXE): $(MODEL_BUILD)/$(MODEL_SRC) | $(MODEL_BUILD)
 	echo "COMPILING AUTOTILER MODEL"
 	gcc -g -o $(MODEL_GEN_EXE) -I. -I$(TILER_INC) -I$(TILER_EMU_INC) $(CNN_GEN) $(CNN_GEN_INCLUDE) $(CNN_LIB_INCLUDE) $? $(TILER_LIB) $(SDL_FLAGS)

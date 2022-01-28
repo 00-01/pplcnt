@@ -84,7 +84,7 @@ class TFLiteImporter(ImporterBase):
         add_sys_path(os.path.dirname(__file__))
         buf = open(filename, "rb").read()
         model = Model.GetRootAsModel(buf, 0)
-        LOG.info("Importing TFLITE model version %s", model.Version())
+        LOG.info("Importing TFLITE models version %s", model.Version())
         check(model.Version() == 3, "Only support version 3 graphs at present")
         if model.SubgraphsLength() > 1:
             LOG.warning(
