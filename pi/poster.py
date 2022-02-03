@@ -5,20 +5,20 @@ from glob import glob
 import requests
 import time
 
-ap = argparse.ArgumentParser()
-ap.add_argument("-l", "--loop", default=1, help="run loop")
-ap.add_argument("-s", "--sleep", default=10, help="loop sleep")
-ap.add_argument("-d", "--delete", default=1, help="delete sent file")
-# ap.add_argument("-scp", "--scp", default=0, help="save to scp")
-args = vars(ap.parse_args())
+parser = argparse.ArgumentParser()
+parser.add_argument("-l", "--loop", default=1, help="run loop")
+parser.add_argument("-s", "--sleep", default=10, help="loop sleep")
+parser.add_argument("-d", "--delete", default=1, help="delete sent file")
+# parser.add_argument("-scp", "--scp", default=0, help="save to scp")
+args = parser.parse_args()
 
 # args
-print(f"loop is {args['loop']}")
-print(f"sleep is {args['sleep']} seconds")
+print(f"loop is {args.loop}")
+print(f"sleep is {args.sleep} seconds")
 print("\n")
 
 with open('device_id.txt') as f:
-    device_id = f.readlines()
+    device_id = f.readline().rstrip()
 
 im_dir = "data/"
 
@@ -44,7 +44,7 @@ def post_data(dir_name, det_data, ir_file, rgb_file):
     r = requests.post(url, data=data, files=files)
 
     if r.status_code == 200:
-        if args['delete']:
+        if args.delete:
             os.system(f"rm -rf {dir_name}")
 
     print(r.headers)
@@ -62,7 +62,7 @@ while LOOP:
         rgb = glob(f"{target}/*_RGB.jpg")
 
         with open(det[0], "r") as file:
-            det_data = file.readline()
+            det_data = file.readline().rstrip()
 
         if len(det) > 0:
             result = post_data(target, det_data, ir[0], rgb[0])
@@ -72,7 +72,7 @@ while LOOP:
         #     print("uploading to server")
         #     os.system(f"sshpass -p {password} scp -r {im_dir}* {username}@{host}:{local_location}")
 
-    LOOP = args["loop"]
+    LOOP = args.loop
 
-    time.sleep(int(args["sleep"]))
+    time.sleep(int(args.sleep))
 

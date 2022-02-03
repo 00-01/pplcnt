@@ -3,10 +3,16 @@ ifndef GAP_SDK_HOME
     $(error Source sourceme in gap_sdk first)
 endif
 
-####################################################################################
 DEBUG = 0
 
-MODE ?= INPUT_FILE
+APP_CFLAGS += -DDRAW_BOX
+
+APP_CFLAGS += -DSHUTTERLESS_FILTER
+#APP_CFLAGS += -DCUSTOM_FILTER
+
+APP_CFLAGS += -DLOOP
+
+MODE ?= INPUT_CAMERA
 ifeq ($(MODE), INPUT_FILE)
     ## test application with input file from host PC(shutterless filtering is desactivated in this mode)
     APP_CFLAGS += -DINPUT_FILE
@@ -19,24 +25,21 @@ else ifeq ($(MODE),INPUT_CAMERA)
     ## Camera is default so no flags are needed
 endif
 
-#APP_CFLAGS += -DUART
+APP_CFLAGS += -DUART
 
-#SAVE_TO_PC=1
+#APP_CFLAGS += -DBT
 
 ##  In full demo mode silent should be activated, since printfs block the execution if set over jtag
 ##  To disable all printf (needed to flash application to boot from flash)
 #APP_CFLAGS += -DSILENT=1
 
-#APP_CFLAGS += -DUSE_BLE
+SAVE_TO_PC=0    #0 or 1(True)
 
 #APP_CFLAGS += -DOFFSET_IMAGE_EVERY_BOOT=1    ## TAKE OFFSET IMAGE EVERY BOOT
 
 #APP_CFLAGS += -DSLEEP    ## SLEEP (ONLY in PulpOS)
 
 #NO_IMAGE=1    ## For debugging don't load an image. run the network with zeros
-####################################################################################
-
-APP_CFLAGS += -DLOOP
 
 EXT_MEM_TYPE ?= HYPER    #HYPER or QSPI
 APP_CFLAGS += -D$(EXT_MEM_TYPE)
@@ -61,8 +64,8 @@ MAKEFILE_PATH := $(dir $(realpath $(firstword $(MAKEFILE_LIST))))
 
 $(info Building GAP8 with $(NN_BITS) bit quantization)
 
-# training of the models is slightly different depending on quantization.
-# 8 bit mode signed 8 bit is used so the input to the models needs to be shifted 1 bit
+# training of the model is slightly different depending on quantization.
+# 8 bit mode signed 8 bit is used so the input to the model needs to be shifted 1 bit
 ifeq ($(EXT_MEM_TYPE), HYPER)
     NNTOOL_SCRIPT = model/nntool_script8
 else
@@ -107,7 +110,7 @@ else
 endif
 
 ifeq ($(SAVE_TO_PC), 1)
-    APP_CFLAGS += -DSAVE_TO_PC=1
+    APP_CFLAGS += -DSAVE_TO_PC
     prepare_debug:
 	    mkdir -p dump_out_imgs
 	    rm -rf dump_out_imgs/*
@@ -117,7 +120,7 @@ else
 endif
 
 
-all:: models prepare_debug    # all depends on the models
+all:: model prepare_debug    # all depends on the model
 
 clean_all:: clean_model
 	rm -rf BUILD*

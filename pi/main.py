@@ -15,22 +15,21 @@ from picamera import PiCamera
 from time import sleep
 
 # true == 1, false == 0
-ap = argparse.ArgumentParser()
-ap.add_argument("-l", "--loop", default=1, help="run loop")
-ap.add_argument("-s", "--sleep", default=10, help="loop sleep")
-args = vars(ap.parse_args())
+parser = argparse.ArgumentParser()
+parser.add_argument("-l", "--loop", default=1, help="run loop")
+parser.add_argument("-s", "--sleep", default=10, help="loop sleep")
+args = parser.parse_args()
 
-# args
-print(f"loop is {args['loop']}")
-print(f"sleep is {args['sleep']} seconds")
+print(f"loop is {args.loop}")
+print(f"sleep is {args.sleep} seconds")
 print("\n")
 
 with open('device_id.txt') as f:
-    device_id = f.readlines()
+    device_id = f.readline().rstrip()
 
 im_dir = "data/"
 
-# set rpi serial
+# set rpi
 ser = serial.Serial(
     port='/dev/ttyS0',
     baudrate=115200,
@@ -39,8 +38,6 @@ ser = serial.Serial(
     bytesize=serial.EIGHTBITS,
     timeout=None
 )
-
-# set gpio
 gp = 17
 GPIO.setwarnings(False)
 GPIO.setmode(GPIO.BCM)
@@ -49,8 +46,7 @@ GPIO.output(gp, GPIO.LOW)
 camera = PiCamera()
 
 # set inputs
-w = 80
-h = 80
+w, h = 80, 80
 size = 2
 img_size = w * h * size
 det_size = 3 + (30 * 12)
@@ -86,7 +82,11 @@ while LOOP:
     camera.stop_preview()
     # os.system(f"/bin/bash grubFrame.sh {device_id} {dtime}")
 
+    print("[TX] threshold")
+    ser.write(threshold.to_bytes(4, byteorder='little'))
+
     print("[RX] detection")
+    # rx_det = ser.read(det_size)
     rx_det = ser.read()
     while len(rx_det) < (det_size):
         len(rx_det)
@@ -95,10 +95,9 @@ while LOOP:
     if len(rx_det) != (det_size):
         print("[!] incorrect size received. skipping detections!")
         exit()
-    # ser.flush()
-    # ser.reset_input_buffer()
 
     print("[RX] image")
+    # rx_img = ser.read(img_size)
     rx_img = ser.read()
     while len(rx_img) < (w * h * size):
         len(rx_img)
@@ -107,27 +106,24 @@ while LOOP:
     if len(rx_img) != (w * h * size):
         print("[!] incorrect size received. skipping image!")
         exit()
-    # ser.flush()
-    # ser.reset_input_buffer()
-
-    print("[TX] threshold")
-    ser.write(threshold.to_bytes(4, byteorder='little'))
-    # ser.flush()
-    # ser.reset_output_buffer()
 
     print("[S] saving detection in txt")
     det = []
     det_str = rx_det.decode(encoding='UTF-8', errors='ignore')
     with open(det_file, "w") as file:
         det_str = det_str.split(";")
+        st = 0
         for i in det_str:
             if "\00" not in i:
                 if i is not None:
                     det.append(i)
-                    file.write(f"{i} ")
+                    if st != 0:
+                        file.write(f",")
+                    file.write(f"{i}")
+                    st = 1
 
     print("[S] saving image in bin")
-    im_int = struct.unpack('<' + 'B' * w * h * 2, rx_img)
+    im_int = struct.unpack('<' + 'B' * img_size, rx_img)
     with open(ir_file, "wb") as file:
         for val in im_int:
             file.write(val.to_bytes(2, byteorder='little', signed=1))
@@ -143,8 +139,8 @@ while LOOP:
     # check image
     # im = Image.frombuffer('I;16', (w,h), rx_img, 'raw', 'L', 0, 1)
 
-    LOOP = args["loop"]
+    LOOP = args.loop
 
     print("-"*24, "FINISH", "-"*6, "\n"*2)
 
-    time.sleep(int(args["sleep"]))
+    time.sleep(int(args.sleep))

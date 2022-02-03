@@ -49,7 +49,7 @@ extern L1_CL_MEM AT_L1_POINTER lynred_L1_Memory;
 void open_flash_filesystem(struct pi_device *flash, struct pi_device *fs){
     struct pi_readfs_conf fsconf;
     /* Init & open flash. */
-    #if defined(QSPI)
+    #ifdef QSPI
         struct pi_spiflash_conf flash_conf;
         pi_spiflash_conf_init(&flash_conf);
     #else
@@ -99,8 +99,8 @@ static int initNN(){
         int32_t size = 0;
         uint32_t size_total = 0;
 
-        img_offset  = (unsigned short int *) pmsis_l2_malloc(80 * 80 * sizeof(short int));
-        char * buff =  img_offset;
+        img_offset = (unsigned short int *) pmsis_l2_malloc(80 * 80 * sizeof(short int));
+        char *buff = img_offset;
 
         if (img_offset==NULL ){
             PRINTF("[!] Failed to allocate Memory for image Offset\n");
@@ -235,7 +235,7 @@ static void RunNN(){
     }
 #endif
 
-int32_t float_shutterless(int16_t* img_input_fp16,int16_t* img_offset_fp16,int w, int h, uint8_t q_output, float gamma){
+int32_t float_shutterless(int16_t* img_input_fp16, int16_t* img_offset_fp16, int w, int h, uint8_t q_output, float gamma){
     int min, max;
     int32_t out_min = 0;
     int32_t out_max = 255;
@@ -277,7 +277,50 @@ int32_t fixed_shutterless(int16_t *img_input_fp16, int16_t *img_offset_fp16, int
     return error;
 }
 
-#if UART
+
+//                                      (ImageIn, img_offset, W, H, 8)
+//int32_t custom_prefilter(int16_t *img_input_fp16, int16_t *img_offset_fp16, int w, int h, uint8_t q_output){
+////    int16_t min = 0, max = 255;
+//
+//
+//
+//
+//    int16_t min, max;
+//    int16_t out_min = 0;
+//    int32_t out_max = 255;
+//    int32_t out_space = (out_max - out_min);
+//    uint8_t *img_input_fp8 = img_input_fp16;
+//////-------------------------------------------------------------------------------------
+//    imgTest("pre filter", ImageIn, 6, 16);
+////-------------------------------------------------------------------------------------
+//
+//    apply 0
+//
+//
+//
+//
+////    //Optmized shutterless running on cluster (cluster must be open ahead and have enough free memory) g on fabric controller
+//////     int error = shutterless_fixed_cl(&cluster_dev, img_input_fp16, img_offset_fp16, 40, &min, &max);
+////    int error = shutterless_fixed_fc(img_input_fp16, img_offset_fp16, 40, &min, &max);
+////    float div = 1./(max-min);
+////    int32_t div_fix = FP2FIX(div, 15);
+////-------------------------------------------------------------------------------------
+//    imgTest("post filter", ImageIn, 6, 16);
+////-------------------------------------------------------------------------------------
+//
+//    //Normalizing to 8 bit and changing fixed point format for NN
+//    for(int i=0; i<w*h; i++){
+//        img_input_fp8[i] = (uint8_t)(((out_space)*((((((int32_t)img_input_fp16[i])-(int32_t)min))*div_fix)))>>(15-q_output+8));
+//    }
+////-------------------------------------------------------------------------------------
+//    imgTest("16 to 8 bit", ImageIn, 6, 8);
+////-------------------------------------------------------------------------------------
+//    return error;
+//}
+
+
+
+#ifdef UART
     struct pi_device gpio;
     struct pi_device gpio_led;
     volatile uint8_t trigger = 0;
@@ -361,16 +404,6 @@ void sendResultsToUART(struct pi_device *uart, uint16_t *img, bboxs_t *boundbxs)
 
     pi_uart_write(uart, img, 80*80*sizeof(uint16_t));
     printf("[TX] image\n");
-
-    printf("[I] waiting for rx\n");
-    pi_uart_read(uart, &dt, 4);
-    printf("[RX] dt: %d\n", dt);
-//    dt = handleDetections(raspDetString,stringLenght);
-    if(dt < 10)    dt = 10;
-    if(dt != old_dt) {
-        old_dt = dt;
-        thres = ((float)old_dt)/100;
-    }
 }
 
 void led(int cycle, int delay1, int delay2){
@@ -386,10 +419,10 @@ void led(int cycle, int delay1, int delay2){
 int imgTest(char name[], unsigned short data[], int num, int bit){
     printf("[I] %s : ", name, num);
     if (bit == 16) {
-        for (int j = 0; j < num; j++) printf("%d ", ((unsigned short *) data)[j]);
+        for (int j = 0; j < num; j++) printf("%d,", ((unsigned short *) data)[j]);
         printf("...\n");
     } else if (bit == 8) {
-        for (int j = 0; j < num; j++) printf("%d ", ((unsigned char *) data)[j]);
+        for (int j = 0; j < num; j++) printf("%d,", ((unsigned char *) data)[j]);
         printf("...\n");
     }
     return 0;
@@ -474,8 +507,8 @@ void peopleDetection(void){
         #endif
     #endif
 
-    #ifdef USE_BLE
-        PRINTF("Init BLE\n");
+    #ifdef BT
+        PRINTF("[I] Init BLE\n");
         int status;
         status = initHandler();
         if(status){
@@ -496,7 +529,7 @@ void peopleDetection(void){
     task->stack_size = (uint32_t) STACK_SIZE;
     task->slave_stack_size = (uint32_t) SLAVE_STACK_SIZE;
 
-    #if UART
+    #ifdef UART
         pi_pad_set_function(PI_PAD_12_A3_RF_PACTRL0, PI_PAD_FUNC1);
         pi_gpio_flags_e cfg_flags = PI_GPIO_OUTPUT;
         pi_gpio_e gpio_out_led = PI_GPIO_A0_PAD_12_A3;
@@ -538,20 +571,22 @@ void peopleDetection(void){
         }
     #endif
 
+    unsigned char l;
     unsigned int save_index = 0;
     clock_t t;
 
     #ifdef LOOP
-        unsigned int cnt = 65535;
+        l = 0;
     #else
-        unsigned int cnt = 1;
+        l = 1;
     #endif
 
-    while(cnt){
-        printf("\n\n=========  START  =======================================\n");
-        int t = pi_time_get_us();
+    uint loop_cnt = 1;
 
-        #if UART
+    while(loop_cnt){
+        printf("\n\n=========  START  =======================================\n");
+
+        #ifdef UART
             while(!trigger){
                 printf("[I] Waiting Pi Signal\n");
                 pi_yield();
@@ -563,19 +598,37 @@ void peopleDetection(void){
             pi_camera_capture(&cam, ImageIn, W*H*sizeof(int16_t));
             pi_camera_control(&cam, PI_CAMERA_CMD_STOP, 0);
             pi_gpio_pin_write(NULL, USER_GPIO , 1); // off
+        //read threshold from pi
+            printf("[I] waiting for rx\n");
+            pi_uart_read(&uart, &dt, 4);
+            printf("[RX] dt: %d\n", dt);
+        //    dt = handleDetections(raspDetString,stringLenght);
+            if(dt < 10)    dt = 10;
+            if(dt != old_dt) {
+                old_dt = dt;
+                thres = ((float)old_dt)/100;
+            }
         #endif
+
+        int t = pi_time_get_us();
 
 //        unsigned char *aaa = ImageIn;
 //         memcpy(aaa, img1, W*H*2*sizeof(unsigned char));
-
         #ifndef INPUT_FILE
             PRINTF("[I] Calling shutterless filtering\n");
-            //shutterless floating point version was done just for reference.very slow on gap.
-            //if(float_shutterless(ImageIn, img_offset,W,H,8,1)){
-            if(fixed_shutterless(ImageIn, img_offset, W, H, 8)) {
-                PRINTF("[!] Error Calling prefiltering, exiting...\n");
-                pmsis_exit(-8);
-            }
+            #ifdef SHUTTERLESS_FILTER
+                //shutterless floating point version was done just for reference.very slow on gap.
+                //if(float_shutterless(ImageIn, img_offset,W,H,8,1)){
+                if(fixed_shutterless(ImageIn, img_offset, W, H, 8)) {
+                    PRINTF("[!] Error Calling prefiltering, exiting...\n");
+                    pmsis_exit(-8);
+                }
+            #elif CUSTOM_FILTER
+                if(custom_prefilter(ImageIn, img_offset, W, H, 8)) {
+                    PRINTF("[!] Error Calling prefiltering, exiting...\n");
+                    pmsis_exit(-8);
+                }
+            #endif
         #endif
 
         int nn = pi_time_get_us();
@@ -593,21 +646,24 @@ void peopleDetection(void){
         pmsis_l1_malloc_free(task->stacks, STACK_SIZE+SLAVE_STACK_SIZE*7);
 
         nn = pi_time_get_us() - nn;
-        PRINTF("[I] models runtime is %.02f s\n", ((float)nn)/1000000);
+        PRINTF("[I] model runtime is %.02f s\n", ((float)nn)/1000000);
 
-        #if UART
+        #ifdef UART
             printf("[I] TX Result to Pi\n");
 //            led(4, 20, 10);
-            unsigned char *img_out_ptr1 = ImageIn;
-            drawBboxes(&bbxs, img_out_ptr1);
-            sendResultsToUART(&uart, img_out_ptr1, &bbxs);
-//            sendResultsToUART(&uart, (unsigned char *)ImageIn, &bbxs);
-//            sendResultsToUART(&uart, ImageIn, &bbxs);
-            pi_gpio_pin_write(&gpio_led, gpio_out_led, 1); // off
-//            printf("[I] FOUND PPL : %s\n", raspDetString);
+            #ifdef DRAW_BOX
+                unsigned char *img_out_ptr1 = ImageIn;
+                drawBboxes(&bbxs, img_out_ptr1);
+                sendResultsToUART(&uart, img_out_ptr1, &bbxs);
+            #else
+    //            sendResultsToUART(&uart, (unsigned char *)ImageIn, &bbxs);
+                sendResultsToUART(&uart, ImageIn, &bbxs);
+                pi_gpio_pin_write(&gpio_led, gpio_out_led, 1); // off
+    //            printf("[I] FOUND PPL : %s\n", raspDetString);
+            #endif
         #endif
 
-        #if defined USE_BLE
+        #ifdef BT
             sendResultsToBle(&bbxs);
 //            #ifndef SAVE_TO_PC
 //                pi_time_wait_us(2 * 1000 * 1000);
@@ -633,8 +689,8 @@ void peopleDetection(void){
         printf("[I] total runtime is %.02f s\n", ((float)t)/1000000);
         printf("======================================  FINISH  =========\n\n");
 
-        cnt -= 1;
-        printf("cnt : %d", cnt);
+        loop_cnt -= l;
+        printf("cnt : %d", loop_cnt);
     }
 
     lynredCNN_Destruct(0);
