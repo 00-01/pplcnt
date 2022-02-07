@@ -1,15 +1,25 @@
-
-from PIL import Image
-
-
-img = Image.open('test.png')
-img.show()
-
-
+#
+# from PIL import Image
+#
+#
+# img = Image.open('test.png')
+# img.show()
 
 
 
 
+import time
+
+elepse = 1
+while 1:
+    start = time.time()
+    while elepse < 4:
+        time.sleep(1)
+        elepse = time.time() - start
+        print("0", elepse)
+        break
+    print("1", elepse)
+    break
 
 
 
@@ -23,8 +33,10 @@ img.show()
 
 
 
-
-
+while (less then time):
+    (run A)
+    (check time)
+    (if time over: break)
 
 
 

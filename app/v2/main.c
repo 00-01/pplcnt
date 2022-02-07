@@ -375,7 +375,7 @@ void sendResultsToBle(bboxs_t *boundbxs){
 //int detSize = 3+(MAX_OUT_BB*12);
 //char * raspDetString = (int *)malloc(detSize * sizeof(int *));
 char raspDetString[3+(MAX_OUT_BB*12)];
-void sendResultsToUART(struct pi_device *uart, uint16_t *img, bboxs_t *boundbxs){
+void sendResultsToUART(struct pi_device *uart, char *img, bboxs_t *boundbxs){
 //void sendResultsToUART(struct pi_device *uart, unsigned char *img, bboxs_t *boundbxs){
     int stringLenght = 0;
     int AliveBBs = 0;
@@ -402,7 +402,7 @@ void sendResultsToUART(struct pi_device *uart, uint16_t *img, bboxs_t *boundbxs)
     pi_uart_write(uart, raspDetString, 3+(MAX_OUT_BB*12));
     printf("[TX] detection\n");
 
-    pi_uart_write(uart, img, 80*80*sizeof(uint16_t));
+    pi_uart_write(uart, img, 80*80*sizeof(char));
     printf("[TX] image\n");
 }
 
@@ -587,8 +587,8 @@ void peopleDetection(void){
         printf("\n\n=========  START  =======================================\n");
 
         #ifdef UART
+            printf("[I] Waiting Pi Signal\n");
             while(!trigger){
-                printf("[I] Waiting Pi Signal\n");
                 pi_yield();
             } trigger=0;
 
@@ -652,15 +652,10 @@ void peopleDetection(void){
             printf("[I] TX Result to Pi\n");
 //            led(4, 20, 10);
             #ifdef DRAW_BOX
-                unsigned char *img_out_ptr1 = ImageIn;
-                drawBboxes(&bbxs, img_out_ptr1);
-                sendResultsToUART(&uart, img_out_ptr1, &bbxs);
-            #else
-    //            sendResultsToUART(&uart, (unsigned char *)ImageIn, &bbxs);
-                sendResultsToUART(&uart, ImageIn, &bbxs);
-                pi_gpio_pin_write(&gpio_led, gpio_out_led, 1); // off
-    //            printf("[I] FOUND PPL : %s\n", raspDetString);
+                drawBboxes(&bbxs, ImageIn);
             #endif
+            sendResultsToUART(&uart, ImageIn, &bbxs);
+            pi_gpio_pin_write(&gpio_led, gpio_out_led, 1); // off
         #endif
 
         #ifdef BT
@@ -675,7 +670,7 @@ void peopleDetection(void){
             sprintf(string_buffer, "../../../dump_out_imgs/img_%04ld.pgm", save_index);
             save_index++;
             unsigned char *img_out_ptr = ImageIn;
-            drawBboxes(&bbxs, img_out_ptr);
+            drawBboxes(&bbxs, ImageIn);
             WriteImageToFile(string_buffer, W, H, img_out_ptr);
         #endif
 
@@ -690,7 +685,7 @@ void peopleDetection(void){
         printf("======================================  FINISH  =========\n\n");
 
         loop_cnt -= l;
-        printf("cnt : %d", loop_cnt);
+        printf("loop : %d", loop_cnt);
     }
 
     lynredCNN_Destruct(0);
