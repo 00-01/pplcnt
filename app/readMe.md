@@ -6,6 +6,8 @@
 ## copy cal file
     cp -p offset_img/Calibration.bin ../../gap8_project_v2/Calibration/{BOARD_NUM}/
 
+
+
 # GAPFLOW
 ## NNTOOL
     set debug true
