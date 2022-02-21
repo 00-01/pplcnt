@@ -7,7 +7,6 @@
 
 
 ### scp
-     scp -r ~/data/* z@192.168.0.16:~/MVPC10/DATA
-
+     scp -r ~/data/* z@192.168.0.16:/media/z/e9503728-f419-4a14-9fc0-21e2947af50c/DATA/gappi
 ### scp with pw
-     sudo sshpass -p 1234qwer scp ~/data/* z@192.168.0.16:~/MVPC10/DATA
+     sudo sshpass -p 1234qwer scp ~/data/* z@192.168.0.16:/media/z/e9503728-f419-4a14-9fc0-21e2947af50c/DATA/gappi
