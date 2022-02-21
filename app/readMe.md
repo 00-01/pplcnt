@@ -1,3 +1,12 @@
+
+# CALIBRATION
+## mmake
+    cd dataset_tools/gap8_capture_raw_images
+    make clean all run
+## copy cal file
+    cp -p offset_img/Calibration.bin ../../gap8_project_v2/Calibration/{BOARD_NUM}/
+
+# GAPFLOW
 ## NNTOOL
     set debug true
 ### open model
