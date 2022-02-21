@@ -5,7 +5,9 @@
     @reboot sudo chmod 666 /dev/ttyS0 && /usr/bin/python3 main.py
     @reboot /usr/bin/python3 post_requester.py
 
+
 ### scp
-     scp -r ~/data/* z@192.168.0.16:~/data
+     scp -r ~/data/* z@192.168.0.16:~/MVPC10/DATA
+
 ### scp with pw
-     sudo sshpass -p 1234qwer scp ~/data/* z@192.168.0.16:~/data
+     sudo sshpass -p 1234qwer scp ~/data/* z@192.168.0.16:~/MVPC10/DATA

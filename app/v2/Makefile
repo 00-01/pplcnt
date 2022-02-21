@@ -3,6 +3,9 @@ ifndef GAP_SDK_HOME
     $(error Source sourceme in gap_sdk first)
 endif
 
+BOARD_NUM=01
+CAL=Calibration/$(BOARD_NUM)/Calibration.bin
+
 DEBUG = 0
 
 APP_CFLAGS += -DDRAW_BOX
@@ -41,7 +44,8 @@ SAVE_TO_PC=0    #0 or 1(True)
 
 #NO_IMAGE=1    ## For debugging don't load an image. run the network with zeros
 
-EXT_MEM_TYPE ?= HYPER    #HYPER or QSPI
+#HYPER or QSPI
+EXT_MEM_TYPE ?= HYPER
 APP_CFLAGS += -D$(EXT_MEM_TYPE)
 
 APP_CFLAGS += -DNN_8BIT
@@ -52,6 +56,7 @@ BOARD_NAME = gapoc_b
 PMSIS_OS ?= pulpos
 io = host
 TRAINED_TFLITE_MODEL = model/OM_V2.tflite
+#TRAINED_TFLITE_MODEL = model/saved_model.tflite
 MODEL_PREFIX = lynred
 MODEL_SUFFIX = _8BIT
 QUANT_BITS = 8
@@ -103,9 +108,9 @@ APP_INC +=
 
 ifeq ($(platform), gvsoc)
     $(info Platform is GVSOC)
-    READFS_FILES = $(realpath $(MODEL_TENSORS)) $(realpath Calibration.bin)
+    READFS_FILES = $(realpath $(MODEL_TENSORS)) $(realpath $(CAL))
 else
-    READFS_FILES += $(realpath $(MODEL_TENSORS)) $(realpath Calibration.bin)
+    READFS_FILES += $(realpath $(MODEL_TENSORS)) $(realpath $(CAL))
     PLPBRIDGE_FLAGS += -f
 endif
 

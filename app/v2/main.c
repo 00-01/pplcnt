@@ -404,6 +404,17 @@ void sendResultsToUART(struct pi_device *uart, char *img, bboxs_t *boundbxs){
 
     pi_uart_write(uart, img, 80*80*sizeof(char));
     printf("[TX] image\n");
+
+    //read threshold from pi
+    printf("[I] waiting for rx\n");
+    pi_uart_read(&uart, &dt, 4);
+    printf("[RX] dt: %d\n", dt);
+//    dt = handleDetections(raspDetString,stringLenght);
+    if(dt < 10)    dt = 10;
+    if(dt != old_dt) {
+        old_dt = dt;
+        thres = ((float)old_dt)/100;
+    }
 }
 
 void led(int cycle, int delay1, int delay2){
@@ -591,23 +602,12 @@ void peopleDetection(void){
             while(!trigger){
                 pi_yield();
             } trigger=0;
-
             PRINTF("[I] Caputring IR Image\n");
             pi_gpio_pin_write(NULL, USER_GPIO, 0); // on
             pi_camera_control(&cam, PI_CAMERA_CMD_START, 0);
             pi_camera_capture(&cam, ImageIn, W*H*sizeof(int16_t));
             pi_camera_control(&cam, PI_CAMERA_CMD_STOP, 0);
             pi_gpio_pin_write(NULL, USER_GPIO , 1); // off
-        //read threshold from pi
-            printf("[I] waiting for rx\n");
-            pi_uart_read(&uart, &dt, 4);
-            printf("[RX] dt: %d\n", dt);
-        //    dt = handleDetections(raspDetString,stringLenght);
-            if(dt < 10)    dt = 10;
-            if(dt != old_dt) {
-                old_dt = dt;
-                thres = ((float)old_dt)/100;
-            }
         #endif
 
         int t = pi_time_get_us();
@@ -655,7 +655,7 @@ void peopleDetection(void){
                 drawBboxes(&bbxs, ImageIn);
             #endif
             sendResultsToUART(&uart, ImageIn, &bbxs);
-            pi_gpio_pin_write(&gpio_led, gpio_out_led, 1); // off
+            pi_gpio_pin_write(&gpio_led, gpio_out_led, 1); // led_off
         #endif
 
         #ifdef BT
@@ -670,7 +670,7 @@ void peopleDetection(void){
             sprintf(string_buffer, "../../../dump_out_imgs/img_%04ld.pgm", save_index);
             save_index++;
             unsigned char *img_out_ptr = ImageIn;
-            drawBboxes(&bbxs, ImageIn);
+            drawBboxes(&bbxs, img_out_ptr);
             WriteImageToFile(string_buffer, W, H, img_out_ptr);
         #endif
 
@@ -687,13 +687,12 @@ void peopleDetection(void){
         loop_cnt -= l;
         printf("loop : %d", loop_cnt);
     }
-
-    lynredCNN_Destruct(0);
-
-    pi_cluster_close(&cluster_dev);
-
-    printf("[I] Ended\n");
-    pmsis_exit(0);
+//    lynredCNN_Destruct(0);
+//
+//    pi_cluster_close(&cluster_dev);
+//
+//    printf("[I] Ended\n");
+//    pmsis_exit(0);
 }
 
 int main(void) {

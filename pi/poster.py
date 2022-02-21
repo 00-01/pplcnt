@@ -32,15 +32,13 @@ url = 'http://115.68.37.86:8180/api/data'
 # local_location = "~/DATA/gappi"
 
 def post_data(dir_name, det_data, ir_file, rgb_file):
-    data = {
-        "device_id": device_id,
-        "predicted": det_data,
-    }
-    files = {
-        # "predicted": (det_file, open(det_file, 'rb'), 'text/plain'),
-        "ir_image": (ir_file, open(ir_file, 'rb'), 'image/png'),
-        "rgb_image": (rgb_file, open(rgb_file, 'rb'), 'image/jpeg'),
-    }
+    data = {"device_id": device_id,
+            "predicted": det_data,
+            }
+    files = {#"predicted": (det_file, open(det_file, 'rb'), 'text/plain'),
+             "ir_image": (ir_file, open(ir_file, 'rb'), 'image/png'),
+             "rgb_image": (rgb_file, open(rgb_file, 'rb'), 'image/jpeg')
+             }
     r = requests.post(url, data=data, files=files)
 
     if r.status_code == 200:
@@ -61,8 +59,11 @@ while LOOP:
         ir = glob(f"{target}/*_IR.png")
         rgb = glob(f"{target}/*_RGB.jpg")
 
-        with open(det[0], "r") as file:
-            det_data = file.readline().rstrip()
+        try:
+            with open(det[0], "r") as file:
+                det_data = file.readline().rstrip()
+        except IndexError:
+            pass
 
         if len(det) > 0:
             result = post_data(target, det_data, ir[0], rgb[0])
@@ -75,4 +76,3 @@ while LOOP:
     LOOP = args.loop
 
     time.sleep(int(args.sleep))
-
