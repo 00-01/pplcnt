@@ -72,7 +72,5 @@ while LOOP:
         # if args["scp"]:
         #     print("uploading to server")
         #     os.system(f"sshpass -p {password} scp -r {im_dir}* {username}@{host}:{local_location}")
-
     LOOP = args.loop
-
     time.sleep(int(args.sleep))
