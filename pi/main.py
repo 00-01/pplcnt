@@ -1,5 +1,3 @@
-
-
 #!/usr/bin/env python3
 # from cv2 import imwrite
 import argparse
@@ -18,13 +16,12 @@ from time import sleep
 
 # true == 1, false == 0
 parser = argparse.ArgumentParser()
-parser.add_argument("-l", "--loop", default=1, help="run loop")
-parser.add_argument("-s", "--sleep", default=10, help="loop sleep")
+parser.add_argument("-l", "--loop", default=0, help="run loop")
+parser.add_argument("-s", "--sleep", default=0, help="loop sleep")
 args = parser.parse_args()
 
 print(f"loop is {args.loop}")
 print(f"sleep is {args.sleep} seconds")
-print("\n")
 
 with open('device_id.txt') as f:
     device_id = f.readline().rstrip()

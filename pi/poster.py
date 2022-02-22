@@ -4,10 +4,11 @@ import os
 from glob import glob
 import requests
 import time
+import logging
 
 parser = argparse.ArgumentParser()
-parser.add_argument("-l", "--loop", default=1, help="run loop")
-parser.add_argument("-s", "--sleep", default=10, help="loop sleep")
+parser.add_argument("-l", "--loop", default=0, help="run loop")
+parser.add_argument("-s", "--sleep", default=0, help="loop sleep")
 parser.add_argument("-d", "--delete", default=1, help="delete sent file")
 # parser.add_argument("-scp", "--scp", default=0, help="save to scp")
 args = parser.parse_args()
@@ -24,30 +25,29 @@ im_dir = "data/"
 
 url = 'http://115.68.37.86:8180/api/data'
 
-# # scp
+
 # host = "192.168.0.5"
-# port = 22
 # username = "z"
-# password = "1234qwer"
-# local_location = "~/DATA/gappi"
+# password = ""
+# save_dir = "~/DATA/gappi"
 
 def post_data(dir_name, det_data, ir_file, rgb_file):
     data = {"device_id": device_id,
             "predicted": det_data,
             }
-    files = {#"predicted": (det_file, open(det_file, 'rb'), 'text/plain'),
-             "ir_image": (ir_file, open(ir_file, 'rb'), 'image/png'),
-             "rgb_image": (rgb_file, open(rgb_file, 'rb'), 'image/jpeg')
-             }
+    files = {  # "predicted": (det_file, open(det_file, 'rb'), 'text/plain'),
+        "ir_image": (ir_file, open(ir_file, 'rb'), 'image/png'),
+        "rgb_image": (rgb_file, open(rgb_file, 'rb'), 'image/jpeg')
+    }
     r = requests.post(url, data=data, files=files)
 
     if r.status_code == 200:
         if args.delete:
             os.system(f"rm -rf {dir_name}")
-
     print(r.headers)
 
     return r.text
+
 
 LOOP = 1
 while LOOP:
@@ -71,6 +71,20 @@ while LOOP:
 
         # if args["scp"]:
         #     print("uploading to server")
-        #     os.system(f"sshpass -p {password} scp -r {im_dir}* {username}@{host}:{local_location}")
+        #     os.system(f"sshpass -p {password} scp -r {im_dir}* {username}@{host}:{save_dir}")
     LOOP = args.loop
     time.sleep(int(args.sleep))
+
+
+
+
+
+# logging.basicConfig(filename="poster.log", format='%(asctime)s %(message)s', filemode='w')
+# logger = logging.getLogger()
+# logger.setLevel(logging.DEBUG)
+#
+# logger.debug("This is just a harmless debug message")
+# logger.info("This is just an information for you")
+# logger.warning("OOPS!!!Its a Warning")
+# logger.error("Have you try to divide a number by zero")
+# logger.critical("The Internet is not working....")

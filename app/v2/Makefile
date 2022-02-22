@@ -3,8 +3,13 @@ ifndef GAP_SDK_HOME
     $(error Source sourceme in gap_sdk first)
 endif
 
+MODEL_VERSION=v1.1
+
 BOARD_NUM=01
 CAL=Calibration/$(BOARD_NUM)/Calibration.bin
+
+# UART or BT
+APP_CFLAGS += -DUART
 
 DEBUG = 0
 
@@ -27,10 +32,6 @@ else ifeq ($(MODE),INPUT_RAW_FILE)
 else ifeq ($(MODE),INPUT_CAMERA)
     ## Camera is default so no flags are needed
 endif
-
-APP_CFLAGS += -DUART
-
-#APP_CFLAGS += -DBT
 
 ##  In full demo mode silent should be activated, since printfs block the execution if set over jtag
 ##  To disable all printf (needed to flash application to boot from flash)
@@ -55,8 +56,7 @@ APP = PeopleDetection
 BOARD_NAME = gapoc_b
 PMSIS_OS ?= pulpos
 io = host
-TRAINED_TFLITE_MODEL = model/v1.tflite
-#TRAINED_TFLITE_MODEL = model/v1.1.tflite
+TRAINED_TFLITE_MODEL = model/$(MODEL_VERSION).tflite
 MODEL_PREFIX = lynred
 MODEL_SUFFIX = _8BIT
 QUANT_BITS = 8
