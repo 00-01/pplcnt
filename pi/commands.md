@@ -4,7 +4,7 @@
     @reboot /usr/bin/python3 post_requester.py
 
     # every 5 minutes from 9 to 16
-    */5 9-16 * * * python3 main.py > main.log && python3 poster.py > poster.log 2>&1
+    */5 9-18 * * * python3 main.py > main.log && python3 poster.py > poster.log 2>&1
 ### start cron
     sudo service cron start
 

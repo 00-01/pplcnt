@@ -674,17 +674,17 @@ void peopleDetection(void){
             WriteImageToFile(string_buffer, W, H, img_out_ptr);
         #endif
 
-        #ifdef SLEEP
-        //This is not the optimized deep sleep, when should take care of pad setting in sleep and to properly shutdown all external devices
-            go_to_sleep();
-        #endif
-
         t = pi_time_get_us() - t;
         printf("[I] total runtime is %.02f s\n", ((float)t)/1000000);
         printf("======================================  FINISH  =========\n\n");
 
         loop_cnt -= l;
         printf("loop : %d", loop_cnt);
+
+        #ifdef SLEEP
+        //This is not the optimized deep sleep, when should take care of pad setting in sleep and to properly shutdown all external devices
+            go_to_sleep();
+        #endif
     }
 //    lynredCNN_Destruct(0);
 //
