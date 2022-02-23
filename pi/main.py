@@ -29,14 +29,12 @@ with open('device_id.txt') as f:
 im_dir = "data/"
 
 # set rpi
-ser = serial.Serial(
-    port='/dev/ttyS0',
-    baudrate=115200,
-    parity=serial.PARITY_NONE,
-    stopbits=serial.STOPBITS_ONE,
-    bytesize=serial.EIGHTBITS,
-    timeout=None
-)
+ser = serial.Serial(port='/dev/ttyS0',
+                    baudrate=115200,
+                    parity=serial.PARITY_NONE,
+                    stopbits=serial.STOPBITS_ONE,
+                    bytesize=serial.EIGHTBITS,
+                    timeout=None, )
 gp = 17
 GPIO.setwarnings(False)
 GPIO.setmode(GPIO.BCM)
@@ -48,16 +46,18 @@ camera = PiCamera()
 w, h = 80, 80
 size = 1
 img_size = w * h * size
-det_size = 3 + (10 * 12)
+det_size = 3 + (30 * 12)
 threshold = 40
 
 LOOP = 1
 while LOOP:
-    print("-"*6, "START", "-"*24)
+    print("-" * 6, "START", "-" * 24)
     camera.start_preview()
 
     now = datetime.now()
     dtime = now.strftime("%Y%m%d-%H%M%S")
+    print([dtime])
+
     base_dir = f"{im_dir}{dtime}/"
     det_file = f"{base_dir}{dtime}_{device_id}_DET.txt"
     ir_file = f"{base_dir}{dtime}_{device_id}_IR.bin"
@@ -120,7 +120,7 @@ while LOOP:
             file.write(val.to_bytes(2, byteorder='little', signed=1))
     # opening image and remove bytes
     ir_raw = np.fromfile(ir_file, dtype=np.uint16).astype(np.uint8)
-    ir_image = np.reshape(ir_raw[:6400], (w,h))
+    ir_image = np.reshape(ir_raw[:6400], (w, h))
 
     print("[S] saving image in png")
     im = Image.fromarray(ir_image)
@@ -132,6 +132,6 @@ while LOOP:
 
     LOOP = args.loop
 
-    print("-"*24, "FINISH", "-"*6, "\n"*2)
+    print("-" * 24, "FINISH", "-" * 6, "\n" * 2)
 
     time.sleep(int(args.sleep))

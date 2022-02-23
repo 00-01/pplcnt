@@ -1,10 +1,10 @@
 #!/usr/bin/env python3
 import argparse
 import os
+from datetime import datetime
 from glob import glob
 import requests
 import time
-import logging
 
 parser = argparse.ArgumentParser()
 parser.add_argument("-l", "--loop", default=0, help="run loop")
@@ -16,7 +16,6 @@ args = parser.parse_args()
 # args
 print(f"loop is {args.loop}")
 print(f"sleep is {args.sleep} seconds")
-print("\n")
 
 with open('device_id.txt') as f:
     device_id = f.readline().rstrip()
@@ -35,10 +34,10 @@ def post_data(dir_name, det_data, ir_file, rgb_file):
     data = {"device_id": device_id,
             "predicted": det_data,
             }
-    files = {  # "predicted": (det_file, open(det_file, 'rb'), 'text/plain'),
-        "ir_image": (ir_file, open(ir_file, 'rb'), 'image/png'),
-        "rgb_image": (rgb_file, open(rgb_file, 'rb'), 'image/jpeg')
-    }
+    files = {"ir_image": (ir_file, open(ir_file, 'rb'), 'image/png'),
+             "rgb_image": (rgb_file, open(rgb_file, 'rb'), 'image/jpeg')
+             # "predicted": (det_file, open(det_file, 'rb'), 'text/plain'),
+             }
     r = requests.post(url, data=data, files=files)
 
     if r.status_code == 200:
@@ -51,6 +50,10 @@ def post_data(dir_name, det_data, ir_file, rgb_file):
 
 LOOP = 1
 while LOOP:
+    now = datetime.now()
+    dtime = now.strftime("%Y%m%d-%H%M%S")
+    print([dtime])
+
     targets = glob(f'{im_dir}/*')
     if len(targets) < 1:
         break
@@ -74,17 +77,3 @@ while LOOP:
         #     os.system(f"sshpass -p {password} scp -r {im_dir}* {username}@{host}:{save_dir}")
     LOOP = args.loop
     time.sleep(int(args.sleep))
-
-
-
-
-
-# logging.basicConfig(filename="poster.log", format='%(asctime)s %(message)s', filemode='w')
-# logger = logging.getLogger()
-# logger.setLevel(logging.DEBUG)
-#
-# logger.debug("This is just a harmless debug message")
-# logger.info("This is just an information for you")
-# logger.warning("OOPS!!!Its a Warning")
-# logger.error("Have you try to divide a number by zero")
-# logger.critical("The Internet is not working....")

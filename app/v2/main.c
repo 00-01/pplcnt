@@ -675,8 +675,7 @@ void peopleDetection(void){
         #endif
 
         #ifdef SLEEP
-        //This is not the optimized deep sleep, when should take care of pad setting in sleep
-            //and to properly shutdown all external devices
+        //This is not the optimized deep sleep, when should take care of pad setting in sleep and to properly shutdown all external devices
             go_to_sleep();
         #endif
 

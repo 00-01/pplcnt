@@ -3,7 +3,7 @@ ifndef GAP_SDK_HOME
     $(error Source sourceme in gap_sdk first)
 endif
 
-MODEL_VERSION=v1.1
+MODEL_VERSION=v1.0
 
 BOARD_NUM=01
 CAL=Calibration/$(BOARD_NUM)/Calibration.bin
