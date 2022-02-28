@@ -13,16 +13,16 @@ from PIL import Image
 from picamera import PiCamera
 
 parser = argparse.ArgumentParser()
-parser.add_argument("-l", "--loop", default=1, help="run loop")
-parser.add_argument("-s", "--sleep", default=1, help="loop sleep")
+parser.add_argument("-l", "--loop", default=0, help="run loop")
+parser.add_argument("-s", "--sleep", default=0, help="loop sleep")
 args = parser.parse_args()
 
 GPIO.setwarnings(False)
 GPIO.setmode(GPIO.BCM)
 
-# po = 27  # power
-# GPIO.setup(po, GPIO.OUT)
-# GPIO.output(po, GPIO.LOW)
+po = 27  # power
+GPIO.setup(po, GPIO.OUT)
+GPIO.output(po, GPIO.LOW)
 
 tr = 17  # trigger ir
 GPIO.setup(tr, GPIO.OUT)
@@ -83,6 +83,7 @@ while LOOP:
     print("[S] capturing rgb image")
     camera.capture(rgb_file)
     camera.stop_preview()
+    camera.close()
     # os.system(f"/bin/bash grubFrame.sh {device_id} {dtime}")
 
     print("[RX] detection")
@@ -137,10 +138,9 @@ while LOOP:
     # check image
     # im = Image.frombuffer('I;16', (w,h), rx_img, 'raw', 'L', 0, 1)
 
-
     end = time.time() - start
     print(f"[I] runtime : {round(end, 2)} sec")
     print("-" * 24, "FINISH", "-" * 6, "\n" * 2)
 
-    time.sleep(int(args.sleep))
     LOOP = args.loop
+    time.sleep(int(args.sleep))

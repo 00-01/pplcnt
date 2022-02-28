@@ -13,14 +13,11 @@ parser.add_argument("-d", "--delete", default=1, help="delete sent file")
 # parser.add_argument("-scp", "--scp", default=0, help="save to scp")
 args = parser.parse_args()
 
-# args
 print(f"loop is {args.loop}")
 print(f"sleep is {args.sleep} seconds")
 
 with open('device_id.txt') as f:
     device_id = f.readline().rstrip()
-
-im_dir = "data/"
 
 url = 'http://115.68.37.86:8180/api/data'
 
@@ -54,7 +51,7 @@ while LOOP:
     dtime = now.strftime("%Y%m%d-%H%M%S")
     print([dtime])
 
-    targets = glob(f'{im_dir}/*')
+    targets = glob(f'data/*')
     if len(targets) < 1:
         break
     for target in targets:
@@ -75,5 +72,6 @@ while LOOP:
         # if args["scp"]:
         #     print("uploading to server")
         #     os.system(f"sshpass -p {password} scp -r {im_dir}* {username}@{host}:{save_dir}")
+
     LOOP = args.loop
     time.sleep(int(args.sleep))

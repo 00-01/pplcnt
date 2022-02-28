@@ -4,12 +4,15 @@
     @reboot /usr/bin/python3 post_requester.py
 
     # every 5 minutes from 9 to 16
-    */5 9-18 * * * python3 main.py > main.log && python3 poster.py > poster.log 2>&1
+    */5 9-17 * * * python3 main.py >> log/main.log && python3 poster.py >> log/poster.log 2>&1
 ### start cron
     sudo service cron start
 
 ## timezone
     sudo cp -p /usr/share/zoneinfo/Asia/Seoul /etc/localtime
+
+## zhsrc
+    alias t="python3 main.py >> log/main.log && python3 poster.py >> log/poster.log"
 
 
 ## etc

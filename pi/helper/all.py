@@ -40,10 +40,10 @@ def post_data(dir_name, det_data, ir_file, rgb_file):
 
     return r.text
 
-with open('device_id.txt') as f:
+with open('../device_id.txt') as f:
     device_id = f.readline().rstrip()
 
-im_dir = "data/"
+im_dir = "../data/"
 
 url = 'http://115.68.37.86:8180/api/data'
 
