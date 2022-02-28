@@ -5,64 +5,85 @@ import os
 import struct
 import time
 from datetime import datetime
+from glob import glob
+from PIL import Image
 
 import RPi.GPIO as GPIO
 import numpy as np
 import serial
-from PIL import Image
 from picamera import PiCamera
+import requests
 
+
+# true == 1, false == 0
 parser = argparse.ArgumentParser()
 parser.add_argument("-l", "--loop", default=1, help="run loop")
 parser.add_argument("-s", "--sleep", default=1, help="loop sleep")
+parser.add_argument("-d", "--delete", default=1, help="delete sent file")
 args = parser.parse_args()
 
-GPIO.setwarnings(False)
-GPIO.setmode(GPIO.BCM)
 
-# po = 27  # power
-# GPIO.setup(po, GPIO.OUT)
-# GPIO.output(po, GPIO.LOW)
+def post_data(dir_name, det_data, ir_file, rgb_file):
+    data = {"device_id": device_id,
+            "predicted": det_data,
+            }
+    files = {"ir_image": (ir_file, open(ir_file, 'rb'), 'image/png'),
+             "rgb_image": (rgb_file, open(rgb_file, 'rb'), 'image/jpeg')
+             # "predicted": (det_file, open(det_file, 'rb'), 'text/plain'),
+             }
+    r = requests.post(url, data=data, files=files)
 
-tr = 17  # trigger ir
-GPIO.setup(tr, GPIO.OUT)
-GPIO.output(tr, GPIO.LOW)
+    if r.status_code == 200:
+        if args.delete:
+            os.system(f"rm -rf {dir_name}")
+    print(r.headers)
 
-camera = PiCamera()
+    return r.text
 
+with open('device_id.txt') as f:
+    device_id = f.readline().rstrip()
+
+im_dir = "data/"
+
+url = 'http://115.68.37.86:8180/api/data'
+
+# set rpi
 ser = serial.Serial(port='/dev/ttyS0',
                     baudrate=115200,
                     parity=serial.PARITY_NONE,
                     stopbits=serial.STOPBITS_ONE,
                     bytesize=serial.EIGHTBITS,
-                    timeout=10, )
+                    timeout=None, )
 
+# trigger ir
+tr = 17
+GPIO.setwarnings(False)
+GPIO.setmode(GPIO.BCM)
+GPIO.setup(tr, GPIO.OUT)
+GPIO.output(tr, GPIO.LOW)
+camera = PiCamera()
+
+# set inputs
 w, h = 80, 80
 size = 1
 img_size = w * h * size
 det_size = 3 + (30 * 12)
 threshold = 40
 
-with open('device_id.txt') as f:
-    device_id = f.readline().rstrip()
-
 LOOP = 1
 while LOOP:
-    start = time.time()
     now = datetime.now()
-    dt = now.strftime("%Y-%m-%d  %H:%M:%S")
-    dtime = now.strftime("%Y%m%d-%H%M%S")
+    dtime = now.strftime("%Y-%m-%d %H:%M:%S")
+    print([dtime])
 
-    print([dt])
+    print(f"loop is {args.loop}")
+    print(f"sleep is {args.sleep} seconds")
+
     print("-" * 6, "START", "-" * 24)
-
-    print(f"[I] loop is {args.loop}")
-    print(f"[I] sleep is {args.sleep} seconds")
-
 
     camera.start_preview()
 
-    base_dir = f"data/{dtime}/"
+    base_dir = f"{im_dir}{dtime}/"
     det_file = f"{base_dir}{dtime}_{device_id}_DET.txt"
     ir_file = f"{base_dir}{dtime}_{device_id}_IR.bin"
     ir_img_file = f"{base_dir}{dtime}_{device_id}_IR.png"
@@ -86,21 +107,18 @@ while LOOP:
     # os.system(f"/bin/bash grubFrame.sh {device_id} {dtime}")
 
     print("[RX] detection")
+    # rx_det = ser.read(det_size)
     rx_det = ser.read()
     while len(rx_det) < (det_size):
         new_det = ser.read()
-        rx_det += new_det
+        rx_det = rx_det + new_det
 
     print("[RX] image")
-    # prev_len = -1
-    rx_img = ser.readline()
+    # rx_img = ser.read(img_size)
+    rx_img = ser.read()
     while len(rx_img) < (img_size):
         new_img = ser.read()
-        rx_img += new_img
-        # current_len = len(rx_img)
-        # if current_len == prev_len:    # data checker
-        #     break
-        # prev_len = current_len
+        rx_img = rx_img + new_img
 
     print("[TX] threshold")
     ser.write(threshold.to_bytes(4, byteorder='little'))
@@ -137,9 +155,24 @@ while LOOP:
     # check image
     # im = Image.frombuffer('I;16', (w,h), rx_img, 'raw', 'L', 0, 1)
 
+    targets = glob(f'{im_dir}/*')
+    if len(targets) < 1:
+        break
+    for target in targets:
+        det = glob(f"{target}/*_DET.txt")
+        ir = glob(f"{target}/*_IR.png")
+        rgb = glob(f"{target}/*_RGB.jpg")
 
-    end = time.time() - start
-    print(f"[I] runtime : {round(end, 2)} sec")
+        try:
+            with open(det[0], "r") as file:
+                det_data = file.readline().rstrip()
+        except IndexError:
+            pass
+
+        if len(det) > 0:
+            result = post_data(target, det_data, ir[0], rgb[0])
+            print(result)
+
     print("-" * 24, "FINISH", "-" * 6, "\n" * 2)
 
     time.sleep(int(args.sleep))

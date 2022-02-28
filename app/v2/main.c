@@ -91,6 +91,28 @@ void close_flash_filesystem(struct pi_device *flash, struct pi_device *fs){
     }
 #endif
 
+void led(int cycle, int delay1, int delay2){
+    for(int i=0; i<cycle; i++){
+        pi_gpio_pin_write(NULL, GPIO_USER_LED, 0);
+        pi_time_wait_us(delay1*10000);
+        pi_gpio_pin_write(NULL, GPIO_USER_LED, 1);
+        pi_time_wait_us(delay1*10000);
+        pi_time_wait_us(delay2*10000);
+    }
+}
+
+int imgTest(char name[], unsigned short data[], int num, int bit){
+    printf("[I] %s : ", name, num);
+    if (bit == 16) {
+        for (int j = 0; j < num; j++) printf("%d,", ((unsigned short *) data)[j]);
+        printf("...\n");
+    } else if (bit == 8) {
+        for (int j = 0; j < num; j++) printf("%d,", ((unsigned char *) data)[j]);
+        printf("...\n");
+    }
+    return 0;
+}
+
 static int initNN(){
     #ifndef INPUT_FILE
         PRINTF("[I] Loading Offset Image from Flash...\n");
@@ -211,30 +233,6 @@ static void RunNN(){
     PRINTF("[I] Cycles NN :%10d\n", ti_nn);
 }
 
-/* This SLEEP only works in pulpos for now
- * TODO: need to be support in freeRTOS when new api available */
-#ifdef SLEEP
-    #define RTC_TIME 5
-    void go_to_sleep(){
-        rt_rtc_conf_t rtc_conf;
-        rt_rtc_t *rtc;
-
-        rtc_conf.clkDivider = 0xF000;
-        rt_rtc_cntDwn_t cntDwn = { RTC_TIME, 0 };
-
-        rtc = rt_rtc_open(&rtc_conf, NULL);
-        if (rtc == NULL) return -1;
-
-        rt_pm_wakeup_clear_all();
-
-        rt_rtc_control(rtc, RTC_CNTDOWN_SET, (void *)&cntDwn, NULL);
-        rt_rtc_control(rtc, RTC_CNTDOWN_START, NULL, NULL);
-
-        if(rt_pm_state_switch(RT_PM_STATE_DEEP_SLEEP, RT_PM_STATE_FAST)==-1)
-            printf("Error....\n");
-    }
-#endif
-
 int32_t float_shutterless(int16_t* img_input_fp16, int16_t* img_offset_fp16, int w, int h, uint8_t q_output, float gamma){
     int min, max;
     int32_t out_min = 0;
@@ -339,6 +337,29 @@ int32_t fixed_shutterless(int16_t *img_input_fp16, int16_t *img_offset_fp16, int
     }
 #endif
 
+// This SLEEP only works in pulpos for now: need to be support in freeRTOS when new api available
+#ifdef SLEEP
+    #define RTC_TIME 5
+    void go_to_sleep(){
+        rt_rtc_conf_t rtc_conf;
+        rt_rtc_t *rtc;
+
+        rtc_conf.clkDivider = 0xF000;
+        rt_rtc_cntDwn_t cntDwn = { RTC_TIME, 0 };
+
+        rtc = rt_rtc_open(&rtc_conf, NULL);
+        if (rtc == NULL) return -1;
+
+        rt_pm_wakeup_clear_all();
+
+        rt_rtc_control(rtc, RTC_CNTDOWN_SET, (void *)&cntDwn, NULL);
+        rt_rtc_control(rtc, RTC_CNTDOWN_START, NULL, NULL);
+
+        if(rt_pm_state_switch(RT_PM_STATE_DEEP_SLEEP, RT_PM_STATE_FAST)==-1)
+            printf("Error....\n");
+    }
+#endif
+
 char bleDetString[200];
 char tmpString[200];
 int dt;
@@ -415,28 +436,6 @@ void sendResultsToUART(struct pi_device *uart, char *img, bboxs_t *boundbxs){
         old_dt = dt;
         thres = ((float)old_dt)/100;
     }
-}
-
-void led(int cycle, int delay1, int delay2){
-    for(int i=0; i<cycle; i++){
-        pi_gpio_pin_write(NULL, GPIO_USER_LED, 0);
-        pi_time_wait_us(delay1*10000);
-        pi_gpio_pin_write(NULL, GPIO_USER_LED, 1);
-        pi_time_wait_us(delay1*10000);
-        pi_time_wait_us(delay2*10000);
-    }
-}
-
-int imgTest(char name[], unsigned short data[], int num, int bit){
-    printf("[I] %s : ", name, num);
-    if (bit == 16) {
-        for (int j = 0; j < num; j++) printf("%d,", ((unsigned short *) data)[j]);
-        printf("...\n");
-    } else if (bit == 8) {
-        for (int j = 0; j < num; j++) printf("%d,", ((unsigned char *) data)[j]);
-        printf("...\n");
-    }
-    return 0;
 }
 
 #define USER_GPIO 18
