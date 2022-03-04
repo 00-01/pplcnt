@@ -1,10 +1,10 @@
 #!/usr/bin/env python3
 # from cv2 import imwrite
-import argparse
 import os
-import struct
-import time
+from struct import unpack
+from argparse import ArgumentParser
 from datetime import datetime
+from time import sleep, time
 
 import RPi.GPIO as GPIO
 import numpy as np
@@ -12,7 +12,7 @@ import serial
 from PIL import Image
 from picamera import PiCamera
 
-parser = argparse.ArgumentParser()
+parser = ArgumentParser()
 parser.add_argument("-l", "--loop", default=0, help="run loop")
 parser.add_argument("-s", "--sleep", default=0, help="loop sleep")
 args = parser.parse_args()
@@ -48,17 +48,13 @@ with open('device_id.txt') as f:
 
 LOOP = 1
 while LOOP:
-    start = time.time()
+    start = time()
     now = datetime.now()
     dt = now.strftime("%Y-%m-%d  %H:%M:%S")
     dtime = now.strftime("%Y%m%d-%H%M%S")
 
-    print([dt])
-    print("-" * 6, "START", "-" * 24)
-
-    print(f"[I] loop is {args.loop}")
-    print(f"[I] sleep is {args.sleep} seconds")
-
+    print(f"[START] ---------------- [{dt}]")
+    print(f"[I] loop is {args.loop}, sleep is {args.sleep} sec")
 
     camera.start_preview()
 
@@ -75,9 +71,9 @@ while LOOP:
     ser.reset_input_buffer()
     ser.reset_output_buffer()
 
-    print("[TX] start signal")
+    print("[TX] TRIGGER")
     GPIO.output(tr, GPIO.HIGH)
-    time.sleep(0.1)
+    sleep(0.1)
     GPIO.output(tr, GPIO.LOW)
 
     print("[S] capturing rgb image")
@@ -86,13 +82,13 @@ while LOOP:
     camera.close()
     # os.system(f"/bin/bash grubFrame.sh {device_id} {dtime}")
 
-    print("[RX] detection")
+    print("[RX] DETECTION")
     rx_det = ser.read()
     while len(rx_det) < (det_size):
         new_det = ser.read()
         rx_det += new_det
 
-    print("[RX] image")
+    print("[RX] IMAGE")
     # prev_len = -1
     rx_img = ser.readline()
     while len(rx_img) < (img_size):
@@ -103,7 +99,7 @@ while LOOP:
         #     break
         # prev_len = current_len
 
-    print("[TX] threshold")
+    print("[TX] THRESHOLD")
     ser.write(threshold.to_bytes(4, byteorder='little'))
 
     print("[S] saving detection in txt")
@@ -122,7 +118,7 @@ while LOOP:
                     st = 1
 
     print("[S] saving image in bin")
-    im_int = struct.unpack('<' + 'B' * img_size, rx_img)
+    im_int = unpack('<' + 'B' * img_size, rx_img)
     with open(ir_file, "wb") as file:
         for val in im_int:
             file.write(val.to_bytes(2, byteorder='little', signed=1))
@@ -138,9 +134,8 @@ while LOOP:
     # check image
     # im = Image.frombuffer('I;16', (w,h), rx_img, 'raw', 'L', 0, 1)
 
-    end = time.time() - start
-    print(f"[I] runtime : {round(end, 2)} sec")
-    print("-" * 24, "FINISH", "-" * 6, "\n" * 2)
+    end = time() - start
+    print(f"[FINISH] ---------------- runtime: {round(end, 2)} sec", "\n" * 2)
 
     LOOP = args.loop
-    time.sleep(int(args.sleep))
+    sleep(int(args.sleep))

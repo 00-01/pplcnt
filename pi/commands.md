@@ -1,10 +1,24 @@
+## git
+    git clone https://github.com/00-01/gappi.git
+
 ## cron
 ### crontab [website](https://crontab.guru/)
+#### old
     @reboot sudo chmod 666 /dev/ttyS0 && /usr/bin/python3 main.py
     @reboot /usr/bin/python3 post_requester.py
 
-    # every 5 minutes from 9 to 16
-    */5 9-17 * * * python3 main.py >> log/main.log && python3 poster.py >> log/poster.log 2>&1
+#### every 5 minutes from 9 to 16
+    */5 9-17 * * * python3 gappi/main.py >> log/main.log && python3 gappi/poster.py >> log/poster.log 2>&1
+    
+#### every 20 seconds
+    * * * * * sleep 20: python3 gappi/main.py > log/main.py && python3 gappi/poster.py > log/poster.log
+    * * * * * sleep 40: python3 gappi/main.py > log/main.py && python3 gappi/poster.py > log/poster.log
+    * * * * * sleep 60: python3 gappi/main.py > log/main.py && python3 gappi/poster.py > log/poster.log
+
+#### on every reboot
+    @reboot python3 gappi/main.py > log/main.log
+    @reboot python3 gappi/poster.py > log/poster.log
+
 ### start cron
     sudo service cron start
 
@@ -12,7 +26,7 @@
     sudo cp -p /usr/share/zoneinfo/Asia/Seoul /etc/localtime
 
 ## zhsrc
-    alias t="python3 main.py >> log/main.log && python3 poster.py >> log/poster.log"
+    alias t="python3 gappi/main.py >> log/main.log && python3 gappi/poster.py >> log/poster.log"
 
 
 ## etc
@@ -24,3 +38,16 @@
 ### change wifi
     sudo nano /etc/wpa_supplicant/wpa_supplicant.conf
 
+
+'''
+@reboot cd gappi && git pull && cd
+
+## */1 * * * * sudo chmod 666 /dev/ttyS0 && cd /home/pi/scripts/ && /usr/bin/python$
+
+*/1 9-17 * * * python3 gappi/main.py >> log/main.log && python3 gappi/poster.py >> log/poster.log 2>&1
+
+# @reboot python3 gappi/main.py > log/main.log
+
+# @reboot python3 gappi/poster.py > log/poster.log
+
+'''
