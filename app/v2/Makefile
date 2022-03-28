@@ -5,18 +5,23 @@ endif
 
 MODEL_VERSION=v1.0
 
-BOARD_NUM=01
+BOARD_NUM=03
 CAL=Calibration/$(BOARD_NUM)/Calibration.bin
 
-# UART or BT
+#APP_CFLAGS += -DMODEL_VERSION=$(MODEL_VERSION)
+#APP_CFLAGS += -DBOARD_NUM=$(BOARD_NUM)
+
+## UART or BT
 APP_CFLAGS += -DUART
+
+#APP_CFLAGS += -DDRAW_BOX
+
+#APP_CFLAGS += -DOFFSET_IMAGE_EVERY_BOOT=1
 
 DEBUG = 0
 
-APP_CFLAGS += -DDRAW_BOX
-
+## SHUTTERLESS_FILTER or CUSTOM_FILTER
 APP_CFLAGS += -DSHUTTERLESS_FILTER
-#APP_CFLAGS += -DCUSTOM_FILTER
 
 APP_CFLAGS += -DLOOP
 
@@ -25,23 +30,22 @@ ifeq ($(MODE), INPUT_FILE)
     ## test application with input file from host PC(shutterless filtering is desactivated in this mode)
     APP_CFLAGS += -DINPUT_FILE
     APP_CFLAGS += -DCI
-else ifeq ($(MODE),INPUT_RAW_FILE)
+else ifeq ($(MODE), INPUT_RAW_FILE)
     ## test prefiltering with a raw image
     APP_CFLAGS += -DINPUT_RAW_FILE
     APP_CFLAGS += -DCI
-else ifeq ($(MODE),INPUT_CAMERA)
+else ifeq ($(MODE), INPUT_CAMERA)
     ## Camera is default so no flags are needed
 endif
 
-##  In full demo mode silent should be activated, since printfs block the execution if set over jtag
-##  To disable all printf (needed to flash application to boot from flash)
-#APP_CFLAGS += -DSILENT=1
+## In full demo mode silent should be activated, since printfs block the execution
+## if set over jtag.  To disable all printf (needed to flash application to boot from flash)
+APP_CFLAGS += -DSILENT=1
 
-SAVE_TO_PC=0    #0 or 1(True)
+#0 or 1
+SAVE_TO_PC=1
 
-#APP_CFLAGS += -DOFFSET_IMAGE_EVERY_BOOT=1    ## TAKE OFFSET IMAGE EVERY BOOT
-
-#APP_CFLAGS += -DSLEEP    ## SLEEP (ONLY in PulpOS)
+APP_CFLAGS += -DSLEEP    ## ONLY in PulpOS
 
 #NO_IMAGE=1    ## For debugging don't load an image. run the network with zeros
 
