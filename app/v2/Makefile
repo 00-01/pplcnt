@@ -3,9 +3,9 @@ ifndef GAP_SDK_HOME
     $(error Source sourceme in gap_sdk first)
 endif
 
-MODEL_VERSION=v1.0
+MODEL_VERSION=v1.1
 
-BOARD_NUM=03
+BOARD_NUM=02
 CAL=Calibration/$(BOARD_NUM)/Calibration.bin
 
 #APP_CFLAGS += -DMODEL_VERSION=$(MODEL_VERSION)
@@ -23,7 +23,7 @@ DEBUG = 0
 ## SHUTTERLESS_FILTER or CUSTOM_FILTER
 APP_CFLAGS += -DSHUTTERLESS_FILTER
 
-APP_CFLAGS += -DLOOP
+#APP_CFLAGS += -DLOOP
 
 MODE ?= INPUT_CAMERA
 ifeq ($(MODE), INPUT_FILE)
@@ -43,9 +43,9 @@ endif
 APP_CFLAGS += -DSILENT=1
 
 #0 or 1
-SAVE_TO_PC=1
+#SAVE_TO_PC=1
 
-APP_CFLAGS += -DSLEEP    ## ONLY in PulpOS
+#APP_CFLAGS += -DSLEEP    ## ONLY in PulpOS
 
 #NO_IMAGE=1    ## For debugging don't load an image. run the network with zeros
 
