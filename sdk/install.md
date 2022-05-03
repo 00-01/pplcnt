@@ -1,6 +1,7 @@
 ## SETUP
     sudo apt-get install -y autoconf automake bison build-essential cmake curl doxygen flex git gtkwave libftdi-dev libftdi1 libjpeg-dev libsdl2-dev libsdl2-ttf-dev \
     libsndfile1-dev graphicsmagick-libmagick-dev-compat libtool libusb-1.0-0-dev pkg-config python3-pip rsync scons texinfo wget
+    mkdir MVPC10 && cd MVPC10
     
 ## OPEN OCD
     git clone https://github.com/GreenWaves-Technologies/gap8_openocd.git
@@ -13,11 +14,13 @@
     sudo udevadm control --reload-rules && sudo udevadm trigger
     sudo usermod -a -G dialout $USER
     export GAPY_OPENOCD_CABLE=interface/ftdi/olimex-arm-usb-ocd-h.cfg
+    cd ..
     
 ## TOOLCHAIN
     git clone https://github.com/GreenWaves-Technologies/gap_riscv_toolchain_ubuntu_18.git
     cd gap_riscv_toolchain_ubuntu_18
     ./install.sh
+    cd ..
     
 ## SDK
     git clone https://github.com/GreenWaves-Technologies/gap_sdk.git
