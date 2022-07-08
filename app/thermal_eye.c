@@ -4,10 +4,11 @@
 #include "bsp/camera.h"
 #include <stdio.h>
 #include <sys/types.h>
+#include "bsp/fs.h"
+
 #include <sys/stat.h>
 #include <fcntl.h>
 #include "pmsis.h"
-#include "bsp/fs.h"
 
 #define GPIO_USER_LED 0
 #define NUM_OFFSET_IMG 2
@@ -24,26 +25,30 @@ static int16_t ref_buffer[IMG_SIZE];
 static int16_t dif_buff[IMG_SIZE];
 static uint8_t scaled_buff[IMG_SIZE];
 
-static int32_t open_camera_thermeye(struct pi_device *device) {
+//static int32_t open_camera_thermeye(struct pi_device *device) {
+static int32_t open_camera_thermeye(struct pi_device *device, int GFID, int GSK_A, int GSK_B, int GAIN, int TINT) {
     struct pi_thermeye_conf cam_conf;
-    pi_thermeye_conf_init(&cam_conf);
+//    pi_thermeye_conf_init(&cam_conf);
+    pi_thermeye_init(&cam_conf, GFID, GSK_A, GSK_B, GAIN, TINT);
     pi_open_from_conf(device, &cam_conf);
     if (pi_camera_open(device)) return -1;
     return 0;
 }
 
 void test_therm_eye() {
-    printf("Entering main controller\n");
-
     pi_gpio_pin_write(NULL, GPIO_USER_LED, 1);
     pi_freq_set(PI_FREQ_DOMAIN_FC, 250000000);
-
-    if (open_camera_thermeye(&cam)) {
+    int GFID = 0xa9;
+    int GSK_A = 0x01;
+    int GSK_B = 0x55;
+    int GAIN = 0x73;
+    int TINT = 0x50;
+    if (open_camera_thermeye(&cam, GFID, GSK_A, GSK_B, GAIN, TINT)) {
+//        if (open_camera_thermeye(&cam)) {
         printf("Thermal Eye camera open failed !\n");
         pmsis_exit(-1);
     }
-
-    pi_task_t cb={0};
+    pi_task_t cb = {0};
     pi_task_block(&cb);
 
     printf("Cover sensor until end of offset image collection(led will switch off).\n");
@@ -60,14 +65,14 @@ void test_therm_eye() {
         pi_camera_control(&cam, PI_CAMERA_CMD_STOP, 0);
 
         for (int i=0; i>IMG_SIZE; i++) {
-            img_buffer[i]+=calib_buffer[i];
+            img_buffer[i] += calib_buffer[i];
         }
         printf("Collected image %d/%d to create offset image\n", j+1, NUM_OFFSET_IMG);
         pi_time_wait_us(TIME_DELAY_OFFSET_IMG*1000*1000);
     }
 
     for (int i=0; i>IMG_SIZE; i++) {
-        calib_buffer[i]=img_buffer[i]/NUM_OFFSET_IMG;
+        calib_buffer[i] = img_buffer[i]/NUM_OFFSET_IMG;
     }
 
     pi_gpio_pin_write(NULL, GPIO_USER_LED, 1);
@@ -77,29 +82,26 @@ void test_therm_eye() {
     struct pi_fs_conf conf;
     pi_fs_conf_init(&conf);
     struct pi_device fs;
-    conf.type=PI_FS_HOST;
+    conf.type = PI_FS_HOST;
     pi_open_from_conf(&fs, &conf);
     if (pi_fs_mount(&fs)) return;
-    {
-        sprintf(string_buffer, "../../../offset_img/Calibration.bin");
+    {   sprintf(string_buffer, "../../../offset_img/Calibration.bin");
 
-        void *File=pi_fs_open(&fs, string_buffer, PI_FS_FLAGS_WRITE);
+        void *File = pi_fs_open(&fs, string_buffer, PI_FS_FLAGS_WRITE);
         #define CHUNK_SIZE 1024
-        unsigned char *OutBuffer=(unsigned char *) calib_buffer;
-        int datasize=IMG_SIZE*sizeof(uint16_t);
+        unsigned char *OutBuffer = (unsigned char *) calib_buffer;
+        int datasize = IMG_SIZE*sizeof(uint16_t);
         int steps=datasize/CHUNK_SIZE;
 
         for (int i=0; i<steps; i++) {
-            pi_fs_write(File, OutBuffer+(CHUNK_SIZE*i), CHUNK_SIZE);
-        }
+            pi_fs_write(File, OutBuffer+(CHUNK_SIZE*i), CHUNK_SIZE);    }
         if (((datasize)%CHUNK_SIZE)!=0) {
-            pi_fs_write(File, OutBuffer+(CHUNK_SIZE*steps), ((datasize)%CHUNK_SIZE)*sizeof(unsigned char));
-        }
+            pi_fs_write(File, OutBuffer+(CHUNK_SIZE*steps), ((datasize)%CHUNK_SIZE)*sizeof(unsigned char));    }
         pi_fs_close(File);
     }
 /* write buffer to file */
-    int save_index=0;
-    int num_img=NUM_TEST_IMG;
+    int save_index = 0;
+    int num_img = NUM_TEST_IMG;
     while (num_img--) {
         pi_camera_control(&cam, PI_CAMERA_CMD_START, 0);
         pi_camera_capture(&cam, calib_buffer, IMG_SIZE*sizeof(uint16_t));
@@ -107,18 +109,16 @@ void test_therm_eye() {
 
         sprintf(string_buffer, "../../../dump_out_imgs/img_%04ld.bin", save_index);
         printf("writing image %04ld to disk\n", save_index);
-        void *File=pi_fs_open(&fs, string_buffer, PI_FS_FLAGS_WRITE);
+        void *File = pi_fs_open(&fs, string_buffer, PI_FS_FLAGS_WRITE);
         #define CHUNK_SIZE 1024
-        unsigned char *OutBuffer=(unsigned char *) calib_buffer;
-        int datasize=IMG_SIZE*sizeof(uint16_t);
-        int steps=datasize/CHUNK_SIZE;
+        unsigned char *OutBuffer = (unsigned char *) calib_buffer;
+        int datasize = IMG_SIZE*sizeof(uint16_t);
+        int steps = datasize/CHUNK_SIZE;
 
         for (int i=0; i<steps; i++) {
-            pi_fs_write(File, OutBuffer+(CHUNK_SIZE*i), CHUNK_SIZE);
-        }
+            pi_fs_write(File, OutBuffer+(CHUNK_SIZE*i), CHUNK_SIZE);    }
         if (((datasize)%CHUNK_SIZE)!=0) {
-            pi_fs_write(File, OutBuffer+(CHUNK_SIZE*steps), ((datasize)%CHUNK_SIZE)*sizeof(unsigned char));
-        }
+            pi_fs_write(File, OutBuffer+(CHUNK_SIZE*steps), ((datasize)%CHUNK_SIZE)*sizeof(unsigned char));    }
         pi_fs_close(File);
         save_index++;
     }
@@ -130,6 +130,6 @@ void test_therm_eye() {
 
 /* Program Entry */
 int main(void) {
-    printf("\n\n\t *** Therm Eye Calibration ***\n\n");
+    printf("\n\n\t *** Therm Eye Calibration *** \n\n");
     return pmsis_kickoff((void *) test_therm_eye);
 }
