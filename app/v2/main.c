@@ -13,15 +13,26 @@
 #include "shutterless/PreFilteringCluster.h"
 #include "ImageDraw.h"
 #include "setup.h"
-
+#include "bsp/flash/spiflash.h"
 #include "bsp/flash/hyperflash.h"
+
 struct pi_device HyperRam;
-AT_HYPERFLASH_FS_EXT_ADDR_TYPE lynred_L3_Flash;
+
+#ifdef QSPI
+    #define FLASH_NAME "QSPI"
+    struct pi_device QspiRam;
+    AT_QSPIFLASH_FS_EXT_ADDR_TYPE lynred_L3_Flash;
+#else
+    #define FLASH_NAME "HYPER"
+//    struct pi_device HyperRam;
+    AT_HYPERFLASH_FS_EXT_ADDR_TYPE lynred_L3_Flash;
+#endif
 
 #define MOUNT           1
 #define UNMOUNT         0
 #define CID             0
 #define GPIO_USER_LED   0
+unsigned int W = 80, H = 80;
 
 #define FIX2FP(Val, Precision)    ((float) (Val) / (float) (1<<(Precision)))
 
@@ -58,25 +69,55 @@ void led(int cycle, int delay1, int delay2){
         pi_time_wait_us(delay2*10000);
     }
 }
-void led_loop(int loop, int delay1, int delay2){
-    while(loop){
-        pi_gpio_pin_write(NULL, GPIO_USER_LED, 0);
-        pi_time_wait_us(delay1*10000);
-        pi_gpio_pin_write(NULL, GPIO_USER_LED, 1);
-        pi_time_wait_us(delay1*10000);
-        pi_time_wait_us(delay2*10000);
-    }
-}
-int imgTest(char name[], unsigned short data[], int num, int bit){
+
+int imgTest(char name[], short data[], short num, short bit){
     printf("[I] %s : ", name, num);
     if (bit == 16) {
         for (int j = 0; j < num; j++) printf("%d,", ((short *) data)[j]);
-//        for (int j = 0; j < num; j++) printf("%d,", ((unsigned short *) data)[j]);
-        printf("...\n");
+        printf("..\n");
     } else if (bit == 8) {
         for (int j = 0; j < num; j++) printf("%d,", ((char *) data)[j]);
-//        for (int j = 0; j < num; j++) printf("%d,", ((unsigned char *) data)[j]);
-        printf("...\n");
+        printf("..\n");
+    }
+    return 0;
+}
+
+void drawBboxes(bboxs_t *boundbxs, uint8_t *img){
+    for (int counter = 0; counter<boundbxs->num_bb; counter++){
+        if (boundbxs->bbs[counter].alive) {
+            DrawRectangle(img, 80, 80, boundbxs->bbs[counter].x, boundbxs->bbs[counter].y, boundbxs->bbs[counter].w, boundbxs->bbs[counter].h, 255);
+        }    }
+}
+
+int save_img(int *img, char name[], char num, char draw, int16_t bit){
+    char string_buffer[50];
+    sprintf(string_buffer, "../../../dump_out_imgs/%s_%04ld.pgm", name, num);
+
+//    int16_t min, max;
+//    int16_t out_min = 0;
+//    int32_t out_max = 255;
+//    int32_t out_space = (out_max-out_min);
+//    float div = 1./(max-min);
+//    int32_t div_fix = FP2FIX(div, 15);
+//    uint8_t *img8 = img;
+//    for (int i = 0; i<W*H; i++) img8[i] = (uint8_t) (((out_space)*((((((int32_t) img[i])-(int32_t) min))*div_fix))) >> (15));
+//    if (bit8 == 1){
+//        if (draw==1) drawBboxes(&bbxs, img8);
+//        WriteImageToFile(string_buffer, W, H, img8);
+//    } else{
+//        if (draw==1) drawBboxes(&bbxs, img);
+//        WriteImageToFile(string_buffer, W, H, img);
+//    }
+
+    if (bit==8) {
+        char img8;
+        img8 = (unsigned char *) pmsis_l2_malloc(W*H*sizeof(char));
+        memcpy(img8, img, W*H*sizeof(char));
+        if (draw==1) drawBboxes(&bbxs, img8);
+        WriteImageToFile(string_buffer, W, H, img8);
+    } else{
+        if (draw==1) drawBboxes(&bbxs, img);
+        WriteImageToFile(string_buffer, W, H, img);
     }
     return 0;
 }
@@ -113,15 +154,16 @@ void close_flash_filesystem(struct pi_device *flash, struct pi_device *fs){
 }
 
 //#ifdef INPUT_CAMERA
-#if !defined(INPUT_RAW_FILE) && !defined(INPUT_FILE)
-    static int32_t open_camera_thermeye(struct pi_device *device){
-        struct pi_thermeye_conf cam_conf;
-        pi_thermeye_conf_init(&cam_conf);
-        pi_open_from_conf(device, &cam_conf);
-        if (pi_camera_open(device)) return -1;
-        return 0;
-    }
-#endif
+//#if !defined(INPUT_RAW_FILE) && !defined(INPUT_FILE)
+static int32_t open_camera_thermeye(struct pi_device *device, int GFID, int GSK_A, int GSK_B, int GAIN, int TINT){
+    struct pi_thermeye_conf cam_conf;
+//    pi_thermeye_conf_init(&cam_conf);
+    pi_thermeye_init(&cam_conf, GFID, GSK_A, GSK_B, GAIN, TINT);
+    pi_open_from_conf(device, &cam_conf);
+    if (pi_camera_open(device)) return -1;
+    return 0;
+}
+//#endif
 
 int initL3Buffers(){
     /* Init & open ram. */
@@ -146,14 +188,7 @@ int initL3Buffers(){
     return 0;
 }
 
-void drawBboxes(bboxs_t *boundbxs, uint8_t *img){
-    for (int counter=0; counter < boundbxs->num_bb; counter++){
-        if(boundbxs->bbs[counter].alive){
-            DrawRectangle(img, 80, 80, boundbxs->bbs[counter].x, boundbxs->bbs[counter].y, boundbxs->bbs[counter].w, boundbxs->bbs[counter].h, 255);
-        }
-    }
-}
-void printBboxes(bboxs_t *boundbxs){
+void printBboxes(bboxs_t *boundbxs) {
     printf("- - - - - - - - - - - - - - - - - - - - - - - - - -\n");
     printf("BoudingBox:  score    cx    cy     w    h   class");
     printf("\n--------------------------------------------------\n");
@@ -222,25 +257,27 @@ int32_t float_shutterless(int16_t* img_input_fp16, int16_t* offset_fp16, int w, 
 
 int32_t fixed_shutterless(int16_t *img_input_fp16, int16_t *offset_fp16, int w, int h, uint8_t q_output){
     int16_t min, max;
-    int16_t out_min = 0;
-    int32_t out_max = 255;
-    int32_t out_space = (out_max - out_min);
     uint8_t *img_input_fp8 = img_input_fp16;
 //-------------------------------------------------------------------------------------
-    imgTest("pre shutterless", now, 6, 16);
-    //Optmized shutterless running on cluster (cluster must be open ahead and have enough free memory) g on fabric controller
-//     int error = shutterless_fixed_cl(&cluster_dev, img_input_fp16, offset_fp16, 40, &min, &max);
+    imgTest("pre filter", img_input_fp8, 8, 8);
+
+//    Optmized shutterless running on cluster (cluster must be open ahead and have enough free memory) g on fabric controller
+//    int error = shutterless_fixed_cl(&cluster_dev, img_input_fp16, offset_fp16, 40, &min, &max);
     int error = shutterless_fixed_fc(img_input_fp16, offset_fp16, 40, &min, &max);
+    //-------------------------------------------------------------------------------------
+    imgTest("post filter", img_input_fp8, 8, 8);
+
+    int16_t out_min = 0;
+    int32_t out_max = 255;
+    int32_t out_space = (out_max-out_min);
     float div = 1./(max-min);
     int32_t div_fix = FP2FIX(div, 15);
-//-------------------------------------------------------------------------------------
-    imgTest("post shutterless", now, 6, 16);
     //Normalizing to 8 bit and changing fixed point format for NN
     for(int i=0; i<w*h; i++){
         img_input_fp8[i] = (uint8_t)(((out_space)*((((((int32_t)img_input_fp16[i])-(int32_t)min))*div_fix)))>>(15-q_output+8));
     }
 //-------------------------------------------------------------------------------------
-    imgTest("16 to 8 bit", now, 6, 8);
+    imgTest("16 to 8 bit - cal", img_input_fp8, 8, 8);
     return error;
 }
 
@@ -255,7 +292,7 @@ int32_t fixed_shutterless(int16_t *img_input_fp16, int16_t *offset_fp16, int w, 
 //    int32_t out_max = 255;
 //    int32_t out_space = (out_max - out_min);
 //    uint8_t *img_input_fp8 = img_input_fp16;
-//////-------------------------------------------------------------------------------------
+////-------------------------------------------------------------------------------------
 //    imgTest("pre filter", now, 6, 16);
 ////-------------------------------------------------------------------------------------
 //
@@ -338,7 +375,7 @@ void sendResultsToBle(bboxs_t *boundbxs){
 //char * raspDetString = (int *)malloc(detSize * sizeof(int *));
 //uint cal = 0;
 char raspDetString[3+(MAX_OUT_BB*12)];
-void sendResultsToUART(struct pi_device *uart, char *img1, char img2, bboxs_t *boundbxs){
+void sendResultsToUART(struct pi_device *uart, char *img1, bboxs_t *boundbxs){
 //void sendResultsToUART(struct pi_device *uart, unsigned char *img, bboxs_t *boundbxs){
     int stringLenght = 0;
     int AliveBBs = 0;
@@ -356,8 +393,8 @@ void sendResultsToUART(struct pi_device *uart, char *img1, char img2, bboxs_t *b
             stringLenght += sprintf(tmpString,"%dx%dx%dx%d;", boundbxs->bbs[counter].x, boundbxs->bbs[counter].y, boundbxs->bbs[counter].w, boundbxs->bbs[counter].h);
             strcat(raspDetString, tmpString);    }
     }
-    //stringLenght+=sprintf(tmpString,"Gap8 Power Consuption %f mW/FPS",((float)(1/(50000000.f/12000000)) * 16.800));
-    //printf("String Size: %d\n",stringLenght);
+//    stringLenght+=sprintf(tmpString,"Gap8 Power Consuption %f mW/FPS",((float)(1/(50000000.f/12000000)) * 16.800));
+//    printf("String Size: %d\n",stringLenght);
 //    pi_uart_read(uart, &dt, 2);
 //    printf("[RX] dt: %d\n", dt);
 
@@ -377,6 +414,7 @@ void sendResultsToUART(struct pi_device *uart, char *img1, char img2, bboxs_t *b
         thres = ((float)old_dt)/100;
     }
 }
+
 uint cal = 0;
 void rx_cal(struct pi_device *uart){
     printf("[I] reading cal\n");
@@ -398,7 +436,7 @@ static int read_cal_file(){
     uint32_t size_total = 0;
     saved = (unsigned short *) pmsis_l2_malloc(80*80*sizeof(short));
     char *buff = saved;
-    if (saved==NULL){
+    if (saved == NULL){
         printf("[!] Failed to allocate Memory for image Offset\n");
         pmsis_exit(-4);
     }
@@ -448,17 +486,20 @@ static int write_cal_file(unsigned char *img) {
 //    conf.type = PI_FS_HOST;
 //    pi_open_from_conf(&fs, &conf);
 //    if (pi_fs_mount(&fs)) return;
-    open_flash_filesystem(&flash, &fs);
-    void *File = pi_fs_open(&fs, name, PI_FS_FLAGS_WRITE);
     unsigned char *OutBuffer = (unsigned char *) calib_buffer;
     int datasize = IMG_SIZE*sizeof(uint16_t);
     int steps = datasize/BUFFER_SIZE;
-
+/* write bufffer to fs */
+    open_flash_filesystem(&flash, &fs);
+    void *File = pi_fs_open(&fs, name, PI_FS_FLAGS_WRITE);
+    if (File == NULL){
+        printf("[!] File %s open failed !\n", name);
+        pmsis_exit(-4);
+    }
     for (int i=0; i<steps; i++) {
         pi_fs_write(File, OutBuffer+(BUFFER_SIZE*i), BUFFER_SIZE);    }
     if (((datasize)%BUFFER_SIZE)!=0){
         pi_fs_write(File, OutBuffer+(BUFFER_SIZE*steps), ((datasize)%BUFFER_SIZE)*sizeof(unsigned char));    }
-
     pi_fs_close(File);
 //    pi_fs_unmount(&fs);
     close_flash_filesystem(&flash, &fs);
@@ -510,15 +551,8 @@ void peopleDetection(void){
     //pi_pad_set_function(PI_PAD_32_A13_TIMER0_CH1, PI_PAD_32_A13_GPIO_A18_FUNC1);
     //pi_gpio_pin_configure(NULL, USER_GPIO, PI_GPIO_OUTPUT);
     //pi_gpio_pin_write(NULL, USER_GPIO, 1);
-    unsigned int Wi, Hi;
-    unsigned int W = 80, H = 80;
+//    unsigned int Wi, Hi;
     printf("[I] Entering main controller\n");
-    now_to_char = (unsigned char *) pmsis_l2_malloc(W*H*sizeof(short));
-    if (now_to_char == 0) {
-        printf("Failed to allocate Memory for Image (%d bytes)\n", W * H * sizeof(uint16_t));
-        return 1;
-    }
-    now = (int16_t *) now_to_char;
 
      /* Configure And open cluster. */
     struct pi_cluster_conf cl_conf;
@@ -543,23 +577,36 @@ void peopleDetection(void){
     if (lynredCNN_Construct(0)){
         printf("[!] Graph constructor exited with an error\n");
         return 1;    }
-    //Deallocating L1 to be used by other cluster calls
+//    Deallocating L1 to be used by other cluster calls
     if (lynredCNN_Destruct(1)){
         printf("[!] Error deallocating L1 for cluster...\n");
         pmsis_exit(-1);    }
     #if !defined(INPUT_RAW_FILE) && !defined(INPUT_FILE)
-        printf("[I] Opening camera\n");
-        if (open_camera_thermeye(&cam)){
-            printf("[!] Thermal Eye camera open failed !\n");
-            pmsis_exit(-1);    }
-//        #ifdef OFFSET_IMAGE_EVERY_BOOT
+        for (int i = 0; i<1; i++) {
+            int GFID =  0xa9;
+            int GSK_A = 0x01;
+            int GSK_B = 0x55;
+            int GAIN = 0x73;
+            int TINT = 0x50;
+            printf("[I] Opening camera_%d\n", i);
+            if (open_camera_thermeye(&cam, GFID, GSK_A, GSK_B, GAIN, TINT)) {
+                printf("[!] Thermal Eye camera open failed !\n");
+                pmsis_exit(-1);
+            }
+            //        #ifdef OFFSET_IMAGE_EVERY_BOOT
             printf("[I] Shooting offset\n");
             pi_gpio_pin_write(NULL, GPIO_USER_LED, 0);
             pi_camera_control(&cam, PI_CAMERA_CMD_START, 0);
             pi_camera_capture(&cam, prev, W*H*sizeof(int16_t));
             pi_camera_control(&cam, PI_CAMERA_CMD_STOP, 0);
             pi_gpio_pin_write(NULL, GPIO_USER_LED, 1);
-//        #endif
+            //        #endif
+        }
+    #endif
+
+    #ifdef SAVE_TO_PC
+        save_img(saved, "1_saved", 1, 1, 16);
+        save_img(prev, "2_prev", 1, 1, 16);
     #endif
 
     #ifdef BT
@@ -642,12 +689,13 @@ void peopleDetection(void){
         l = 1;
     #endif
 
+
     uint loop_cnt = 1;
     while(loop_cnt){
         int t = pi_time_get_us();
         printf("\n[START] -------------------------------------------------\n");
         #ifdef UART
-            printf("[I] Waiting Pi Signal\n");
+            printf("[RX] Waiting Pi Signal\n");
             while(!trigger){
                 pi_yield();
             } trigger=0;
@@ -656,53 +704,63 @@ void peopleDetection(void){
 //            pi_uart_read(u, &cal, 2);
             rx_cal(&uart);
 
-            printf("[I] Caputring IR Image\n");
-            pi_gpio_pin_write(NULL, USER_GPIO, 0); // on
-            pi_camera_control(&cam, PI_CAMERA_CMD_START, 0);
-            pi_camera_capture(&cam, now, W*H*sizeof(int16_t));
-            pi_camera_control(&cam, PI_CAMERA_CMD_STOP, 0);
-            pi_gpio_pin_write(NULL, USER_GPIO , 1); // off
+            #ifdef RNN
+                now_to_char = (unsigned char *) pmsis_l2_malloc(W*H*sizeof(short));
+                if (now_to_char == 0) {
+                    printf("Failed to allocate Memory for Image (%d bytes)\n", W * H * sizeof(uint16_t));
+                    return 1;
+                }
+                now = (int16_t *) now_to_char;
 
-            /* offset image - max: 65535 */
-            switch (cal) {
-            case 11111:
-                printf("[S:11111] offset: prev\n");
-                offset = prev;
-                break;
-            case 22222:
-                printf("[S:22222] offset: saved\n");
-                offset = saved;
-                break;
-            case 33333:
-                printf("[S:33333] offset: prev\n");
-                offset = prev;
-                break;
-            case 44444:
-                printf("[S:44444] overiding cal file\n");
-                if (write_cal_file(now)) {
-                    printf("[!] Writing cal file failed\n");
-                    pmsis_exit(-8);    }
-                break;
-            case 55555:
-                printf("[S:55555] nulling cal file\n");
-                if (null_cal_file()) {
-                    printf("[!] Writing cal file failed\n");
-                    pmsis_exit(-8);    }
-                break;
-            default:
-                printf("[S:0] offset: saved\n");
-                offset = saved;
-                break;
-            }
+                printf("[I] Caputring IR Image\n");
+                pi_gpio_pin_write(NULL, USER_GPIO, 0); // on
+                pi_camera_control(&cam, PI_CAMERA_CMD_START, 0);
+                pi_camera_capture(&cam, now, W*H*sizeof(int16_t));
+                pi_camera_control(&cam, PI_CAMERA_CMD_STOP, 0);
+                pi_gpio_pin_write(NULL, USER_GPIO , 1); // off
+
+                /* offset image - max: 65535 */
+                switch (cal) {
+                case 11111:
+                    printf("[S:11111] offset: prev\n");
+                    offset = prev;
+                    break;
+                case 22222:
+                    printf("[S:22222] offset: saved\n");
+                    offset = saved;
+                    break;
+                case 33333:
+                    printf("[S:33333] offset: prev\n");
+                    offset = prev;
+                    break;
+                case 44444:
+                    printf("[S:44444] overiding cal file\n");
+                    if (write_cal_file(now)) {
+                        printf("[!] Writing cal file failed\n");
+                        pmsis_exit(-8);    }
+                    break;
+                case 55555:
+                    printf("[S:55555] nulling cal file\n");
+                    if (null_cal_file()) {
+                        printf("[!] Writing cal file failed\n");
+                        pmsis_exit(-8);    }
+                    break;
+                default:
+                    printf("[S:0] offset: saved\n");
+                    offset = saved;
+                    break;
+                }
+            #endif
         #endif
         //        unsigned int *aaa = now;
-//        memcpy(aaa, img1, W*H*2*sizeof(short));
+        //        memcpy(aaa, img1, W*H*2*sizeof(short));
+
         #ifndef INPUT_FILE
             printf("[I] Calling shutterless filtering\n");
             #ifdef SHUTTERLESS_FILTER
                 //shutterless floating point version was done just for reference.very slow on gap.
                 //if(float_shutterless(now, offset,W,H,8,1)){
-                if(fixed_shutterless(now, offset, W, H, 8)) {
+                if(fixed_shutterless(prev, saved, W, H, 8)) {
                     printf("[!] Error Calling prefiltering, exiting...\n");
                     pmsis_exit(-8);    }
             #elif CUSTOM_FILTER
@@ -710,6 +768,10 @@ void peopleDetection(void){
                     printf("[!] Error Calling prefiltering, exiting...\n");
                     pmsis_exit(-8);    }
             #endif
+        #endif
+
+        #ifdef SAVE_TO_PC
+            save_img(prev, "3_result", 0, 1, 0);
         #endif
 
         printf("[I] Call cluster\n");
@@ -726,54 +788,40 @@ void peopleDetection(void){
         nn = pi_time_get_us() - nn;
         printf("[I] model runtime : %.02f s\n", ((float)nn)/1000000);
 
-        switch (cal) {
-            case 11111:
-                printf("[S:11111] img: now\n");
-                img = now;
-                break;
-            case 22222:
-                printf("[S:22222] img: now\n");
-                img = modified_now;
-                break;
-            case 33333:
-                printf("[S:33333] img: now\n");
-                img = modified_now;
-                break;
-            default:
-                printf("[S:0] img: now\n");
-                img = now;
-                break;
-            }
+//        switch (cal) {
+//            case 11111:
+//                printf("[S:11111] img: now\n");
+//                img = now;
+//                break;
+//            case 22222:
+//                printf("[S:22222] img: now\n");
+//                img = modified_now;
+//                break;
+//            case 33333:
+//                printf("[S:33333] img: now\n");
+//                img = modified_now;
+//                break;
+//            default:
+//                printf("[S:0] img: now\n");
+//                img = now;
+//                break;
+//            }
+//        img = now;
 
         #ifdef UART
             printf("[I] TX Result to Pi\n");
-            #ifdef DRAW_BOX
-                drawBboxes(&bbxs, img);
-            #endif
-            sendResultsToUART(&uart, img, offset, &bbxs);
+            sendResultsToUART(&uart, prev, &bbxs);
             pi_gpio_pin_write(&gpio_led, gpio_out_led, 1); // led_off
         #endif
 
         #ifdef BT
             sendResultsToBle(&bbxs);
-//            #ifndef SAVE_TO_PC
-//                pi_time_wait_us(2 * 1000 * 1000);
-//            #endif
-        #endif
-
-        #ifdef SAVE_TO_PC
-            char string_buffer[50];
-            sprintf(string_buffer, "../../../dump_out_imgs/img_%04ld.pgm", save_index);
-            save_index++;
-            unsigned char *img_out_ptr = img;
-
-            #ifdef DRAW_BOX
-                drawBboxes(&bbxs, img_out_ptr);
+            #ifndef SAVE_TO_PC
+                pi_time_wait_us(2 * 1000 * 1000);
             #endif
-
-//            drawBboxes(&bbxs, img_out_ptr);
-            WriteImageToFile(string_buffer, W, H, img_out_ptr);
         #endif
+
+        save_index++;
 
         loop_cnt -= l;
         printf("[I] loop : %d\n", loop_cnt);
@@ -792,9 +840,8 @@ void peopleDetection(void){
 }
 
 int main(void) {
-    printf("\n\n\t *** Therm Eye HYPER Flash ***\n");
-//    printf("\tmodel version: v1.0\n");
-//    printf("\tbodard number: 06\n");
-    printf("\tflash check number: 01\n\n");
+    printf("\n\n\t *** Therm Eye ***\n");
+//    printf("\tModel_Version: %1.1f\n\n", MODEL_VERSION);
+    printf("\tBoard Number: %d\n", BOARD_NUM);
     return pmsis_kickoff((void *) peopleDetection);
 }
