@@ -583,24 +583,24 @@ void peopleDetection(void){
         pmsis_exit(-1);    }
     #if !defined(INPUT_RAW_FILE) && !defined(INPUT_FILE)
         for (int i = 0; i<1; i++) {
-            int GFID =  0xa9;
-            int GSK_A = 0x01;
-            int GSK_B = 0x55;
-            int GAIN = 0x73;
-            int TINT = 0x50;
+            int GFID = 0xa9;  // DEFAULT = 0xBD / RANGE = 0x00 ~ 0xCC
+            int GSK_A = 0x01;  // DEFAULT = 0x01 / RANGE = 0x01 ~ 0x03
+            int GSK_B = 0x55;  // DEFAULT = 0x30 / RANGE = 0x00 ~ 0xF3
+            int GAIN = 0x73;  // DEFAULT = 0x53 / RANGE = 0x0x ~ 0x7x, 0xx0 ~ 0xx3
+            int TINT = 0x50;  // DEFAULT = 0x50 / 0x50, 0xA0, 0xF0
             printf("[I] Opening camera_%d\n", i);
             if (open_camera_thermeye(&cam, GFID, GSK_A, GSK_B, GAIN, TINT)) {
                 printf("[!] Thermal Eye camera open failed !\n");
                 pmsis_exit(-1);
             }
-            //        #ifdef OFFSET_IMAGE_EVERY_BOOT
+//        #ifdef OFFSET_IMAGE_EVERY_BOOT
             printf("[I] Shooting offset\n");
             pi_gpio_pin_write(NULL, GPIO_USER_LED, 0);
             pi_camera_control(&cam, PI_CAMERA_CMD_START, 0);
             pi_camera_capture(&cam, prev, W*H*sizeof(int16_t));
             pi_camera_control(&cam, PI_CAMERA_CMD_STOP, 0);
             pi_gpio_pin_write(NULL, GPIO_USER_LED, 1);
-            //        #endif
+//        #endif
         }
     #endif
 
