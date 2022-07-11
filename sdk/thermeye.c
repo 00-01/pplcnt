@@ -1,19 +1,3 @@
-/*
- * Copyright (C) 2019 GreenWaves Technologies
- *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- *
- *     http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
- */
-
 #include "pmsis.h"
 #include "bsp/bsp.h"
 #include "bsp/camera/thermeye.h"
@@ -97,14 +81,8 @@ static void __pi_thermeye_start(thermeye_t *thermeye){
     __pi_thermeye_reg_write(thermeye, (uint16_t) ADC_BIAS, 0x00);
     __pi_thermeye_reg_write(thermeye, (uint16_t) EXT_POLAR, 0x08);
 
-    //////////////////////////////////////////////// CUTOM ////////////////////////////////////////////////
+//////////////////////////////////////////////// CUTOM ////////////////////////////////////////////////
 
-    // DEFAULT //
-//     int GFID = 0xBD;  // 0x00 ~ 0xCC
-//     int GSK_A = 0x01;  // 0x01 ~ 0x03
-//     int GSK_B = 0x30;  // 0x00 ~ 0xF3
-//     int GAIN = 0x53;  // 0x0x ~ 0x7x, 0xx0 ~ 0xx3
-//     int TINT = 0x50;  // 0x50, 0xA0, 0xF0
      __pi_thermeye_reg_write(thermeye, (uint16_t) DACGFID, GFID);
      __pi_thermeye_reg_write(thermeye, (uint16_t) DACGSK_A, GSK_A);
      __pi_thermeye_reg_write(thermeye, (uint16_t) DACGSK_B, GSK_B);
@@ -350,11 +328,7 @@ void pi_thermeye_conf_init(struct pi_thermeye_conf *conf) {
 }
 
 void pi_thermeye_init(struct pi_thermeye_conf *conf, int a, int b, int c, int d, int e) {
-    GFID = a;
-    GSK_A = b;
-    GSK_B = c;
-    GAIN = d;
-    TINT = e;
+    GFID = a, GSK_A = b, GSK_B = c, GAIN = d, TINT = e;
 
     conf->camera.api = &thermeye_api;
     bsp_thermeye_conf_init(conf);
